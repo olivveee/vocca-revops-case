@@ -40,6 +40,7 @@
 table.plain { width: 100%; border-collapse: collapse; font-size: 13px; }
 table.plain th { text-align: left; font-size: 11px; color: var(--text-secondary); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--axis); white-space: nowrap; }
 table.plain td { padding: 9px 10px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+table.plain th.num { text-align: right; white-space: normal; min-width: 90px; vertical-align: bottom; }
 table.plain td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .mode { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; background: var(--neutral-chip); }
 .mode.auto { background: var(--brand-soft); color: var(--brand); }

@@ -1,8 +1,11 @@
 # Part 1B · Mapping the TAM
 
-> **Three choices.** (1) The account is the **site**: one SIRET, one booking calendar, the unit Vocca deploys and bills. Sites roll up to a **group** (where the decision and the framework contract sit) and a **network**; the **legal entity** (SIREN) is linked, not used as the hierarchy. (2) The **master record lives in the warehouse**, built from public registries; Attio is the operational copy. (3) **Nothing that touches a customer or two sales owners is merged by a machine.**
+> **Three choices.**
+> 1. **One account model for every market.** The account is the **site**: the place patients book, the unit Vocca deploys and bills. Sites roll up to a **group** (where the decision and the framework contract sit) and a **network**. The **legal entity** is linked to sites, not used as the hierarchy.
+> 2. **One generic identity in the CRM.** Attio carries `country` + `company_number` + `company_number_type` (SIRET in France, NPI in the US…), validated per type, and that is the only dedupe key. Market-specific columns and sources live upstream, in the warehouse, which joins them into this shape.
+> 3. **Nothing that touches a customer or two sales owners is merged by a machine.**
 >
-> Real work on the file: [`scripts/tam_dedup.py`](../scripts/tam_dedup.py) applies this model to the 5,080 accounts and produces the action lists in [`out/tam/`](../out/tam/).
+> Real work on the file: [`scripts/tam_dedup.py`](../scripts/tam_dedup.py) applies this model to the 5,080 accounts and produces the action lists in [`out/tam/`](../out/tam/). The [TAM cockpit](https://vocca-revops-case.vercel.app/tam.html) shows the result, the rules and the manual review queue.
 
 ---
 
@@ -12,129 +15,138 @@ Full list with every number: [`docs/data_findings.md`](data_findings.md). The is
 
 | Problem | Size | Why it matters |
 |---|---|---|
-| Identity key unusable | 761 SIRENs typed in the SIRET field, 485 empty, 15 malformed: **25% of accounts have no site identifier** | Matching falls back on names and phones, which is where duplicates come from |
-| Duplicates | **115 records** are certain duplicates (same SIRET, or same SIREN + name + postcode, or same booking calendar + a second key); 132 more pairs need a human | Two owners working the same practice; inflated TAM and pipeline |
-| Duplicates are produced by automations | Of the 115, **43 were created by the enrichment pipeline**, 11 by n8n, 11 by email sync | Inserts instead of upserts: cleaning once will not last |
-| Hierarchy broken | 3 records are their own parent, 36 impossible parent types (e.g. a group under a practice), 53 "practices" with several sites, 112 empty groups, 65 accounts without a type | Group roll-outs and account plans cannot be read from the CRM |
-| ARR counted twice | **426 sites carry ARR while their group carries it too** (€8.8M customer ARR at risk of double counting) | Revenue reporting is wrong as soon as you sum a hierarchy |
-| Lifecycle and billing out of sync | 334 accounts without lifecycle; a Hyperline ID on 204 non-customers; 188 customers without ARR | Cannot separate "in the TAM, not worked" from "customer" reliably |
-| Contacts on the wrong account | **247 contacts** whose work-email domain belongs to another account family; 2,439 contacts parked on a group instead of their site | Outreach and champions mapped to the wrong practice |
-| Junk enrichment | Practice "websites" such as doctolib.fr, maiia.com, pagesjaunes.fr, gmail.com; 30 SIRETs failing the checksum | Enrichment writes whatever it finds, unchecked |
+| No usable identity | **25% of accounts** have no validated company number: in France 756 SIRENs typed in the SIRET field and 220 empty; in the US **0 of 175** accounts has a valid one | Matching falls back on names and phones, which is where duplicates come from |
+| A French field used for every country | US numbers are typed in the `siret` field; **none of them passes the NPI check** (10 digits, starting with 1 or 2, check digit) | Foreign identifiers are stored and never validated: they cannot be used to deduplicate |
+| Duplicates | **117 records** are certain duplicates; 136 more pairs need a human | Two owners working the same practice; inflated TAM and pipeline |
+| Duplicates are produced by automations | Of the 117, **43 were created by the enrichment pipeline**, 11 by n8n, 11 by email sync | Inserts instead of upserts: cleaning once will not last |
+| Hierarchy broken | 3 self-parents, 36 impossible parent types, 53 "practices" with several sites, 112 empty groups, 65 accounts without type, **60 multi-site organisations with no group** (e.g. 3 US sites in 3 cities sharing one domain) | Group roll-outs and account plans cannot be read from the CRM |
+| ARR counted twice | **€4.0M** on 426 sites whose group carries ARR too (customer ARR €8.8M) | Revenue reporting is wrong as soon as a hierarchy is summed |
+| Market not set or not used | 118 accounts without country (all French postcodes); **47 US accounts owned by the French team**; 67% of US accounts without lifecycle | Territories, ownership and US pipeline cannot be trusted |
+| Out-of-TAM accounts mixed in | **101 investors, partners and media** in the same object as prospects (41 in the US) | They inflate the TAM and the lead counts |
+| Junk enrichment | Practice "websites" such as doctolib.fr or gmail.com (60); **doctolib.fr booking pages on US accounts** (8), a platform that does not operate there | Enrichment writes whatever it finds, unchecked |
+| Contacts on the wrong account | **244 contacts** whose work-email domain belongs to another account family; 450 without company | Outreach and champions mapped to the wrong practice |
 
-## 2. The model
+## 2. The model, as the CRM sees it
 
-### What an account is
+### Objects
 
-| Object | Definition | Key | Why it exists |
+| Object | Definition | Why it exists |
+|---|---|---|
+| **Site** (the account) | One physical place where patients book: a practice, a health centre, an imaging centre, a dental office, a clinic | The unit Vocca integrates with (one calendar), prices (practitioners / machines) and deploys. Group roll-out deals are per site |
+| **Group** | Several sites under one decision maker: a radiology group, a dental group (DSO in the US), a health system | Where the decision is taken and the framework contract is signed |
+| **Network** | A network of groups (a national chain) | Account planning above group level |
+| **Legal entity** | The company behind sites or a group | Contracts and invoices. Linked, not a level: in France 314 legal entities run several sites, and 689 sites sit under a group whose legal entity differs from theirs |
+| **Practitioner** | A person working at one or more sites | Pricing driver and champion |
+
+Rules that follow: **ARR and billing IDs live on sites only** (group ARR = sum of its sites). Contacts attach to the site where they work; group-level contacts attach to the group. Investors, partners and media stay in Attio but outside the TAM.
+
+### One generic identity, validated per market
+
+Attio does not get a column per country. It gets generic fields, filled from whichever registry applies:
+
+| Generic CRM field | France | United States | Other markets |
 |---|---|---|---|
-| **Site** (the account) | One physical place where patients book: a practice, a health centre, an imaging centre, a clinic | SIRET (14 digits) | The unit Vocca integrates with (one booking calendar), prices (practitioners / machines) and deploys. Group roll-out deals are per site |
-| **Group** | Several sites under one decision maker; where the framework contract is signed | Internal ID; SIREN when the group is itself a legal entity | 1,728 sites already sit under 310 groups; the decision is taken here |
-| **Network** (Superorga) | A network of groups (e.g. a national imaging or clinic chain) | Internal ID | Account planning above group level |
-| **Legal entity** | The company behind a site or a group | SIREN (9 digits) | Contracts and invoices. **Linked, not a level of the hierarchy**: 314 SIRENs run several sites, and 689 sites sit under a group whose SIREN differs from theirs (a group of separate SCMs) |
-| **Practitioner** | A person working at one or more sites | RPPS (11 digits) | Pricing driver and champion; can work at several sites |
+| `country` | ISO code (inferred from the postcode when missing) | ISO code | ISO code |
+| `company_number` + `company_number_type` (site) | SIRET (14 digits, checksum, active) | NPI of the organisation (10 digits, check digit) | National business / establishment number, to confirm per country |
+| `legal_entity_number` | SIREN | No public national registry: legal name + state of registration | Per country |
+| `practitioner_number` (on contacts) | RPPS | Individual NPI | Per country |
+| Fallback keys, same everywhere | Booking-calendar URL, normalised address, phone, website domain, name + postcode | | |
 
-Rules that follow from it: **ARR and billing IDs live on sites only** (group ARR = sum of its sites). Contacts attach to the site where they work; group-level contacts (a CEO, a purchasing lead) attach to the group.
-
-### The match key
-
-1. **SIRET**, validated: 14 digits, Luhn checksum, establishment active in the SIRENE registry.
-2. If no SIRET: **booking-calendar URL** (Doctolib / Maiia page), unique per site and present on 1,517 accounts.
-3. Then **FINESS** (health centres, clinics), **normalised phone**, **website domain** (platforms and webmail excluded), **normalised name + postcode**.
-4. US: **NPI** (organisation) from the NPPES registry, the SIRET equivalent.
+A number only counts as identity once it passes its type's validation; until then it is stored but ignored by matching. That single rule is what would have kept the US numbers out of the dedupe.
 
 ### What I refuse to merge automatically, and why
 
 | Case | Decision | Why |
 |---|---|---|
-| Same SIREN, different SIRETs | Never merge; link both sites to one legal entity | Two sites of one company are two deployments |
-| A site and a group sharing an identifier | Never merge; attach the site to the group | That is the group's head-office site, or a missing hierarchy link |
-| Either record is a customer (billing ID, ARR, Customer/Churn) | Manual review | Merging moves invoices and ARR: a human signs it off |
-| Open deals owned by two different people | Manual review | It is an ownership decision, not a data one |
-| Shared phone, domain or name only | Never merge | Groups share switchboards and domains legitimately; names repeat ("Clinique Nice") |
-| Same calendar URL only, or same name + postcode without SIRET | Manual review | Strong hint, not proof |
+| Two different validated company numbers | Never merge; link both sites to their legal entity | Two sites of one company are two deployments |
+| A site and a group sharing an identifier | Never merge; attach the site to the group | Head-office site or a missing hierarchy link |
+| Either record is a customer | Manual review | Merging moves invoices and ARR |
+| Open deals owned by two different people | Manual review | Ownership decision, not a data one |
+| Shared phone, domain or name only | Never merge | Groups share switchboards and domains; names repeat. A domain shared across cities is a **group to create**, not a duplicate |
+| Same calendar URL only, or same name + postcode without a number | Manual review | Strong hint, not proof |
 
-**Survivor rule** when merging: customer first, then the record with the most deals, then the most contacts, then the most complete, then the oldest.
+**Survivor rule**: customer first, then most deals, most contacts, most complete, oldest.
 
 ## 3. Real work on the file
 
-`python scripts/tam_dedup.py data out/tam` (runs in 2 seconds):
+`python scripts/tam_dedup.py data out/tam web/data` (runs in a few seconds):
 
 | Output | Result |
 |---|---|
-| `merge_clusters.csv` | **5,080 → 4,965 accounts**: 115 records merged into 113 survivors (86 leads, 25 without lifecycle, 4 prospects; no customer touched) |
-| `merge_pairs.csv` | Every candidate pair with the keys it shares, the decision and the reason in plain words: 117 auto-merge, **132 manual review** (70 involve a customer, 39 same name + postcode without SIRET, 19 missing type, 4 same calendar only), 40 hierarchy fixes, 5,241 refused (mostly sites sharing a SIREN) |
-| `hierarchy_issues.csv` | 771 issues with a proposed action: 426 ARR on site and group, 112 empty groups, 76 single-site groups, 65 missing types, 53 practices that are groups, 36 impossible parent types, 3 self-parents |
-| `contact_moves.csv` | **247 contacts** to re-attach (244 on the wrong account family, 3 without any company) |
+| `merge_clusters.csv` | **5,080 → 4,963 accounts**: 117 records merged into 115 survivors, no customer touched |
+| `merge_pairs.csv` | Every candidate pair with the keys it shares, the decision and the reason: 119 auto-merge, **136 manual review** (70 involve a customer, 40 same name + postcode without number, 22 missing type, 4 same calendar only), 40 hierarchy fixes, 5,233 refused (mostly sites sharing a legal entity) |
+| `hierarchy_issues.csv` | 771 issues with a proposed action (426 ARR on site and group, 112 empty groups, 53 practices that are groups, 36 impossible parents, 3 self-parents…) |
+| `market_issues.csv` | 356 market issues: 118 countries inferred, 101 out-of-TAM accounts, 60 multi-site organisations without group, 47 accounts owned by the other market's team, 16 unverified foreign numbers, 12 booking URLs from the wrong country |
+| `contact_moves.csv` | **247 contacts** to re-attach |
+| `tam_action_pack.xlsx` | All of the above in one workbook, plus the rules |
 
-The rules were tuned on real pairs from the file. Two examples of what the script gets right: "Scanner IRM du Cours" exists twice with the same SIREN, name and postcode (merged); four imaging sites share the SIREN of "Radiys Radiologie" while one of them is not attached to it (hierarchy fix, not a merge).
+Two examples the rules get right: "Scanner IRM du Cours" exists twice with the same legal entity, name and postcode (merged); "Cabinet de Masso-Kinésithérapie Bordeaux - site 2" shares a calendar with "Cabinet de Masso-Kinésithérapie Bordeaux" (sent to review: it may be a real second site).
 
 ## 4. The build
 
-### Sources
+### Why a warehouse, in one paragraph
 
-| Source | What it gives | Access |
-|---|---|---|
-| **SIRENE** (INSEE) | Every establishment (SIRET) and legal unit (SIREN): address, NAF code, legal form, active/closed, head office | Open data, API and monthly stock file, daily updates |
-| **Annuaire Santé / RPPS** (Agence du Numérique en Santé) | Every practitioner, specialty, and where they practise (with the structure's identifiers) | Open data extracts, refreshed frequently |
-| **FINESS** | Health centres, clinics, hospitals, with legal entity and establishment numbers | Open data |
-| **Booking platforms** (Doctolib, Maiia) | Calendar URL, practitioner count, specialties, booking software: the integration effort | Public pages; to be checked with legal before any systematic collection |
-| **Enrichment vendors** (e.g. Dropcontact, Kaspr, Lusha) | Decision-maker emails and phones | Paid, per contact; write to contacts only, never create accounts |
-| **US**: NPPES (NPI), state licensing boards | Organisations and practitioners | Open data |
+Each market brings its own registries, booking platforms, enrichment vendors and identifier formats, plus Attio and Hyperline. Joining them, keeping history and testing matching rules is a data-engineering job: it belongs in the warehouse (being built), where source-specific columns (`siret`, `npi`, `rpps`…) are mapped into the generic model above. Attio receives the result. I would not detail the pipelines here: the point is that the CRM only ever sees one model.
 
-The TAM itself is built from the registries, not from the CRM: every site with a target specialty and structure type, scored, then flagged "in Attio / not in Attio".
+### Sources, by market
+
+| Market | Sites and legal entities | Practitioners | Booking / practice data |
+|---|---|---|---|
+| France | SIRENE (INSEE), FINESS for health centres and clinics | Annuaire Santé / RPPS | Doctolib, Maiia public pages (to clear with legal before systematic collection) |
+| United States | NPPES (NPI registry, organisations), CMS provider data linking clinicians to group practices | NPPES (individual NPI), state licensing boards | Practice websites; paid healthcare data vendors for group and DSO structures |
+| Every market | Enrichment vendors write to **contacts** only and never create accounts | | |
+
+The TAM is built from the registries, not from the CRM: every site of a target specialty and structure type, scored, then flagged "in Attio / not in Attio".
 
 ### Where the master record lives
 
-**In the warehouse.** The golden `site`, `group`, `legal_entity` and `practitioner` tables are built there (dbt models: ingest registries → normalise → match → survivorship), because matching across 100k+ registry rows, keeping history and testing rules does not belong in a CRM.
-
-**Attio is the operational copy.** A daily sync (n8n, or a reverse-ETL tool) pushes accounts, hierarchy and keys into Attio; Attio writes back only the fields Sales owns (owner, lifecycle, notes). Every Attio record carries the master ID.
+**In the warehouse.** Golden `site`, `group`, `legal_entity` and `practitioner` tables, rebuilt nightly (ingest → normalise → match → survivorship). **Attio is the operational copy**: a daily sync pushes accounts, hierarchy and the generic identity; Attio writes back only the fields Sales owns (owner, lifecycle, notes). Every Attio record carries the master ID.
 
 ### Keeping it fresh
 
 | What | Cadence |
 |---|---|
-| SIRENE changes (closures, moves, new sites) | Daily API delta, monthly full reconciliation |
-| RPPS / Annuaire Santé | Weekly |
-| Booking-platform attributes | Monthly on targeted segments |
-| Matching and survivorship run | Nightly in the warehouse |
-| Manual review queue | Owned by RevOps, reviewed weekly, SLA one week |
+| Registry changes (SIRENE, NPPES: closures, moves, new sites) | Daily or weekly deltas, monthly full reconciliation |
+| Practitioner registries (RPPS, NPPES) | Weekly |
+| Matching and survivorship | Nightly |
+| Manual review queue | Owned by RevOps, weekly, one-week SLA |
 
 ### Measuring that it is clean, and stopping it degrading
 
-**Data-quality KPIs** (one dashboard, weekly): % of sites with a valid active SIRET, duplicate pairs open, manual queue size and age, hierarchy violations, % of contacts on the right account, % of customers whose billing ID matches Hyperline, ARR reconciliation Attio vs Hyperline.
+**Data-quality KPIs, per market** (one dashboard, weekly): % of sites with a validated company number, duplicate pairs open, review queue size and age, hierarchy violations, % of contacts on the right account, % of customers whose billing ID matches Hyperline, ARR reconciliation Attio vs Hyperline, accounts owned outside their market.
 
 **Gates that prevent new mess:**
-- SIRET as a **unique attribute** in Attio, required for any account at Prospect stage or beyond.
-- Every automation (enrichment, n8n, email sync) **upserts on the match key**; none may create an account without a lookup first. Email sync attaches contacts, it does not create companies.
-- A creation webhook checks the warehouse before a new account is saved and proposes the existing one.
-- dbt tests fail the nightly run on cycles, impossible parent types or ARR on two levels.
+- `company_number` unique per `country` + type in Attio, validated on entry, required from Prospect stage.
+- Every automation (enrichment, n8n, email sync) **upserts on the identity**; none creates an account without a lookup. Email sync attaches contacts, it does not create companies.
+- Country required; ownership routed by market.
+- Warehouse tests fail the nightly run on cycles, impossible parents, ARR on two levels, or a booking URL from a platform absent in the account's country.
 
 ### Automated vs manual
 
 | Automated | Manual |
 |---|---|
-| Normalisation, SIRET validation, registry lookups | Merges involving a customer or two owners |
-| Merges on exact SIRET (non-customers) | Re-typing a practice into a group, splitting a group |
-| Hierarchy from shared SIREN where unambiguous | Disputed group ownership (a site claimed by two groups) |
-| Contact re-attachment when the email domain is unique | Contacts whose domain is shared by several accounts |
-| Enrichment of empty fields | Overwriting a field a salesperson filled by hand |
+| Normalisation, validation of company numbers, registry lookups, country inference | Merges involving a customer or two owners |
+| Merges on the same validated number (non-customers) | Re-typing a practice into a group; creating a group from a shared domain |
+| Hierarchy from a shared legal entity where unambiguous | Disputed group ownership |
+| Contact re-attachment when the email domain is unique | Reassigning accounts to the right market's team |
+| Excluding investors, partners and media from TAM views | Overwriting a field a salesperson filled by hand |
 
 ## 5. Recommendations
 
 | Priority | What | Why first | Effort |
 |---|---|---|---|
-| **P0 · Stop the bleeding** | SIRET unique in Attio; enrichment / n8n / email sync switched to upsert-on-key; creation lookup | Otherwise every clean-up is undone within weeks | Week 1 |
-| **P0 · Fix what breaks reporting** | Run the 115 automatic merges; move ARR to sites only (426); break the 3 cycles and 36 impossible parents | Revenue and pipeline numbers are wrong today | Week 1-2 |
-| **P1 · Master record** | Warehouse models: SIRENE + RPPS + FINESS ingestion, matching, survivorship, sync to Attio | One source of truth, refreshed, with history | Weeks 2-5 |
-| **P1 · Clear the queue** | 132 manual pairs, 38 sites to attach, 53 practices to re-type, 247 contacts | Small enough to finish in a few days with Sales | Weeks 2-3, about 3 days of work |
-| **P2 · Size and score the TAM** | Full universe from registries by specialty, structure type and booking software; score; flag "not in Attio" | Feeds territory design and outbound for the 3x plan | Weeks 5-7 |
-| **P2 · US** | Same model on NPI, before the US base grows | Cheap now, expensive after 1,000 accounts | Weeks 6-8 |
-| **P3 · Run it** | Data-quality dashboard, weekly review, dbt tests | Keeps it clean without heroics | Ongoing |
+| **P0 · Stop the bleeding** | Generic identity in Attio (`country`, `company_number`, type), unique and validated; automations switched to upsert; creation lookup | Otherwise every clean-up is undone within weeks | Week 1 |
+| **P0 · Fix what breaks reporting** | 117 automatic merges; ARR on sites only; countries set; investors, partners and media out of TAM views; the 3 cycles and 36 impossible parents | Revenue, pipeline and TAM numbers are wrong today | Weeks 1-2 |
+| **P1 · Master record** | Warehouse models joining Attio, Hyperline and the French and US registries into the generic model; sync to Attio | One source of truth, refreshed, with history | Weeks 2-5 |
+| **P1 · Clear the queues** | 136 review pairs, 38 sites to attach, 60 groups to create, 47 accounts to reassign to the US team, 247 contacts | Small enough to finish in a few days with Sales | Weeks 2-3, about 3 days of work |
+| **P1 · US identity** | Validate the 175 US accounts against NPPES; build their groups (dental groups first) | The US base is small: fixing it now is cheap, after 1,000 accounts it is not | Weeks 3-4 |
+| **P2 · Size and score the TAM per market** | Full universe from registries by specialty and structure type; score; flag "not in Attio" | Feeds territories and outbound for the 3x plan, starting with the US | Weeks 5-7 |
+| **P3 · Run it** | Data-quality dashboard per market, weekly review, warehouse tests | Keeps it clean without heroics | Ongoing |
 
-**Rough plan: 6 to 8 weeks for one person**, with P0 delivering visible value in the first two weeks.
+**Rough plan: 6 to 8 weeks for one person**, with visible value in the first two weeks.
 
 ## 6. With a week and a warehouse
 
-- Join the file to SIRENE and RPPS for real: validate every SIRET, recover the 761 SIRETs hidden behind a SIREN, and size the true addressable universe instead of the 3,164 leads already in the CRM.
-- Replace the hand-tuned rules with a scored matcher (weighted keys, thresholds set on a labelled sample from the manual queue) and measure precision and recall.
-- Turn the script into dbt models with tests, so the cleaning runs every night instead of once.
+- Join the file to SIRENE, RPPS and NPPES for real: validate every company number, recover the SIRETs hidden behind a SIREN and the US NPIs, and size the true addressable universe per market.
+- Replace the hand-tuned rules with a scored matcher (weighted keys, thresholds set on a labelled sample from the review queue) and measure precision and recall.
+- Turn the script into warehouse models with tests, so the cleaning runs every night instead of once.

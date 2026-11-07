@@ -1,31 +1,32 @@
 {
   "accounts_before": 5080,
-  "accounts_after_auto_merge": 4965,
-  "records_removed_by_auto_merge": 115,
-  "auto_merge_clusters": 113,
+  "accounts_after_auto_merge": 4963,
+  "records_removed_by_auto_merge": 117,
+  "auto_merge_clusters": 115,
   "pairs_by_decision": {
-    "do_not_merge": 5241,
-    "manual_review": 132,
-    "auto_merge": 117,
+    "do_not_merge": 5233,
+    "manual_review": 136,
+    "auto_merge": 119,
     "hierarchy_fix": 40
   },
   "manual_review_reasons": {
     "customer record involved (billing ID / ARR): never merged automatically": 70,
-    "same name and postcode, no SIRET to confirm or contradict": 39,
-    "account type missing on one record": 19,
+    "same name and postcode, no SIRET to confirm or contradict": 40,
+    "account type missing on one record": 22,
     "same booking calendar only": 4
   },
   "hierarchy_fix_reasons": {
     "site shares siren with another group than its current parent": 16,
-    "orphan site shares siren with a Group": 12,
-    "site shares siren+siret with another group than its current parent": 12
+    "site shares company_number+siren with another group than its current parent": 12,
+    "orphan site shares siren with a Group": 12
   },
   "sites_to_attach_or_check": 38,
   "siret_status": {
-    "siret": 3819,
-    "siren_only": 761,
-    "missing": 485,
-    "invalid": 15
+    "siret": 3817,
+    "siren_only": 756,
+    "not_applicable": 281,
+    "missing": 220,
+    "invalid": 6
   },
   "valid_siret_failing_checksum": 30,
   "multi_site_sirens": 314,
@@ -41,5 +42,97 @@
   "contact_moves": {
     "email domain belongs to another account family": 244,
     "no company attached": 3
+  },
+  "company_number_types": {
+    "FR SIREN": 756,
+    "FR SIRET": 3817,
+    "FR invalid": 6,
+    "FR missing": 220,
+    "US NPI": 7,
+    "US missing": 167,
+    "US unverified": 1
+  },
+  "market_issues": {
+    "country_inferred": 118,
+    "out_of_tam": 101,
+    "group_missing": 60,
+    "owner_market_mismatch": 47,
+    "company_number_unverified": 16,
+    "booking_url_wrong_country": 12,
+    "country_unknown": 2
+  },
+  "markets": {
+    "FR": {
+      "accounts": 4799,
+      "customers": 823,
+      "customer_arr_eur": 8716060.0,
+      "without_lifecycle": 135,
+      "validated_company_number": 3787,
+      "open_deals": 523,
+      "countries": {
+        "FR": 4799
+      },
+      "issues": {
+        "country_inferred": 118,
+        "out_of_tam": 43,
+        "group_missing": 36
+      }
+    },
+    "Other": {
+      "accounts": 104,
+      "customers": 7,
+      "customer_arr_eur": 15360.0,
+      "without_lifecycle": 82,
+      "validated_company_number": 0,
+      "open_deals": 4,
+      "countries": {
+        "GB": 58,
+        "CH": 13,
+        "BE": 4,
+        "NL": 3,
+        "AU": 3,
+        "SE": 3
+      },
+      "issues": {
+        "out_of_tam": 17,
+        "group_missing": 14,
+        "company_number_unverified": 6,
+        "booking_url_wrong_country": 2
+      }
+    },
+    "US": {
+      "accounts": 175,
+      "customers": 28,
+      "customer_arr_eur": 90740.0,
+      "without_lifecycle": 117,
+      "validated_company_number": 0,
+      "open_deals": 8,
+      "countries": {
+        "US": 175
+      },
+      "issues": {
+        "owner_market_mismatch": 47,
+        "out_of_tam": 41,
+        "group_missing": 10,
+        "company_number_unverified": 8,
+        "booking_url_wrong_country": 8
+      }
+    },
+    "Unknown": {
+      "accounts": 2,
+      "customers": 0,
+      "customer_arr_eur": 0.0,
+      "without_lifecycle": 0,
+      "validated_company_number": 0,
+      "open_deals": 2,
+      "countries": {
+        "UNKNOWN": 2
+      },
+      "issues": {
+        "country_unknown": 2,
+        "booking_url_wrong_country": 2,
+        "company_number_unverified": 2
+      }
+    }
   }
 }

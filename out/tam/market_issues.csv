@@ -1,0 +1,357 @@
+record_id,name,market,country,issue,detail,proposed_action,mode
+5e8715a5-d869-4694-a2be-3f7dc056c325,Centre de Santé Eaubonne,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+7784cb97-24ad-427c-86df-af65b92ddb84,Axiis Clinic,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+9eecb899-a527-4b50-ad83-b5a02a907b5b,Centre de Santé des Oliviers,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+f8cc81c7-ac04-4e71-8d4f-40d94ee93616,Phillips Family Dentistry,US,US,company_number_unverified,NPI 7747822857 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+f8cc81c7-ac04-4e71-8d4f-40d94ee93616,Phillips Family Dentistry,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+fff52b77-ef8d-4432-aba2-e5980daf708b,Centre de Santé Saint-Francois,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+51704d2e-af65-4f1a-9891-1d2e3967fded,Sanatis Health,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+c2232361-4bc3-4441-af5f-c46149d503c9,Centre de Santé Cayenne,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+c2232361-4bc3-4441-af5f-c46149d503c9,Centre de Santé Cayenne,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+532666ed-4dd5-4389-bf89-f3ad125d27ea,Orbitis Health,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+8da25c0d-faab-4db5-8680-a0b7afa4f86e,Centre Médical Pluridisciplinaire Jaurès,Other,DE,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+910d155b-46cf-4cde-866d-846201f6cf13,Centre Médical Le Port,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+ba0abb70-f7fc-4a61-af2c-69a111bb1576,Maison de Santé Riviera,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+f41cc0fa-7164-4f99-a946-1a33c112b065,Raditis Dental Group,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+e503a94b-0c2f-4331-a601-3ee881ee6a39,Centre Médical Pluridisciplinaire Vallée,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+e503a94b-0c2f-4331-a601-3ee881ee6a39,Centre Médical Pluridisciplinaire Vallée,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+6abc96cd-3898-4199-87b6-21c954af4001,Centre Médical Pluridisciplinaire Gambetta,FR,FR,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+4478dc05-baaf-493e-ba39-d03479614f90,Visiance Health,US,US,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+ac14d4b3-444e-47e1-ad26-7f8dcc09851d,Optivel Clinic,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+0ff2ae8d-7ad8-413c-8e72-b31c0787bb3f,Clinique Le Robert,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+65c648ca-b63f-4ac9-8f03-c93febb168f1,Vestal Health Partners,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+5fb62ec2-1bdd-49ac-89d9-fdffbbe0ca44,Centre Médical Pluridisciplinaire Saint-Louis,Other,IN,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+be3b5825-626a-4c02-b9d6-9edca1174c73,Cliniium Dental Group,US,US,company_number_unverified,NPI 9104976526 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+be3b5825-626a-4c02-b9d6-9edca1174c73,Cliniium Dental Group,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+cbc8363b-8264-48f9-acc9-b5f449bcdba1,Shah Medical Group,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+376b8732-d3e7-4957-99bf-d568cff0c03f,Polyclinique La Chatre,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+80e00f18-a5de-4f8a-865b-38f68e3f1e3f,Pôle Santé Cilaos,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+b6ba68f7-a126-4460-9f24-db5d0ca73aa6,Pôle Santé du Palais,Other,GB,booking_url_wrong_country,doctolib.fr page on a GB account,remove the URL or fix the country,manual
+27408579-4aba-453f-a0b3-5f755d51fdda,Centre Médical Pluridisciplinaire Provence,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+518c5e54-7cbe-429e-aee9-b16a2bf95f9a,Clinique Riviera,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+515b1f80-63b8-4daa-968a-f8ddce3d1b30,Clinique Altiium ,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+e5dc23b7-1fdd-4e94-a7e2-b9b6c1600a37,Centre Cardiologique des Marronniers,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+af95f87a-528c-43f7-a019-aa2d0f49cf4d,Imagalys Eye Care,US,US,owner_market_mismatch,US account owned by Quitterie Lamy (FR team),reassign to the market's team,manual
+28d17c15-4576-4665-b8c6-28a3f563b0b5,Miller Family Dentistry,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+f801409e-ffee-410d-a9fe-f2bc3a05b84d,Scanner IRM du Mail,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+1a32ccb1-d863-4302-bd52-6d76698432d9,Pôle Santé du Littoral,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+ebfa6f74-e706-48af-a1a8-04ce373b81b7,Centre Médical Pluridisciplinaire des Remparts,Other,DE,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+f10d291b-aa3d-4c8a-b847-55c183918e41,Scanner IRM Baie-Mahault,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+ce3285a4-dfa1-4e63-8647-abc32dd19ade,Optinor Health,US,US,owner_market_mismatch,US account owned by Quitterie Lamy (FR team),reassign to the market's team,manual
+92e91d07-248c-490c-ae4d-19c89c42a24b,Centre Médical Confluence,Other,GB,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+06d79277-d126-42cc-bc18-f99204c92616,Sandy Springs Dental Care,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+254c1b63-072f-4459-862d-9a92158d758b,Ophtalmologie Alpes,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+d170e69f-1ec1-4bc2-b106-dd3e74536d40,New York Health Partners ,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+d1f9c63c-6ae5-4e11-a42d-7b566db8069d,Cardiologie Haddad,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+92db60a3-e1b0-4dea-9d33-55c8b943c69c,Lumalia Dentaire,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+12a8f2e1-1043-4692-ac7e-738b2dc87633,Lakewood Dental Care,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+d3e2933e-5694-46c2-885f-6fbe3bd846e6,Centre de Santé Estuaire,Other,NL,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+13fb94d7-40a2-4299-b524-98e617aa0e53,Houston Dental Care,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+49db76dd-ea30-4ddf-8013-6f147113cef8,Wright Medical Group,US,US,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+13f3e2f3-7f37-4b39-a84a-14eb6a03642f,Clinique Saint-Louis,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+13f3e2f3-7f37-4b39-a84a-14eb6a03642f,Clinique Saint-Louis,FR,FR,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+ba655af6-31af-4623-b55a-bdc374ecdcbc,Dentovel Dentaire,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+e3695d03-f8a9-48f2-a666-de35de3bd783,Centre Ophtalmologique des Vignes,Other,CH,company_number_unverified,unverified 145031856 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+a824a9e2-57dd-4aff-bb1e-83e8874ef565,Clinique Saint-Jean,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+55fedea6-61fc-48e5-ab14-5ed1aaa5444a,Centre de la Vision du Cours,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+76cc2cb5-c944-4cd0-a989-e05bfe0072ce,Centre Médical Pluridisciplinaire Garonne,Other,PL,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+a3f7b803-656c-4473-bca7-3925ea487e13,Centre de Santé Hugo,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+df7d1f81-27c1-4c55-a91a-90bb401b3dcb,Centre Médical Plenitis,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+df7d1f81-27c1-4c55-a91a-90bb401b3dcb,Centre Médical Plenitis,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+f7a297bf-247c-4d67-8810-1aaf82b3b5ce,Helialys Health,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+eeb010a8-e9fe-4d0f-9c2d-59be61d3d391,Cabinet de Masso-Kinésithérapie Saint-Honoré,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+a56a9729-86cf-48c5-9fdc-de48ac57cb1a,Smile Imagence,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+4a835ca9-2909-48e4-9797-cd10b68d155c,Centre de Santé Lamartine,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+122e0a61-f68b-43b9-98d9-597d93e74a5c,Cabinet de Cardiologie du Littoral,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+2adf51b3-4c6a-4b11-9b17-9fe0cd2ed00b,Altiqua Clinic,US,US,owner_market_mismatch,US account owned by Quitterie Lamy (FR team),reassign to the market's team,manual
+7755a16f-9d66-430d-9e42-592571cda646,Centre de Santé Laennec,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+52ea37d0-bbf0-438e-a71d-5000aa0a35e2,Ann Arbor Health Partners,US,US,owner_market_mismatch,US account owned by Quitterie Lamy (FR team),reassign to the market's team,manual
+55112a5e-bfef-4807-a4fe-19bf075aaf95,Clinique du Mail,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+e5a5660e-26cc-457c-b63a-c1ea79ac8ac9,Centre de Santé Confluence,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+e5a5660e-26cc-457c-b63a-c1ea79ac8ac9,Centre de Santé Confluence,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+f62f4280-f2a6-4425-9ef4-c77fc586a071,Ophtalmologie Alpes,Other,CH,company_number_unverified,unverified 145031856 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+a793ab68-3e03-419c-82cf-4e7f7b0539c0,Centre Médical Pluridisciplinaire du Pont,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+a793ab68-3e03-419c-82cf-4e7f7b0539c0,Centre Médical Pluridisciplinaire du Pont,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+58d37ff0-28cf-4532-8f5e-15bd26da7223,Imagerie Médicale Henry,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+a48d313d-cc1f-43fd-8da0-8bfe3f0c0030,Pensacola Health Partners,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+56729f9c-d931-408e-a896-e07170e82928,Centre Médical Pluridisciplinaire des Acacias,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+226409bd-82ff-44cf-85ce-ad4b13b1766a,Centre Cardiologique des Acacias,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+c9f5d676-47bc-4791-83ec-7ad73356bbc8,Clinique Confluence,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+52c565b3-a699-4cc3-bf6c-52bf0e352e54,Pôle Santé Provence,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+ef28132c-1684-4e67-957a-33a713c8e18c,Pôle Santé du Moulin,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+ff501595-77e8-4efd-bd34-9f7897a400b2,Pôle Santé du Parc,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+a644f035-466b-400e-9168-a5737bbae2c4,Centre de Santé Vauban,FR,FR,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+4905c6dd-fdd9-42a3-bb89-5cfd0a79bea7,Centre Cardiologique Confluence,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+04f0ff49-9355-4665-83d2-b6f41dd2f50c,Axiance Health,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+0303ddbe-0243-4973-b21c-aef19be12470,Cardiologie Blaye,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+6aef74fd-31aa-41a1-b272-22d4930b82e1,CDS des Cèdres,Other,AU,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+c16e532b-5120-4864-9cfa-7fb10e8852c5,Clinique Joly,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+d2b45335-ce28-4afc-a3a1-40ab9c0c6ce3,Clinique du Plateau,Other,SE,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+f3d4add5-60c8-40d5-811f-fae6ef63f9c1,Mediium Health,US,US,owner_market_mismatch,US account owned by Quitterie Lamy (FR team),reassign to the market's team,manual
+d97401c0-5d87-43fa-b1ce-085e81c08b9d,Centre Médical Saint-Martin,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+d97401c0-5d87-43fa-b1ce-085e81c08b9d,Centre Médical Saint-Martin,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+76ee0bf6-c133-43d1-9d90-0e5b83463d5f,Ophtalmologie Riviera,Other,CH,company_number_unverified,unverified 800721317 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+7e37d51c-8de5-4c9b-81d1-eaa97e140745,Kinemea Health,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+cf0f9775-47eb-40f5-a307-8a75bdc1169e,Scottsdale Dental Care,US,US,company_number_unverified,NPI 2127138078 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+cf0f9775-47eb-40f5-a307-8a75bdc1169e,Scottsdale Dental Care,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+b5bc1503-7175-426e-8fb1-ec349a4097a8,Medilia Dental Group,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+2255bb1b-a995-4516-9787-e18dfb7b477b,Centre Médical Armor,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+d4f9a0a8-a67e-4d44-a047-bca76941baac,Centre de Santé des Coteaux,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+657b20f6-d250-4fc3-b016-d1701573e6b1,Clinique des Tilleuls,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+edf3be50-67c7-4f16-ace0-e82133421b79,Centre de Santé Vallée,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+7144cf42-c314-4a71-9088-553f393da74c,Pleniis Dental Group,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+dfe1e91a-154b-4e44-869d-ee4296781ef3,Us Health Partners,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+473073ce-eb10-4ef2-b808-849b95f19a57,Centre Médical Saint-Jean,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+cc71d1ac-e55d-4c25-bd35-5453de073bfd,Centre Medical du Palais,FR,FR,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+168babae-f686-49d8-b609-738d07d50779,Novaqua Health,US,US,owner_market_mismatch,US account owned by Quitterie Lamy (FR team),reassign to the market's team,manual
+c7203cd6-72f5-452f-9a2a-69653f2479fd,Neovel Health,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+622ff832-7c88-4d63-84af-9cb1ac830b34,Centre Médical Pluridisciplinaire du Val,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+6ac3862c-323a-4340-8fa8-d6d924c47b50,Centre Médical Garonne,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+e4929998-8244-4cda-84b0-3818fc6d86a5,Ophtalmologie Lamartine,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+80bbdb5c-3a6d-4d8b-bb47-02217389e303,Clinique Saint-Honoré,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+80bbdb5c-3a6d-4d8b-bb47-02217389e303,Clinique Saint-Honoré,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+ce74a478-1067-483d-8acb-ff94dd877e85,King Family Dentistry,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+17c5a9d6-1453-4bf4-9121-1683bab69f8e,Centre Médical Pluridisciplinaire Saint-Éloi,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+fb4fb860-7320-4e08-846e-97bab38820fd,Collins Family Dentistry,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+b7c08413-565d-4f98-adde-0d3357e4ab55,Centre Médical Pluridisciplinaire Belkacem,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+8ff3c47c-6067-4d9d-b494-b3a7304c50e6,Roberts Family Dentistry,US,US,company_number_unverified,NPI 0764432764 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+8ff3c47c-6067-4d9d-b494-b3a7304c50e6,Roberts Family Dentistry,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+68213239-ce80-4170-94e4-fa7cc5607571,Imagerie Médicale Saint-Martin,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+3fc7c3a1-b231-4e9b-a6fd-9694e08d5c98,Pôle Santé Helimea,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+84b49f33-2aac-4dc3-b70c-8d15ebac27c8,Clinique Marty,FR,FR,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+4d0cd08d-d22c-42ea-822e-93a424000c62,Santa Barbara Health Partners,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+4d0cd08d-d22c-42ea-822e-93a424000c62,Santa Barbara Health Partners,US,US,booking_url_wrong_country,doctolib.fr page on a US account,remove the URL or fix the country,manual
+dffcea4f-1502-468b-8c0b-748680c07949,Honolulu Health Partners,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+e76ece77-2543-4e7a-9a93-b9218e59ca18,Centre de Santé des Cèdres,Other,AU,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+59dbce36-be8e-40de-93e0-ac27e7ec3cdd,Serois Health,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+a2acb40a-2a79-4d53-951b-1b5b3672a9b3,Lumalia Clinic,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+6367510b-40b1-44e0-933c-2982de5e4ae0,Centre de Santé Saint-Louis,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+431fd5eb-e7bb-4998-a021-66794ac12bac,Los Angeles Health Partners,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+40ef401b-4b9c-4eb7-a552-a86ef4e4cf53,Centre Médical Le Port,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+40ef401b-4b9c-4eb7-a552-a86ef4e4cf53,Centre Médical Le Port,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+adbcbabb-aeb2-4e12-a8a3-12c31c10c71b,Centre Médical Pluridisciplinaire Saint-Paul,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+ea915096-568e-4985-91ed-b20c6206fe77,Centre Médical du Bocage,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+a41c21e4-e1e5-478e-ad1d-3b5186502be4,Centre Médical Pluridisciplinaire Maisons-Alfort,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+66e8db72-1259-4580-b58c-4b4db5aec59c,Centre de Santé Verfeil,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+66e8db72-1259-4580-b58c-4b4db5aec59c,Centre de Santé Verfeil,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+368b3996-2072-49a6-ba68-2b494caaf72c,Clinique du Marché,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+ea53e80e-e6ef-419c-b2fd-828cf4602a1f,Centre Médical Pluridisciplinaire du Palais,Other,SE,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+7e0476f3-8092-4a46-9ea2-0350787866e6,Centre de Santé Provence,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+88b82cd4-5bef-4154-84a0-46d5dbd8fb34,Dr Marchand - Chirurgien-dentiste,Other,BE,company_number_unverified,unverified 4718960666 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+26e337b4-ed10-42af-bef7-d46fc33ba4b7,Centre Médical Laennec,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+1f2397ce-3b6f-4578-8f35-14d3d5ffcb0f,Pembroke Pines Health Partners,US,US,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+8ddbc215-e34c-4f7c-8232-869c38d70055,Clinique Altiium,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+1b2803db-25fe-490b-9c32-fedc6139e775,Imagerie Médicale Arago,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+11c52e18-5bb5-423a-a2c0-aacbfe82a69e,Centre Médical Bessoncourt,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+2a37f346-dfef-4dd8-b85e-5dae057d24cf,Medivia Dental Group,US,US,booking_url_wrong_country,doctolib.fr page on a US account,remove the URL or fix the country,manual
+2a37f346-dfef-4dd8-b85e-5dae057d24cf,Medivia Dental Group,US,US,owner_market_mismatch,US account owned by Katia Benhamou (FR team),reassign to the market's team,manual
+18829ff9-da7a-4aaa-aefe-52e8dffe55ba,Clinique Gambetta,Other,GB,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+5ba3f69a-773e-477e-acb8-0cb7b0aaf25a,Cabinet d'Orthodontie Chevalier,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+df563311-2330-4e6e-82b0-acb1cd7e2c80,Pôle Santé Curie,FR,FR,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+3c0d4aee-6745-4062-8f97-22ac87a59124,Axivel Dentaire,Other,CH,company_number_unverified,unverified 410401820 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+1ac54f29-bf3e-4745-bdda-624cce720775,Edwards Medical Group,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+93e295ab-c589-4acb-9469-0fe373e41d70,Clinique Saint-Nicolas,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+12640540-bbf2-473a-81a4-a21d3c39466e,Centre de Santé Leroy,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+1085fb7b-4951-4a96-857e-6392312522f4,Pôle Sante Condorcet,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+7080de93-6f6d-46d1-a12d-b571e12ae362,Smile Heliora,US,US,company_number_unverified,NPI 9153850443 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+7080de93-6f6d-46d1-a12d-b571e12ae362,Smile Heliora,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+18664dd0-7cc9-40a3-b695-7e04cec15dba,Sanaea Clinic,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+18664dd0-7cc9-40a3-b695-7e04cec15dba,Sanaea Clinic,US,US,booking_url_wrong_country,doctolib.fr page on a US account,remove the URL or fix the country,manual
+8ef05278-4a7d-4aaa-9bac-fe47802c2d6c,Clinique Cilaos,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+07401b9b-1549-4997-b1bf-0bdbac114b85,Centre de Santé Leroux,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+b2354172-0df5-403c-828a-4d1ab6d2a1b6,Clinitis Dental Group,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+a5859498-689c-4cb5-914a-b3d3ba6a3847,Pôle Santé Cayenne,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+a5859498-689c-4cb5-914a-b3d3ba6a3847,Pôle Santé Cayenne,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+2dbc6bef-46d5-4bd7-b570-53fc3bb0a625,Neovia Clinic,US,US,booking_url_wrong_country,doctolib.fr page on a US account,remove the URL or fix the country,manual
+e7b929c4-7283-4bec-ac28-b6f469ea2002,Centre Médical du Port,Other,CH,company_number_unverified,unverified 01658765358 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+17801d97-5e25-45c2-8695-db2d80db29f0,Cabinet du Dr Roy,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+a30efed1-b021-47f2-91b0-f2043dfaea3e,Pôle Santé Colbert,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+da6194c4-dbe9-4759-b344-7d74565cd187,Neolia Clinic,US,US,owner_market_mismatch,US account owned by Quitterie Lamy (FR team),reassign to the market's team,manual
+b90240f2-8d4c-4344-8eca-847a7ad08a6c,Centre Médical Pluridisciplinaire Saint-Éloi,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+ef37f938-c1e7-42a0-a085-e3e47bee32a4,Johnson Family Dentistry,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+f129e3fe-3e6c-4f62-8a41-e68f1e45e903,Clinique Atlantique,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+00992cb3-0a2d-4211-99a5-60bf1574cad1,Centre Médical Pluridisciplinaire Fleming,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+00992cb3-0a2d-4211-99a5-60bf1574cad1,Centre Médical Pluridisciplinaire Fleming,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+ec57874d-9e64-4577-85be-adbac9f21b60,Ophtalmologie du Lac,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+9d73d303-a954-411a-9c2e-797d4c20f5cf,Centre Médical Saint-Benoit,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+48d64092-e6a5-4786-9800-253db2686a43,Pôle Santé Rivière,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+738a4eaf-bbdc-43a2-897b-109df6aa2a70,Centre de Santé Aubert,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+3ee67bbb-dda6-41c4-8d80-20947c59373b,Centre Médical Lefèvre,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+7ab118f9-3c48-4845-b1d6-65e2e688e6cd,Centre Médical Bénard,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+8b847103-b3c4-4b00-8dc2-394021158728,Dr Azoulay - Chirurgien-dentiste,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+8b847103-b3c4-4b00-8dc2-394021158728,Dr Azoulay - Chirurgien-dentiste,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+8b12907c-ea78-4d71-bba8-217d5ce9bb09,Scanner IRM Arnaud,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+f221a158-d581-4552-b8af-00b5e69daf9a,Clinique Medimea,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+5af5cb5b-65a2-4016-b96b-c04bf4bb57b5,Centre de Chirurgie Saint-Nicolas,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+40f699c8-80d0-447a-b495-0d8396408efb,Scott Medical Group,US,US,booking_url_wrong_country,doctolib.fr page on a US account,remove the URL or fix the country,manual
+f2bd86cc-1871-4f9f-a1c7-96439d1cf70d,Centre Médical Pluridisciplinaire Lamartine,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+82caa30d-a500-4ccb-a04b-60717fc17e93,Centre de Santé Saint-Michel,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+82caa30d-a500-4ccb-a04b-60717fc17e93,Centre de Santé Saint-Michel,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+52420432-412d-4998-9bf0-ecfc84112e35,Centre Médical Gauthier,Other,AT,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+f0aaec03-2a59-4255-a631-7ad33d7ee1f0,Optilia Health,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+0e7c7560-2db3-4512-9000-8f27af60ee42,Novaora Eye Care,US,US,company_number_unverified,unverified 006249528 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+0e7c7560-2db3-4512-9000-8f27af60ee42,Novaora Eye Care,US,US,owner_market_mismatch,US account owned by Quitterie Lamy (FR team),reassign to the market's team,manual
+2db83807-7f79-4261-a4e3-589bda863e88,Centre Médical Pluridisciplinaire Muller,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+2db83807-7f79-4261-a4e3-589bda863e88,Centre Médical Pluridisciplinaire Muller,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+40af0048-0898-4519-83bc-c2be73794507,Centre de Santé Dentaire Baie-Mahault,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+6f7e484f-cbf8-48c7-97cc-fae41546c84c,Dallas Dental Care,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+d8a2eba4-bc39-41d9-8b83-1c36ae26868a,Centre Médical du Pont,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+c4f6e7b4-fc8f-44cd-813c-02ef37e01f30,Shah Medical Group ,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+f6fb3708-db7b-4a37-8940-ed38bb75db52,Kineium Dental Group,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+fed2b0c2-de7f-496c-939f-13ff5e48fdb1,Sanamea Clinic,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+01d459f8-b97d-44f3-9993-42b7e4760574,Cardience Clinic,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+a3fc88ec-21c8-44ae-a737-8f485ee65988,Centre Médical Cayenne,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+a77b7c0b-bdad-400c-a186-c17d51a7b08a,Nelson Family Dentistry,US,US,company_number_unverified,NPI 4818589610 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+a77b7c0b-bdad-400c-a186-c17d51a7b08a,Nelson Family Dentistry,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+1cc77573-3763-42c1-8902-dbcb4fe046c7,Us Health Partners,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+957c8241-ea5a-47ab-88e8-da655796b1f6,Harris Medical Group,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+ebedcd4f-5f7a-4d56-9c40-416e4d6a5cbc,Us Health Partners,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+78e52d45-748c-4ad8-a734-9834be432f7d,Cabinet de Cardiologie Brun,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+d2630ed1-9611-493e-93cb-dc5dae52fd99,Miller Family Dentistry,US,US,booking_url_wrong_country,maiia.com page on a US account,remove the URL or fix the country,manual
+d2630ed1-9611-493e-93cb-dc5dae52fd99,Miller Family Dentistry,US,US,owner_market_mismatch,US account owned by Katia Benhamou (FR team),reassign to the market's team,manual
+3c3ac303-0e9e-4e1a-a83b-7b9b9e6b3155,Centre de Santé du Moulin,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+8590d006-d682-425e-9beb-5d7efc4e1a30,Centre Médical Pluridisciplinaire La Grande-Motte,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+a8e29f35-b17b-4ed2-9636-4894d90a0c5a,Centre Médical Pluridisciplinaire Val-D'Ize,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+393744ef-958d-450f-9683-9ee92327d77e,Jackson Family Dentistry,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+1b7a06f1-9b2b-457e-84b4-6928133406ec,Centre de Chirurgie Montpellier,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+20ba6d30-8e0d-4e5f-9c50-d4592afd6b78,Clinique du Cours,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+a60482dd-d245-4268-b549-9ca9b26c775e,Pleniis Health,US,US,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+41454149-dcae-485f-bd65-055ba050e02b,Clinique du Plateua,Other,SE,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+5eb584cc-cc82-4bdf-887c-d859b2037035,Centre Médical Arago,Other,PK,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+5b4d38e3-a41e-49b3-b17a-9f8552538a3e,Centre de Santé du Littoral,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+a62de9c5-342b-4888-881e-4bc1071ed010,New York Health Partners,US,US,owner_market_mismatch,US account owned by Quitterie Lamy (FR team),reassign to the market's team,manual
+e06b0d33-1d2d-41b8-9017-b28b768d6464,Cardinor Health,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+19f678d5-7607-4b02-8d21-8cc77bfad4cb,Centre de Santé Aubert,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+9c2bc514-fc12-480b-a2bf-d8dca6af45ca,New York Health Partners,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+d68d0fa0-7a60-4fab-8876-d472c44f83dd,New York Health Partners,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+2b47b7da-78ba-4fea-988d-c74ce193ba9a,Heliance Dental Group,US,US,booking_url_wrong_country,doctolib.fr page on a US account,remove the URL or fix the country,manual
+d7bec4a7-f83a-423b-bc52-cbc2d3842bdc,Centre Médical Saint-Roch,Other,GB,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+538ff52a-b09c-474d-a01b-837406e125bf,Centre Médical Pluridisciplinaire Saint-Antoine,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+dec26248-d942-40d6-a122-bee212462366,Centre de Santé des Iris,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+4791bba7-ddfd-4831-b02d-2fb7f9d93e50,Altivia Dental Group,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+381699d4-5e6e-4f6a-b365-4f7fff910a4b,Centre de Santé Armor,FR,FR,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+01d43944-92f9-468e-8c8e-77a7ddf9ac70,Altience Dental Group,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+94ec7f92-b5ac-4724-858d-dd3e2766d1ed,Brown Medical Group,US,US,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+10f27fa9-730c-43b2-8666-81d93af97d5a,Pôle Santé Rivière,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+a46a23ec-0415-4543-8cd7-bf2377eb6860,Pôle Santé Robin,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+0e4dd5d6-4de3-4cd8-965e-3a20827d9d61,CLINIQUE ATLANTIQEU,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+8bfe84b6-f4bb-4e38-a3a7-4ae7b816fc51,Centre Médical du Palais,FR,FR,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+ec0752ee-a8cb-451e-9917-6055cc798977,Imagium Health,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+965b5604-af6f-48c4-a013-4e9b72bffcd4,Groupe Médical Axialys,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+ece0ee56-9c9e-48ec-8ded-a4918078cf61,Greenwich Dental Care,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+4dc40696-7fe9-413f-a0e9-920674ddce55,Centre de Santé Le Port,FR,FR,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+fa3cbb19-f6b5-4774-aee9-7543436b54c5,Radiologie du Littoral,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+913a633f-997f-48a6-804b-7cbf6981c0ea,Imagerie Médicale du Bocage,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+5a2e309b-ae86-45a9-93c4-90710bf2b526,Pôle Santé Saint-Paul,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+fc1d0191-41dd-4ed0-822e-4bf61d9e9eed,Polyclinique Hugo,FR,FR,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+45092c3d-f91f-47ec-8535-ed0717b73387,Sanaqua Dental Group,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+a3e9e060-6c43-4f68-b024-7ba8b110b596,Cabinet d'Ophtalmologie Heliys,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+2bc53d1c-349a-44b5-838c-9f77384d2eee,Centre Médical Arago,Unknown,UNKNOWN,country_unknown,no usable country or postcode,set the country,manual
+2bc53d1c-349a-44b5-838c-9f77384d2eee,Centre Médical Arago,Unknown,UNKNOWN,booking_url_wrong_country,doctolib.fr page on a UNKNOWN account,remove the URL or fix the country,manual
+2bc53d1c-349a-44b5-838c-9f77384d2eee,Centre Médical Arago,Unknown,UNKNOWN,company_number_unverified,unverified 04854945540439 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+d7b28ff6-ef9a-4b43-be0b-c8f7ac95b19a,Centre Médical Pluridisciplinaire Blanc,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+87961a3c-f45a-4860-8f40-787111bc739a,Clinique Thomas,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+8c6ae0ca-36a0-430b-b0be-99e389247794,Smith Medical Group,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+ba96a805-cc7e-4bc7-954a-e597ec387d39,Visiance Health ,US,US,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+f11cf803-e050-4772-bd2e-c88f93ebe414,Smile Lumavel,US,US,company_number_unverified,NPI 9147068706 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+f11cf803-e050-4772-bd2e-c88f93ebe414,Smile Lumavel,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+54d87c03-4165-43d2-a932-cba186c483fb,Campbell Medical Group,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+7b1fb5d2-ec4c-41f1-a9a1-40e1fabc1996,Novavia Clinic,US,US,owner_market_mismatch,US account owned by Quitterie Lamy (FR team),reassign to the market's team,manual
+32188caf-5be2-41bd-8d67-bd216963972f,Clinique Vallée,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+32188caf-5be2-41bd-8d67-bd216963972f,Clinique Vallée,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+9fe4d8ae-d502-4094-82ed-6d009bbcf1be,Centre Medical Saint-Roch,Other,GB,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+ff53eceb-61ba-43b9-aa9d-1367869fb712,Radiea Health,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+7f5c04b7-1299-4eb4-8025-6d0303745585,Centre Médical Baie-Mahault,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+41926cbe-d754-4399-a038-0498f57bd175,Centre d'Imagerie Chalon-Sur-Saône,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+fdb1b764-f49d-43a0-aa80-d63733527862,Centre de Chirurgie Horizon,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+9bbaceb8-65cb-4cc9-b605-d7cf12b99ef8,Pôle Santé Condorcet,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+dd60bbad-a3f6-477c-8c73-e9fefa5ebbc3,Centre de Chirurgie Carnot,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+06969643-7844-46db-a52b-b1e864768b2e,Centre Médical Pluridisciplinaire Guérin,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+caa3e650-d329-402f-b3c0-0cef929403d8,Pôle Médical Bernard,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+0f69ea56-2d7b-43c4-97a4-cdfa743cb752,Mediys Health,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+7fca5161-d4df-4cce-a150-6cb9fb171c41,Axilia Radiology,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+05bd290d-fe56-46a7-8d53-ca0a711c660e,King Medical Group,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+f2a3bc3b-3c42-496b-b76c-6f1799e6d7c0,Centre Médical Pluridisciplinaire du Cours,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+5e5a2440-ad3f-45c2-a6b2-da9707c0c9ea,Cabinet d'Ophtalmologie Richard,Unknown,UNKNOWN,country_unknown,no usable country or postcode,set the country,manual
+5e5a2440-ad3f-45c2-a6b2-da9707c0c9ea,Cabinet d'Ophtalmologie Richard,Unknown,UNKNOWN,booking_url_wrong_country,doctolib.fr page on a UNKNOWN account,remove the URL or fix the country,manual
+5e5a2440-ad3f-45c2-a6b2-da9707c0c9ea,Cabinet d'Ophtalmologie Richard,Unknown,UNKNOWN,company_number_unverified,unverified 04745479858108 fails validation,re-enrich from the market's registry (NPPES for the US),manual
+9533cc5d-1a7f-44b8-a7eb-bc858413867a,Clinique des Oliviers,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+4d2900b0-d1b6-453d-8f2f-33bb6d49704d,Centre Médical Pluridisciplinaire des Vignes,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+4d2900b0-d1b6-453d-8f2f-33bb6d49704d,Centre Médical Pluridisciplinaire des Vignes,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+c1815a23-178c-44b2-adb6-a0274b28ebc1,Baltimore Health Partners,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+fe289311-eba7-442e-83ea-f350fdb4ff9d,Centre de Santé Baie-Mahault,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+4a728dba-ec6c-4669-903a-f21fd5456c06,Miami Health Partners,US,US,out_of_tam,relationship = Media,"keep in the CRM, exclude from TAM and pipeline views",auto
+37d28d45-a35f-4c53-8cc9-6e8bba7e8081,Kim Family Dentistry,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+55e0a89c-6460-4eaf-bfe8-237493dfd2e8,Centre Médical Visinor,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+55e0a89c-6460-4eaf-bfe8-237493dfd2e8,Centre Médical Visinor,FR,FR,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+97743963-afc9-44d1-83a8-a419a605166b,SCM Dentaire Armor,Other,CA,booking_url_wrong_country,doctolib.fr page on a CA account,remove the URL or fix the country,manual
+aeb22fd9-f8d8-4766-ad71-f98347c9cd3f,Odoence Health,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+655e2aa8-53fb-4b57-bd2e-e0783db0327b,Shah Medical Group,US,US,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+15bd7a6e-d8e8-453b-81ca-286f376381fe,Centre Médical Riviera,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+18443906-206e-4c2a-ac01-80a3085be451,Centre de Radiologie Alpes,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+3ac34469-d31d-4b7d-b1d1-06a12d516035,Pôle Santé Ampère,Other,CH,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+c52ef41f-8cfd-4981-b365-40606e31bfef,Centre de Chirurgie Monge,FR,FR,country_inferred,country '' -> FR from postcode,set the ISO country,auto
+31925d0f-2098-4e98-acd5-d1ece68270f7,Phillips Family Dentistry,US,US,owner_market_mismatch,US account owned by Capucine Maury (FR team),reassign to the market's team,manual
+a332b249-9f55-4f62-9e65-f26a360bb464,Clinique Le Tampon,FR,FR,out_of_tam,relationship = Invest,"keep in the CRM, exclude from TAM and pipeline views",auto
+bb03d467-506c-426a-876c-a89e01ff8c26,Medilia Health,US,US,out_of_tam,relationship = Partner,"keep in the CRM, exclude from TAM and pipeline views",auto
+bb03d467-506c-426a-876c-a89e01ff8c26,Medilia Health,US,US,booking_url_wrong_country,doctolib.fr page on a US account,remove the URL or fix the country,manual
+2adf51b3-4c6a-4b11-9b17-9fe0cd2ed00b,Altiqua Clinic,US,US,group_missing,2 sites in 2 cities share altiquaclinic.com,create the group for altiquaclinic.com and attach its sites,manual
+1c2924c4-f8e4-462d-a185-040c5d271ebf,Altiqua Clinic,US,US,group_missing,2 sites in 2 cities share altiquaclinic.com,create the group for altiquaclinic.com and attach its sites,manual
+37db8ef1-b2cd-450d-bb65-f5c494bc5a7a,Cardience Clinic,US,US,group_missing,2 sites in 2 cities share cardience-clinic.com,create the group for cardience-clinic.com and attach its sites,manual
+01d459f8-b97d-44f3-9993-42b7e4760574,Cardience Clinic,US,US,group_missing,2 sites in 2 cities share cardience-clinic.com,create the group for cardience-clinic.com and attach its sites,manual
+e1ab5c19-85a0-4115-a525-8204636005bf,Clinique Lavoisier,FR,FR,group_missing,2 sites in 2 cities share cliniquelavoisier.fr,create the group for cliniquelavoisier.fr and attach its sites,manual
+66857606-3b6d-4abe-86cc-36f0bea33bbe,Clinique Lavoisier,Other,GB,group_missing,2 sites in 2 cities share cliniquelavoisier.fr,create the group for cliniquelavoisier.fr and attach its sites,manual
+b14ee62b-9b3a-4d61-85cc-998740e62acd,Centre de la Vision Armor,FR,FR,group_missing,2 sites in 2 cities share de-la-vision-armor.fr,create the group for de-la-vision-armor.fr and attach its sites,manual
+63ea7453-424a-4af5-a627-97bfe86d492a,Centre de la Vision Armor,Other,CH,group_missing,2 sites in 2 cities share de-la-vision-armor.fr,create the group for de-la-vision-armor.fr and attach its sites,manual
+4d2f48d5-c432-419a-b644-7fdad530367e,Centre de la Vision des Iris,FR,FR,group_missing,2 sites in 2 cities share de-la-vision-des-iris.fr,create the group for de-la-vision-des-iris.fr and attach its sites,manual
+8573b129-3688-4b12-86ca-b686346dca2e,Centre de la Vision des Iris,FR,FR,group_missing,2 sites in 2 cities share de-la-vision-des-iris.fr,create the group for de-la-vision-des-iris.fr and attach its sites,manual
+595f796a-88f7-4a2f-8ee4-94fbb8223727,Cabinet de Radiologie Gambetta,FR,FR,group_missing,2 sites in 2 cities share de-radiologie-gambetta.fr,create the group for de-radiologie-gambetta.fr and attach its sites,manual
+5c2edc3e-2dab-4f56-bd90-6ebba37d46b1,Cabinet de Radiologie Gambetta,FR,FR,group_missing,2 sites in 2 cities share de-radiologie-gambetta.fr,create the group for de-radiologie-gambetta.fr and attach its sites,manual
+c843045e-b135-4b4d-8afc-6464198ce3c6,Centre de Santé des Marronniers,FR,FR,group_missing,2 sites in 2 cities share de-sante-des-marronniers.fr,create the group for de-sante-des-marronniers.fr and attach its sites,manual
+812c3bc1-de26-4e86-a3e5-08e6a4945f8c,Centre de Santé des Marronniers,Other,GB,group_missing,2 sites in 2 cities share de-sante-des-marronniers.fr,create the group for de-sante-des-marronniers.fr and attach its sites,manual
+c660e905-98da-44e7-8464-3d330e3a2a54,Centre de Santé du Val,FR,FR,group_missing,2 sites in 2 cities share de-sante-du-val.fr,create the group for de-sante-du-val.fr and attach its sites,manual
+dfc4875f-db45-455e-b33e-ee89537b69eb,Centre de Santé du Val,FR,FR,group_missing,2 sites in 2 cities share de-sante-du-val.fr,create the group for de-sante-du-val.fr and attach its sites,manual
+d3e2933e-5694-46c2-885f-6fbe3bd846e6,Centre de Santé Estuaire,Other,NL,group_missing,2 sites in 2 cities share de-sante-estuaire.com,create the group for de-sante-estuaire.com and attach its sites,manual
+6e257f73-8fcc-433f-90e6-9d0e84af3a06,Centre de Santé Estuaire,FR,FR,group_missing,2 sites in 2 cities share de-sante-estuaire.com,create the group for de-sante-estuaire.com and attach its sites,manual
+f0e8539f-2c9a-43de-ae45-cec7a42595ea,Cabinet Dentaire Armor,FR,FR,group_missing,2 sites in 2 cities share dentaire-armor.fr,create the group for dentaire-armor.fr and attach its sites,manual
+97743963-afc9-44d1-83a8-a419a605166b,SCM Dentaire Armor,Other,CA,group_missing,2 sites in 2 cities share dentaire-armor.fr,create the group for dentaire-armor.fr and attach its sites,manual
+ebdd4842-efae-448b-bded-1d56c06840dd,SCM Dentaire Hugo,FR,FR,group_missing,2 sites in 2 cities share dentairehugo.fr,create the group for dentairehugo.fr and attach its sites,manual
+53cd4794-344c-4f56-835a-12f248ca4af2,Cabinet Dentaire Hugo,FR,FR,group_missing,2 sites in 2 cities share dentairehugo.fr,create the group for dentairehugo.fr and attach its sites,manual
+f7a297bf-247c-4d67-8810-1aaf82b3b5ce,Helialys Health,US,US,group_missing,3 sites in 3 cities share helialys-health.com,create the group for helialys-health.com and attach its sites,manual
+3e0755e8-d176-4597-a718-30d662e9ea5b,Helialys Health,US,US,group_missing,3 sites in 3 cities share helialys-health.com,create the group for helialys-health.com and attach its sites,manual
+a9f77d99-ac17-410d-8d0d-e2f356e524de,Helialys Health,US,US,group_missing,3 sites in 3 cities share helialys-health.com,create the group for helialys-health.com and attach its sites,manual
+25f14db4-eb11-4963-855c-56e897e7a848,Centre Médical Pluridisciplinaire des Acacias,FR,FR,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-d.net,create the group for medical-pluridisciplinaire-d.net and attach its sites,manual
+e473351c-a386-42ee-9a8c-e3363ca4b51a,Centre Médical Pluridisciplinaire des Oliviers,FR,FR,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-d.net,create the group for medical-pluridisciplinaire-d.net and attach its sites,manual
+5b70d05d-243f-4861-82ee-d6d57f0ff8e9,Centre Médical Pluridisciplinaire des Glycines,FR,FR,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-d.org,create the group for medical-pluridisciplinaire-d.org and attach its sites,manual
+319c32a3-1d22-40de-b1f7-b2131302cfe0,Centre Médical Pluridisciplinaire du Moulin,FR,FR,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-d.org,create the group for medical-pluridisciplinaire-d.org and attach its sites,manual
+6abc96cd-3898-4199-87b6-21c954af4001,Centre Médical Pluridisciplinaire Gambetta,FR,FR,group_missing,3 sites in 3 cities share medical-pluridisciplinaire-g.fr,create the group for medical-pluridisciplinaire-g.fr and attach its sites,manual
+76cc2cb5-c944-4cd0-a989-e05bfe0072ce,Centre Médical Pluridisciplinaire Garonne,Other,PL,group_missing,3 sites in 3 cities share medical-pluridisciplinaire-g.fr,create the group for medical-pluridisciplinaire-g.fr and attach its sites,manual
+81d09d44-fff1-4e8d-a6fc-db2fe2f3a8fd,Centre Médical Pluridisciplinaire Gambetta,FR,FR,group_missing,3 sites in 3 cities share medical-pluridisciplinaire-g.fr,create the group for medical-pluridisciplinaire-g.fr and attach its sites,manual
+8da25c0d-faab-4db5-8680-a0b7afa4f86e,Centre Médical Pluridisciplinaire Jaurès,Other,DE,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-j.fr,create the group for medical-pluridisciplinaire-j.fr and attach its sites,manual
+6c581993-82ec-4312-b75d-32c001be5652,Centre Médical Pluridisciplinaire Joffre,FR,FR,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-j.fr,create the group for medical-pluridisciplinaire-j.fr and attach its sites,manual
+8edb93cd-0cf2-4f82-a2d9-e5f27c7a60ba,Centre Médical Pluridisciplinaire Laennec,FR,FR,group_missing,3 sites in 3 cities share medical-pluridisciplinaire-l.fr,create the group for medical-pluridisciplinaire-l.fr and attach its sites,manual
+153bf6d4-896b-4e7a-949c-d2860029cac9,Centre Médical Pluridisciplinaire Laennec,FR,FR,group_missing,3 sites in 3 cities share medical-pluridisciplinaire-l.fr,create the group for medical-pluridisciplinaire-l.fr and attach its sites,manual
+cf08f671-648d-4c93-bb0d-db1824a1d489,Centre Médical Pluridisciplinaire Laennec,FR,FR,group_missing,3 sites in 3 cities share medical-pluridisciplinaire-l.fr,create the group for medical-pluridisciplinaire-l.fr and attach its sites,manual
+64481e7a-b6fc-4899-b642-18b3697d106d,Centre Médical Pluridisciplinaire Martinez,FR,FR,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-m.fr,create the group for medical-pluridisciplinaire-m.fr and attach its sites,manual
+2db83807-7f79-4261-a4e3-589bda863e88,Centre Médical Pluridisciplinaire Muller,FR,FR,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-m.fr,create the group for medical-pluridisciplinaire-m.fr and attach its sites,manual
+89c17da7-361e-4145-afcc-ec01fd8b4421,Centre Médical Pluridisciplinaire Océane,Other,GB,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-o.fr,create the group for medical-pluridisciplinaire-o.fr and attach its sites,manual
+f62ed3fc-da92-4538-8d9f-33d6195ed2de,Centre Médical Pluridisciplinaire Orbitis,FR,FR,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-o.fr,create the group for medical-pluridisciplinaire-o.fr and attach its sites,manual
+adbcbabb-aeb2-4e12-a8a3-12c31c10c71b,Centre Médical Pluridisciplinaire Saint-Paul,FR,FR,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-s.com,create the group for medical-pluridisciplinaire-s.com and attach its sites,manual
+ca893cb1-d353-4329-9ac6-d5e78da835e7,Centre Médical Pluridisciplinaire Saint-Jean,FR,FR,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-s.com,create the group for medical-pluridisciplinaire-s.com and attach its sites,manual
+5fb62ec2-1bdd-49ac-89d9-fdffbbe0ca44,Centre Médical Pluridisciplinaire Saint-Louis,Other,IN,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-s.fr,create the group for medical-pluridisciplinaire-s.fr and attach its sites,manual
+e6a81c63-9b0b-466d-bfcf-eeeb666ac827,Centre Médical Pluridisciplinaire Saint-Antoine,Other,NZ,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-s.fr,create the group for medical-pluridisciplinaire-s.fr and attach its sites,manual
+e503a94b-0c2f-4331-a601-3ee881ee6a39,Centre Médical Pluridisciplinaire Vallée,FR,FR,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-v.fr,create the group for medical-pluridisciplinaire-v.fr and attach its sites,manual
+12728db9-1cac-4239-b83d-9983d81fec39,Centre Médical Pluridisciplinaire Val De Briey,FR,FR,group_missing,2 sites in 2 cities share medical-pluridisciplinaire-v.fr,create the group for medical-pluridisciplinaire-v.fr and attach its sites,manual
+6ac3862c-323a-4340-8fa8-d6d924c47b50,Centre Médical Garonne,FR,FR,group_missing,2 sites in 2 cities share medicalgaronne.fr,create the group for medicalgaronne.fr and attach its sites,manual
+8c9bd9bf-b62f-444b-b498-02db7b030e7c,Centre Médical Garonne,Other,GB,group_missing,2 sites in 2 cities share medicalgaronne.fr,create the group for medicalgaronne.fr and attach its sites,manual
+5217adc0-ce6f-4bce-b722-3f4f15fba870,Centre Médical Pluridisciplinaire des Glycines,Other,GB,group_missing,2 sites in 2 cities share medicalpluridisciplinaired.com,create the group for medicalpluridisciplinaired.com and attach its sites,manual
+4d2900b0-d1b6-453d-8f2f-33bb6d49704d,Centre Médical Pluridisciplinaire des Vignes,FR,FR,group_missing,2 sites in 2 cities share medicalpluridisciplinaired.com,create the group for medicalpluridisciplinaired.com and attach its sites,manual
+dedbc4bc-3c4c-4527-b7c5-81f7761a9d05,Centre Médical Pluridisciplinaire Helinor,Other,GB,group_missing,2 sites in 2 cities share medicalpluridisciplinaireh.fr,create the group for medicalpluridisciplinaireh.fr and attach its sites,manual
+94b72dd0-7f8a-41ed-ac58-f5e6befc33da,Centre Médical Pluridisciplinaire Horizon,Other,GB,group_missing,2 sites in 2 cities share medicalpluridisciplinaireh.fr,create the group for medicalpluridisciplinaireh.fr and attach its sites,manual
+7c88bcad-6086-4157-bf18-6c49a9891135,Centre Médical Pluridisciplinaire Legrand,FR,FR,group_missing,2 sites in 2 cities share medicalpluridisciplinairel.fr,create the group for medicalpluridisciplinairel.fr and attach its sites,manual
+baaa9a05-afff-4c44-9fdf-b09e8be2a8f8,Centre Médical Pluridisciplinaire Laennec,FR,FR,group_missing,2 sites in 2 cities share medicalpluridisciplinairel.fr,create the group for medicalpluridisciplinairel.fr and attach its sites,manual
+9ee131f3-501d-4cc9-97dd-b13a9eb94f60,Pôle Santé du Bocage,FR,FR,group_missing,2 sites in 2 cities share pole-sante-du-bocage.net,create the group for pole-sante-du-bocage.net and attach its sites,manual
+2042001e-c54c-4150-aa06-26ecf7bb7567,Pôle Santé du Bocage,FR,FR,group_missing,2 sites in 2 cities share pole-sante-du-bocage.net,create the group for pole-sante-du-bocage.net and attach its sites,manual
+032c6388-eec7-403d-b943-d83f1afddf7f,Shah Medical Group,US,US,group_missing,3 sites in 2 cities share shah-medical-group.com,create the group for shah-medical-group.com and attach its sites,manual
+c4f6e7b4-fc8f-44cd-813c-02ef37e01f30,Shah Medical Group ,US,US,group_missing,3 sites in 2 cities share shah-medical-group.com,create the group for shah-medical-group.com and attach its sites,manual
+655e2aa8-53fb-4b57-bd2e-e0783db0327b,Shah Medical Group,US,US,group_missing,3 sites in 2 cities share shah-medical-group.com,create the group for shah-medical-group.com and attach its sites,manual

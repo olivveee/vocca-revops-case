@@ -1,15 +1,19 @@
 """Account deduplication, hierarchy audit and contact re-attachment for the TAM.
 
-Account model (Part 1B): the account is the SITE (one SIRET, one booking calendar),
-rolled up to a GROUP (where the decision and the framework contract sit) and a
-NETWORK (Superorga). The legal entity (SIREN) is a separate attribute linked to sites:
-several sites can share a SIREN, and a group can own sites with different SIRENs.
+Account model (Part 1B), the same in every market: the account is the SITE, rolled up
+to a GROUP (where the decision and the framework contract sit) and a NETWORK
+(Superorga). The legal entity is a separate attribute linked to sites.
 
-Matching keys, strongest first: valid SIRET, booking-calendar URL, normalised phone,
-website domain (platforms and webmail excluded), normalised name + postcode.
+The CRM sees one generic identity: country + company_number + company_number_type.
+The type depends on the market (SIRET in France, NPI in the US, ...) and a number only
+counts once it passes that type's validation. In France the legal entity is the SIREN.
+
+Matching keys, strongest first: validated company number, booking-calendar URL,
+legal entity, normalised name + postcode, phone, website domain (platforms and
+webmail excluded).
 
 Never merged automatically:
-  - different valid SIRETs (two sites, even under the same SIREN);
+  - different validated company numbers (two sites, even under one legal entity);
   - a Practice and a Group/Superorga (that is a hierarchy fix, not a duplicate);
   - pairs where either record is a customer (billing ID or signed ARR);
   - pairs with open deals owned by different people;
@@ -39,6 +43,9 @@ LEGAL_FORM_WORDS = {
     "eurl", "association", "asso", "fondation", "mutuelle", "groupe", "cabinet", "centre",
     "de", "du", "des", "la", "le", "les", "d", "l", "et", "the", "of",
 }
+COUNTRY_ALIASES = {"FRANCE": "FR", "FRA": "FR", "USA": "US", "UNITED STATES": "US"}
+BOOKING_PLATFORM_COUNTRY = {"doctolib.fr": "FR", "maiia.com": "FR", "keldoc.com": "FR"}
+OUT_OF_TAM_RELATIONSHIPS = {"Invest", "Partner", "Media"}
 CUSTOMER_LIFECYCLES = {"Customer", "Churn"}
 LIFECYCLE_RANK = {"Customer": 0, "Churn": 1, "Prospect": 2, "Lead": 3}
 
@@ -77,6 +84,38 @@ def luhn_ok(digits):
     return total % 10 == 0
 
 
+def npi_ok(digits):
+    """US National Provider Identifier: 10 digits, starts with 1 or 2, Luhn on '80840' + number."""
+    return len(digits) == 10 and digits[0] in "12" and luhn_ok("80840" + digits)
+
+
+def norm_country(country, postcode):
+    """Return (ISO country, inferred?). A missing country with a French postcode is France."""
+    raw = str(country).strip().upper() if isinstance(country, str) else ""
+    raw = COUNTRY_ALIASES.get(raw, raw)
+    if len(raw) == 2 and raw.isalpha():
+        return raw, False
+    if isinstance(postcode, str) and re.fullmatch(r"\d{5}", postcode.strip()):
+        return "FR", True
+    return "UNKNOWN", bool(raw)
+
+
+def company_number(country, value):
+    """Generic identity: (number, type, validated). Type depends on the market."""
+    if pd.isna(value):
+        return None, "missing", False
+    digits = re.sub(r"\D", "", str(value))
+    if country == "FR":
+        if len(digits) == 14:
+            return digits, "SIRET", luhn_ok(digits)
+        if len(digits) == 9:
+            return digits, "SIREN", False  # a legal entity, not a site
+        return digits or None, "invalid", False
+    if country == "US" and len(digits) == 10:
+        return digits, "NPI", npi_ok(digits)
+    return digits or None, "unverified", False
+
+
 def norm_phone(value):
     if pd.isna(value):
         return None
@@ -113,9 +152,18 @@ def load(data_dir):
     contacts = pd.read_csv(f"{data_dir}/contacts.csv", dtype=str)
 
     c = companies.copy()
-    parsed = c.siret.map(norm_siret)
+    countries = [norm_country(k, p) for k, p in zip(c.country, c.postcode)]
+    c["country_norm"] = [k for k, _ in countries]
+    c["country_inferred"] = [inf for _, inf in countries]
+    numbers = [company_number(k, v) for k, v in zip(c.country_norm, c.siret)]
+    c["company_number"] = [n for n, _, _ in numbers]
+    c["company_number_type"] = [t for _, t, _ in numbers]
+    c["company_number_valid"] = [ok for _, _, ok in numbers]
+    # French-only fields kept for the SIREN (legal entity) logic.
+    is_fr = c.country_norm.eq("FR")
+    parsed = c.siret.where(is_fr).map(norm_siret)
     c["siret_norm"] = parsed.map(lambda x: x[0])
-    c["siret_status"] = parsed.map(lambda x: x[1])
+    c["siret_status"] = parsed.map(lambda x: x[1]).where(is_fr, "not_applicable")
     c["siret_valid"] = c.siret_status.eq("siret")
     c["siren"] = c.siret_norm.str[:9]
     c["name_norm"] = c.name.map(norm_name)
@@ -151,7 +199,8 @@ def candidate_pairs(c):
                 for j in range(i + 1, len(ids)):
                     evidence.setdefault((ids[i], ids[j]), set()).add(key_name)
 
-    add_block(c.siret_norm.where(c.siret_valid), "siret")
+    identity = c.country_norm + "|" + c.company_number_type + "|" + c.company_number.fillna("")
+    add_block(identity.where(c.company_number_valid), "company_number")
     add_block(c.siren.where(c.siret_status.isin(["siret", "siren_only"])), "siren")
     add_block(c.calendar_norm, "calendar")
     add_block(c.phone_norm, "phone")
@@ -170,13 +219,13 @@ def decide(a, b, keys):
     """
     type_a, type_b = a["type"], b["type"]
     weak = f"weak evidence only ({', '.join(sorted(keys))}): typically a shared group phone/domain or a recycled number"
-    if a["siret_valid"] and b["siret_valid"] and a["siret_norm"] != b["siret_norm"]:
-        if a["siren"] == b["siren"]:
+    if a["company_number_valid"] and b["company_number_valid"] and a["company_number"] != b["company_number"]:
+        if a["siren"] == b["siren"] and isinstance(a["siren"], str):
             return "do_not_merge", "same legal entity (SIREN), different sites (SIRET): link to one legal entity, keep both sites"
-        return "do_not_merge", "different valid SIRETs: two distinct sites"
+        return "do_not_merge", "different validated company numbers: two distinct sites"
     if not isinstance(type_a, str) or not isinstance(type_b, str):
         return "manual_review", "account type missing on one record"
-    identity = keys & {"siret", "siren", "calendar", "domain"}
+    identity = keys & {"company_number", "siren", "calendar", "domain"}
     if type_a != type_b:
         if not identity:
             return "do_not_merge", weak
@@ -187,8 +236,8 @@ def decide(a, b, keys):
             return "hierarchy_fix", f"site shares {'+'.join(sorted(identity))} with another group than its current parent: check which group owns it"
         return "hierarchy_fix", f"orphan site shares {'+'.join(sorted(identity))} with a {type_b if site is a else type_a}: attach it, do not merge"
 
-    if "siret" in keys:
-        decision, reason = "auto_merge", "same valid SIRET, same type"
+    if "company_number" in keys:
+        decision, reason = "auto_merge", "same validated company number, same type"
     elif "calendar" in keys and keys & {"phone", "name_postcode", "domain", "siren"}:
         decision, reason = "auto_merge", "same booking calendar confirmed by a second key"
     elif "siren" in keys and "name_postcode" in keys:
@@ -243,7 +292,9 @@ def clusters_from(pairs, c):
                 "name": by_id.at[rid, "name"],
                 "type": by_id.at[rid, "type"],
                 "lifecycle": by_id.at[rid, "lifecycle"],
-                "siret": by_id.at[rid, "siret_norm"],
+                "country": by_id.at[rid, "country_norm"],
+                "company_number": by_id.at[rid, "company_number"],
+                "company_number_type": by_id.at[rid, "company_number_type"],
                 "postcode": by_id.at[rid, "postcode"],
                 "deals": by_id.at[rid, "deal_count"],
                 "contacts": by_id.at[rid, "contact_count"],
@@ -327,17 +378,82 @@ def contact_moves(c, contacts, merge_map):
     return pd.DataFrame(rows)
 
 
+# ---------- markets ----------
+def market_of(country):
+    return country if country in ("FR", "US") else ("Unknown" if country == "UNKNOWN" else "Other")
+
+
+def market_issues(c, team):
+    """Issues that only show once the base is read market by market."""
+    owner_market = dict(zip(team.name, team.market))
+    rows = []
+
+    def issue(r, kind, detail, action, mode):
+        rows.append({"record_id": r.record_id, "name": r["name"], "market": market_of(r.country_norm), "country": r.country_norm,
+                     "issue": kind, "detail": detail, "proposed_action": action, "mode": mode})
+
+    for _, r in c.iterrows():
+        if r.country_inferred and r.country_norm != "UNKNOWN":
+            issue(r, "country_inferred", f"country '{r.country if isinstance(r.country, str) else ''}' -> {r.country_norm} from postcode", "set the ISO country", "auto")
+        if r.country_norm == "UNKNOWN":
+            issue(r, "country_unknown", "no usable country or postcode", "set the country", "manual")
+        if r.business_relationship_type in OUT_OF_TAM_RELATIONSHIPS:
+            issue(r, "out_of_tam", f"relationship = {r.business_relationship_type}", "keep in the CRM, exclude from TAM and pipeline views", "auto")
+        if isinstance(r.calendar_norm, str):
+            platform = r.calendar_norm.split("/")[0]
+            platform_country = BOOKING_PLATFORM_COUNTRY.get(platform)
+            if platform_country and platform_country != r.country_norm:
+                issue(r, "booking_url_wrong_country", f"{platform} page on a {r.country_norm} account", "remove the URL or fix the country", "manual")
+        if r.country_norm != "FR" and isinstance(r.company_number, str) and not r.company_number_valid:
+            issue(r, "company_number_unverified", f"{r.company_number_type} {r.company_number} fails validation", "re-enrich from the market's registry (NPPES for the US)", "manual")
+        owner = r.sales_owner if isinstance(r.sales_owner, str) else None
+        if owner and r.country_norm in ("FR", "US") and owner_market.get(owner) not in (None, r.country_norm):
+            issue(r, "owner_market_mismatch", f"{r.country_norm} account owned by {owner} ({owner_market.get(owner)} team)", "reassign to the market's team", "manual")
+
+    # Multi-site organisations without a group: same website domain, several cities, no common parent.
+    sites = c[c.type.eq("Practice")][["record_id", "name", "domain_list", "city", "parent_record_id", "country_norm"]].explode("domain_list").dropna(subset=["domain_list"])
+    for dom, g in sites.groupby("domain_list"):
+        if g.city.str.lower().nunique() < 2 or g.parent_record_id.notna().all() and g.parent_record_id.nunique() == 1:
+            continue
+        if g.parent_record_id.notna().any():
+            continue  # partly attached already: handled by the hierarchy review
+        for _, r in c.set_index("record_id").loc[g.record_id].reset_index().iterrows():
+            issue(r, "group_missing", f"{len(g)} sites in {g.city.nunique()} cities share {dom}", f"create the group for {dom} and attach its sites", "manual")
+    return pd.DataFrame(rows)
+
+
+def market_summary(c, deals, issues):
+    c = c.assign(market=c.country_norm.map(market_of))
+    arr = pd.to_numeric(c.arr_signed_eur, errors="coerce")
+    open_deals = deals[~deals.stage.isin(["Closed Won", "Closed Lost"])].company_record_id.value_counts()
+    out = {}
+    for m, g in c.groupby("market"):
+        ids = set(g.record_id)
+        mi = issues[issues.record_id.isin(ids)] if len(issues) else issues
+        out[m] = {
+            "accounts": int(len(g)),
+            "customers": int(g.lifecycle.eq("Customer").sum()),
+            "customer_arr_eur": float(arr[g.index][g.lifecycle.eq("Customer")].sum()),
+            "without_lifecycle": int(g.lifecycle.isna().sum()),
+            "validated_company_number": int(g.company_number_valid.sum()),
+            "open_deals": int(g.record_id.map(open_deals).fillna(0).sum()),
+            "countries": {k: int(v) for k, v in g.country_norm.value_counts().head(6).items()},
+            "issues": {k: int(v) for k, v in mi.issue.value_counts().items()} if len(mi) else {},
+        }
+    return out
+
+
 # ---------- cockpit export (web page + action pack) ----------
 MATCH_KEYS = [
-    {"key": "siret", "label": "SIRET (14 digits, checksum, active)", "role": "Identity of a site. Same SIRET + same type = automatic merge"},
+    {"key": "company_number", "label": "Company number, validated (SIRET in France, NPI in the US)", "role": "Identity of a site. Same validated number + same type = automatic merge"},
     {"key": "calendar", "label": "Booking-calendar URL", "role": "One calendar per site. Automatic merge only if a second key agrees"},
-    {"key": "siren", "label": "SIREN (legal entity)", "role": "Links sites to one legal entity. Merges only with same name + postcode"},
+    {"key": "siren", "label": "Legal entity (SIREN in France)", "role": "Links sites to one legal entity. Merges only with same name + postcode"},
     {"key": "name_postcode", "label": "Normalised name + postcode", "role": "Strong hint: manual review, never automatic alone"},
     {"key": "phone", "label": "Normalised phone", "role": "Supporting evidence only: switchboards are shared"},
     {"key": "domain", "label": "Website domain (platforms and webmail excluded)", "role": "Supporting evidence only: group domains are shared"},
 ]
 GUARDS = [
-    {"rule": "Different valid SIRETs are never merged", "why": "Two sites, even under one SIREN, are two deployments", "match": "different valid SIRET|different sites \\(SIRET\\)"},
+    {"rule": "Different validated company numbers are never merged", "why": "Two sites, even under one legal entity, are two deployments", "match": "different validated company numbers|different sites \\(SIRET\\)"},
     {"rule": "A site and a group are never merged", "why": "It is a missing hierarchy link or the group's head-office site", "match": "site shares|orphan site"},
     {"rule": "Customers are never merged automatically", "why": "A merge moves invoices and ARR: a human signs it off", "match": "customer record involved"},
     {"rule": "Two owners with open deals: manual", "why": "Ownership is a sales decision, not a data one", "match": "open deals owned by different"},
@@ -365,7 +481,9 @@ def current_state(c, contacts):
         "accounts": int(len(c)),
         "by_type": {str(k): int(v) for k, v in c.type.fillna("Missing").value_counts().items()},
         "by_lifecycle": {str(k): int(v) for k, v in c.lifecycle.fillna("Missing").value_counts().items()},
-        "siret_status": {k: int(v) for k, v in c.siret_status.value_counts().items()},
+        "siret_status": {k: int(v) for k, v in c[c.country_norm.eq("FR")].siret_status.value_counts().items()},
+        "fr_accounts": int(c.country_norm.eq("FR").sum()),
+        "company_number_validated": int(c.company_number_valid.sum()),
         "siret_checksum_failures": int((~c[c.siret_valid].siret_norm.map(luhn_ok)).sum()),
         "multi_site_sirens": int(c[c.siret_valid].groupby("siren").siret_norm.nunique().gt(1).sum()),
         "calendar_coverage": int(c.calendar_norm.notna().sum()),
@@ -412,7 +530,9 @@ def record_card(row, deals_by_company):
         "name": row["name"],
         "type": row.type if isinstance(row.type, str) else None,
         "lifecycle": row.lifecycle if isinstance(row.lifecycle, str) else None,
-        "siret": row.siret if isinstance(row.siret, str) else None,
+        "siret": row.company_number if isinstance(row.company_number, str) else None,
+        "number_type": row.company_number_type,
+        "country": row.country_norm,
         "address": " ".join(str(x) for x in [row.postcode, row.city] if isinstance(x, str)),
         "phone": row.standard_phone if isinstance(row.standard_phone, str) else None,
         "domains": row.domains if isinstance(row.domains, str) else None,
@@ -426,7 +546,7 @@ def record_card(row, deals_by_company):
     }
 
 
-def write_cockpit(web_dir, c, contacts, deals, pairs, clusters, hierarchy, moves, summary):
+def write_cockpit(web_dir, c, contacts, deals, pairs, clusters, hierarchy, moves, summary, markets):
     web = Path(web_dir)
     web.mkdir(parents=True, exist_ok=True)
     by_id = c.set_index("record_id")
@@ -450,6 +570,19 @@ def write_cockpit(web_dir, c, contacts, deals, pairs, clusters, hierarchy, moves
         mode, what = HIERARCHY_ACTIONS.get(issue, ("manual", "Review"))
         actions.append({"action": f"Hierarchy: {issue.replace('_', ' ')}", "mode": mode, "count": int(n), "detail": what,
                         "prod": "dbt model + Attio sync" if mode == "auto" else "RevOps review queue"})
+    market_actions = {
+        "country_inferred": "Set the ISO country from the postcode",
+        "out_of_tam": "Exclude investors, partners and media from TAM and pipeline views",
+        "booking_url_wrong_country": "Remove booking URLs that do not exist in the account's country",
+        "company_number_unverified": "Re-enrich foreign company numbers from the market's registry",
+        "owner_market_mismatch": "Reassign accounts to the team of their market",
+        "group_missing": "Create the group of multi-site organisations and attach the sites",
+        "country_unknown": "Set the country",
+    }
+    for issue, n in (markets.issue.value_counts().items() if len(markets) else []):
+        mode = markets[markets.issue.eq(issue)].iloc[0]["mode"]
+        actions.append({"action": f"Market: {issue.replace('_', ' ')}", "mode": mode, "count": int(n), "detail": market_actions.get(issue, ""),
+                        "prod": "dbt model + Attio sync" if mode == "auto" else "RevOps review queue"})
     actions.append({"action": "Review candidate duplicates", "mode": "manual", "count": int(len(review)), "detail": "Customer involved, no SIRET to confirm, or calendar only", "prod": "Review queue in this cockpit -> decisions to Attio"})
     actions.append({"action": "Attach sites to their group", "mode": "manual", "count": summary["sites_to_attach_or_check"], "detail": "Site shares SIREN/SIRET with a group it is not attached to", "prod": "RevOps review queue"})
 
@@ -464,16 +597,17 @@ def write_cockpit(web_dir, c, contacts, deals, pairs, clusters, hierarchy, moves
         "review": review_items,
     }
     (web / "tam_cockpit.json").write_text(json.dumps(cockpit, ensure_ascii=False, default=str))
-    write_action_pack(web / "tam_action_pack.xlsx", cockpit, clusters, review, hierarchy, moves, pairs)
+    write_action_pack(web / "tam_action_pack.xlsx", cockpit, clusters, review, hierarchy, moves, pairs, markets)
 
 
-def write_action_pack(path, cockpit, clusters, review, hierarchy, moves, pairs):
+def write_action_pack(path, cockpit, clusters, review, hierarchy, moves, pairs, markets):
     readme = pd.DataFrame({"Vocca TAM action pack": [
         "Produced by scripts/tam_dedup.py on the anonymised Attio export of 25 Sep 2026.",
         "Model: the account is the site (SIRET), rolled up to a group and a network; the legal entity (SIREN) is linked.",
         "Auto merges: certain duplicates, never a customer, never two owners. Survivor: customer, most deals, most contacts, most complete, oldest.",
         "Manual review: pairs the rules refuse to merge without a human. Decide in the TAM cockpit, then export.",
-        "Tabs: Summary, Rules, Auto merges, Manual review, Hierarchy, Contact moves, All pairs.",
+        "Tabs: Summary, Rules, Auto merges, Manual review, Hierarchy, Contact moves, Markets, All pairs.",
+        "CRM identity is generic: country + company_number + company_number_type (SIRET in France, NPI in the US), validated per type.",
     ]})
     s = cockpit["summary"]
     summary = pd.DataFrame([
@@ -492,6 +626,7 @@ def write_action_pack(path, cockpit, clusters, review, hierarchy, moves, pairs):
         review.assign(decision_by_reviewer="").to_excel(xl, sheet_name="Manual review", index=False)
         hierarchy.to_excel(xl, sheet_name="Hierarchy", index=False)
         moves.to_excel(xl, sheet_name="Contact moves", index=False)
+        markets.to_excel(xl, sheet_name="Markets", index=False)
         pairs.to_excel(xl, sheet_name="All pairs", index=False)
         for ws in xl.book.worksheets:
             ws.freeze_panes = "A2"
@@ -530,6 +665,9 @@ def main(data_dir, out_dir, web_data_dir=None):
     hierarchy.to_csv(out / "hierarchy_issues.csv", index=False)
     moves = contact_moves(c, contacts, merge_map)
     moves.to_csv(out / "contact_moves.csv", index=False)
+    team = pd.read_csv(f"{data_dir}/sales_team.csv", dtype=str)
+    markets = market_issues(c, team)
+    markets.to_csv(out / "market_issues.csv", index=False)
 
     removed = int(clusters.role.eq("merge_into_survivor").sum()) if len(clusters) else 0
     sirets = c[c.siret_valid].siret_norm
@@ -550,11 +688,14 @@ def main(data_dir, out_dir, web_data_dir=None):
         "multi_site_sirens": int(c[c.siret_valid].groupby("siren").siret_norm.nunique().gt(1).sum()),
         "hierarchy_issues": hierarchy.issue.value_counts().to_dict() if len(hierarchy) else {},
         "contact_moves": moves.reason.value_counts().to_dict() if len(moves) else {},
+        "company_number_types": {f"{k[0]} {k[1]}": int(v) for k, v in c.groupby(["country_norm", "company_number_type"]).size().items() if k[0] in ("FR", "US")},
+        "market_issues": markets.issue.value_counts().to_dict() if len(markets) else {},
+        "markets": market_summary(c, deals, markets),
     }
     (out / "summary.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False))
     print(json.dumps(summary, indent=2, ensure_ascii=False))
     if web_data_dir:
-        write_cockpit(web_data_dir, c, contacts, deals, pairs, clusters, hierarchy, moves, summary)
+        write_cockpit(web_data_dir, c, contacts, deals, pairs, clusters, hierarchy, moves, summary, markets)
         print(f"cockpit feed and action pack -> {web_data_dir}")
 
 

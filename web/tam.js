@@ -53,7 +53,7 @@ const toCsv = (rows) => rows.map((r) => r.map(csvCell).join(",")).join("\n");
 function renderState() {
   const c = data.current;
   const s = data.summary;
-  const noSiret = c.accounts - (c.siret_status.siret || 0);
+  const noSiret = c.accounts - c.company_number_validated;
   const auto = Object.entries(data.duplicate_sources).filter(([k]) => AUTOMATION_CREATORS.includes(k)).reduce((t, [, v]) => t + v, 0);
   const dupTotal = Object.values(data.duplicate_sources).reduce((t, v) => t + v, 0);
   const siretParts = [
@@ -68,17 +68,18 @@ function renderState() {
     <p class="lead">What the CRM looks like today, before any clean-up. Every figure is a count of records in the export.</p>
     <div class="tiles">
       ${tile("Accounts in Attio", fmt.format(c.accounts), `${fmt.format(c.by_type.Practice || 0)} practices · ${fmt.format(c.by_type.Group || 0)} groups · ${fmt.format(c.by_type.Superorga || 0)} networks · ${fmt.format(c.by_type.Missing || 0)} untyped`)}
-      ${tile("No valid site identifier", pct(noSiret, c.accounts), `${fmt.format(noSiret)} accounts without a 14-digit SIRET`, "alert")}
+      ${tile("No validated company number", pct(noSiret, c.accounts), `${fmt.format(noSiret)} accounts: no SIRET in France, no NPI in the US`, "alert")}
       ${tile("Certain duplicates", fmt.format(s.records_removed_by_auto_merge), `+ ${fmt.format(data.review.length)} pairs that need a human`, "alert")}
       ${tile("ARR counted twice", eurM(c.arr_double_counted_eur), `${fmt.format(c.arr_double_counted_sites)} sites whose group also carries ARR (customer ARR ${eurM(c.customer_arr_eur)})`, "alert")}
       ${tile("Contacts misplaced", fmt.format(s.contact_moves["email domain belongs to another account family"] || 0), `on the wrong account · ${fmt.format(c.contacts_without_company)} without company · ${fmt.format(c.contacts_on_group_level)} parked on a group`)}
       ${tile("Lifecycle / billing out of sync", fmt.format(c.by_lifecycle.Missing || 0), `accounts without lifecycle · ${fmt.format(c.billing_id_on_non_customers)} billing IDs on non-customers · ${fmt.format(c.customers_without_arr)} customers without ARR`)}
     </div>
+    ${renderMarkets()}
     <div class="charts-2">
       <div class="card">
-        <h3>Site identifier (SIRET)</h3>
+        <h3>France: site identifier (SIRET), ${fmt.format(c.fr_accounts)} accounts</h3>
         <div class="stack" role="img" aria-label="SIRET status">${siretParts.map((p) => `<span style="flex:${p.value};background:${p.color}" title="${esc(p.label)}: ${p.value}"></span>`).join("")}</div>
-        ${barList(siretParts, { max: c.accounts })}
+        ${barList(siretParts, { max: c.fr_accounts })}
         <p class="muted">${fmt.format(c.multi_site_sirens)} legal entities (SIREN) run several sites: SIREN cannot be the account key. ${fmt.format(c.calendar_coverage)} accounts have a booking-calendar URL, the best fallback key.</p>
       </div>
       <div class="card">
@@ -97,6 +98,34 @@ function renderState() {
         <p class="muted">accounts whose "website" is a platform or a webmail (doctolib.fr, maiia.com, gmail.com…), and ${fmt.format(c.siret_checksum_failures)} SIRETs failing the checksum. Enrichment writes whatever it finds, unchecked.</p>
       </div>
     </div>`;
+}
+
+function renderMarkets() {
+  const order = ["FR", "US", "Other", "Unknown"];
+  const names = { FR: "France", US: "United States", Other: "Other countries", Unknown: "Unknown" };
+  const markets = order.filter((m) => data.summary.markets[m]).map((m) => ({ key: m, ...data.summary.markets[m] }));
+  const issueLabels = {
+    owner_market_mismatch: "owned by the other market's team",
+    out_of_tam: "investors, partners, media (out of TAM)",
+    group_missing: "multi-site, no group",
+    booking_url_wrong_country: "booking URL not available in the country",
+    company_number_unverified: "company number fails validation",
+    country_inferred: "country inferred from postcode",
+    country_unknown: "country unknown",
+  };
+  const cell = (m, k) => fmt.format(m.issues[k] || 0);
+  return `
+    <h2>One model, read market by market</h2>
+    <p class="lead" style="margin-top:0">The CRM carries one generic identity for every market: <strong>country + company number + number type</strong> (SIRET in France, NPI in the US), validated per type. Market-specific sources are joined into it upstream, in the warehouse.</p>
+    <div class="card table-card"><div class="table-scroll"><table class="plain">
+      <thead><tr><th>Market</th><th class="num">Accounts</th><th class="num">Customers</th><th class="num">Customer ARR</th><th class="num">Validated number</th><th class="num">No lifecycle</th>
+        ${Object.keys(issueLabels).map((k) => `<th class="num" title="${esc(issueLabels[k])}">${esc(issueLabels[k])}</th>`).join("")}</tr></thead>
+      <tbody>${markets.map((m) => `<tr>
+        <td><strong>${names[m.key]}</strong><br><span class="muted">${Object.entries(m.countries).map(([k, v]) => `${k} ${v}`).join(" · ")}</span></td>
+        <td class="num">${fmt.format(m.accounts)}</td><td class="num">${fmt.format(m.customers)}</td><td class="num">${eur.format(m.customer_arr_eur)}</td>
+        <td class="num">${pct(m.validated_company_number, m.accounts)}</td><td class="num">${pct(m.without_lifecycle, m.accounts)}</td>
+        ${Object.keys(issueLabels).map((k) => `<td class="num">${cell(m, k)}</td>`).join("")}</tr>`).join("")}</tbody>
+    </table></div></div>`;
 }
 
 // ---------- 2. after the scripts ----------
