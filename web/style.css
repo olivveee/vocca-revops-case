@@ -1,7 +1,8 @@
 /* Vocca brand tokens, taken from vocca.com: brand blue #0073ec, ink #0c1112,
    greys #666 / #999, light surfaces #fafafa / #efefef, 12-16px radii, pill controls.
    Their typefaces (Bagoss, PP Neue Montreal) are licensed; Satoshi, also loaded on
-   vocca.com, is used for headings and figures, with the system sans for body text. */
+   vocca.com, is used for headings and figures, with the system sans for body text.
+   Light theme only, like vocca.com: a dark OS setting must not repaint the brand. */
 :root {
   color-scheme: light;
   --brand: #0073ec;
@@ -26,44 +27,6 @@
   --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
   --radius: 12px;
   --radius-large: 16px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:where(:not([data-theme="light"])) {
-    color-scheme: dark;
-    --brand: #3d93f0;
-    --brand-soft: #0d2a4a;
-    --page: #0c1112;
-    --surface: #151b1d;
-    --text-primary: #f2f4f5;
-    --text-secondary: #b3b8ba;
-    --text-muted: #80878a;
-    --grid: #232a2c;
-    --axis: #343c3f;
-    --border: rgba(255, 255, 255, 0.08);
-    --series-1: #3d93f0;
-    --series-2: #d9dcdd;
-    --neutral-chip: #232a2c;
-    --input-bg: #151b1d;
-  }
-}
-
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --brand: #3d93f0;
-  --brand-soft: #0d2a4a;
-  --page: #0c1112;
-  --surface: #151b1d;
-  --text-primary: #f2f4f5;
-  --text-secondary: #b3b8ba;
-  --text-muted: #80878a;
-  --grid: #232a2c;
-  --axis: #343c3f;
-  --border: rgba(255, 255, 255, 0.08);
-  --series-1: #3d93f0;
-  --series-2: #d9dcdd;
-  --neutral-chip: #232a2c;
-  --input-bg: #151b1d;
 }
 
 * { box-sizing: border-box; }

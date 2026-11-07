@@ -3,7 +3,7 @@
 Work for Part 1A (sales efficiency dashboard) of the Vocca Senior RevOps case.
 
 - **Google Sheet (the deliverable and the back-office):** https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit
-- **Web view (`web/`):** a read-only visual layer on top of the same sheet.
+- **Web view:** https://vocca-revops-case.vercel.app/ (source in `web/`), a read-only visual layer on top of the same sheet.
 
 ## How the pieces fit
 
