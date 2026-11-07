@@ -1,0 +1,45 @@
+{
+  "accounts_before": 5080,
+  "accounts_after_auto_merge": 4965,
+  "records_removed_by_auto_merge": 115,
+  "auto_merge_clusters": 113,
+  "pairs_by_decision": {
+    "do_not_merge": 5241,
+    "manual_review": 132,
+    "auto_merge": 117,
+    "hierarchy_fix": 40
+  },
+  "manual_review_reasons": {
+    "customer record involved (billing ID / ARR): never merged automatically": 70,
+    "same name and postcode, no SIRET to confirm or contradict": 39,
+    "account type missing on one record": 19,
+    "same booking calendar only": 4
+  },
+  "hierarchy_fix_reasons": {
+    "site shares siren with another group than its current parent": 16,
+    "orphan site shares siren with a Group": 12,
+    "site shares siren+siret with another group than its current parent": 12
+  },
+  "sites_to_attach_or_check": 38,
+  "siret_status": {
+    "siret": 3819,
+    "siren_only": 761,
+    "missing": 485,
+    "invalid": 15
+  },
+  "valid_siret_failing_checksum": 30,
+  "multi_site_sirens": 314,
+  "hierarchy_issues": {
+    "arr_on_parent_and_child": 426,
+    "empty_group": 112,
+    "single_site_group": 76,
+    "missing_type": 65,
+    "practice_looks_like_group": 53,
+    "invalid_parent_type": 36,
+    "self_parent": 3
+  },
+  "contact_moves": {
+    "email domain belongs to another account family": 244,
+    "no company attached": 3
+  }
+}

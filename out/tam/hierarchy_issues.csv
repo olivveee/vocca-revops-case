@@ -1,0 +1,772 @@
+record_id,name,type,issue,detail,proposed_action
+45850d72-41ee-4b95-b836-c7ee83ebe601,Cabinet d'Ophtalmologie Saint-Martin,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f7dd7fa9-cbf6-46e0-8b63-d2b0f6707f98,SCM Dentaire Buffon,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+00055c51-c60f-419b-abf4-3ec5f21c489b,Cabinet de Masso-Kinésithérapie Brun,,missing_type,type is empty,derive from practice_count / children / SIRET
+11206823-dfb8-45e8-bfbe-535bd713277f,Centre de Radiologie Carnot,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+31df6aff-be3d-461a-b351-3b479cc87580,Cabinet Dentaire Plaisance,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+114f54fe-dbf0-452d-a274-dbb736a8a829,Orbitis Imagerie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+a4801eb8-d488-4f45-a040-cc7556323071,SCM Dentaire Atlantique,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+316150ba-b419-49a5-9840-a59fde30b4be,Radiologie Benali,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+2359e4c8-b3de-425c-af6e-a25ba1ced937,Cabinet de Radiologie Benoît,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d8f15d2b-e7a3-459c-bed1-0ab6405103bf,Ophtalmologie des Glycines,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4da39f0a-a319-49a7-8866-c6410c1a6083,Visience Imagerie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+9014ff2d-d424-420f-a0b9-f546ab9f79c1,Centre d'Imagerie Bichat,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7a62dd2b-4987-48b3-ba3f-93c70a221ff7,Clinique des Acacias,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+976e0eb8-23bc-4774-9427-c1c32fb76fc6,Cabinet Dentaire Les Grandes-Ventes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5c6db316-ec8c-4c2c-a403-14676880ba06,Ophtalmologie Molière,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+6c3a29ce-5b0e-4df8-a264-685923bbeddb,Imagtis Dentaire,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+707e4dd1-c1b4-443e-b069-abbb114a25de,Groupe Médical Imagance,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+c92a2dc9-bac6-4ed7-81ed-82a2c3719950,Cabinet de Radiologie Saint-Paul,,missing_type,type is empty,derive from practice_count / children / SIRET
+cde2cb6d-0423-4efc-a6a1-7c0252aa9cf3,Lumaqua Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+d347285e-71d5-48eb-a076-a2740f206c34,Centre d'Imagerie Joffre,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+272e3cca-be01-4159-904a-ff87bf925316,Radiologie Fleming,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+cf7b398f-dd84-494e-8bc3-2ae12747a632,Dr Fabre - Chirurgien-dentiste,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0ea3ab00-48d7-4e5c-a539-10a8d6cfd1c0,Lumavia Radiologie,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+6385041b-d266-4936-a749-52837c7bf63b,Centre Ophtalmologique Neoence,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ee849227-ed93-4556-b701-9dd277b9fe02,Scanner IRM des Halles,,missing_type,type is empty,derive from practice_count / children / SIRET
+9e4bc3dd-c708-49d6-a3c0-ee6ca9e26dd7,Cabinet Dentaire Montpellier,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+8acdc4ad-26d4-44a8-ba05-5b92ed3d9310,Scanner IRM Lyon-1Er-Arrondissement,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+637ba057-964c-4cab-918b-4194f53d5bff,Cabinet Dentaire Axiium,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+36b7ce86-b3b3-4a6f-b2ee-9348cdd1f494,Polyclinique Arago,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+45ef8042-3474-4092-8bf2-b8ce079b58f5,Cabinet Dentaire Kinevia,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+cbd036fd-1671-4732-8b53-65d03b1fa0ff,Clinique Serois,Group,single_site_group,one child site only,check: real group or duplicate of its site
+10d9d971-0b70-4039-95a9-a81ba93490f7,Centre Ophtalmologique François,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+993fa03a-eff5-434c-89b8-8a6121222174,Visiium Radiologie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+1b188e82-82bb-4dd5-b2b3-827cf22a2c8f,Centre de la Vision du Val,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0cc05c2c-aefc-4b53-bb91-7a4c6bbec783,Clinique du Palais,Practice,invalid_parent_type,Practice under Practice,re-type the parent or re-attach to the right group
+776880e9-3327-47d2-8e3f-1dff65428850,Réseau Radivia,Group,single_site_group,one child site only,check: real group or duplicate of its site
+e30eaf58-9cb2-4aba-8c51-40fd70ddbdbd,Helialys Health,,missing_type,type is empty,derive from practice_count / children / SIRET
+fc235fd9-6dc0-48d1-96a5-14a655697449,Cabinet d'Ophtalmologie Laennec,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1f5bc6b4-d009-44da-861b-b8f9c313fba3,Cabinet Médical Voltaire,Practice,practice_looks_like_group,practice_count = 4,re-type as Group and create its sites
+5f2a7264-fd0d-4776-a400-5e09e7faa49d,Cabinet de Kinésithérapie des Arcades,Practice,invalid_parent_type,Practice under nan,re-type the parent or re-attach to the right group
+6adca8c6-5dca-4955-b985-9d306081108b,Cabinet Dentaire Arago,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e5e16154-fa56-45d1-bfe1-254ee3eadb93,Cabinet Médical des Cèdres,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+fdf45337-f875-4371-8fb1-e3765a15238f,Polyclinique Marty,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+d2d7b2e1-428a-4bef-9f31-e307c7905ca1,Cabinet de Masso-Kinésithérapie Sanchez,Practice,invalid_parent_type,Practice under nan,re-type the parent or re-attach to the right group
+ef626166-8111-4ee1-825d-d9d3d905a464,Cliniis Imagerie,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+74389410-7b00-4a30-bc41-455c957a289d,Radiologie Monge,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d751c056-0074-44e9-a705-8b56eb31ba6b,Centre de Chirurgie Lumavel,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+938ade06-8bf6-4452-bd1a-98480ba550c3,Optiis Santé,Group,single_site_group,one child site only,check: real group or duplicate of its site
+ee79f65b-cf73-4a7f-8638-b3b7d8e12556,Imagerie Médicale Rodriguez,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+67e6c48b-3f3d-4b7a-af34-37d6ff234e73,Groupe Médical Pleniance,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+67e6c48b-3f3d-4b7a-af34-37d6ff234e73,Groupe Médical Pleniance,Group,single_site_group,one child site only,check: real group or duplicate of its site
+b5361762-878e-4192-9912-93f8d74b7968,Neonor Dentaire,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+127a336f-d332-4a57-b8f2-340f6a9a9932,Imagerie Médicale Saint-Honoré,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+819728f2-fdd4-4ea3-aa87-715a655103fc,Centre de Radiologie Novais,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7f729b1b-c04a-4a09-8ee7-99e72d87c1f9,MSP Oloron-Sainte-Marie,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+364fb567-be79-400a-b271-2592a921d6bb,Centre de la Vision Confluence,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+977556e6-5850-4622-bf07-350f5637100e,Clinique Foch,,missing_type,type is empty,derive from practice_count / children / SIRET
+31e9db0b-c2e4-481e-b0a8-cabef2e123fc,Groupe Neoys,Group,invalid_parent_type,Group under Practice,re-type the parent or re-attach to the right group
+31e9db0b-c2e4-481e-b0a8-cabef2e123fc,Groupe Neoys,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+d03e7127-7b72-4226-b17e-3f1c4be3287e,Cabinet d'Ophtalmologie des Platanes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a39ea107-596d-4ca2-80fb-e943ea4f763c,Centre d'Imagerie Noisy-Le-Sec,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+337a843d-5474-41a9-9481-a34f68550947,Ophtalmologie Saint-Roch,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+8cc33c55-8923-4e65-bb45-24ea768388f5,Centre d'Imagerie Cardinor,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+189a1546-3e08-4809-8a76-de5f1b6fea1a,Groupe Optivia,Group,single_site_group,one child site only,check: real group or duplicate of its site
+35d34d02-6c83-46a1-83ae-cac5dc456a47,Cabinet d'Orthodontie Saint-Ouen-Sur-Seine,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+eb379d70-053e-4342-997a-82ded08e025e,Centre Ophtalmologique Lacroix,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+2b8b2105-4b9d-4708-8d45-fb61d88a8f8b,Centre d'Imagerie du Plateau,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d34efc80-56f7-4500-af0b-afcf6a5292b5,Centre Médical Lavoisier,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0cad9c7f-41fa-453c-8fce-c87460a84b6b,Centre de Santé du Palais,,missing_type,type is empty,derive from practice_count / children / SIRET
+62b339c9-6c0a-491a-84d1-9c22f67a23e9,Centre d'Imagerie Saint-Louis,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+17f8394c-03ba-4be2-900e-e2625ec19ac8,Ophtalmologie Monge,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+701d2f29-9cc5-4d06-a808-6a5438b16a66,Ctre Med. Pluridisciplinaire Horizon,,missing_type,type is empty,derive from practice_count / children / SIRET
+80e00f18-a5de-4f8a-865b-38f68e3f1e3f,Pôle Santé Cilaos,,missing_type,type is empty,derive from practice_count / children / SIRET
+6f7c2c4d-9a9a-442c-b3d7-ceeb10492b31,Cabinet Médical Arago,Practice,practice_looks_like_group,practice_count = 8,re-type as Group and create its sites
+8dc0d9f4-6453-44e2-bebb-155f332c9472,Imagerie Médicale du Bocage,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ddee92e9-2f21-42b2-b7e9-d9ac56413654,Visiys Imagerie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+60edf33c-49db-4a17-bdb7-b9ba4ee2306c,Centre Ophtalmologique Boyer,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+fbdbb07c-4b16-4ad3-a92e-e2d1f7b422ad,Centre Ophtalmologique Cricqueboeuf,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+80345543-fe78-43b7-ba27-2041ca873edb,Centre de Radiologie des Marronniers,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d38dd5a9-63a0-46f6-91c3-43effa7c3c95,Scanner IRM Lavoisier,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c283b569-1cb2-4b0a-91cb-96837849c935,Orbinor Imagerie,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7a2a60f8-bab0-4e50-905e-ecf69550ecf7,Radivia Radiologie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+7aa0153c-ebfa-46d9-a377-f0c6d814fbc9,Centre de Santé Girard,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+15f3fd7e-0e01-4850-aff6-a33b357c1716,Serois Imagerie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+f801409e-ffee-410d-a9fe-f2bc3a05b84d,Scanner IRM du Mail,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1dbd1b87-607e-4964-89e7-047c5f7613c4,SCM Dentaire du Marché,,missing_type,type is empty,derive from practice_count / children / SIRET
+90a4bf38-9a64-4f73-9fed-95b181385656,Radiologie du Palais,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3f1a4f0d-655a-4b65-a967-92d50fa4ac40,Radiologie des Platanes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+8c1a4488-de70-4765-809f-cc808d6d07c4,Centre d'Imagerie Courcelles-Les-Lens,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b8f00371-abcc-4c3b-b7d8-acb737dfc646,Sanaqua Radiologie,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b0404896-2b24-4293-a129-9a77fbfea74b,Groupe Médical Imagium,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+5b575955-f361-448c-bf71-bb77e0b7d211,Groupe Médical Cardiora,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5b575955-f361-448c-bf71-bb77e0b7d211,Groupe Médical Cardiora,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+63966828-86a7-43e7-bddd-1cf1baddd25e,Cabinet de Radiologie des Marronniers,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a850ae83-13be-480b-8e3f-e6fc55e60888,Plenivia Radiologie,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a850ae83-13be-480b-8e3f-e6fc55e60888,Plenivia Radiologie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+795d33b5-5d78-491a-9004-7226a53e83f9,Centre Ophtalmologique Confluence,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+66ae20ca-c8e7-4395-b3b8-203d6d5c3f70,Centre Médical Pluridisciplinaire Saint-Éloi,,missing_type,type is empty,derive from practice_count / children / SIRET
+84957b2a-73e0-4d4b-91dd-e587b68d0d69,Maison de Santé Paris,Practice,practice_looks_like_group,practice_count = 30,re-type as Group and create its sites
+0e5b221c-c9ec-4e84-af8a-4db4ec1c5e65,Groupe Médical Sanaea,Group,single_site_group,one child site only,check: real group or duplicate of its site
+ea490fb3-f65a-42b3-8f3b-27935cc3c209,Radialys Santé,Group,single_site_group,one child site only,check: real group or duplicate of its site
+9aab810f-934d-41f1-8caa-b75f61b415f7,Centre d'Imagerie Marchand,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+8a6086a9-5d9a-489b-9157-d0dd772660a6,Polyclinique Armor,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+2cf33fea-b3a8-416c-a344-a27922437171,Centre Médical Fleming,,missing_type,type is empty,derive from practice_count / children / SIRET
+6f236c2e-4eda-4213-a67a-aa0d208c0e31,Radiologie du Cours,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7560f235-6d3c-4e5b-8c8d-ae2541e1ce2a,Centre de Radiologie des Coteaux,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+31762310-a6c3-432f-8055-9a0e364438fb,Mediance Diagnostic Imaging,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+e72825d1-6034-4166-bb6e-f5a306d369e8,Imagmea Santé,Group,single_site_group,one child site only,check: real group or duplicate of its site
+d9f4dce6-cd68-4e31-8d07-3503a5fcff35,Imagerie Médicale Saint-Éloi,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+115758bf-0494-44a2-92d8-76f5289619f0,Centre de la Vision du Palais,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+170d1acd-7ce6-4fcc-a490-603fb7c29dec,Centre de Santé Pontarlier,Practice,practice_looks_like_group,practice_count = 5,re-type as Group and create its sites
+cd838ec6-aa8b-44d4-be9e-88fe9438e376,Réseau Cardivel,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+ee588870-7c5d-46a4-a454-ce55d5116e45,Lumaence Dentaire,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+75b40da4-4e7c-4ce6-8503-979ff6be5b42,Cabinet de Radiologie Lumavel,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+098dbea7-12ab-4b9b-9216-9b75a2a0fcd8,Centre de la Vision des Platanes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e21a252d-bb8e-4458-8f87-a30d28f86264,Ophtalmologie Arago,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+09a1d503-4cab-415c-99a2-4941e885119b,Groupe Medinor,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+65ed9d73-1dc5-4d78-b828-4d49a3096733,Clinique Rey,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f9f68ae6-259c-4b18-975e-e283ab1e3509,MSP du Plateau,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+fd1da8a9-0b5b-4659-a586-7207d6c21a75,Clinique La Garenne Colombes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+196966da-34ea-4b66-aa5d-86e0c29d0c11,Pôle Santé Imagqua,,missing_type,type is empty,derive from practice_count / children / SIRET
+2095eb38-cefd-4bd4-a265-57a9c39927ee,Clinique Kineea,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+9c38dc8b-1406-4fde-8909-ca8bccb38b9b,Pôle Santé du Théâtre,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+fbee9a05-65f4-4c0b-872c-25f15f30097e,Pôle Médical du Marché,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+6c2cd751-3341-45cc-8386-0b062a582c90,Cabinet d'Ophtalmologie Rouen,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+09b11efe-7a5c-4e8c-8666-25410e7198d9,Clinique du Canal,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4ba44fe0-6b57-4e5c-a521-c3a99d39f847,Groupe Médical Neoance,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+4b7cf9d3-e6cb-4b5c-ad71-9813d54b8552,Centre d'Imagerie du Marché,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+42c6b85c-0d2c-42de-835c-2cfb3a46e7a8,Centre de Santé Dentaire Saint-Louis,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+662c85c7-e343-4099-aa1d-1bf961096a87,Réseau Cardilia,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d126f351-826c-4306-bf21-8a6f28e95ebd,Cabinet du Dr Kaci,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b9d2528a-1bb5-4161-9949-028a9557d240,Centre de la Vision Bastia,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+2caeae48-911a-41c5-98b9-db8e5b689842,Imagerie Médicale Vertaizon,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d71b0405-da03-4a8e-b8d7-5312c2206f0a,Cabinet de Radiologie Imagqua,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+65c28388-6593-4181-92b2-951603b5570c,Scanner IRM Hugo,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4017926c-0a6c-4322-a5b5-6f989168a47a,Pôle Médical Olivier,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+207a4c81-135b-4915-8459-80fd5c02b454,Centre de Radiologie du Bocage,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+28d5080b-1d85-4096-9433-c43480828bbb,Cabinet de Radiologie du Canal,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e053a15b-c12c-4c97-8115-4bce6e369008,Scanner IRM Robin,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1e39e403-f526-4d7b-a64a-c1c8a42a4bc3,Réseau Orbiis,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+955c3f2c-cdd6-4f5d-b0e8-ad3bc60c94bc,Scanner IRM Paris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0c581794-0181-4fee-97fe-7ef7fce22e74,Centre de Radiologie Paris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c4793313-a08f-44b2-b0d9-c6d66b98bc90,Cabinet de Cardiologie des Acacias,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+612ef5a9-0b29-4f09-b1a9-2aad161ec702,Clinique du Forum,Practice,invalid_parent_type,Practice under Practice,re-type the parent or re-attach to the right group
+127d2836-6fcc-47f4-84e8-061a9e6173fa,Clinique du Port,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+ffc7f0bf-9741-44b2-acb9-f81f543f890e,Réseau Imagence,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+f4bd27d0-3ee0-43a4-85b9-f0469cea6e1e,Cabinet de Radiologie Alpes,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+c642b9c5-0dde-474a-bdb8-1780e71d61b6,Groupe Plenivel,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+4609c368-70f1-4507-aa63-17bef529dee5,Centre Ophtalmologique du Lac,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+8384bccf-f881-4e62-8ca5-18084edb01d0,Ophtalmologie Saint-Michel,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a3f7b803-656c-4473-bca7-3925ea487e13,Centre de Santé Hugo,,missing_type,type is empty,derive from practice_count / children / SIRET
+b1eab19e-91d8-4c3b-9026-aa1bcebebe73,Clinique Neovia,Group,single_site_group,one child site only,check: real group or duplicate of its site
+e73adeba-06ae-4156-bd00-5a680365287d,Centre de Santé Dentaire Ermont,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7955d508-e4d0-42dd-9f85-faa9a9911830,Centre de Radiologie Marty,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+adb0defe-2ec8-4e94-b833-b03f63c64d91,CLINIQUE DU PALAIS,Practice,invalid_parent_type,Practice under Practice,re-type the parent or re-attach to the right group
+bede3b53-0b59-4fcc-b196-641b9dee69ee,Centre de Santé Saint-Roch,,missing_type,type is empty,derive from practice_count / children / SIRET
+ac46b46b-edf9-4279-bfae-dd80d5b91413,Centre de Radiologie Banyuls-Sur-Mer,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+aba0afca-ed4e-48f9-ba9b-9bc31b486c45,Centre de Radiologie des Cèdres,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+51b2b1d3-9b59-43fe-9d73-3f8271405fe4,Pleniea Dentaire,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+9564f9fb-7151-46a8-b861-0a286c0fc16e,Groupe Médical Imagora,Group,single_site_group,one child site only,check: real group or duplicate of its site
+fb41be1c-9e14-428b-a96b-3cace8267d7e,Plenivia Radiologie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+0be504bb-e50d-4244-873a-ed4320ca8807,Pôle Santé des Arcades,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1c8e84e1-cd75-404e-9235-2dd175524600,SCM Dentaire Issy-Les-Moulineaux,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+52c5ba45-3461-428a-8fc0-98f111d4c515,Altiys Santé,Group,single_site_group,one child site only,check: real group or duplicate of its site
+8c7241fd-c088-4922-96f5-72683cb456f9,Centre de Santé Méridien,Practice,self_parent,record is its own parent,clear parent_record_id
+ca78698a-56d1-4660-9c53-67c5417a906b,Cabinet de Radiologie Mantes-La-Jolie,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5c17e02a-9c1a-4809-9201-c399c805e72d,Cabinet de Radiologie du Moulin,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+10832d87-3861-4acd-962a-8bd2881c2666,Groupe Seroance,Group,single_site_group,one child site only,check: real group or duplicate of its site
+7e406021-47a2-4614-895a-88024519b10b,Centre de Santé Ampère,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0de98119-f148-4e1e-88de-841b109ca782,Radiologie Joffre,Practice,invalid_parent_type,Practice under Practice,re-type the parent or re-attach to the right group
+d6fce65a-e3a0-4d14-8ff5-d9559e020666,Clinique Lumaqua,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+1f308620-f042-4ec3-a46c-e99a93e98804,Groupe Novanor,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+1f308620-f042-4ec3-a46c-e99a93e98804,Groupe Novanor,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+2de6690d-60cf-4a42-9783-85f9485de136,Clinique Novais,Group,single_site_group,one child site only,check: real group or duplicate of its site
+71f95c66-de1e-403c-8432-e806496eb032,Radiologie du Théâtre,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e1eb80cb-3305-4fdd-b3ad-d1248bd7378d,Clinitis Dentaire,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+bc896e58-e014-4141-ba79-4d95e0c57809,Clinique Radiqua,Group,single_site_group,one child site only,check: real group or duplicate of its site
+af60b5b9-c22d-4b89-8a28-8ff5d255dd6f,Pôle Santé Paris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+9e282956-61aa-4dd0-89ac-5bcdd2a39306,Centre de Radiologie Dentoora,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+299370fa-ef05-48fc-ad57-a57ac281c3b6,Neoence Imagerie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+6dca7e46-d5c3-4be7-b8c7-2f4f81d18b9d,Lumaium Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+781f79ed-d55c-47b1-bacf-5e38e81476fd,Pôle Santé Meudon,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3bdcb35b-2e42-446b-95d3-6f397ff1ac71,Cabinet Médical des Marronniers,,missing_type,type is empty,derive from practice_count / children / SIRET
+d234aee7-7129-4e2a-a85b-25f2047ea36f,Centre Médical du Cours,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b9854bcb-7a95-495a-841b-d2976ec45c25,Optimea Dentaire,Group,single_site_group,one child site only,check: real group or duplicate of its site
+852e462e-6f89-472e-98e9-8ed86d824981,Centre Ophtalmologique des Oliviers,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a973cc9b-c734-495a-9c6c-0af9f4c886ce,Centre Dentaire des Oliviers,Practice,invalid_parent_type,Practice under Practice,re-type the parent or re-attach to the right group
+b5790fbd-d546-4d51-8a59-f91d198594d9,Odoea Radiologie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+ba966852-06fe-4247-8c0a-48d1a79dd232,Cabinet de Radiologie Saint-Michel,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3d0c90e7-4193-4f98-9799-8c020637ea32,Cabinet Dentaire Plenivia,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+319f0239-ac50-4008-804d-bc797a181f12,Centre Ophtalmologique Orbivia,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b53ec964-0a31-4c6d-8b41-0aa0536636de,Centre d'Imagerie Jaurès,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7f888564-845d-40cc-8695-9efcbe8a9485,Cabinet Dentaire Horizon,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c901c69e-8081-42a2-bac3-5d0f233d32d6,Cabinet d'Ophtalmologie Riviera,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e58ea762-701a-450d-bb10-b09d1d0e10ff,Pôle Santé Bichat - doublon ?,,missing_type,type is empty,derive from practice_count / children / SIRET
+db3e4e3a-9e37-4e5f-93b9-973bc5504889,Imagerie Médicale Rousseau,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+910b9668-769b-4180-9654-c2a2f8dbe666,Centre Médical Saint-Pierre,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+7bdab4f4-c63e-47d8-9242-af56a160af74,Centre Ophtalmologique des Vignes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f98c7e56-aad1-442f-875f-24ce6a393578,Clinience Dentaire,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f9907de5-6911-4472-aa3d-2ac8744d9c22,SCM Dentaire Saint-Georges,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+cf3c2c4b-fb41-423d-be27-3e93fcfab3a8,Cabinet de Cardiologie Cardialys,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c9f5d676-47bc-4791-83ec-7ad73356bbc8,Clinique Confluence,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b248b2be-8d6e-45bc-b7b1-99f03efc1073,Imagea Santé,Group,single_site_group,one child site only,check: real group or duplicate of its site
+752c7c1d-c9d9-49ab-bb57-a817d0a81caa,Maison de Santé Confluence,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+d50187c5-913d-434c-80a8-92bd7ca979d9,Cabinet de Radiologie Confluence,,missing_type,type is empty,derive from practice_count / children / SIRET
+ef28132c-1684-4e67-957a-33a713c8e18c,Pôle Santé du Moulin,,missing_type,type is empty,derive from practice_count / children / SIRET
+7bcaa43b-103d-4c63-8a1a-ecae7b830422,Groupe Médical Plenience,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+069721c9-3d7e-4c66-829e-4b0a4f24612b,Polyclinique Fleming,Practice,practice_looks_like_group,practice_count = 10,re-type as Group and create its sites
+a635797e-521c-4531-8502-b78600efbb2e,SCM Dentaire du Lac,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1a1abfed-88b1-4581-9794-14f67a5ea2a3,Imagerie Médicale des Acacias,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+2680b6ee-f5a4-43e0-a341-07d952531b1e,Cabinet d'Ophtalmologie Confluence,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b73ad8aa-8157-40d9-b90c-b88bf7d4ea49,Polyclinique des Lilas,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+45c289b4-75f3-449d-8363-3bf9581b03ea,Odois Imagerie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+a39b6314-6000-440b-9515-a9e12012f56b,Maison de Santé Molière,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+8a43619b-4334-4e24-bc57-f3312272eb6f,Centre de Santé Carcassonne,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+dacc9103-48d5-4730-921a-78577b14737a,Kineys Dentaire,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+686e28b9-5922-4a52-84ff-cdb0a518d147,Maison de Santé du Marché,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4b8bd16c-21a7-4e29-8dc6-c043586ecaad,Clinique Odovel,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+c16e532b-5120-4864-9cfa-7fb10e8852c5,Clinique Joly,,missing_type,type is empty,derive from practice_count / children / SIRET
+51d4d1c0-5eda-4e5d-86d8-282ceef4da8d,Cabinet d'Ophtalmologie Lille,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+248c164e-a844-4fd0-911c-bdb5bb3f1ffb,Cabinet de Radiologie du Lac,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b43046a2-f163-4b8d-9187-63e8dd5104fe,Odovel Dentaire,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+96c1be08-ba9b-41cf-8c9e-c15f849a0122,Groupe Dentotis,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+fa6db52f-c793-4236-924a-c5da30b8a41f,Dr Blanc - Chirurgien-dentiste,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7dc1e7bb-c899-497e-a8c3-c55b40c7d8e6,SCM Dentaire Albi,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c6b1656a-cc0e-435f-ad55-ddf0a50bebc7,Cabinet Dentaire Paris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+090569e3-be8f-4b57-afd6-d9f2e017c659,Pôle Médical Saint-Antoine,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+160931c1-66b1-4018-9a53-072b563e67b4,Novanor Santé,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c97016b7-f8cd-4c85-ad3f-efcdeca93ac9,Clinience Dentaire,Group,single_site_group,one child site only,check: real group or duplicate of its site
+e7daed9b-5146-4ad4-9c66-dbac95ae0632,Radiologie des Cèdres,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e32caa20-1255-443a-87c9-90f4c4a173c1,Dentoium Imagerie,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+e32caa20-1255-443a-87c9-90f4c4a173c1,Dentoium Imagerie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+bb17ffe5-b1bf-4b1f-8257-355e7f361e93,Radivia Radiologie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+7acae2e9-8a3e-4aa6-becb-bf99036b5552,Clinique du Port,Practice,invalid_parent_type,Practice under Practice,re-type the parent or re-attach to the right group
+0fbb4be4-7cff-4ca4-88f3-af1105d1353f,Cabinet d'Orthodontie Aximea,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3a778f5a-ec17-40d8-8dd8-732ccfbe8a3d,Dr Picard - Chirurgien-dentiste,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d258b0fc-f0f6-4268-af5c-df22d3a32cd9,Groupe Médical Seroea,Group,single_site_group,one child site only,check: real group or duplicate of its site
+ce070267-df17-45e2-98e6-e7ed397a5f64,Centre d'Imagerie Rueil-Malmaison,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3c2a48d7-c6df-472e-b998-679457aa876b,Clinique Lumais,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+3ba04a59-eaf7-4f79-ba52-4e9837d05d57,Centre Ophtalmologique Boulogne-Billancourt,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+6cffb30a-a3fa-46d3-89fc-9dd1d88915a4,Groupe Médical Cardiora,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+6cffb30a-a3fa-46d3-89fc-9dd1d88915a4,Groupe Médical Cardiora,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+657b20f6-d250-4fc3-b016-d1701573e6b1,Clinique des Tilleuls,,missing_type,type is empty,derive from practice_count / children / SIRET
+b438155e-41e7-479a-ba47-6fad19dfa7dc,Radiologie Chaville,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ef23e8e2-b3a0-4d7e-a811-87f22bc60c69,Groupe Meditis,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+f828636e-9a75-482d-8dbc-288472d85c4e,Scanner IRM Joffre,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ce6b6033-176c-4556-8ac7-0cc76ee47bb7,Cardilia Radiologie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+a414d746-89f4-4d95-a453-4ec5fdfb9d70,Centre d'Imagerie du Château,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+6851c54d-50ed-4ea6-afaf-c63be262e427,Clinique Neoance,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+45ae1aa2-7eb0-4105-a8c8-97265747d372,Clinique des Glycines,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+461bf461-d83a-40fc-9583-3c102764d8f5,Heliys Radiologie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+cd5413bd-0f9a-4d22-99c0-94886987f8c3,Sanaora Dentaire,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+8db32df7-9ad1-4824-8868-7ffaaae0062e,Optialys Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+b679e77a-4a4d-482f-86d6-835018836f55,Imagora Radiologie,Group,invalid_parent_type,Group under Practice,re-type the parent or re-attach to the right group
+b679e77a-4a4d-482f-86d6-835018836f55,Imagora Radiologie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+91f350a7-d2fa-4be0-b990-344da327eed0,Cabinet d'Ophtalmologie du Littoral,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ee93eb03-039c-45bb-b26f-f2ce5e32e723,Centre de la Vision Carnot,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3cf08c60-4393-405c-98d1-f5c33cf5bc57,Cardiologie du Lac,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+cb9a3f43-f5a4-4ba3-b31e-b29f842a4380,Groupe Médical Kineance,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+87732279-16d8-474b-b8fd-35fa7fcb5e9e,Clinique Lumais,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+052aace0-267e-4816-9ec9-f9b3d04f771e,Réseau Kinevia,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+bb8b5e0f-3cf7-4816-a595-1475343b540c,Clinique Lumanor,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4e9f1851-1015-4c53-8075-022c8ba2857c,Altilia Radiologie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+622ff832-7c88-4d63-84af-9cb1ac830b34,Centre Médical Pluridisciplinaire du Val,,missing_type,type is empty,derive from practice_count / children / SIRET
+98c94d7d-7e8b-44bc-ad84-efcc220bce6c,Scanner IRM Condorcet,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+fd66827a-60fb-4af5-a0b4-9c85a648dd58,Cabinet d'Orthodontie des Vignes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+150c346c-1cfb-47de-b4fb-194d9aacbcb8,Centre d'Imagerie Horizon,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3355ce78-f0b4-48fe-a7e6-c4d1dbdc206f,Centre de Chirurgie Sananor,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+88332921-3de6-4ba4-be12-341cc65bf00e,Centre de Radiologie Confluence,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f62ffead-d238-4e7d-94c6-d22894dbdbef,Cabinet de Cardiologie Laennec,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+98dbed5c-9fc5-47e7-8f03-970f47e6cbb5,CLINIQUE DREUX,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+cf900801-d6dc-4960-97c4-c2b822be8f39,Clinique Bonnet,,missing_type,type is empty,derive from practice_count / children / SIRET
+4e58979e-258a-4075-ba4e-d2580648cae6,Centre Ophtalmologique Lamartine,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+464ca73b-bf55-4de8-828c-52459eb1c90a,Neoea Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+97b16dc0-9de1-46e8-91f1-83e6102b99a0,Radiologie Saint-Martin,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a6f3bc9d-46e2-40a5-ac9c-a85c23d25bcd,Clinique Clinience,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+473183e9-6480-449d-8d9c-39c57ab2b81e,Cabinet Dentaire Condorcet,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ecabe7d0-5aad-4850-966b-d023d2c16ed0,Scanner IRM Saint-Jean,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ac6065cb-2e85-47f9-98e3-1c0f2763a3a6,Dr Pierre - Chirurgien-dentiste,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+2d43bf7f-592a-4937-b360-f266b7a69fa0,Cabinet de Cardiologie des Platanes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ea1c0757-d6c2-4f02-b8a8-9dfaa7624006,Neoence Imagerie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+0fe6b074-f889-42cd-af8c-9f89b8d44fa2,Centre de la Vision du Val,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+977ebf8e-63a7-4c1b-9d38-a8637e783e7b,Scanner IRM des Lilas,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+90b552d5-4f1d-4d7f-92bd-29a4be92b0ad,SCM Dentaire du Port,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5671bd1b-e3be-44c5-b5e4-0be115770c54,Lumaium Radiologie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+75a9c6e8-31ef-4c68-914c-428ae311b2ba,Cabinet de Cardiologie Raditis,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d25560d6-a9b9-4cbc-a098-a105a16bac41,Centre Médical des Iris,,missing_type,type is empty,derive from practice_count / children / SIRET
+7e124d82-08a0-4d1e-a0a4-08b1e4cfff8f,Medivel Santé,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+7e124d82-08a0-4d1e-a0a4-08b1e4cfff8f,Medivel Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+8730368c-e9f9-4177-985e-cb05618a1a4d,Radiium Santé,Group,single_site_group,one child site only,check: real group or duplicate of its site
+9f10421d-e47e-4b32-8ce1-67e47b46921b,Clinique Dentomea,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+bd273f60-84d8-4d9f-8153-755410f7a39e,Scanner IRM Radiea,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b91d09f0-e70b-4f8a-9ce5-046efe1a85e7,Radiologie Saint-Paul,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+25e1045d-989d-4efc-bf44-26d8a4677497,Réseau Radiium,Group,invalid_parent_type,Group under Practice,re-type the parent or re-attach to the right group
+80483ead-7a4b-4521-bc92-72a4640c9fcd,Centre Dentaire du Moulin,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+fe23ebda-8f3c-44ff-8b2c-a98fe0022a21,Sanais Imagerie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+54289243-73f4-4d3a-8166-cb37bc5b3f41,Centre d'Imagerie des Tilleuls,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+fb153a11-29d6-496d-b02b-8764e099e146,Cardiance Imagerie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+9b69b74b-fa9d-49c5-8da2-8a4ce8bce76d,Centre de la Vision du Littoral,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5a8b1abd-e2c9-4d18-8dd1-1ed7d38d27cd,Cabinet Médical Le,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+08c8713d-ad68-4717-8fe2-c6e4ef93598a,Ophtalmologie Dunkerque,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+acdb6a75-91e4-40e1-b01a-cc2f7b08c2e5,Scanner IRM des Tilleuls,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1a282b3b-ba47-48fc-83fc-a493722cdf04,Clinique Seronor,Group,single_site_group,one child site only,check: real group or duplicate of its site
+a2fa897d-d4a5-4692-a913-c1cb6ec9882e,Centre de Santé Dentaire Saint-Paul,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a035737e-ae21-4a65-89b8-151dc09473ed,Réseau Helimea,Group,single_site_group,one child site only,check: real group or duplicate of its site
+4a160a52-8c7e-4f57-8db8-c1d07375ea13,Centre Ophtalmologique Vincent,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+fecb0434-0363-477f-96dd-84b392ca4cc5,Centre de Radiologie du Parc,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+8d9251dd-3673-47cc-bd90-930b6411c77b,Seroea Dentaire,Group,single_site_group,one child site only,check: real group or duplicate of its site
+64c11ae0-3746-4837-b61b-cacce71d3ec3,Lumaium Dentaire,Group,single_site_group,one child site only,check: real group or duplicate of its site
+7ae09e63-0212-4ea5-aa9e-3dbad578b30c,Réseau Seronor,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+186ae88d-e160-48b3-b73a-3d1bf2c6b883,Centre de Radiologie du Marché,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e36532c4-a2b8-45a0-8c3e-41b79bd045bf,Centre d'Imagerie Monge,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+9ea79449-1b95-4dc2-8b60-70a91cb707fa,Centre de Santé Dentaire des Marronniers,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+02def719-0227-4cbf-acee-bd92ec13e510,Centre de Radiologie Seroys,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b11e7332-9c70-4154-9fb5-b2b8a0cef1c7,Centre de la Vision des Remparts,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ad78af93-ce29-4163-a648-6c4eb4caa5e2,Centre de Chirurgie Belkacem,Practice,practice_looks_like_group,practice_count = 4,re-type as Group and create its sites
+27f9bf1c-6568-4a6b-8132-6a3c75c7c541,Clinique Serotis,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+fe3ad21f-7c9d-40bd-8513-953766d802b5,Dentoea Radiologie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+c66f4ead-f146-4bce-8328-f0fee94916d3,Groupe Axinor,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7084ff3d-7a38-4078-8e9f-efb6020d3884,Scanner IRM Saint-Cloud,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+6367510b-40b1-44e0-933c-2982de5e4ae0,Centre de Santé Saint-Louis,,missing_type,type is empty,derive from practice_count / children / SIRET
+23d74922-514b-40af-b0c1-9a3aa031bd73,Radiologie du Bocage,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e7270107-8a04-4e78-9cb3-88e11803bf57,Dentoys Radiologie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+c3751207-b2c5-490c-a9a5-8c849c9cece9,Centre d'Imagerie Riviera,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+2e2b5b43-e53f-4eb1-ab21-121780cbf4a4,Réseau Lumanor,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+20031bec-86e9-4d07-9566-badf00a24a08,Groupe Médical Optiium,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+0663fb0a-b38e-48eb-9efe-1768a57d499e,Cabinet de Radiologie Méridien,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+63c1be32-300d-40dc-88c4-cb4d5c727001,Cabinet Médical du Marché,Practice,practice_looks_like_group,practice_count = 4,re-type as Group and create its sites
+fbbade21-23de-4af5-bb52-eb838313ac40,Clinique Saint-Antoine,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+553a2922-95e3-4e64-8f82-85fbdd19caab,Radiologie du Forum,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+70093eab-eb12-4429-b150-7cd4352595af,Groupe Médical Axivel,Group,single_site_group,one child site only,check: real group or duplicate of its site
+b82b6575-e359-499e-a5bc-91cb6b050e9b,Groupe Lumais,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+6ad52ed7-b3ab-4c1e-8f4b-bceb4c3ba34e,Cabinet d'Ophtalmologie Colbert,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+2e445f43-556a-401c-b1c6-f440466fe3e8,Altiqua Imagerie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+1972e0e5-6fe4-4bf9-b81f-3513a47a85e1,Clinique Pleniqua,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+e7a7c856-653c-4e32-bec9-944210e197f4,Centre de la Vision des Platanes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+076dcaf9-1535-4674-b140-eabe959c3588,Ophtalmologie Carnot,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+26744006-b402-4cdc-80b7-13492fec8758,Scanner IRM Lambert,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f7839f5c-7f06-49b9-8540-97b57a4b14e3,Clinique Helitis,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+f2160c2c-4aef-44e8-a102-d527610b1f83,Axiance Radiology,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+07e9c2f3-1d7d-47d6-8c6a-df1a9da97081,Cabinet d'Ophtalmologie Estuaire,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d7466f9c-2a14-4adb-9d5a-9136c04558fb,Cabinet d'Orthodontie Lavoisier,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e8a730d2-3ffc-43d2-b37e-822e59c2572f,Visiora Dentaire,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+348dc187-3353-4b39-b295-60362bc73f9f,Imagerie Médicale Alpes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c66868b9-14ee-4453-872d-b35612e3ea1c,Centre de Santé Dentaire Saint-Pierre,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4a85e859-8fc0-49e6-8337-fab09002d7f1,Cabinet d'Ophtalmologie Jaurès,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ca83c573-1a57-4e40-b334-e47dc516f04a,Centre Médical Pluridisciplinaire Colbert,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+b01b7be3-7540-417d-a9c2-d93381f3ec92,Cabinet de Radiologie du Château,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+368b3996-2072-49a6-ba68-2b494caaf72c,Clinique du Marché,,missing_type,type is empty,derive from practice_count / children / SIRET
+4169cbb2-56d0-4e80-8895-5668a73726cd,Centre de Santé Pasteur,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ee040a2c-cc7f-4085-968a-dbab6a756377,Imagerie Médicale Robert,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+2dce1605-ed6a-46c0-b9f8-feef3838574d,Clinique Plenivia,Group,single_site_group,one child site only,check: real group or duplicate of its site
+519f1c8e-08ca-48c7-9ed6-247b7f883b08,Réseau Sanatis,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+3cac28c3-c0ae-463f-ab88-1f6c1b6acdb4,Cabinet Médical Cardiium,Practice,practice_looks_like_group,practice_count = 7,re-type as Group and create its sites
+ef17ee73-a856-4bab-9d96-72997d393ba5,Ophtalmologie Kinevel,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+cb8487ef-9f12-48a2-ba31-1df53edb7d9e,Scanner IRM Raditis,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+6de9d025-d1df-43bd-9478-bed1b4022b91,Radiys Radiologie,Group,invalid_parent_type,Group under Practice,re-type the parent or re-attach to the right group
+26e337b4-ed10-42af-bef7-d46fc33ba4b7,Centre Médical Laennec,,missing_type,type is empty,derive from practice_count / children / SIRET
+78e54562-a0b6-430a-ac7f-dd21be8e1f32,Centre Dentaire Saint-Honoré,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+15026355-3510-4839-84ac-0a39edb56017,Groupe Médical Neoea,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+0224979d-7535-4aa0-8a6b-7796b6971dc6,Centre de Radiologie du Pont,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b99c4f41-3527-44ae-a321-0794f4fe27ca,Scanner IRM du Port,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e11bc218-8011-4c72-8807-6b601da77605,Centre de Santé Dentaire Saint-Roch,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+fcdaddae-b670-4294-b5d5-059126f5dd50,Centre de Rééducation Novaea,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+8ddbc215-e34c-4f7c-8232-869c38d70055,Clinique Altiium,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+8e461dd9-b923-45aa-bd0d-5e0569437047,Centre Dentaire des Remparts,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f766eed9-bf5b-4dd9-969b-311eccf0e82e,Centre de Chirurgie Axinor,,missing_type,type is empty,derive from practice_count / children / SIRET
+bca8b040-e391-4844-aef9-c03d0bca50c6,Axiium Diagnostic Imaging,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+35a885c2-bfda-4831-9d66-5e8dfc9c2e33,Clinique Imagance,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+1783f57e-3f77-446f-88bf-af52a7907049,Cabinet de Radiologie Lavoisier,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+007737c2-9a32-455b-8575-fe8ad9d80e83,Cabinet d'Ophtalmologie du Littoral,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0d484bc6-6e5d-42f4-a634-b3c09a1c110e,Centre de Santé Clonas-Sur-Vareze,,missing_type,type is empty,derive from practice_count / children / SIRET
+0e92beb3-b553-467d-b0df-a6721c54a19d,Clinique Lumatis,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+e9b2abfd-7f07-4c1d-bc30-b9ba4c4fcfd1,Scanner IRM Saint-Honoré,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e9b2abfd-7f07-4c1d-bc30-b9ba4c4fcfd1,Scanner IRM Saint-Honoré,Practice,practice_looks_like_group,practice_count = 7,re-type as Group and create its sites
+87d1cec3-e978-4665-a89a-633e9182a244,Centre de la Vision du Parc,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+14d45169-de5a-421f-b691-5aa2d942da21,Groupe Altivel,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+914edabe-8b77-4bef-8ea0-e9e1f53362ac,Centre Médical Pluridisciplinaire du Pont,,missing_type,type is empty,derive from practice_count / children / SIRET
+31564970-b0c5-491e-9ed8-e672dd12ed9e,Cabinet du Dr Rey,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+1b50d950-577f-4520-8387-13724d73b5fa,Clinique Novaium,Group,single_site_group,one child site only,check: real group or duplicate of its site
+6dc2d2c0-b2c6-4ac8-a58f-46df3f0f22fe,Cabinet de Cardiologie Lambert,,missing_type,type is empty,derive from practice_count / children / SIRET
+48501904-58ac-4e08-8399-648c1daa6ad5,Sanaqua Imagerie,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+48501904-58ac-4e08-8399-648c1daa6ad5,Sanaqua Imagerie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+4b5be51e-7860-4996-965a-04bab6cc3be1,Clinique des Platanes,Practice,invalid_parent_type,Practice under nan,re-type the parent or re-attach to the right group
+0d1e133b-1c55-415e-bab8-3977e3741201,Scanner IRM Saint-Jean,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7fb0a07b-6a85-40bf-a090-743e7b26bd7b,Réseau Dentonor,Group,single_site_group,one child site only,check: real group or duplicate of its site
+03d62961-d8f4-40d1-b089-25ff23954be2,Cabinet de Kinésithérapie Belkacem,,missing_type,type is empty,derive from practice_count / children / SIRET
+0bc9e600-c7cc-413c-ab5f-3136a57fafc5,Groupe Médical Axiance,Group,single_site_group,one child site only,check: real group or duplicate of its site
+50bf1507-7f79-4f3c-86a1-b4bd79c950ae,Centre de Radiologie Optiora,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a38c5299-12ea-4c2f-aa27-96df26230552,Cabinet Dentaire Azoulay,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5256632c-c6ad-4cce-974b-aab73763346f,Centre de Santé des Platanes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+eb2f6396-7ffe-47f7-9c0e-8eee69ae7567,Clinique Orbiis,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+f30d4e4f-3702-4fbd-b5f7-3391d836c971,Radimea Imagerie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+917e5b34-4006-4d64-adc0-c33368ccff5b,Polyclinique Gaillard,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+3fc4e379-b1fe-4581-ac81-99c941bde5d9,Cabinet Dentaire Axitis,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+217ae033-c4a7-4be4-b602-d348179c2969,Centre de Radiologie Océane,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ebe57e49-81d9-4f04-8e2c-14416f93430c,Cabinet d'Ophtalmologie du Théâtre,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b713f402-86da-4b27-9eb8-d7cc9c495b39,Maison de Santé Cergy,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+49edf516-ea96-4c5e-b0df-a68cdaef80be,Clinique des Platanes,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+bdbcf6a8-ad3f-4bbf-9463-02da7b30ae09,Neonor Dentaire,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+0943e619-8250-473a-82a5-f4aacf8d9303,Cabinet de Radiologie Estuaire,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+56fb5500-dbff-4ae9-865a-09b5eb3c5969,Clinique Dreux,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+93e295ab-c589-4acb-9469-0fe373e41d70,Clinique Saint-Nicolas,,missing_type,type is empty,derive from practice_count / children / SIRET
+3e1fc13e-e612-4089-9edd-d03b495a8370,Clinitis Radiologie,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+76cb4d17-0840-47fe-871d-82f555d66d04,Centre de Santé du Littoral,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+780d97b6-8774-42bc-97e8-ea3543794044,Aximea Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+1bb2d1de-236f-4c29-b7d4-8a05c629242a,Groupe Médical Orbitis,Group,single_site_group,one child site only,check: real group or duplicate of its site
+9f8811f7-a31a-4e37-85f8-6639a199701e,Clinique Kinelia,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+68946824-587a-4e36-abf0-52020b08dfc8,Cabinet de Kinésithérapie des Platanes,,missing_type,type is empty,derive from practice_count / children / SIRET
+b136cdfe-28dc-4c9b-91d0-6cf06d387ea5,Imagqua Imagerie,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+37df5331-0e54-46b5-abae-22f12da1339f,Scanner IRM Gambetta,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1a89b74b-ca89-452d-9dde-bbe13d18ba77,Groupe Altiora,Group,single_site_group,one child site only,check: real group or duplicate of its site
+7c448729-8e35-4a64-854f-c01feeed427c,Medivel Dentaire,Group,single_site_group,one child site only,check: real group or duplicate of its site
+a981513b-b59c-4ced-a309-7f48f05f2fc4,Groupe Médical Mediium,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+a981513b-b59c-4ced-a309-7f48f05f2fc4,Groupe Médical Mediium,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1c206cb0-9dd0-4f3e-ab4d-106e9656b1c7,Centre de Radiologie Joly,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d64e7f45-f0fd-4d4e-8b90-841ac52d0193,Imagqua Santé,Group,single_site_group,one child site only,check: real group or duplicate of its site
+5e31bf07-e594-47ff-b893-fb7efbd324ca,Cabinet Dentaire Joffre,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b895829d-eee1-4144-90b7-f2c4134d6f4c,Centre d'Imagerie des Arcades,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+37e0dd3d-3f75-4969-ad6f-6fea325e4d70,Centre Ophtalmologique Voltaire,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+82826252-edaf-4955-be0d-44a164a1d106,Ophtalmologie Gambetta,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0ca1ea77-f910-44d6-981c-70fafe1cc7d6,Centre de Radiologie Vantoux,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+49c2936c-7aaf-4b21-aa0e-b1d16099dec1,Centre Dentaire Puteaux,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+912dbfe0-e84d-4c71-90e6-169bb95a803b,Ophtalmologie Fontaine,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a69ca4fe-bf0e-4da7-9d9d-bac0e17ab398,Scanner IRM Atlantique,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b90240f2-8d4c-4344-8eca-847a7ad08a6c,Centre Médical Pluridisciplinaire Saint-Éloi,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+6400fbe1-b5c0-4b0f-9d55-4270360deed1,Cabinet de Radiologie Bertrand,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1200af92-01fa-4d04-be6d-72360e627c2c,Centre de la Vision Bruz,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+cce298bd-04b3-416d-8e1c-c844c0ddd51a,Clinique Aix-En-Provence,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+3830d506-75b9-445b-a023-7762849c3ee6,Imagerie Médicale Armor,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+690141eb-27b3-4d42-a8d2-c77dd93945d4,New Hyde Park Imaging Center,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+cf8f1487-b15f-4724-970f-a86841647513,Centre de Santé des Remparts,,missing_type,type is empty,derive from practice_count / children / SIRET
+14640998-2505-4dbd-9512-b9ee678a8154,Optitis Dentaire,Group,single_site_group,one child site only,check: real group or duplicate of its site
+2362e63c-8266-4e64-bf6e-119f570f5a85,Cabinet de Radiologie Mediis,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+2bc6442d-3d90-42b2-9f21-95cf6adc1666,Centre de Santé Garcia,,missing_type,type is empty,derive from practice_count / children / SIRET
+65f0e699-bf7c-4931-ae96-54624aba235d,Altimea Radiologie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+7460c1cb-47be-4f89-a86a-cfaf9fd30f30,Centre Ophtalmologique des Marronniers,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+70ab51d4-37b4-4006-90c6-ea7cab605b67,Centre de la Vision Maisons-Alfort,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+9b0f7230-5cdb-430a-9768-4139f902c99b,Cabinet d'Ophtalmologie Saint-Éloi,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e6acf3b4-9133-4159-957a-96c59e1abd10,Medivel Dentaire,Group,single_site_group,one child site only,check: real group or duplicate of its site
+25431bb5-f9f4-4038-962b-92befb2a3379,Seroora Radiologie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+0a70d028-8f7d-45e5-9666-6b64c958b452,Centre Ophtalmologique des Iris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3ee67bbb-dda6-41c4-8d80-20947c59373b,Centre Médical Lefèvre,,missing_type,type is empty,derive from practice_count / children / SIRET
+61b81341-75a7-4539-b7a3-413805a607c9,Groupe Seromea,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+61b81341-75a7-4539-b7a3-413805a607c9,Groupe Seromea,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+9427b560-3c74-4497-a38f-05545c6b8379,Centre Cardiologique Dentovel,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+58a0b1eb-7153-42a2-8ce2-b1fa68598342,Centre de Santé Vallée,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+cccfcdc0-f6cd-40c1-9bba-211bc0237cde,Clinique Saint-Martin,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1d25d2ad-06f6-4bcd-9965-39db70ffe562,SCM Dentaire Alpes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+be6c911b-8323-49fd-88f7-8122bc82bcff,Groupe Cliniys,Group,single_site_group,one child site only,check: real group or duplicate of its site
+36ef910d-2878-4277-947b-19bc0dadb4a2,Clinique Optiea,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+36ef910d-2878-4277-947b-19bc0dadb4a2,Clinique Optiea,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+bd6fe06a-09bb-4d73-b04a-b8d3caa4dc5c,Centre de Santé Dentaire des Platanes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+80bd2ca3-e6f4-41f4-950f-936d98a7bb34,New York Health Partners,,missing_type,type is empty,derive from practice_count / children / SIRET
+ca7edfcd-7029-4a26-adf9-8b87f4c2d48d,Centre d'Imagerie Jaurès,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+67ef19c5-2bb3-40af-b52a-1f35a6527206,Cabinet d'Ophtalmologie Picard,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f5bca321-c3d9-4b0a-9aac-3a62174f5def,Clinique Saint-Louis,Practice,invalid_parent_type,Practice under Practice,re-type the parent or re-attach to the right group
+c647a6d6-a040-4111-baf9-825d03e157ee,Centre de la Vision du Mail,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+cca5d26f-03b8-46ae-886f-d7dd2147acf6,Cabinet Dentaire des Oliviers,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+687712b3-8d4b-4189-afc7-73deb69bcf8c,Centre de la Vision Colbert,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+745bbd37-e94c-4577-9173-b5fef4742098,Cabinet d'Ophtalmologie Jaurès,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b3d779a4-075f-4c24-be51-42693beb83f5,Ophtalmologie Saint-Luc,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+172df091-1825-4313-b003-07899079761d,Centre d'Imagerie Melun,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+dde68ced-45d6-40f7-9245-e972f5bc1b87,Cabinet du Dr François,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+902dfdf3-66c4-413c-b4fb-7c91ec5a2d85,Centre Ophtalmologique Cannes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+bc88ec15-8e57-4e57-b0d9-3e77d5e19567,Ophtalmologie Dentotis,,missing_type,type is empty,derive from practice_count / children / SIRET
+bc88ec15-8e57-4e57-b0d9-3e77d5e19567,Ophtalmologie Dentotis,,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+21fdbf3d-ab69-4baa-bbf4-a259489a4870,Cabinet d'Ophtalmologie Pasteur,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4ac7eba1-13ea-42d7-947d-44dfcc955e7c,Centre d'Imagerie Guillaume,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ec4be8eb-68eb-497b-a00c-abeccff33f52,Centre de Santé Neoium,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+9e1a188f-4f2e-4019-ae4c-8b891770980b,Groupe Médical Odoalys,Group,single_site_group,one child site only,check: real group or duplicate of its site
+6c48516c-4013-479f-9103-42f24e8a84b0,Réseau Cliniora,Group,invalid_parent_type,Group under Practice,re-type the parent or re-attach to the right group
+6c48516c-4013-479f-9103-42f24e8a84b0,Réseau Cliniora,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+b7b1dc6d-1eb7-4419-b175-1963118f71bf,Clinique Neoance,Group,single_site_group,one child site only,check: real group or duplicate of its site
+579f0f0e-571e-4870-912d-4ea71ce999c6,Lumamea Radiologie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+81099f6f-e202-4e5d-8f79-5345e9beaa20,CENTRE D'IMAGERIE PEREZ,,missing_type,type is empty,derive from practice_count / children / SIRET
+fc3d9759-2826-46cf-9305-7d5ac35dbe4d,Lumaora Diagnostic Imaging,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+55d7a241-2a90-43c1-9141-5738421b5636,Visivia Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+8f71e544-7536-4c62-866e-13ce89afbb25,Centre Médical Vallée,,missing_type,type is empty,derive from practice_count / children / SIRET
+648a4c99-4c6b-4c00-8335-c5dcd04b5e73,Centre de la Vision Condorcet,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+80a19638-4f8c-42a9-8b8e-8a847fe324df,Centre Médical Robin,,missing_type,type is empty,derive from practice_count / children / SIRET
+605b499c-b142-495f-8ea7-1491c1b08c77,Cabinet de Radiologie Bichat,,missing_type,type is empty,derive from practice_count / children / SIRET
+4157c2ad-d9e8-4cff-bd02-51d6fd5cf668,Plenimea Imagerie,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ad7276c0-cfe0-487d-93ed-97d40fdab174,Saint-Gratien Imaging Center,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+97efec07-c773-4542-b420-d711b172c9f8,Centre Médical Paris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e203bd82-c378-45b4-956b-ab728cd48437,Centre Cardiologique des Cèdres,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+04b858ca-5e80-4256-bc3d-6916a80be823,Groupe Radiqua,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+82caa30d-a500-4ccb-a04b-60717fc17e93,Centre de Santé Saint-Michel,,missing_type,type is empty,derive from practice_count / children / SIRET
+4b478564-c2bf-4fd9-80a5-2c60b2e92e25,Pôle Médical Alpes,,missing_type,type is empty,derive from practice_count / children / SIRET
+56b9ed6c-f0a3-4bd1-930d-8c011d9b94cb,Clinique Marseille,,missing_type,type is empty,derive from practice_count / children / SIRET
+cd334e27-0466-4dbd-b37f-0c772b70c4b4,Réseau Cliniys,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+dfdaae3d-63b2-4278-a767-6c94185f684b,Ophtalmologie Saint-Roch,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d6b4ed71-e581-40be-ad34-3e8c239232db,Centre de la Vision Venissieux,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ef83b6b9-081c-4605-9439-6b65205c85a2,Centre de Radiologie du Port,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+34fdf016-78df-44d4-b98f-62907a549cab,Centre Médical Toury,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+872d2c17-391f-4d5b-a6b1-be6b65d4ec9c,Scanner IRM Serris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0e7c7560-2db3-4512-9000-8f27af60ee42,Novaora Eye Care,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+d475efd2-1fbb-41be-99e1-2747fe54d80f,Centre de Santé Dentaire Arago,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+6b0229ba-d470-4ca2-b45d-8bfdccdba059,Cabinet de Masso-Kinésithérapie Méridien,Practice,self_parent,record is its own parent,clear parent_record_id
+69d2518d-8d0e-415d-a765-a91d95f2719e,Groupe Axiys,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+454d460c-b2d8-4616-be06-3a84d5b93efa,Centre Ophtalmologique Fenouillet,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0546064f-58d3-4b9a-9cf1-e1d6c76af1b3,Centre Médical Océane,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c1fdef06-d15a-4668-9e4c-b06cf1d9e53d,Polyclinique Fleming,Practice,self_parent,record is its own parent,clear parent_record_id
+fbb37c59-8977-4297-b4ef-0211ccce83ff,Centre Dentaire Riviera,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+2aa6bf08-b011-4ff3-bbe3-02b07ef9ea8f,Ophtalmologie du Cours,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1ed157bf-f77a-4915-89d3-150c9198627f,Cabinet d'Ophtalmologie Deschamps,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f1a87b68-be54-40a2-871f-15bc51dc8be1,Groupe Aximea,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+f1a87b68-be54-40a2-871f-15bc51dc8be1,Groupe Aximea,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1d481608-bfc5-4042-bc01-db754811d711,Plenimea Radiologie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+8d14d808-4d9a-4d16-9039-3c51671d082e,Centre Médical Pluridisciplinaire Delmas,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c24a9e54-b1c6-4f74-b1ad-8f1256c77ac8,Maison de Santé Saint-Martin,Practice,practice_looks_like_group,practice_count = 5,re-type as Group and create its sites
+8dad5137-c84a-4b9d-9c11-24add7011444,Centre d'Imagerie Horizon,,missing_type,type is empty,derive from practice_count / children / SIRET
+494c2645-e898-4b8e-9392-518284df4f24,Groupe Medinor,Group,single_site_group,one child site only,check: real group or duplicate of its site
+86ee27d7-9bc8-43f7-945f-368160e30f8c,Centre de Santé Dentaire Villemomble,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b64bf846-b6ff-409a-b26d-b249d1141941,Kinequa Radiologie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+b62e935e-24a9-42da-84d6-79fa71e39ad0,Radiologie Riviera,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+efa2b94e-e6be-49fc-9abb-fe1f6ce9dd69,Radiologie du Val,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+58b6739a-e8d7-4cf6-b49c-ab8911d08f66,Cabinet d'Ophtalmologie du Littoral,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3534e00c-9816-42f6-972a-329d45632909,Centre Ophtalmologique Saint-Jean,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f0760495-c7eb-4b5a-a7da-b5594962be5a,Cardiium Dentaire,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+df60b2d1-c807-4e7c-80ad-d94e8e889683,Radiologie Courbevoie,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3f0ad66b-3d12-428d-9731-510758733bf7,Kiné Océane,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+ebedcd4f-5f7a-4d56-9c40-416e4d6a5cbc,Us Health Partners,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+4013e8ab-60d9-41a5-bb27-8c0999a3f411,SCM Dentaire Optialys,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+9e6b9c12-b085-4449-a615-58054fbe23b5,Radiologie Montigny-Le-Bretonneux,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e8b3199b-6752-48a9-9dd7-c7cfbcf3bd24,Centre Ophtalmologique du Château,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5ae7aeb8-b567-441e-b30d-4422f4ea2edb,Centre de Santé Dentaire Fleury,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f420b21d-c7ba-446c-a896-f00d1195fe56,Cabinet d'Orthodontie Saint-Honoré,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3c3ac303-0e9e-4e1a-a83b-7b9b9e6b3155,Centre de Santé du Moulin,,missing_type,type is empty,derive from practice_count / children / SIRET
+cf3702a3-f983-42a7-a4da-79a6561b0bea,Pôle Santé Baie-Mahault,,missing_type,type is empty,derive from practice_count / children / SIRET
+e1aa930e-50b0-40cb-a913-3500ae8726a6,SCM Dentaire du Val,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+49421b2a-bf67-4bdc-8837-aed8224e635d,Centre de Santé Visitis,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+a8772fef-08c4-49df-8e3c-cd406813a018,Ophtalmologie Laennec,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4278b69e-7ebe-4ff0-8158-65a26810bf39,Altinor Dentaire,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+472c7536-4662-4cc2-a821-4e32b358f23c,Centre Dentaire des Cèdres,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+709b99a6-1c7c-406d-942e-d02d4a42cb3c,Ctre d'Imagerie des Acacias,,missing_type,type is empty,derive from practice_count / children / SIRET
+d35613d9-8767-4f80-9d3b-0ce3fab03bbc,Ophtalmologie Boujan-Sur-Libron,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+9df9e085-54df-4cf5-b2b1-f9b02559d084,Clinique des Lilas,Practice,practice_looks_like_group,practice_count = 4,re-type as Group and create its sites
+e1a225a8-1cd3-4450-adbf-a0fb0d474328,Radiance Dentaire,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+072addb6-3313-42b6-9bbc-218a73d325b3,Centre de Rééducation Gambetta,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+be9fc6f6-f5a5-41ed-b8ac-9ebc8538c122,Centre de la Vision Neuilly-Sur-Seine,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+94ae9f6d-171e-4f07-9d94-fd9c40e09ba8,Polyclinique Giat,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+e26882ca-2716-42f9-bd21-7e6e2a3dcf49,Réseau Novais,Group,single_site_group,one child site only,check: real group or duplicate of its site
+4f213a03-10b8-4a44-9e4a-a307cfafa67a,Centre d'Imagerie Tessier,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+77976141-88a6-4f5f-91a6-829d1b83683a,Centre Dentaire Perez,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+182de605-074d-4e5f-a7ef-93b4e3cae467,Imagerie Médicale du Forum,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5e43f3bd-b32d-4513-8194-0ff431b5eb0a,Radiologie du Pont,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4e7cdc16-6333-4bfd-bc93-923324e9b083,Visiea Dentaire,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+4e7cdc16-6333-4bfd-bc93-923324e9b083,Visiea Dentaire,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+b3f7282d-e966-469e-be81-8d0a6ed304cb,Centre Ophtalmologique Paris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e2edfc72-62bd-442b-8e9f-31cf65b442fe,Imagerie Médicale Saint-Honoré,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+46c61e0f-04e8-4bc0-a1bc-bcbc6a1f952d,Polyclinique des Coteaux,Practice,practice_looks_like_group,practice_count = 12,re-type as Group and create its sites
+b58602c7-821f-4392-b251-f68cb40489a3,Réseau Axivel,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+26a46d26-a849-4744-957a-f8136a00d9f4,Scanner IRM des Lilas,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+98d55b40-2689-4995-852d-38879b4abe7d,Clinique Imagvel,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+519b341f-d538-487c-b8cd-85b247e37d88,Pôle Médical Sanchez,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5663f2c9-a862-45fa-8c49-eb5b28b6d983,Altiora Imagerie,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5663f2c9-a862-45fa-8c49-eb5b28b6d983,Altiora Imagerie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+a01f5e72-f1d0-4cda-bbfa-ace4d4fa20b3,Centre Ophtalmologique Mistral,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+051c4096-d137-4a1d-a217-9120c25b5f79,Centre de la Vision Foch,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+15404aa2-ca44-47b3-924f-8ed13465652c,Medience Santé,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+15404aa2-ca44-47b3-924f-8ed13465652c,Medience Santé,Group,single_site_group,one child site only,check: real group or duplicate of its site
+da762ebe-cfaa-420e-95a5-52afe1ebbeef,Cabinet de Radiologie Le Port,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+09dbc2c9-825c-484d-be13-1bdd71d0ceb1,Centre de Chirurgie Diderot,Practice,invalid_parent_type,Practice under Practice,re-type the parent or re-attach to the right group
+7ae8f035-275f-4444-af6e-0ff7c6e17157,Dentoance Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+7e252c7f-9c7e-4c00-a509-3546bb5e10f8,Centre Dentaire Monge,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3aaba35d-f514-4568-bd0f-7e1bae917bea,Pôle Santé du Plateau,,missing_type,type is empty,derive from practice_count / children / SIRET
+691e8d88-9382-4673-833d-d46505a7780f,SCM Dentaire Saint-Honoré,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5ab12571-732e-436b-924b-a30ec4672476,Centre Ophtalmologique du Littoral,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+667664b3-6a62-45d5-8ea3-486f06af022a,Clinique Optinor,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+667664b3-6a62-45d5-8ea3-486f06af022a,Clinique Optinor,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+73299b82-1f4e-413b-9d19-5efaeedf2149,Centre Ophtalmologique Laennec,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+96830f63-c3d3-4a53-a3b7-cec61efdc6f9,Centre de Radiologie du Pont,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7a9fde69-b15d-4a5b-9b8d-30e34ef22e12,Imagerie Médicale du Val,,missing_type,type is empty,derive from practice_count / children / SIRET
+a71772bc-1fca-47ae-82d0-a6e38642c188,Pôle Santé Cayenne,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+195eb5cd-aa4e-4c41-b308-4b7649b90c8c,Centre Dentaire Paris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5a2b6e15-b3dc-42ce-b0ac-142636d06368,Centre de Santé du Cours,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+451e8c09-b1e3-4205-bf90-0241e65cd3df,Dr Guillaume - Chirurgien-dentiste,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d26cf0d7-d8f4-4ce6-9cd0-2c1aa9490599,Scanner IRM du Marché,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+47aa5169-b09a-4b8f-ac72-5f7d7d3754ba,Polyclinique Armor,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+96b9fadf-a32f-41f0-8020-c8f5f723a443,Cabinet d'Ophtalmologie Bichat,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+97c73fae-1aaf-4806-a9a7-3462146ef4a8,Cabinet de Cardiologie Saint-Honoré,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+60e53ef8-6ac8-4051-bb0d-2beb307e0b31,Groupe Pleniora,Group,single_site_group,one child site only,check: real group or duplicate of its site
+e3427354-daec-4434-b74d-51fc7afbcf1b,Centre d'Imagerie Vallée,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+cafce735-fa81-4fb7-844b-8af8a72e8b7c,Ophtalmologie Fleming,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3e93ce8e-f34a-45dd-81f9-c62ce8aa4ae8,Imagora Imagerie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+19325a2d-f831-49be-bd63-4e7d7340edf1,Polyclinique Heliis,Practice,practice_looks_like_group,practice_count = 4,re-type as Group and create its sites
+d9b82946-66b6-4dcd-b2b9-ae2cc5b87fda,Centre d'Imagerie Cliniance,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f507ac84-ce7b-4ddd-96cf-fb729ebcd24f,Centre Médical du Plateau,,missing_type,type is empty,derive from practice_count / children / SIRET
+b41096f1-e170-493a-8de0-ab606e346021,Sananor Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+4f4b7a21-45ec-4196-877e-f1e7c5ee4a8e,Radiologie Coulonges-Sur-L'Autize,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4d4c4875-e5ad-4faf-8398-e73c32c43a8a,Cardiologie du Canal,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b125d771-81d0-491c-b409-a360bfeeab67,Centre Dentaire des Coteaux,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+05805c48-33a0-405f-997e-6eb8047d3439,Cabinet de Radiologie du Cours,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+11c6c6c7-9f02-4809-bfa9-94d5dcd13826,Sanavel Imagerie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+a5267540-cb15-4d03-a6dd-c46a79856178,Centre d'Imagerie des Halles,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+78fe50b6-5692-4352-97aa-51e329643c0c,Clinique Imagance,Group,single_site_group,one child site only,check: real group or duplicate of its site
+e75bf5ce-ab09-472f-9768-a9c4ddedf3ac,Pôle Santé Imagalys,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5e645a81-a3b5-4ad7-96e0-a585bbc728d6,Imagerie Médicale Saint-Michel,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c85418e2-8c8f-42ed-b4db-a05a91adb641,Scanner IRM Garonne,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0f5bfed6-fee9-442b-a58c-c0625e8f16af,Ophtalmologie du Littoral,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d6c8c64d-ce6c-4761-a7b6-f0b2827b98b7,Réseau Plenivel,Group,single_site_group,one child site only,check: real group or duplicate of its site
+155a9caf-7199-41a9-bce1-d2c67bdf6869,Ophtalmologie des Glycines,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+346faa50-ceac-4cd7-b80c-bf824fa27fcd,Cabinet Dentaire Roy,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+849fd30a-7a33-47b8-ba85-9fe95de2e987,Groupe Médical Pleniium,Group,single_site_group,one child site only,check: real group or duplicate of its site
+fa504a62-5ec5-4513-b4e0-524bd23c59fc,Centre Médical Bourgeois,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e0d9258e-8576-473e-9ea5-35f2416c271e,Imagerie Médicale Saint-Etienne,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+8a334810-78db-4c7b-82fd-f179a9bfd5f0,Groupe Sanatis,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+cd4cc8c9-8b33-47dd-abb5-87e86ad907d8,Neoea Dentaire,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5c8b6a91-5e06-439b-b255-f2acee574783,Cabinet d'Orthodontie Lamartine,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+dec26248-d942-40d6-a122-bee212462366,Centre de Santé des Iris,,missing_type,type is empty,derive from practice_count / children / SIRET
+5abe6fb6-7d45-4774-9bbc-c1570282bd98,Visivel Radiologie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+66488b16-bba9-4bc8-bb84-59426c6c22fd,Cabinet d'Orthodontie Monge,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+846b7e32-7463-48ad-a882-250689ce422b,Cardimea Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+c444863a-1172-47a0-9248-c729f290daed,Centre Dentaire Diderot,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c21cfef6-ee89-4f49-8cd1-d5102652bcce,Scanner IRM du Forum,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c7a5f346-73fc-46c9-9046-35dd20a05588,Odoence Imagerie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+7046e4e3-11fe-4c78-a8d1-eda3861acfd8,Orbivel Santé,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+7046e4e3-11fe-4c78-a8d1-eda3861acfd8,Orbivel Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+42aa41fa-0684-4429-b40c-8148c261868e,Centre Ophtalmologique Atlantique,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3ae53447-b5f9-4b36-955d-e5f0dfdb5f07,Serotis Radiologie,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3ae53447-b5f9-4b36-955d-e5f0dfdb5f07,Serotis Radiologie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+a4da4577-16ec-4fc9-9807-dd581629f01b,Groupe Médical Cardiora,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+b3443700-41f7-4274-bf1a-33d1d9e51c4c,Ophtalmologie Lyon,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+853d84b4-411e-4620-8ca5-2db59d89152f,Scanner IRM Boulogne-Billancourt,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+aefd1a13-d231-40c2-bb26-157c3a63a36f,Cabinet de Radiologie Neuilly-Sur-Seine ,,missing_type,type is empty,derive from practice_count / children / SIRET
+388f1453-ab26-411a-a11a-4a215474c896,Groupe Cardiora,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+ba2a94b3-f935-4496-b0d8-b129a16f34b7,Dr Leclercq - Chirurgien-dentiste,,missing_type,type is empty,derive from practice_count / children / SIRET
+3cf709d7-619f-4f74-a391-5d618e677b80,Clinique Rey,,missing_type,type is empty,derive from practice_count / children / SIRET
+497d1c4f-53b3-4c65-85bd-8777ab612d8d,Cabinet de Radiologie du Théâtre,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0d3166dc-341c-4853-aed9-40c385f5cfe1,Optiea Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+a35dc497-9720-4530-9d04-d7b202befc2d,Radiologie Altiys,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+b5f6587d-91c0-4e2f-8af4-bc3bf12373c8,Imagerie Médicale Saint-Louis,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+8e902a49-7268-4639-b7bf-2539badedf87,Groupe Cardiora,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+8e902a49-7268-4639-b7bf-2539badedf87,Groupe Cardiora,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+9a71347e-afe9-48cf-b4bf-85ac38343fc4,Scanner IRM Bois-Le-Roi,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+138af153-f9bf-4a3c-af3d-be14399ce221,Centre de Santé Dentaire Malakoff,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+2bf15a17-4592-49be-9f4b-aab97cdd00c4,Orbinor Radiologie,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+2bf15a17-4592-49be-9f4b-aab97cdd00c4,Orbinor Radiologie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+b2d240c7-a4ca-4057-8d8e-9be6147009ed,Réseau Neoence,Group,single_site_group,one child site only,check: real group or duplicate of its site
+5a1b1152-d888-406d-85a6-47ebf1f6697d,Kinealys Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+88d3f866-7d52-4266-b6e9-3930b0bb5e32,Scanner IRM des Cèdres,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+50494494-b05e-4d05-b5d7-4a4fcfb51214,Seronor Dental Group,Group,single_site_group,one child site only,check: real group or duplicate of its site
+e9149958-96cc-4d11-95c4-38c7ed3a8160,Centre de Radiologie Quincy-Sous-Sénart,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+cd71a279-02ce-4fdc-a86f-7eed9ba04711,Clinique Radiora,Group,single_site_group,one child site only,check: real group or duplicate of its site
+cf9b8771-457a-4a7c-818a-de63ccda901f,Radiologie Paris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+1f03f43e-9b2f-4929-bb8e-19b6d4fb8003,Centre de la Vision des Platanes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+efe09a0f-32df-44f2-9ad3-2ca293ab7bd0,Centre d'Imagerie Buffon,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0ab7319e-1a3e-484b-ad38-9dde0aa59f9d,Centre Ophtalmologique Cardivel,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+bc1655f9-7ff3-4737-a1fe-e986382cfa08,Scanner IRM des Coteaux,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3ec949c1-1c3b-4bf2-8df5-d9f50b34d10f,Axience Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+0e133837-9b68-4409-819a-731d6285008c,Polyclinique Lyon 9Eme,Practice,practice_looks_like_group,practice_count = 4,re-type as Group and create its sites
+def3fbe5-91a5-4db7-be72-682038a2071f,Centre Dentaire Laennec,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+fefbacf7-a8fc-4ba3-9c6f-a86f4902a625,Helilia Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+ec0752ee-a8cb-451e-9917-6055cc798977,Imagium Health,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+965b5604-af6f-48c4-a013-4e9b72bffcd4,Groupe Médical Axialys,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+10997063-59c5-440a-bab3-40749d60f80e,Centre de la Vision Bezannes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a71b1ea0-cb10-421e-8012-506514ca4652,Clinique Pleniis,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+9413a0b8-ffc9-49b3-8ac7-37d0ea298b5f,Clinique Altiea,Group,single_site_group,one child site only,check: real group or duplicate of its site
+29c15447-ea56-4635-8c9e-44b39ea01a6f,Plenilia Santé,Group,single_site_group,one child site only,check: real group or duplicate of its site
+10d6bee8-565d-430c-83b7-1204b5185699,Cabinet de Radiologie Alpes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e4bfcbd3-8855-4e1e-986e-ec6dacdad7d9,Pôle Médical des Arcades,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f31fe50f-f38c-4417-a38f-486f23910b21,Centre Ophtalmologique Confluence,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+895fb3f4-439f-469c-8c2e-5dea61c08c7e,Maison de Santé Munster,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+080dab99-dd78-4b47-8070-1f735422938d,Polyclinique Kineence,,missing_type,type is empty,derive from practice_count / children / SIRET
+5a2e309b-ae86-45a9-93c4-90710bf2b526,Pôle Santé Saint-Paul,,missing_type,type is empty,derive from practice_count / children / SIRET
+f08385ce-9cf1-4043-8876-7e0c517c88df,Optimea Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+fbe5c571-ad85-485e-8873-a576f33a3989,Radiologie Plenivia,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+f54a6451-ca31-456a-96cd-cda94c4bb143,Imagerie Médicale Saint-Nicolas,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c95b593d-a663-443b-88a3-ca2a1f7a1521,Radiologie Atlantique,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a4a497ad-d09c-4616-8572-abe765012f5b,Ophtalmologie Pleniea,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3f57b9d6-f6ca-4bbe-a8e0-4b1f503da217,Centre de la Vision Trappes,,missing_type,type is empty,derive from practice_count / children / SIRET
+3f57b9d6-f6ca-4bbe-a8e0-4b1f503da217,Centre de la Vision Trappes,,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+37eae47f-c868-4697-95d5-3b75c4dc4cf9,Réseau Neovel,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+6380e0f2-a6c9-43c7-a20f-00e55a19ea58,Centre Dentaire Dardilly,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+40011c49-2796-4a6d-9f24-cb3ec5608f51,Centre de Chirurgie Bichat,Practice,practice_looks_like_group,practice_count = 5,re-type as Group and create its sites
+61b40f98-a53f-481b-a960-66c02dddc197,Centre de Santé Dentaire Paris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a08c0b3b-c979-4bb6-b893-e0dd5d093c5e,Cabinet d'Ophtalmologie Le,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c51fb7d4-4f97-4590-91c9-dd58d8eb14ab,Radiologie Saint-Nicolas,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d83dbd5a-b0a8-4873-a6b6-890df557d9b8,Réseau Medinor,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+0cffb91b-533a-40ad-9115-b64c3706bd1a,Clinique Seroence,Group,single_site_group,one child site only,check: real group or duplicate of its site
+80cdd84d-0de3-4a1a-a7cd-f448d07bf18d,Centre de la Vision Colbert,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+37086893-5ce6-4e15-a3c7-fd4b947d1ace,Virginia Imaging Center,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+649af50d-2a1a-4864-ad35-6cc844578059,Centre Dentaire Paris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+381bb0f9-f359-4b8b-a1ea-37917c325c6d,Centre Dentaire Hugo,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+15618ac0-603e-4f95-93ea-749ccfceeb11,Centre d'Imagerie Marie,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+cc880ec9-8104-4ee8-a3bd-19f671bdcad9,Dentoium Dentaire,Group,single_site_group,one child site only,check: real group or duplicate of its site
+7f1833c2-579b-41be-8aae-1fe0df1491a0,Ophtalmologie Laennec,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d71ca904-e274-47df-9cff-842a3a9b9819,Clinique Pleniqua,Group,single_site_group,one child site only,check: real group or duplicate of its site
+e1be34d8-c766-4275-988c-6cbd0a2237e2,Centre d'Imagerie du Marché,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+abfe3906-434c-44ee-8475-91a26a333791,Neomea Imagerie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+81dd359c-802f-433b-8bbd-baa057960355,Scanner IRM Belkacem,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+092b1c76-1ada-4592-89eb-d564796028c6,MSP des Vignes,Practice,practice_looks_like_group,practice_count = 15,re-type as Group and create its sites
+81130395-4202-4717-a8c4-610e19b97e48,Cabinet d'Ophtalmologie Thomas,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+792d5843-9a9b-4430-b944-8b41ffb21aec,Imagerie Médicale Condorcet,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+6b372746-27e3-45bc-9569-0c0693ee31d5,Groupe Neoea,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+ca893cb1-d353-4329-9ac6-d5e78da835e7,Centre Médical Pluridisciplinaire Saint-Jean,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+23ab53a8-057d-4ba8-819f-7cf155dce9d9,Cabinet de Radiologie Fleming,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e7ae4598-5b77-4065-9ed8-993c04550805,Cabinet Médical Tarbes,,missing_type,type is empty,derive from practice_count / children / SIRET
+1dd7d85d-5456-418f-808c-aae3e5f8915d,Centre d'Imagerie Curie,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+bfb1039b-53b5-499f-8bc2-e0f2e446c48c,Clinique Plenivia,Group,single_site_group,one child site only,check: real group or duplicate of its site
+2a1edae7-fd9f-465e-a0e0-26ee50ed3e26,Ophtalmologie des Acacias,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+93707b94-7733-4c44-a973-3f8289aad54e,Serois Imagerie,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+93707b94-7733-4c44-a973-3f8289aad54e,Serois Imagerie,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+93707b94-7733-4c44-a973-3f8289aad54e,Serois Imagerie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+1bc10d8b-1979-485f-83ee-1bcda79cb015,Centre de la Vision Condorcet,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0af39e83-308c-4bc0-b527-f19b477e69c2,Réseau Plenience,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+41926cbe-d754-4399-a038-0498f57bd175,Centre d'Imagerie Chalon-Sur-Saône,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4bfe59ef-03bf-4487-9223-c97bf0100fdd,Imagerie Médicale Bichat,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+6404aeda-5d83-4c70-ab36-9f002f48f158,Centre de la Vision Audincourt,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+e0526241-5717-4eb0-873b-8b2954cbbf1d,Scanner IRM Paris,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+6e27fb1e-56ad-4d6c-b0ca-7eeafb12b6e0,Groupe Neoalys,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+fe6a3fd2-5436-4876-8e08-397e25ef519a,Centre de Radiologie Hubert,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4a34d0ee-2d2c-4943-b7a4-4bbd51a68a64,Radiologie du Marché,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+417af84e-15af-4cb9-b813-5a152b67056b,Groupe Médical Axiqua,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+de02a342-4cbf-4c7f-a686-7bfe4150e30a,Centre Dentaire Condorcet,,missing_type,type is empty,derive from practice_count / children / SIRET
+221ffe2a-ccbe-4aa7-adf4-17599638a68e,Cabinet de Radiologie Pasteur,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+81076e04-052d-40c7-ab8e-fc4d5ae0e6f7,Cabinet de Radiologie Neuilly-Sur-Seine,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7fca5161-d4df-4cce-a150-6cb9fb171c41,Axilia Radiology,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+41e1a02c-6e97-48b9-b613-5b7b51043d4e,Ophtalmologie Lefèvre,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+2fb02ae5-de0b-46ee-8314-48877f8e3cee,Imagerie Médicale Brun,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+c603435a-1b99-4643-8475-21751403324b,Réseau Pleniys,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+304e8714-b6e9-4277-8866-3d6cb51e31fb,Helivia Dentaire,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+9584fa2e-f7df-45b3-b3b7-6e45a491db12,Centre de Rééducation du Port,,missing_type,type is empty,derive from practice_count / children / SIRET
+ce5f652d-78c0-449f-b21d-d8f9b6f6bda4,Centre Dentaire des Oliviers,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+9f792b18-c0d2-44df-97c8-3fd689874964,Scanner IRM Fleming,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+b4b7b081-a88c-436a-b7b4-d4004f771e05,Centre de Santé Saint-Paul,Practice,invalid_parent_type,Practice under Practice,re-type the parent or re-attach to the right group
+fe289311-eba7-442e-83ea-f350fdb4ff9d,Centre de Santé Baie-Mahault,,missing_type,type is empty,derive from practice_count / children / SIRET
+a5988c84-4182-405b-a5da-fac2ef71e415,Centre Ophtalmologique Visitis,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7ec4e24e-26d5-467f-8d71-e91fa2b2dc3a,Scanner IRM du Port,Practice,practice_looks_like_group,practice_count = 3,re-type as Group and create its sites
+36bd4c4b-f92e-4c72-8541-b99657ee7332,Cabinet Dentaire Meyer,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+3d85a988-9175-4b05-94aa-a3a9ac5f599c,Medivel Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+bda2f09b-d9e1-478e-b645-9b0a0cebab92,Peachtree City Imaging Center,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+b790d537-31cc-40d2-900c-c2da517c6067,Centre Ophtalmologique Maillard,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+444a856c-1139-444f-b22e-219da4c895fd,Groupe Optience,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+b40bb6bb-8b85-40e0-8131-030bfdf43e31,Centre Médical Pluridisciplinaire Cesson-Sévigné,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+123fc051-fddc-44ad-874d-e718d9b11e4f,Dr Moulin - Chirurgien-dentiste,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+769c8834-e73e-4228-a478-ea7f3ec878b0,Ophtalmologie Saint-Quentin,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+023158d5-1674-4bcd-b802-be96de55f8ee,Clinique Axience,Group,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+bef451dd-000d-4160-86d5-7d9c4dbdef20,Lumalia Santé,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+ab95f194-d837-4941-ac02-f69fb59a7d29,Cabinet de Masso-Kinésithérapie des Iris,,missing_type,type is empty,derive from practice_count / children / SIRET
+d50629c7-4c1b-4168-8662-cf42b0018ee0,Polyclinique Lesneven,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+482a2e61-9b60-4470-ae64-10fbd13d5415,Centre de Radiologie Nimes,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+cb391563-2b57-4d43-9467-4bb275c24ee9,Centre de la Vision Dupuis,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+84f438dc-9483-461e-8b04-1d57aa270f77,Réseau Plenialys,Group,invalid_parent_type,Group under Group,re-type the parent or re-attach to the right group
+b1a794ff-e4c7-4f77-a644-bd62d49269d8,Centre d'Imagerie Joffre,,missing_type,type is empty,derive from practice_count / children / SIRET
+e493cafc-d7bd-467e-9cce-8c021f1fb81a,Scanner IRM Osny,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5cbc6513-ab9e-4dc0-b4d5-1c8b2b2946c2,Centre de la Vision du Littoral,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+46c3086c-df37-4168-9d22-370b835dd46d,Centre de Radiologie Saint-Nicolas,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+efe9c178-91b0-48bb-bdd5-3dea48801224,Novais Dentaire,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+1128871e-482b-44c5-8ae6-7aa2e20056b8,Polyclinique des Platanes,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+3e0b16cf-e48e-4c5a-ac81-812d7026964c,Helilia Radiologie,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+72475e41-9cf6-4133-a073-333f5430437f,Radiologie Saint-Jean,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+36cc88d4-22af-4eeb-9b32-b2e72c3cc562,Maison de Santé Kineora,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+0acc9e2e-fc48-45d5-82f4-0c23a5d9b997,Centre Médical des Oliviers,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d431651f-9ddd-48f4-9193-a333ae46bbd2,Cabinet de Radiologie Saint-Éloi,Practice,practice_looks_like_group,practice_count = 2,re-type as Group and create its sites
+98b7b0f4-a720-4296-aca3-c16721578b65,Centre Médical Pluridisciplinaire du Palais,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+5abae504-255b-420a-859b-dfad0778fae4,Cabinet d'Ophtalmologie Optiora,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+565d5731-dfe9-4f0e-b001-df0ad400fc6c,Centre d'Imagerie Le Port,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d73e0cad-32b7-41a9-b209-7435af9775be,Centre de la Vision des Lilas,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+7d241f76-e9d9-45de-87e1-702d7b412560,Centre Dentaire Monge,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+adeeafce-5e30-4faf-be86-8d20312c8df4,Centre Ophtalmologique Seronor,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+710e3bb5-6aaa-456b-b89d-a6daa6d4f934,Radiologie Rousseau,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+4707915c-0054-4369-812e-b8c132dc7466,Réseau Pleninor,Group,empty_group,no child site in the CRM,create sites from SIRENE (same SIREN) or re-type as Practice
+da66e35b-01e4-46be-bcf0-ea9ad1d65a5b,Lumays Radiologie,Group,single_site_group,one child site only,check: real group or duplicate of its site
+a4fff1b7-083d-4150-98dc-42136b10f766,Dr Rolland - Chirurgien-dentiste,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+967f3885-32a3-4635-aa2e-9605fb13cf4f,Cabinet d'Ophtalmologie Phalsbourg,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+a0afe4a6-0c84-4fe9-88b8-b474d08068e1,Centre Médical Pluridisciplinaire Saint-Paul,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+d2f4fb84-27fb-429a-8e0f-ef1fa636a991,Scanner IRM Curie,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+db7956cf-ecb7-4e44-bb4f-7c505855c8d5,Scanner IRM Vauban,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites
+46f9e901-80d1-4eea-949d-0f65595f7358,Cabinet d'Ophtalmologie Voltaire,Practice,arr_on_parent_and_child,ARR carried at both levels,keep ARR on sites only; group ARR = sum of sites

@@ -1,6 +1,6 @@
 # Vocca · Senior RevOps case study
 
-Work for Part 1A (sales efficiency dashboard) of the Vocca Senior RevOps case.
+Work for Part 1 of the Vocca Senior RevOps case: **1A**, a sales efficiency dashboard, and **1B**, mapping the TAM ([`docs/tam_mapping.md`](docs/tam_mapping.md)).
 
 - **Google Sheet (the deliverable and the back-office):** https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit
 - **Web view:** https://vocca-revops-case.vercel.app/ (source in `web/`), a read-only visual layer on top of the same sheet.
@@ -27,7 +27,10 @@ Attio export (CSV)  ->  Google Sheet  ->  web page
 | --- | --- |
 | `data/` | The anonymised CRM export provided for the case, with its data dictionary (`data/README.md`) |
 | `docs/data_findings.md` | What is wrong in the export, sized with numbers (dashboard and TAM) |
+| `docs/tam_mapping.md` | **1B write-up**: what is wrong, the account model, the build, prioritised recommendations |
 | `scripts/` | Exploration scripts used to audit the export and test candidate metrics |
+| `scripts/tam_dedup.py` | **1B real work on the file**: deduplication, hierarchy audit and contact re-attachment under the site / group / network model |
+| `out/tam/` | Its outputs: merge clusters, every candidate pair with its decision and reason, hierarchy issues, contact moves, summary |
 | `web/` | Static web dashboard (HTML/CSS/JS, no build step, no dependency) |
 
 ## Metrics, and what was left out
@@ -51,6 +54,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python scripts/checks_accounts.py data
 .venv/bin/python scripts/checks_extra.py data
 .venv/bin/python scripts/metrics_test.py data
+.venv/bin/python scripts/tam_dedup.py data out/tam
 ```
 
 ## Running the web page locally
