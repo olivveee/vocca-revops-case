@@ -1,0 +1,91 @@
+/* TAM cockpit additions on top of style.css (same Vocca tokens). */
+
+.site-nav { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+.site-nav a {
+  padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border);
+  color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; background: var(--surface);
+}
+.site-nav a[aria-current="page"] { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
+
+.tabs { display: flex; gap: 4px; margin: 24px 0 8px; border-bottom: 1px solid var(--grid); overflow-x: auto; }
+.tabs button {
+  appearance: none; border: 0; background: none; cursor: pointer; white-space: nowrap;
+  padding: 10px 14px; font: inherit; font-size: 14px; font-weight: 500; color: var(--text-secondary);
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.tabs button[aria-selected="true"] { color: var(--text-primary); border-bottom-color: var(--brand); }
+.tabs button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.tab-count { display: inline-block; min-width: 20px; padding: 0 6px; border-radius: 999px; background: var(--brand-soft); color: var(--brand); font-size: 11px; font-weight: 700; }
+
+.lead { font-size: 15px; color: var(--text-secondary); max-width: 860px; margin: 8px 0 16px; }
+.tile.alert .tile-value { color: var(--critical); }
+
+.bar-list { display: flex; flex-direction: column; gap: 8px; }
+.bar-row { display: grid; grid-template-columns: minmax(120px, 220px) 1fr 70px; gap: 10px; align-items: center; font-size: 13px; }
+.bar-row .label { color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-row .track { height: 10px; background: var(--grid); border-radius: 5px; overflow: hidden; }
+.bar-row .track > span { display: block; height: 100%; border-radius: 5px; }
+.bar-row .value { text-align: right; font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+
+.stack { display: flex; height: 18px; border-radius: 6px; overflow: hidden; gap: 2px; margin: 8px 0 10px; }
+.stack > span { display: block; height: 100%; }
+
+.compare { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.compare .card { display: flex; flex-direction: column; gap: 6px; }
+.compare .from-to { display: flex; align-items: baseline; gap: 10px; font-family: var(--font-display); }
+.compare .from { color: var(--text-muted); font-size: 18px; text-decoration: line-through; }
+.compare .to { font-size: 28px; font-weight: 500; }
+.compare .arrow { color: var(--brand); }
+
+table.plain { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.plain th { text-align: left; font-size: 11px; color: var(--text-secondary); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--axis); white-space: nowrap; }
+table.plain td { padding: 9px 10px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+table.plain td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mode { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; background: var(--neutral-chip); }
+.mode.auto { background: var(--brand-soft); color: var(--brand); }
+.prod { color: var(--text-muted); font-size: 12px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  padding: 9px 16px; border-radius: 999px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text-primary); font: inherit; font-size: 13px; font-weight: 600; text-decoration: none;
+}
+.btn.primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+.btn.danger { color: var(--critical); }
+.btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.btn[disabled] { opacity: 0.45; cursor: default; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 12px 0; }
+code.cmd { display: block; padding: 10px 12px; background: var(--neutral-chip); border-radius: 8px; font-size: 12px; overflow-x: auto; white-space: nowrap; }
+
+.rule-key { display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--grid); align-items: start; }
+.rule-key .rank { width: 24px; height: 24px; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 700; }
+.rule-key .stats { text-align: right; font-size: 12px; color: var(--text-secondary); white-space: nowrap; }
+.rule-key .stats b { color: var(--text-primary); font-size: 14px; }
+
+.progress { height: 8px; background: var(--grid); border-radius: 4px; overflow: hidden; display: flex; }
+.progress > span { display: block; height: 100%; }
+
+.review-card { margin-bottom: 12px; }
+.review-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 10px; }
+.review-reason { font-weight: 600; font-size: 13px; }
+.keys { display: flex; gap: 4px; flex-wrap: wrap; }
+.key { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--brand-soft); color: var(--brand); font-weight: 600; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.record { border: 1px solid var(--grid); border-radius: var(--radius); padding: 10px 12px; font-size: 12px; }
+.record h4 { margin: 0 0 6px; font-family: var(--font-display); font-weight: 500; font-size: 15px; }
+.record dl { display: grid; grid-template-columns: 90px 1fr; gap: 3px 8px; margin: 0; }
+.record dt { color: var(--text-muted); }
+.record dd { margin: 0; overflow-wrap: anywhere; }
+.record dd.same { color: var(--brand); font-weight: 600; }
+.record .flag-customer { color: var(--critical); font-weight: 600; }
+.review-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center; }
+.decision { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
+.decision.merge { background: var(--brand-soft); color: var(--brand); }
+.decision.separate { background: var(--neutral-chip); color: var(--text-secondary); }
+.review-card.decided { opacity: 0.7; }
+
+@media (max-width: 640px) {
+  .pair { grid-template-columns: 1fr; }
+  .bar-row { grid-template-columns: 1fr 70px; }
+  .bar-row .track { grid-column: 1 / -1; grid-row: 2; }
+}

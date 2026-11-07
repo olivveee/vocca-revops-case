@@ -15,9 +15,10 @@ Never merged automatically:
   - pairs with open deals owned by different people;
   - matches resting on a shared phone, domain or name only.
 
-Usage: python scripts/tam_dedup.py <data_dir> <out_dir>
+Usage: python scripts/tam_dedup.py <data_dir> <out_dir> [<web_data_dir>]
 Writes merge_pairs.csv, merge_clusters.csv, hierarchy_issues.csv, contact_moves.csv
-and summary.json to <out_dir>.
+and summary.json to <out_dir>. With <web_data_dir>, also writes the TAM cockpit feed
+(tam_cockpit.json) and the action pack (tam_action_pack.xlsx) there.
 """
 import json
 import re
@@ -326,7 +327,180 @@ def contact_moves(c, contacts, merge_map):
     return pd.DataFrame(rows)
 
 
-def main(data_dir, out_dir):
+# ---------- cockpit export (web page + action pack) ----------
+MATCH_KEYS = [
+    {"key": "siret", "label": "SIRET (14 digits, checksum, active)", "role": "Identity of a site. Same SIRET + same type = automatic merge"},
+    {"key": "calendar", "label": "Booking-calendar URL", "role": "One calendar per site. Automatic merge only if a second key agrees"},
+    {"key": "siren", "label": "SIREN (legal entity)", "role": "Links sites to one legal entity. Merges only with same name + postcode"},
+    {"key": "name_postcode", "label": "Normalised name + postcode", "role": "Strong hint: manual review, never automatic alone"},
+    {"key": "phone", "label": "Normalised phone", "role": "Supporting evidence only: switchboards are shared"},
+    {"key": "domain", "label": "Website domain (platforms and webmail excluded)", "role": "Supporting evidence only: group domains are shared"},
+]
+GUARDS = [
+    {"rule": "Different valid SIRETs are never merged", "why": "Two sites, even under one SIREN, are two deployments", "match": "different valid SIRET|different sites \\(SIRET\\)"},
+    {"rule": "A site and a group are never merged", "why": "It is a missing hierarchy link or the group's head-office site", "match": "site shares|orphan site"},
+    {"rule": "Customers are never merged automatically", "why": "A merge moves invoices and ARR: a human signs it off", "match": "customer record involved"},
+    {"rule": "Two owners with open deals: manual", "why": "Ownership is a sales decision, not a data one", "match": "open deals owned by different"},
+    {"rule": "Shared phone, domain or name alone: no merge", "why": "Groups share switchboards and domains; names repeat", "match": "weak evidence only"},
+    {"rule": "Missing account type: manual", "why": "The model cannot place the record", "match": "account type missing"},
+]
+HIERARCHY_ACTIONS = {
+    "self_parent": ("auto", "Clear the parent link"),
+    "arr_on_parent_and_child": ("auto", "Keep ARR on sites, group ARR becomes the sum"),
+    "invalid_parent_type": ("manual", "Re-type or re-attach"),
+    "practice_looks_like_group": ("manual", "Re-type as group and create its sites"),
+    "empty_group": ("manual", "Create sites from SIRENE or re-type as practice"),
+    "single_site_group": ("manual", "Check: real group or duplicate of its site"),
+    "missing_type": ("manual", "Set the type"),
+    "orphan_parent": ("auto", "Clear the parent link"),
+}
+
+
+def current_state(c, contacts):
+    arr = pd.to_numeric(c.arr_signed_eur, errors="coerce")
+    parent_arr = c.parent_record_id.map(dict(zip(c.record_id, arr)))
+    junk_domain = c.domains.fillna("").str.lower().str.contains("|".join(re.escape(d) for d in PLATFORM_OR_WEBMAIL_DOMAINS))
+    types = c.set_index("record_id").type
+    return {
+        "accounts": int(len(c)),
+        "by_type": {str(k): int(v) for k, v in c.type.fillna("Missing").value_counts().items()},
+        "by_lifecycle": {str(k): int(v) for k, v in c.lifecycle.fillna("Missing").value_counts().items()},
+        "siret_status": {k: int(v) for k, v in c.siret_status.value_counts().items()},
+        "siret_checksum_failures": int((~c[c.siret_valid].siret_norm.map(luhn_ok)).sum()),
+        "multi_site_sirens": int(c[c.siret_valid].groupby("siren").siret_norm.nunique().gt(1).sum()),
+        "calendar_coverage": int(c.calendar_norm.notna().sum()),
+        "junk_domains": int(junk_domain.sum()),
+        "arr_double_counted_sites": int((arr.notna() & parent_arr.notna()).sum()),
+        "arr_double_counted_eur": float(arr[arr.notna() & parent_arr.notna()].sum()),
+        "customer_arr_eur": float(arr[c.lifecycle.eq("Customer")].sum()),
+        "billing_id_on_non_customers": int((c.hyperline_customer_id.notna() & c.lifecycle.ne("Customer")).sum()),
+        "customers_without_arr": int((c.lifecycle.eq("Customer") & arr.isna()).sum()),
+        "contacts": int(len(contacts)),
+        "contacts_without_company": int(contacts.company_record_id.isna().sum()),
+        "contacts_on_group_level": int(contacts.company_record_id.map(types).isin(["Group", "Superorga"]).sum()),
+    }
+
+
+def duplicate_sources(clusters, c):
+    merged = clusters[clusters.role.eq("merge_into_survivor")]
+    return {str(k): int(v) for k, v in c.set_index("record_id").loc[merged.record_id].created_by.fillna("Unknown").value_counts().items()}
+
+
+def rules_usage(pairs):
+    usage_keys = []
+    for k in MATCH_KEYS:
+        has = pairs.shared_keys.str.split("+").map(lambda s, key=k["key"]: key in s)
+        usage_keys.append({**k, "pairs": int(has.sum()), "auto_merges": int((has & pairs.decision.eq("auto_merge")).sum())})
+    usage_guards = []
+    for g in GUARDS:
+        hit = pairs.reason.str.contains(g["match"], case=False, regex=True)
+        usage_guards.append({"rule": g["rule"], "why": g["why"], "pairs_blocked_or_routed": int(hit.sum())})
+    merge_reasons = pairs[pairs.decision.eq("auto_merge")].reason.value_counts()
+    return {
+        "keys": usage_keys,
+        "guards": usage_guards,
+        "auto_merge_reasons": [{"reason": r, "pairs": int(n)} for r, n in merge_reasons.items()],
+        "survivor_rule": "Customer first, then most deals, most contacts, most complete, oldest",
+    }
+
+
+def record_card(row, deals_by_company):
+    deals = deals_by_company.get(row.name, [])
+    arr = pd.to_numeric(row.arr_signed_eur, errors="coerce")
+    return {
+        "id": row.name,
+        "name": row["name"],
+        "type": row.type if isinstance(row.type, str) else None,
+        "lifecycle": row.lifecycle if isinstance(row.lifecycle, str) else None,
+        "siret": row.siret if isinstance(row.siret, str) else None,
+        "address": " ".join(str(x) for x in [row.postcode, row.city] if isinstance(x, str)),
+        "phone": row.standard_phone if isinstance(row.standard_phone, str) else None,
+        "domains": row.domains if isinstance(row.domains, str) else None,
+        "calendar": row.calendar_url if isinstance(row.calendar_url, str) else None,
+        "owner": row.sales_owner if isinstance(row.sales_owner, str) else None,
+        "billing_id": isinstance(row.hyperline_customer_id, str),
+        "arr": None if pd.isna(arr) else float(arr),
+        "deals": len(deals),
+        "open_deals": [{"stage": d["stage"], "owner": d["owner"]} for d in deals if d["stage"] not in ("Closed Won", "Closed Lost")],
+        "created_by": row.created_by if isinstance(row.created_by, str) else None,
+    }
+
+
+def write_cockpit(web_dir, c, contacts, deals, pairs, clusters, hierarchy, moves, summary):
+    web = Path(web_dir)
+    web.mkdir(parents=True, exist_ok=True)
+    by_id = c.set_index("record_id")
+    deals_by_company = {cid: g[["stage", "owner"]].to_dict("records") for cid, g in deals.groupby("company_record_id")}
+
+    review = pairs[pairs.decision.eq("manual_review")]
+    review_items = [{
+        "pair_id": f"{r.record_a}|{r.record_b}",
+        "reason": r.reason,
+        "shared_keys": r.shared_keys.split("+"),
+        "a": record_card(by_id.loc[r.record_a], deals_by_company),
+        "b": record_card(by_id.loc[r.record_b], deals_by_company),
+    } for r in review.itertuples()]
+
+    hier_counts = hierarchy.issue.value_counts()
+    actions = [
+        {"action": "Merge duplicates", "mode": "auto", "count": summary["records_removed_by_auto_merge"], "detail": f"{summary['auto_merge_clusters']} survivors keep deals, contacts and history", "prod": "n8n workflow tam-merge -> Attio merge API, logged"},
+        {"action": "Re-attach contacts", "mode": "auto", "count": int(len(moves)), "detail": "Work-email domain owned by exactly one other account family", "prod": "n8n workflow tam-contacts -> Attio update"},
+    ]
+    for issue, n in hier_counts.items():
+        mode, what = HIERARCHY_ACTIONS.get(issue, ("manual", "Review"))
+        actions.append({"action": f"Hierarchy: {issue.replace('_', ' ')}", "mode": mode, "count": int(n), "detail": what,
+                        "prod": "dbt model + Attio sync" if mode == "auto" else "RevOps review queue"})
+    actions.append({"action": "Review candidate duplicates", "mode": "manual", "count": int(len(review)), "detail": "Customer involved, no SIRET to confirm, or calendar only", "prod": "Review queue in this cockpit -> decisions to Attio"})
+    actions.append({"action": "Attach sites to their group", "mode": "manual", "count": summary["sites_to_attach_or_check"], "detail": "Site shares SIREN/SIRET with a group it is not attached to", "prod": "RevOps review queue"})
+
+    cockpit = {
+        "generated_from": "scripts/tam_dedup.py",
+        "current": current_state(c, contacts),
+        "summary": summary,
+        "duplicate_sources": duplicate_sources(clusters, c),
+        "rules": rules_usage(pairs),
+        "actions": actions,
+        "merge_examples": clusters.head(60).fillna("").to_dict("records"),
+        "review": review_items,
+    }
+    (web / "tam_cockpit.json").write_text(json.dumps(cockpit, ensure_ascii=False, default=str))
+    write_action_pack(web / "tam_action_pack.xlsx", cockpit, clusters, review, hierarchy, moves, pairs)
+
+
+def write_action_pack(path, cockpit, clusters, review, hierarchy, moves, pairs):
+    readme = pd.DataFrame({"Vocca TAM action pack": [
+        "Produced by scripts/tam_dedup.py on the anonymised Attio export of 25 Sep 2026.",
+        "Model: the account is the site (SIRET), rolled up to a group and a network; the legal entity (SIREN) is linked.",
+        "Auto merges: certain duplicates, never a customer, never two owners. Survivor: customer, most deals, most contacts, most complete, oldest.",
+        "Manual review: pairs the rules refuse to merge without a human. Decide in the TAM cockpit, then export.",
+        "Tabs: Summary, Rules, Auto merges, Manual review, Hierarchy, Contact moves, All pairs.",
+    ]})
+    s = cockpit["summary"]
+    summary = pd.DataFrame([
+        ("Accounts before", s["accounts_before"]), ("Accounts after auto merge", s["accounts_after_auto_merge"]),
+        ("Records removed by auto merge", s["records_removed_by_auto_merge"]), ("Pairs for manual review", len(review)),
+        ("Sites to attach or check", s["sites_to_attach_or_check"]), ("Contacts to re-attach", len(moves)),
+    ] + [(f"Hierarchy: {k}", v) for k, v in s["hierarchy_issues"].items()], columns=["Metric", "Value"])
+    rules = pd.DataFrame(cockpit["rules"]["keys"])[["label", "role", "pairs", "auto_merges"]]
+    guards = pd.DataFrame(cockpit["rules"]["guards"])
+    with pd.ExcelWriter(path, engine="openpyxl") as xl:
+        readme.to_excel(xl, sheet_name="README", index=False)
+        summary.to_excel(xl, sheet_name="Summary", index=False)
+        rules.to_excel(xl, sheet_name="Rules", index=False, startrow=0)
+        guards.to_excel(xl, sheet_name="Rules", index=False, startrow=len(rules) + 3)
+        clusters.to_excel(xl, sheet_name="Auto merges", index=False)
+        review.assign(decision_by_reviewer="").to_excel(xl, sheet_name="Manual review", index=False)
+        hierarchy.to_excel(xl, sheet_name="Hierarchy", index=False)
+        moves.to_excel(xl, sheet_name="Contact moves", index=False)
+        pairs.to_excel(xl, sheet_name="All pairs", index=False)
+        for ws in xl.book.worksheets:
+            ws.freeze_panes = "A2"
+            for col in ws.columns:
+                width = max(len(str(cell.value or "")) for cell in col[:200])
+                ws.column_dimensions[col[0].column_letter].width = min(max(10, width + 2), 60)
+
+
+def main(data_dir, out_dir, web_data_dir=None):
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     c, deals, contacts = load(data_dir)
@@ -379,7 +553,10 @@ def main(data_dir, out_dir):
     }
     (out / "summary.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False))
     print(json.dumps(summary, indent=2, ensure_ascii=False))
+    if web_data_dir:
+        write_cockpit(web_data_dir, c, contacts, deals, pairs, clusters, hierarchy, moves, summary)
+        print(f"cockpit feed and action pack -> {web_data_dir}")
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    main(sys.argv[1], sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else None)

@@ -5,3 +5,5 @@ __pycache__/
 .vercel/
 # Working notes in French, superseded by docs/data_findings.md
 constats_dataset.md
+# French working copy of docs/tam_mapping.md, for review only
+tam_mapping_fr.md
