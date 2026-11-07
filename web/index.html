@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Sales Efficiency Dashboard</title>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <div>
+        <p class="eyebrow">Vocca · RevOps case study · Part 1A</p>
+        <h1>Sales efficiency by AE</h1>
+        <p class="context" id="context-line"></p>
+      </div>
+      <div class="filters" role="group" aria-label="Filters">
+        <label>Month <select id="filter-month"></select></label>
+        <label>Market <select id="filter-market"></select></label>
+        <label>Pipeline <select id="filter-pipeline"></select></label>
+      </div>
+    </header>
+
+    <section aria-labelledby="h-team">
+      <h2 id="h-team">Are we on track?</h2>
+      <div class="tiles" id="tiles"></div>
+      <div class="charts-2">
+        <figure class="card">
+          <figcaption>
+            <span class="chart-title">New-logo ARR vs team quota</span>
+            <span class="chart-sub">Last 12 months · quota includes ramp-up of new AEs</span>
+          </figcaption>
+          <div class="legend" id="legend-arr"></div>
+          <div class="chart" id="chart-arr"></div>
+        </figure>
+        <figure class="card">
+          <figcaption>
+            <span class="chart-title">Win rate, 3-month rolling</span>
+            <span class="chart-sub">The gap is the July bulk clean-up of dead deals</span>
+          </figcaption>
+          <div class="legend" id="legend-win"></div>
+          <div class="chart" id="chart-win"></div>
+        </figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-reps">
+      <h2 id="h-reps">Who needs help?</h2>
+      <p class="section-note">AEs in seat during the selected month. Volumes on the month, rates on 3 rolling months, pipe as of the data date. Ramping AEs are greyed out and judged on a ramped quota.</p>
+      <div class="card table-card">
+        <div class="table-scroll">
+          <table class="reps" id="reps-table"></table>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-why">
+      <h2 id="h-why">Why?</h2>
+      <div class="charts-2">
+        <figure class="card">
+          <figcaption>
+            <span class="chart-title">Open pipe health by AE</span>
+            <span class="chart-sub" id="health-sub"></span>
+          </figcaption>
+          <div class="legend" id="legend-health"></div>
+          <div class="chart" id="chart-health"></div>
+        </figure>
+        <div class="card notes">
+          <h3>What I do not trust in the export</h3>
+          <ul id="caveats"></ul>
+          <p class="muted">Full list, counts and handling: DATA_QUALITY tab of the Google Sheet. This page reads the sheet directly: cleaning rules, quota and thresholds are edited there, not here.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Data: anonymised Attio export of 25 Sep 2026. Quotas recalibrated on the median tenured AE (the synthetic quotas put everyone at 150-600%).</p>
+    </footer>
+  </main>
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

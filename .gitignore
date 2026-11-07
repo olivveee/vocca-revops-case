@@ -1,0 +1,7 @@
+.DS_Store
+__pycache__/
+.venv/
+.claude/
+.vercel/
+# Working notes in French, superseded by docs/data_findings.md
+constats_dataset.md

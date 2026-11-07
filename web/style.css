@@ -1,0 +1,253 @@
+/* Vocca brand tokens, taken from vocca.com: brand blue #0073ec, ink #0c1112,
+   greys #666 / #999, light surfaces #fafafa / #efefef, 12-16px radii, pill controls.
+   Their typefaces (Bagoss, PP Neue Montreal) are licensed; Satoshi, also loaded on
+   vocca.com, is used for headings and figures, with the system sans for body text. */
+:root {
+  color-scheme: light;
+  --brand: #0073ec;
+  --brand-soft: #e5f1fd;
+  --page: #fafafa;
+  --surface: #ffffff;
+  --text-primary: #0c1112;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+  --grid: #efefef;
+  --axis: #d6d6d6;
+  --border: rgba(12, 17, 18, 0.08);
+  --series-1: #0073ec;
+  --series-2: #0c1112;
+  --good: #0ca30c;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+  --neutral-chip: #f3f4f5;
+  --input-bg: #ffffff;
+  --font-display: "Satoshi", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 12px;
+  --radius-large: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --brand: #3d93f0;
+    --brand-soft: #0d2a4a;
+    --page: #0c1112;
+    --surface: #151b1d;
+    --text-primary: #f2f4f5;
+    --text-secondary: #b3b8ba;
+    --text-muted: #80878a;
+    --grid: #232a2c;
+    --axis: #343c3f;
+    --border: rgba(255, 255, 255, 0.08);
+    --series-1: #3d93f0;
+    --series-2: #d9dcdd;
+    --neutral-chip: #232a2c;
+    --input-bg: #151b1d;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --brand: #3d93f0;
+  --brand-soft: #0d2a4a;
+  --page: #0c1112;
+  --surface: #151b1d;
+  --text-primary: #f2f4f5;
+  --text-secondary: #b3b8ba;
+  --text-muted: #80878a;
+  --grid: #232a2c;
+  --axis: #343c3f;
+  --border: rgba(255, 255, 255, 0.08);
+  --series-1: #3d93f0;
+  --series-2: #d9dcdd;
+  --neutral-chip: #232a2c;
+  --input-bg: #151b1d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+h1, h2, h3, .tile-value, .chart-title, .rep-name { font-family: var(--font-display); }
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+}
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+h1 { margin: 0; font-size: 34px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+h2 { margin: 40px 0 12px; font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
+h3 { margin: 0 0 8px; font-size: 16px; font-weight: 500; }
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 8px; height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+  vertical-align: 1px;
+}
+
+.context { margin: 6px 0 0; color: var(--text-secondary); font-size: 13px; }
+.section-note { margin: -4px 0 12px; color: var(--text-secondary); font-size: 13px; max-width: 900px; }
+.muted { color: var(--text-muted); font-size: 12px; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 12px; }
+.filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+.filters select {
+  min-width: 140px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+}
+.filters select:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+.card {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-large);
+  padding: 18px;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px;
+}
+.tile { display: flex; flex-direction: column; gap: 4px; }
+.tile-label { color: var(--text-secondary); font-size: 12px; font-weight: 600; }
+.tile-value { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; }
+.tile:first-child { background: var(--brand); border-color: var(--brand); }
+.tile:first-child .tile-label, .tile:first-child .tile-sub { color: rgba(255, 255, 255, 0.82); }
+.tile:first-child .tile-value { color: #ffffff; }
+.tile:first-child .meter { background: rgba(255, 255, 255, 0.25); }
+.tile:first-child .meter > span { background: #ffffff !important; }
+.tile-sub { color: var(--text-secondary); font-size: 12px; }
+.meter { height: 6px; border-radius: 3px; background: var(--grid); overflow: hidden; margin-top: 4px; }
+.meter > span { display: block; height: 100%; border-radius: 3px; }
+
+.charts-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+figcaption { display: flex; flex-direction: column; gap: 2px; margin-bottom: 8px; }
+.chart-title { font-weight: 500; font-size: 15px; }
+.chart-sub { color: var(--text-secondary); font-size: 12px; }
+.chart { width: 100%; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart text { fill: var(--text-muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.chart .label-strong { fill: var(--text-secondary); font-weight: 600; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 6px; font-size: 12px; color: var(--text-secondary); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.swatch.line { height: 2px; width: 14px; border-radius: 1px; }
+
+.table-card { padding: 0; }
+.table-scroll { overflow-x: auto; }
+table.reps { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; min-width: 1100px; }
+.reps th {
+  position: sticky; top: 0;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 10px 10px;
+  border-bottom: 1px solid var(--axis);
+  background: var(--surface);
+  white-space: nowrap;
+}
+.reps th:first-child, .reps td:first-child { text-align: left; }
+.reps th.left, .reps td.left { text-align: left; }
+.reps td { padding: 9px 10px; border-bottom: 1px solid var(--grid); text-align: right; white-space: nowrap; }
+.reps tr.ramping td { color: var(--text-muted); }
+.rep-name { font-weight: 500; font-size: 14px; }
+.rep-meta { display: block; color: var(--text-muted); font-size: 11px; font-weight: 400; }
+
+.pct { display: inline-flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.pct-bar { width: 60px; height: 6px; background: var(--grid); border-radius: 3px; overflow: hidden; }
+.pct-bar > span { display: block; height: 100%; border-radius: 3px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 4px; white-space: normal; min-width: 180px; max-width: 240px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 2px 8px; border-radius: 999px;
+  background: var(--neutral-chip);
+  color: var(--text-primary);
+  font-size: 11px; font-weight: 600;
+}
+.chip i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+
+.notes ul { margin: 0 0 12px; padding-left: 18px; }
+.notes li { margin-bottom: 8px; color: var(--text-secondary); }
+.notes li strong { color: var(--text-primary); }
+
+.tooltip {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10;
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  max-width: 260px;
+}
+.tooltip .tt-title { font-weight: 650; margin-bottom: 2px; }
+.tooltip .tt-row { display: flex; justify-content: space-between; gap: 12px; color: var(--text-secondary); }
+.tooltip .tt-row b { color: var(--text-primary); font-variant-numeric: tabular-nums; }
+
+.footer { margin-top: 36px; color: var(--text-muted); font-size: 12px; }
+
+@media (max-width: 640px) {
+  .page { padding: 20px 16px 40px; }
+  h1 { font-size: 22px; }
+  .filters { width: 100%; }
+  .filters label { flex: 1 1 100px; }
+  .filters select { min-width: 0; width: 100%; }
+  .tile-value { font-size: 22px; }
+}
