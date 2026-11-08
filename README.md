@@ -113,6 +113,6 @@ The exploration scripts take the data folder as argument (`.venv/bin/python 1A_s
 
 ## With a week and a warehouse
 
-- Fix the source, not the report: mandatory `signed_date`, `signed_arr` and `loss_reason` at Closed Won / Lost in Attio, `close_date` no longer used as an expected date, next steps enforced on open deals, group rollouts typed correctly at creation, a generic company identity validated per country.
+- Fix the source, not the report: mandatory `signed_date`, `signed_arr` and `loss_reason` at Closed Won / Lost in Attio, next steps enforced on open deals, group rollouts typed correctly at creation, a generic company identity validated per country.
 - Sync Attio to the warehouse daily; move the `DEALS_CLEAN` rules and `tam_dedup.py` into tested SQL / dbt models; the Sheet or a BI tool reads the final tables.
 - Use stage-change history for a real funnel and cycle time, and calibrate stage weights on observed conversion.
