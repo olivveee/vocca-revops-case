@@ -142,17 +142,20 @@ The TAM is built from the registries, not from the CRM: every site of a target s
 
 ## 5. Recommendations
 
-| Priority | What | Why first | Effort |
-|---|---|---|---|
-| **P0 · Stop the bleeding** | Generic identity in Attio (`country`, `company_number`, type), unique and validated; automations switched to upsert; creation lookup | Otherwise every clean-up is undone within weeks | Week 1 |
-| **P0 · Fix what breaks reporting** | 117 automatic merges; account and relationship types set; countries set; investors, partners and media out of TAM and SAM views; the 3 cycles and 17 impossible parents | Revenue, pipeline and TAM numbers are wrong today | Weeks 1-2 |
-| **P1 · Master record** | Warehouse models joining Attio, Hyperline and the French and US registries into the generic model; sync to Attio | One source of truth, refreshed, with history | Weeks 2-5 |
-| **P1 · Clear the queues** | 136 review pairs, 38 sites to attach, 60 groups to create, 47 accounts to reassign to the US team, 247 contacts | Small enough to finish in a few days with Sales | Weeks 2-3, about 3 days of work |
-| **P1 · US identity** | Find the NPI of the 175 US accounts in NPPES (167 have no number today); build their groups (dental groups first) | The US base is small: fixing it now is cheap, after 1,000 accounts it is not | Weeks 3-4 |
-| **P2 · Size and score the TAM per market** | Full universe from registries by specialty and structure type; score; flag "not in Attio" | Feeds territories and outbound for the 3x plan, starting with the US | Weeks 5-7 |
-| **P3 · Run it** | Data-quality dashboard per market, weekly review, warehouse tests | Keeps it clean without heroics | Ongoing |
+Deadlines follow dependencies, not the amount of work: most items take RevOps a few days, and the elapsed time comes from who else is needed.
 
-**Rough plan: 6 to 8 weeks for one person**, with visible value in the first two weeks.
+| When | Workstream | What | RevOps effort | Depends on |
+|---|---|---|---|---|
+| **Week 1** | P0 · Fix the numbers | 117 automatic merges; 65 account types; 118 countries; investors, partners and media out of TAM and SAM views; 3 cycles and 17 impossible parents | 2-3 days | Nobody |
+| **Week 1** | P0 · Close the tap | Email sync and telephony stop creating companies; enrichment writes to contacts only (configuration, not development) | 1 day | Tool admins |
+| **Weeks 1-3** | P0 · Stop the bleeding for good | Generic identity in Attio (`country`, `company_number`, type), unique and validated; n8n and enrichment workflows switched to upsert; creation lookup | 3-5 days | Tool owners |
+| **Weeks 2-4** | P1 · Clear the queues with Sales | 136 review pairs, 73 hierarchy errors, 60 groups to create, 47 accounts to reassign to the US team, 450 contacts without account and 244 on the wrong one; RevOps prepares each decision, about 30 minutes per AE per week | 1 day a week | Sales time |
+| **Weeks 2-3** | P1 · US identity | Find the NPI of the 175 US accounts in NPPES (167 have no number today); build their groups, dental groups first | 2-3 days | Nobody |
+| **Weeks 2-3** | P1 · TAM map v1 | One-shot extract from the registries by specialty and structure type, scored, flagged "in Attio / not in Attio", US first | 1 week | Nobody |
+| **Months 2-3** | P2 · Master record | The one-shot becomes a daily recompute in the warehouse, with tests and the sync to Attio | To be scoped | Data team |
+| **Ongoing** | P3 · Run it | Data-quality dashboard per market, weekly review | 2 hours a week | RevOps |
+
+**Correct numbers in week 1, a first TAM map in week 3.** The warehouse then industrialises what was proven by hand; it is not needed to produce the first map.
 
 ## 6. With a week and a warehouse
 

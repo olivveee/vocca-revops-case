@@ -156,25 +156,43 @@ function slides(d) {
 
     `<section class="slide">
       <p class="kicker">4 · Recommandations</p>
-      <h2>D'abord arrêter l'hémorragie, ensuite construire le master</h2>
+      <h2>Des chiffres justes en semaine 1, le TAM en semaine 3</h2>
       <div class="body">
-        <div class="roadmap">
+        <div class="roadmap tight">
           <div></div>${[1, 2, 3, 4, 5, 6, 7, 8].map((w) => `<div class="wk">S${w}</div>`).join("")}
-          <div class="label"><b>P0</b>Arrêter l'hémorragie</div><div class="bar" style="grid-column: span 1">Identité + MAJ</div><div style="grid-column: span 7"></div>
-          <div class="label"><b>P0</b>Corriger le reporting</div><div class="bar" style="grid-column: span 2">${fmt.format(s.records_removed_by_auto_merge)} fusions · types de compte</div><div style="grid-column: span 6"></div>
-          <div class="label"><b>P1</b>Master record</div><div></div><div class="bar p1" style="grid-column: span 4">Modèles warehouse + synchro vers Attio</div><div style="grid-column: span 3"></div>
-          <div class="label"><b>P1</b>Files · identité US</div><div></div><div class="bar p1" style="grid-column: span 3">${fmt.format(d.review.length)} revues · NPI des comptes US via NPPES</div><div style="grid-column: span 4"></div>
-          <div class="label"><b>P2</b>Dimensionner le TAM</div><div style="grid-column: span 4"></div><div class="bar p2" style="grid-column: span 3">Registres par marché, US d'abord</div><div></div>
-          <div class="label"><b>P3</b>Faire tourner</div><div style="grid-column: span 2"></div><div class="bar p3" style="grid-column: span 6">Indicateurs et revue hebdo, tests warehouse</div>
+          ${roadmapRows(d, hi).join("")}
         </div>
         <div class="closing">
-          <div class="big">6 à 8 semaines, une personne<span>Valeur visible dès la semaine 2 : doublons fusionnés, TAM, SAM et hors marché séparés, comptes US avec leur équipe.</span></div>
+          <div class="big">Les délais suivent les dépendances, pas le volume<span>Le warehouse industrialise ensuite ce qu'on a prouvé à la main.</span></div>
           <a class="cta" href="tam.html">Ouvrir le cockpit TAM →</a>
         </div>
       </div>
       ${mark(4)}
     </section>`,
   ];
+}
+
+// One roadmap row per workstream: priority and dependency on the left, the bar on the weeks it runs.
+function roadmapRows(d, hi) {
+  const s = d.summary;
+  const rows = [
+    { p: "P0", dep: "aucune dépendance", name: "Corriger les chiffres", start: 1, span: 1, bar: `${fmt.format(s.records_removed_by_auto_merge)} fusions`, note: `+ ${fmt.format(hi.missing_type || 0)} types, ${fmt.format((s.market_issues || {}).country_inferred || 0)} pays, hors marché sortis des vues, ${fmt.format(hi.self_parent || 0)} boucles` },
+    { p: "P0", dep: "admin des outils", name: "Fermer le robinet", start: 1, span: 1, bar: "Config", note: "synchro email et téléphonie ne créent plus de sociétés" },
+    { p: "P0", dep: "propriétaires des outils", name: "Arrêter l'hémorragie", start: 1, span: 3, bar: "Identité générique · unicité · n8n en mise à jour" },
+    { p: "P1", dep: "temps des Sales", name: "Vider les files", start: 2, span: 3, cls: "p1", bar: `${fmt.format(d.review.length)} paires · ${fmt.format(s.hierarchy_structure_errors)} hiérarchies · contacts` },
+    { p: "P1", dep: "aucune dépendance", name: "Identité US", start: 2, span: 2, cls: "p1", bar: "NPI via NPPES", note: `${fmt.format((s.markets.US || {}).accounts || 0)} comptes` },
+    { p: "P1", dep: "aucune dépendance", name: "Carte du TAM v1", start: 2, span: 2, cls: "p1", bar: "Registres, scorée", note: "US d'abord, « dans Attio / pas dans Attio »" },
+    { p: "P2", dep: "équipe data", name: "Master record", start: 5, span: 4, cls: "p2", bar: "Warehouse : recalcul quotidien, tests → mois 3" },
+    { p: "P3", dep: "RevOps, 2 h / semaine", name: "Faire tourner", start: 2, span: 7, cls: "p3", bar: "Indicateurs qualité et revue hebdo" },
+  ];
+  return rows.map((r) => {
+    const before = r.start - 1;
+    const after = 8 - before - r.span;
+    return `<div class="label"><b>${r.p} · ${r.dep}</b>${r.name}</div>`
+      + (before ? `<div style="grid-column: span ${before}"></div>` : "")
+      + `<div class="bar ${r.cls || ""}" style="grid-column: span ${r.span}">${r.bar}</div>`
+      + (after ? `<div class="roadmap-note" style="grid-column: span ${after}">${r.note || ""}</div>` : "");
+  });
 }
 
 // ---------- navigation ----------
