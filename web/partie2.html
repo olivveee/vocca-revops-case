@@ -249,13 +249,70 @@ ul.clean li span { color: var(--text-secondary); }
   <span class="footer">Case Senior RevOps · Partie 2 · 4 / 4</span>
 </section>
 
+<nav class="deck-nav" aria-label="Navigation">
+  <button type="button" id="prev" aria-label="Slide précédente">←</button>
+  <span id="counter" aria-live="polite"></span>
+  <button type="button" id="next" aria-label="Slide suivante">→</button>
+  <a href="partie2.pdf" class="deck-link">PDF</a>
+  <button type="button" id="fullscreen" aria-label="Plein écran">⤢</button>
+</nav>
+<style>
+/* On screen: one slide at a time, like the Part 1 deck. Print keeps every slide, one per page. */
+@media screen {
+  body { min-height: 100vh; display: grid; place-items: center; overflow: hidden; }
+  .slide { display: none; margin: 0; }
+  .slide.active { display: flex; }
+}
+@media print { .deck-nav { display: none; } }
+.deck-nav { position: fixed; bottom: 12px; right: 16px; display: flex; gap: 6px; align-items: center; background: rgba(12, 17, 18, 0.82); padding: 6px 8px; border-radius: 999px; color: #fff; font-size: 13px; z-index: 5; font-family: var(--font-body); }
+.deck-nav button, .deck-nav a { background: none; border: 0; color: #fff; font: inherit; cursor: pointer; padding: 4px 10px; border-radius: 999px; text-decoration: none; }
+.deck-nav button:hover, .deck-nav a:hover, .deck-nav button:focus-visible, .deck-nav a:focus-visible { background: rgba(255, 255, 255, 0.15); outline: none; }
+.deck-nav #counter { min-width: 40px; text-align: center; font-variant-numeric: tabular-nums; }
+:fullscreen .deck-nav { opacity: 0.15; }
+:fullscreen .deck-nav:hover { opacity: 1; }
+</style>
 <script>
-// Slides are fixed 1600x900 for the PDF export; on screen, scale them to the window width.
-const fit = () => { document.body.style.zoom = Math.min(1, (window.innerWidth - 16) / 1600); };
+"use strict";
+// Same controls as slides.html: arrows, PageUp/PageDown, space, Home/End, f for fullscreen, #n in the URL.
+const all = document.querySelectorAll(".slide");
+const total = all.length;
+let current = 0;
+
+// Slides are fixed 1600x900 for the PDF export; on screen, scale the slide to fit the window.
+function fit() {
+  const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+  all.forEach((el) => { el.style.zoom = scale; });
+}
+function show(i) {
+  current = Math.max(0, Math.min(total - 1, i));
+  all.forEach((el, n) => el.classList.toggle("active", n === current));
+  document.getElementById("counter").textContent = `${current + 1} / ${total}`;
+  history.replaceState(null, "", `#${current + 1}`);
+}
+document.getElementById("prev").addEventListener("click", () => show(current - 1));
+document.getElementById("next").addEventListener("click", () => show(current + 1));
+document.getElementById("fullscreen").addEventListener("click", () => {
+  if (document.fullscreenElement) document.exitFullscreen();
+  else document.documentElement.requestFullscreen?.();
+});
+document.addEventListener("keydown", (e) => {
+  if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); show(current + 1); }
+  if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); show(current - 1); }
+  if (e.key === "Home") show(0);
+  if (e.key === "End") show(total - 1);
+  if (e.key === "f") document.getElementById("fullscreen").click();
+});
+window.addEventListener("hashchange", () => {
+  const n = parseInt(location.hash.slice(1), 10);
+  if (Number.isFinite(n) && n - 1 !== current) show(n - 1);
+});
 window.addEventListener("resize", fit);
-window.addEventListener("beforeprint", () => { document.body.style.zoom = 1; });
+window.addEventListener("beforeprint", () => all.forEach((el) => { el.style.zoom = 1; }));
 window.addEventListener("afterprint", fit);
+
 fit();
+const fromHash = parseInt(location.hash.slice(1), 10);
+show(Number.isFinite(fromHash) ? fromHash - 1 : 0);
 </script>
 </body>
 </html>

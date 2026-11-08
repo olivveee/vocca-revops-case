@@ -1,6 +1,6 @@
 # Vocca · Senior RevOps case study
 
-Part 1 of the Vocca Senior RevOps case: **1A**, a sales efficiency dashboard for the Head of Sales, and **1B**, mapping the TAM. Everything below runs on the anonymised Attio export provided for the case (`data/`).
+The Vocca Senior RevOps case. Part 1: **1A**, a sales efficiency dashboard for the Head of Sales, and **1B**, mapping the TAM, both run on the anonymised Attio export provided for the case (`data/`). Part 2: **a project I ran**, qualified prospect lists delivered to every sales rep.
 
 ## Deliverables
 
@@ -35,7 +35,11 @@ Part 1 of the Vocca Senior RevOps case: **1A**, a sales efficiency dashboard for
 
 | What | Link |
 | --- | --- |
-| **Support slides** (4, in French: qualified prospect lists delivered to every sales rep) | [Open the slides](https://vocca-revops-case.vercel.app/partie2.html) · [PDF](https://vocca-revops-case.vercel.app/partie2.pdf) |
+| **Slides** (4, in French, arrow keys to navigate) | [Open the slides](https://vocca-revops-case.vercel.app/partie2.html) · [PDF](https://vocca-revops-case.vercel.app/partie2.pdf) |
+| ↳ Why it existed: a score nobody used, a team going from 15 to 70+ reps | [Slide 1](https://vocca-revops-case.vercel.app/partie2.html#1) |
+| ↳ What I built: find, exclude, qualify, deliver; and why these choices | [Slide 2](https://vocca-revops-case.vercel.app/partie2.html#2) |
+| ↳ Adoption: fewer fields, the ones reps read; built, co-built, bought | [Slide 3](https://vocca-revops-case.vercel.app/partie2.html#3) |
+| ↳ What broke, what is in progress, what I would do differently | [Slide 4](https://vocca-revops-case.vercel.app/partie2.html#4) |
 
 Part 3 is live, with no material.
 
@@ -55,6 +59,14 @@ Choices worth knowing:
 - **Quota:** the synthetic quotas of the team file put every tenured AE at about 170-480%, so by default the quota is recalculated: median monthly new-logo ARR of tenured AEs over the last 6 complete months, with a 25/50/75/100% ramp-up. `PARAMS` > Quota used switches back to the provided quotas to compare, and a top-down target typed in `PARAMS` overrides both.
 - **One reporting currency, USD by default:** deals come in EUR (1,469) or USD (37). The EUR→USD rate is fixed in `PARAMS` (1.1145, rate of 8 Nov 2026) so the Sheet and the web view match; clearing it switches to the live Google Finance rate in the Sheet.
 - **Left out on purpose:** sales cycle length (deals are created late, often at signature), the AEs' closing probability (half empty, uncalibrated), activity volume (not in the export), SDR metrics (demo attribution is broken).
+
+## 2 in short
+
+At a restaurant-payments scale-up, the restaurant base was enriched for RevOps but not built to tell reps whom to call: its score rewarded review volume, so a chain fast-food ranked gold and a starred restaurant bronze. As the team grew to 70+ reps, including 15 to 20 SDRs, I built a flow that delivers 200 qualified accounts per AE each month and per SDR every two weeks.
+
+- **Rules before AI:** obvious non-fits are excluded by rule, so the AI is only paid for on accounts that need judgement, and every AI verdict carries its reason so an SDR can challenge it.
+- **Adoption came from cutting:** reps ignored most AI fields; what stayed is nearby customers to cite, why it fits in three bullets, and the segment.
+- **What broke:** the AI confidently qualified accounts that were not restaurants, because the scraped input was wrong. The work now under way makes the data deterministic first (legal registry, Michelin Guide, a reference table of categories) and keeps the AI for what no source can say.
 
 ## How the pieces fit
 
@@ -84,7 +96,7 @@ data/  ->  scripts/tam_dedup.py  ->  out/tam/*.csv
 | `scripts/tam_dedup.py` | 1B work on the file: deduplication, hierarchy audit, contact re-attachment, work queues |
 | `scripts/profile.py`, `checks_*.py`, `metrics_test.py` | Exploration scripts used to audit the export and test candidate metrics |
 | `out/tam/` | Output of `tam_dedup.py`: merge pairs and clusters, hierarchy and market issues, contact moves, summary |
-| `web/` | Static site (HTML/CSS/JS, no build step): 1A web view (`index.html`), TAM slides (`slides.html`), TAM cockpit (`tam.html`) |
+| `web/` | Static site (HTML/CSS/JS, no build step): 1A web view (`index.html`), TAM slides (`slides.html`), TAM cockpit (`tam.html`), Part 2 slides and PDF (`partie2.html`, `partie2.pdf`) |
 
 ## Running it
 
