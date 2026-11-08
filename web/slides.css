@@ -59,10 +59,10 @@
 .identity td { padding: 0.65cqw 0.6cqw; border-bottom: 1px solid var(--grid); }
 .identity code { font-size: 1.05cqw; background: var(--brand-soft); color: var(--brand); padding: 0.1cqw 0.5cqw; border-radius: 0.4cqw; }
 .note { font-size: 1.1cqw; color: var(--text-secondary); margin: 1cqw 0 0; }
-.rules { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1cqw; margin-top: 0.7cqw; }
-.rule { display: flex; gap: 0.8cqw; align-items: flex-start; font-size: 1.2cqw; background: var(--surface); border: 1px solid var(--border); border-radius: 1cqw; padding: 1cqw 1.2cqw; }
+.rules { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5cqw 2.4cqw; margin-top: 0.7cqw; }
+.rule { display: flex; gap: 0.8cqw; align-items: flex-start; }
 .rule .x { flex: none; width: 1.8cqw; height: 1.8cqw; border-radius: 50%; background: #fdecec; color: var(--critical); display: grid; place-items: center; font-weight: 700; font-size: 1.1cqw; }
-.rule span { color: var(--text-secondary); display: block; font-size: 1.02cqw; margin-top: 0.2cqw; }
+.rule p { margin: 0; font-size: 1.12cqw; line-height: 1.35; color: var(--text-primary); }
 
 /* Slide 3: build flow */
 .flow { display: grid; grid-template-columns: 1fr 0.12fr 1.15fr 0.12fr 1fr; align-items: stretch; }

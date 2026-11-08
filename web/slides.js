@@ -95,11 +95,11 @@ function slides(d) {
         </div>
         <p class="rules-title">Jamais fusionné automatiquement</p>
         <div class="rules">
-          <div class="rule"><span class="x">✕</span><div><b>Deux numéros validés différents</b><span>deux sites distincts, reliés à leur entité légale. Même agenda ou adresse : revue</span></div></div>
-          <div class="rule"><span class="x">✕</span><div><b>Même numéro, deux codes postaux</b><span>un site est un lieu : un numéro a été recopié. Revue</span></div></div>
-          <div class="rule"><span class="x">✕</span><div><b>Un client ou deux commerciaux</b><span>fusionner déplace des factures ou un propriétaire : un humain décide</span></div></div>
-          <div class="rule"><span class="x">✕</span><div><b>Un seul indice ou pas de type</b><span>agenda seul, nom + code postal sans numéro, type manquant : revue</span></div></div>
-          <div class="rule"><span class="x">✕</span><div><b>Un site et un groupe</b><span>même SIREN ou SIRET : on rattache le site au groupe, ce n'est pas un doublon</span></div></div>
+          <div class="rule"><span class="x">✕</span><p>Deux SIRET différents sont deux sites distincts ; s'ils ont le même agenda ou la même adresse, un humain vérifie.</p></div>
+          <div class="rule"><span class="x">✕</span><p>Un même SIRET dans deux codes postaux est un numéro recopié par erreur : un humain vérifie.</p></div>
+          <div class="rule"><span class="x">✕</span><p>Si un client ou deux commerciaux sont concernés, un humain décide : la fusion déplacerait des factures ou un portefeuille.</p></div>
+          <div class="rule"><span class="x">✕</span><p>Un seul indice (même agenda, ou même nom et code postal sans SIRET) ou un compte sans type ne suffit pas.</p></div>
+          <div class="rule"><span class="x">✕</span><p>Un site et un groupe qui partagent un SIREN ou un SIRET ne sont pas des doublons : on rattache le site au groupe.</p></div>
         </div>
       </div>
       ${mark(2)}
