@@ -49,6 +49,12 @@ const monthsBetween = (from, to) => Array.from({ length: monthDiff(from, to) + 1
 
 // ---------- calculations ----------
 const sum = (arr, f) => arr.reduce((s, x) => s + (f(x) || 0), 0);
+const median = (values) => {
+  if (!values.length) return null;
+  const v = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(v.length / 2);
+  return v.length % 2 ? v[mid] : (v[mid - 1] + v[mid]) / 2;
+};
 
 function periodRange() {
   const to = state.month;
@@ -173,6 +179,7 @@ function compute() {
       forecast: sum(inStage, (d) => d.forecast),
       pipe: sum(inStage, (d) => d.weightedHealthy),
       unhealthyShare: inStage.length ? inStage.filter((d) => d.unhealthy).length / inStage.length : null,
+      medianAge: median(inStage.map((d) => d.age).filter((a) => a !== null)),
     };
   });
 
@@ -328,17 +335,18 @@ function renderTiles(model) {
 function renderPipe(model) {
   const max = Math.max(1, ...model.stages.map((s) => s.deals));
   el("pipe").innerHTML = `
-    <div class="hbar-head"><span>Stage</span><span>Open deals</span><span class="num">Weighted pipe</span><span class="num">Unhealthy</span></div>
+    <div class="hbar-head"><span>Stage</span><span>Open deals</span><span class="num">Healthy pipe</span><span class="num">Unhealthy</span><span class="num">Median age</span></div>
     ${model.stages.map((s, i) => `
       <div class="hbar-row" data-tip="${i}">
         <span class="hbar-label">${esc(s.stage)}</span>
         <span class="hbar-track"><span style="width:${(s.deals / max) * 100}%"></span><b>${s.deals}</b></span>
         <span class="num">${money(s.pipe)}</span>
         <span class="num ${s.unhealthyShare > state.data.params.flags.unhealthyShare ? "bad" : ""}">${pct(s.unhealthyShare)}</span>
+        <span class="num ${s.medianAge > state.data.params.staleDays ? "bad" : ""}">${s.medianAge === null ? "–" : `${Math.round(s.medianAge)} d`}</span>
       </div>`).join("")}`;
   bindTooltips(el("pipe"), (i) => {
     const s = model.stages[Number(i)];
-    return `<div class="tt-title">${esc(s.stage)}</div>${ttRow("Open deals", s.deals)}${ttRow("Forecast ARR (AE)", money(s.forecast))}${ttRow("Weighted healthy pipe", money(s.pipe))}${ttRow("Unhealthy share", pct(s.unhealthyShare))}`;
+    return `<div class="tt-title">${esc(s.stage)}</div>${ttRow("Open deals", s.deals)}${ttRow("Forecast ARR (AE)", money(s.forecast))}${ttRow("Weighted healthy pipe", money(s.pipe))}${ttRow("Unhealthy share", pct(s.unhealthyShare))}${ttRow("Median age", s.medianAge === null ? "–" : `${Math.round(s.medianAge)} days`)}`;
   });
 }
 
@@ -499,6 +507,7 @@ async function loadFromSheet() {
       forecast: flag(r.forecast_outlier) ? null : num(r.forecast_amt),
       reachedDemo: flag(r.reached_demo),
       unhealthy: flag(r.is_sick),
+      age: num(r.open_age_days),
       weightedHealthy: num(r.weighted_pipe_healthy) || 0,
     })),
   };

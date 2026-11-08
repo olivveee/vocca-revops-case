@@ -8,7 +8,7 @@
   <title>Sales Efficiency Dashboard</title>
   <link rel="preconnect" href="https://api.fontshare.com">
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap">
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
   <link rel="stylesheet" href="tam.css?v=2">
 </head>
 <body>
@@ -47,9 +47,9 @@
         <figure class="card">
           <figcaption>
             <span class="chart-title">Pipe in progress</span>
-            <span class="chart-sub">Open deals as of the data date · unhealthy = older than 90 days, or next step / expected close more than 30 days late</span>
+            <span class="chart-sub">Open deals as of the data date · unhealthy = older than 90 days, or next step / expected close more than 30 days late · healthy pipe = the other open deals, weighted by stage</span>
           </figcaption>
-          <div class="hbar" id="pipe"></div>
+          <div class="hbar five" id="pipe"></div>
         </figure>
       </div>
     </section>
@@ -93,6 +93,6 @@
   </main>
   <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
   <script src="config.js"></script>
-  <script src="app.js?v=9"></script>
+  <script src="app.js?v=10"></script>
 </body>
 </html>

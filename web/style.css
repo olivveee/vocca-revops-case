@@ -212,6 +212,7 @@ table.reps.compact { min-width: 0; }
 .hbar-head, .hbar-row { display: grid; grid-template-columns: minmax(96px, 150px) minmax(0, 1fr) 76px 64px; gap: 10px; align-items: center; }
 .hbar-head { font-size: 11px; font-weight: 600; color: var(--text-secondary); padding-bottom: 6px; border-bottom: 1px solid var(--axis); }
 .hbar-row { padding: 7px 0; border-bottom: 1px solid var(--grid); }
+.hbar.five .hbar-head, .hbar.five .hbar-row { grid-template-columns: minmax(96px, 140px) minmax(0, 1fr) 76px 64px 64px; }
 .hbar-row:hover { background: var(--brand-soft); }
 .hbar-row.grouped .hbar-label { color: var(--text-muted); font-style: italic; }
 .hbar-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -236,4 +237,5 @@ table.reps.compact { min-width: 0; }
   .filters select { min-width: 0; width: 100%; }
   .tile-value { font-size: 22px; }
   .hbar-head, .hbar-row { grid-template-columns: minmax(80px, 110px) minmax(0, 1fr) 56px 40px; gap: 6px; }
+  .hbar.five .hbar-head, .hbar.five .hbar-row { grid-template-columns: minmax(70px, 96px) minmax(0, 1fr) 54px 40px 44px; }
 }
