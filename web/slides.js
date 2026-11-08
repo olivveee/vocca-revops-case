@@ -111,12 +111,12 @@ function slides(d) {
           <div class="stage">
             <span class="tag">Sources, par marché</span>
             <div class="market"><b>France</b><div class="chips"><span class="chip-s">SIRENE</span><span class="chip-s">RPPS</span><span class="chip-s">FINESS</span><span class="chip-s">pages Doctolib</span></div></div>
-            <div class="market"><b>États-Unis</b><div class="chips"><span class="chip-s">NPPES (NPI)</span><span class="chip-s">données CMS</span><span class="chip-s">ordres des États</span></div></div>
+            <div class="market"><b>États-Unis</b><div class="chips"><span class="chip-s">NPPES (NPI)</span><span class="chip-s">CMS (Medicare)</span><span class="chip-s">ordres des États</span></div></div>
             <div class="market"><b>Interne</b><div class="chips"><span class="chip-s">Attio</span><span class="chip-s">Hyperline</span><span class="chip-s">enrichissement (contacts seulement)</span></div></div>
           </div>
           <div class="arrow">→</div>
           <div class="stage core">
-            <span class="tag">Warehouse · chaque nuit</span>
+            <span class="tag">Warehouse · recalcul quotidien</span>
             <h3>Le TAM : tous les sites du marché, scorés</h3>
             <ol class="steps">
               <li><i>1</i>Normaliser dans le modèle générique</li>
