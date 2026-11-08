@@ -16,18 +16,18 @@ const el = (id) => document.getElementById(id);
 
 // One entry per work queue. `mode` says who acts: the script, a person, or a decision to take with Sales.
 const QUEUES = [
-  { code: "dup_certain", section: "Identity and duplicates", label: "Certain duplicates", hint: "same validated number, or calendar confirmed by a second key", mode: "auto", owner: "Script",
-    action: "Merge into the survivor", rule: "Same validated company number and type, or same calendar plus a second key, or same SIREN + name + postcode. Never a customer, never two owners. Survivor: customer, most deals, most contacts, most complete, oldest." },
-  { code: "dup_review", section: "Identity and duplicates", label: "Pairs to decide", hint: "customer involved, two numbers with the same calendar or address, no SIRET to confirm", mode: "manual", owner: "Sales + RevOps", unit: "pairs",
-    action: "Decide in the pair review", rule: "A merge that moves invoices, ARR or ownership is signed off by a person. Two different validated numbers with the same calendar or address usually mean one number is wrong. Same name + postcode without a number, or a shared calendar alone, is a strong hint, not proof." },
+  { code: "dup_certain", section: "Identity and duplicates", label: "Certain duplicates", hint: "same validated number or calendar, same postcode", mode: "auto", owner: "Script",
+    action: "Merge into the survivor", rule: "Same validated company number and type, or same calendar plus a second key, or same SIREN + name + postcode, and always the same postcode. Never a customer, never two salespeople. Survivor: customer, most deals, most contacts, most complete, oldest." },
+  { code: "dup_review", section: "Identity and duplicates", label: "Pairs to decide", hint: "customer involved, same number in two postcodes, two numbers at one address, two salespeople", mode: "manual", owner: "Sales + RevOps", unit: "pairs",
+    action: "Decide in the pair review", rule: "A merge that moves invoices, ARR or ownership is signed off by a person. Two different validated numbers with the same calendar or address, or the same number in two postcodes, usually mean one number is wrong. Same name + postcode without a number, or a shared calendar alone, is a strong hint, not proof." },
   { code: "no_identity", section: "Identity and duplicates", label: "No validated identity", hint: "SIREN typed instead of SIRET, empty, or no US number", mode: "auto", owner: "Registry lookup",
     action: "Look up the SIRET in SIRENE, the NPI in NPPES", rule: "A number counts as identity only once it passes its type's validation (SIRET checksum, NPI check digit). Until then it is stored but ignored by matching." },
   { code: "missing_type", section: "Structure", label: "Accounts without type", hint: "neither site, group nor network", mode: "manual", owner: "RevOps",
     action: "Set site, group or network", rule: "Every account carries a type; without it the model cannot place the record or decide between merging and attaching." },
   { code: "hierarchy_error", section: "Structure", label: "Hierarchy errors", hint: "practices with several sites, attached to a practice, loops", mode: "manual", owner: "RevOps",
     action: "Re-type or re-attach", rule: "A site sits under a group or a network; a group under a group or a network. A group under a group is valid (sub-group); the top of the chain is the ultimate parent." },
-  { code: "site_to_attach", section: "Structure", label: "Sites to attach to their group", hint: "site shares SIREN or SIRET with a group", mode: "manual", owner: "RevOps",
-    action: "Attach the site, do not merge", rule: "A site and a group sharing an identifier are never merged: it is a missing hierarchy link or the group's head-office site." },
+  { code: "site_to_attach", section: "Structure", label: "Sites to attach to their group", hint: "shares SIREN or SIRET with a group, or its contacts use the group's email domain", mode: "manual", owner: "RevOps",
+    action: "Attach the site, do not merge", rule: "A site and a group sharing an identifier are never merged: it is a missing hierarchy link or the group's head-office site. Contacts of a site that use the network's email domain stay on the site: the site is attached to the network." },
   { code: "group_missing", section: "Structure", label: "Multi-site organisations without a group", hint: "one website domain across several cities", mode: "manual", owner: "RevOps",
     action: "Create the group and attach its sites", rule: "A domain shared across cities is a group to create, not a duplicate." },
   { code: "structure_question", section: "Structure", label: "Structure questions", hint: "empty groups, single-site groups", mode: "decide", owner: "Sales",
@@ -43,7 +43,7 @@ const QUEUES = [
   { code: "contact_no_account", section: "Contacts", dataset: "contacts", label: "Contacts without an account", hint: "created by telephony, email sync, enrichment", mode: "manual", owner: "RevOps",
     action: "Attach by email domain, else review", rule: "A tool that creates a contact must attach it to an account found by lookup; otherwise it does not create it." },
   { code: "contact_wrong_account", section: "Contacts", dataset: "contacts", label: "Contacts on the wrong account", hint: "work-email domain owned by another account family", mode: "auto", owner: "Script",
-    action: "Re-attach by email domain", rule: "When a work-email domain belongs to exactly one account family, the contact moves there." },
+    action: "Re-attach by email domain", rule: "When a work-email domain belongs to exactly one account family, the contact moves there; if that account is the network above the contact's site, the site is attached instead and the contact stays." },
 ];
 const QUEUE = Object.fromEntries(QUEUES.map((q) => [q.code, q]));
 const MODE_LABEL = { auto: "Automatic", manual: "Manual", decide: "To decide" };

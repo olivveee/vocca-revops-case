@@ -56,7 +56,7 @@ function slides(d) {
         <div class="problems four">
           <div class="problem">${icon("id")}<span class="num">${noId} %</span><span class="what">Pas d'identité fiable</span><span class="why">pas de SIRET validé en France ; aux US, ${fmt.format(us.without_company_number || 0)} comptes sur ${us.accounts} sans aucun numéro</span></div>
           <div class="problem">${icon("copy")}<span class="num">${fmt.format(s.records_removed_by_auto_merge)}</span><span class="what">Doublons certains</span><span class="why">+ ${fmt.format(d.review.length)} paires à faire valider par un humain</span></div>
-          <div class="problem">${icon("tree")}<span class="num">${fmt.format(s.hierarchy_structure_errors)}</span><span class="what">Hiérarchie incohérente</span><span class="why">${fmt.format(hi.practice_looks_like_group || 0)} cabinets multi-sites, ${fmt.format(underPractice)} rattachés à un cabinet, ${fmt.format(hi.self_parent || 0)} boucles : quelle structure pour déployer un groupe ?</span></div>
+          <div class="problem">${icon("tree")}<span class="num">${fmt.format(s.hierarchy_structure_errors)}</span><span class="what">Hiérarchie incohérente</span><span class="why">${fmt.format(hi.practice_looks_like_group || 0)} cabinets multi-sites, ${fmt.format(underPractice)} rattachés à un cabinet, ${fmt.format(hi.outside_its_group || 0)} sites hors de leur réseau, ${fmt.format(hi.self_parent || 0)} boucles : quelle structure pour déployer un groupe ?</span></div>
           <div class="problem">${icon("person")}<span class="num">${fmt.format(c.contacts_without_company)}</span><span class="what">Contacts rattachés à aucun compte</span><span class="why">+ ${fmt.format(wrongAccount)} sur le mauvais compte · aucune règle de création</span></div>
         </div>
         <div class="takeaway">Ce ne sont pas les équipes, ce sont les outils : <b>branchés au CRM mais pas orchestrés</b>, sans règle de création, ils créent au lieu de mettre à jour. Ils sont à l'origine de <b>${Math.round((dupAuto / dupTotal) * 100)} % des doublons</b> et de <b>${noCompanyByTool} % des contacts sans compte</b> (enrichissement, n8n, synchro email, téléphonie).</div>
@@ -95,8 +95,9 @@ function slides(d) {
         </div>
         <p class="rules-title">Jamais fusionné automatiquement</p>
         <div class="rules">
-          <div class="rule"><span class="x">✕</span><div><b>Deux numéros validés différents</b><span>deux sites d'une même société : on relie. Même agenda ou même adresse : revue, un numéro est sans doute faux</span></div></div>
-          <div class="rule"><span class="x">✕</span><div><b>Un client ou une attribution</b><span>fusionner déplace des factures ou un propriétaire : un humain décide</span></div></div>
+          <div class="rule"><span class="x">✕</span><div><b>Deux numéros validés différents</b><span>deux sites d'une même société : on relie. Même agenda ou adresse : revue</span></div></div>
+          <div class="rule"><span class="x">✕</span><div><b>Même numéro, deux codes postaux</b><span>un site est un lieu : un numéro a été recopié. Revue</span></div></div>
+          <div class="rule"><span class="x">✕</span><div><b>Un client ou deux commerciaux</b><span>fusionner déplace des factures ou un propriétaire : un humain décide</span></div></div>
           <div class="rule"><span class="x">✕</span><div><b>Un site et un groupe</b><span>même SIREN ou SIRET : on rattache le site au groupe, ce n'est pas un doublon</span></div></div>
         </div>
       </div>
@@ -138,7 +139,7 @@ function slides(d) {
             <h3>Propre par construction</h3>
             <ul>
               <li>Numéro d'entreprise <b>unique et validé</b> par pays</li>
-              <li>Les automatisations <b>mettent à jour</b>, sans jamais insérer</li>
+              <li>Les automatisations <b>mettent à jour</b> si le compte existe, créent sinon</li>
               <li><b>Recherche avant création</b> dans Attio</li>
               <li>Pays obligatoire, <b>attribution par marché</b></li>
               <li><b>Type de compte et de relation</b> obligatoires</li>

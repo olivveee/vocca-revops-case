@@ -14,10 +14,12 @@ webmail excluded).
 
 Never merged automatically:
   - different validated company numbers (two sites, even under one legal entity);
+  - records with different postcodes, even with the same number (one number is probably wrong);
   - a Practice and a Group/Superorga (that is a hierarchy fix, not a duplicate);
   - pairs where either record is a customer (billing ID or signed ARR);
-  - pairs with open deals owned by different people;
+  - pairs owned by different salespeople (account owner or open deals);
   - matches resting on a shared phone, domain or name only.
+A cluster that would chain records from different postcodes or owners goes back to review.
 
 Usage: python 1B_tam_mapping/tam_dedup.py <data_dir> <out_dir> [<web_data_dir>]
 Writes merge_pairs.csv, merge_clusters.csv, hierarchy_issues.csv, contact_moves.csv
@@ -253,11 +255,26 @@ def decide(a, b, keys):
     else:
         return "do_not_merge", weak
 
+    # A site is one place: an automatic merge needs the same postcode. Same number in two places means
+    # one number was copied onto the wrong account (or the practice moved): a person checks.
+    if decision == "auto_merge" and not same_postcode(a, b):
+        return "manual_review", "same identifier but different postcode: one number is probably wrong, or the site moved"
     if a["is_customer"] or b["is_customer"]:
         return "manual_review", "customer record involved (billing ID / ARR): never merged automatically"
-    if len(a["open_deal_owners"] | b["open_deal_owners"]) > 1:
-        return "manual_review", "open deals owned by different people: needs an owner decision"
+    if len(owners_of(a) | owners_of(b)) > 1:
+        return "manual_review", "owned by different salespeople (account owner or open deals): needs an owner decision"
     return decision, reason
+
+
+def same_postcode(a, b):
+    pa, pb = a.get("postcode"), b.get("postcode")
+    return isinstance(pa, str) and isinstance(pb, str) and pa.strip() == pb.strip()
+
+
+def owners_of(record):
+    """Every salesperson attached to a record: the account owner and the owners of its open deals."""
+    owner = record.get("sales_owner")
+    return set(record["open_deal_owners"]) | ({owner} if isinstance(owner, str) else set())
 
 
 # ---------- clustering and survivor ----------
@@ -304,6 +321,27 @@ def clusters_from(pairs, c):
                 "contacts": by_id.at[rid, "contact_count"],
             })
     return pd.DataFrame(rows)
+
+
+def demote_inconsistent_chains(pairs, c):
+    """Pairs are checked one by one; a chain A-B-C can still join A and C from different postcodes or owners.
+    Such a cluster is not merged automatically: its pairs go to manual review."""
+    by_id = c.set_index("record_id")
+    auto = pairs.decision.eq("auto_merge")
+    clusters = clusters_from(list(zip(pairs.record_a[auto], pairs.record_b[auto])), c)
+    if clusters.empty:
+        return pairs
+    bad = set()
+    for cid, g in clusters.groupby("cluster_id"):
+        members = by_id.loc[g.record_id]
+        owners = set().union(*(owners_of(r) for r in members.to_dict("records")))
+        if members.postcode.str.strip().nunique(dropna=False) > 1 or len(owners) > 1:
+            bad |= set(g.record_id)
+    chained = auto & pairs.record_a.isin(bad) & pairs.record_b.isin(bad)
+    pairs = pairs.copy()
+    pairs.loc[chained, "decision"] = "manual_review"
+    pairs.loc[chained, "reason"] = "chained merge would join different postcodes or owners: needs a person"
+    return pairs
 
 
 # ---------- hierarchy ----------
@@ -360,8 +398,10 @@ def contact_moves(c, contacts, merge_map):
         for d in row.domain_list:
             domain_owner.setdefault(d, set()).add(row.record_id)
     unique_domain = {d: next(iter(ids)) for d, ids in domain_owner.items() if len(ids) == 1}
+    level = dict(zip(c.record_id, c.type.map(ACCOUNT_LEVEL)))
+    names = dict(zip(c.record_id, c.name))
 
-    rows = []
+    rows, links = [], {}
     for _, p in contacts.dropna(subset=["email_addresses"]).iterrows():
         email = str(p.email_addresses).split(",")[0].strip().lower()
         dom = email.split("@")[-1]
@@ -369,8 +409,16 @@ def contact_moves(c, contacts, merge_map):
         current = p.company_record_id
         if not target or target == current:
             continue
-        if isinstance(current, str) and root(current) == root(target):
-            continue  # same account family (site vs its group): not a wrong attachment
+        if isinstance(current, str):
+            top = root(current)
+            if top == root(target):
+                continue  # same account family (site vs its group): not a wrong attachment
+            if level.get(top, -1) < level.get(target, -1):
+                # The contact works at the site; the email domain is its group's or network's.
+                # The site (or its group) is missing its parent link: fix the hierarchy, keep the contact.
+                links.setdefault((top, target, dom), 0)
+                links[(top, target, dom)] += 1
+                continue
         rows.append({
             "contact_id": p.record_id,
             "email_domain": dom,
@@ -378,7 +426,14 @@ def contact_moves(c, contacts, merge_map):
             "proposed_company_id": merge_map.get(target, target),
             "reason": "no company attached" if not isinstance(current, str) else "email domain belongs to another account family",
         })
-    return pd.DataFrame(rows)
+    by_id = c.set_index("record_id")
+    link_rows = [{
+        "record_id": top, "name": names[top], "type": by_id.at[top, "type"],
+        "issue": "outside_its_group", "severity": HIERARCHY_SEVERITY["outside_its_group"],
+        "detail": f"{n} contact(s) use {dom}, the domain of {names[target]}",
+        "proposed_action": f"attach to {names[target]} and keep its contacts",
+    } for (top, target, dom), n in links.items()]
+    return pd.DataFrame(rows), pd.DataFrame(link_rows)
 
 
 # ---------- markets ----------
@@ -449,7 +504,7 @@ def market_summary(c, deals, issues):
 
 # ---------- cockpit export (web page + action pack) ----------
 MATCH_KEYS = [
-    {"key": "company_number", "label": "Company number, validated (SIRET in France, NPI in the US)", "role": "Identity of a site. Same validated number + same type = automatic merge"},
+    {"key": "company_number", "label": "Company number, validated (SIRET in France, NPI in the US)", "role": "Identity of a site. Same validated number + same type + same postcode = automatic merge"},
     {"key": "calendar", "label": "Booking-calendar URL", "role": "One calendar per site. Automatic merge only if a second key agrees"},
     {"key": "siren", "label": "Legal entity (SIREN in France)", "role": "Links sites to one legal entity. Merges only with same name + postcode"},
     {"key": "name_postcode", "label": "Normalised name + postcode", "role": "Strong hint: manual review, never automatic alone"},
@@ -460,7 +515,8 @@ GUARDS = [
     {"rule": "Different validated company numbers are never merged automatically", "why": "Two sites, even under one legal entity, are two deployments; with the same calendar or address, a person checks which number is wrong", "match": "different validated company numbers|different sites \\(SIRET\\)|two different validated numbers"},
     {"rule": "A site and a group are never merged", "why": "It is a missing hierarchy link or the group's head-office site", "match": "site shares|orphan site"},
     {"rule": "Customers are never merged automatically", "why": "A merge moves invoices and ARR: a human signs it off", "match": "customer record involved"},
-    {"rule": "Two owners with open deals: manual", "why": "Ownership is a sales decision, not a data one", "match": "open deals owned by different"},
+    {"rule": "Same identifier in two postcodes: manual", "why": "A site is one place: the number was copied onto the wrong account, or the site moved", "match": "different postcode|chained merge"},
+    {"rule": "Two salespeople (account owner or open deals): manual", "why": "Ownership is a sales decision, not a data one", "match": "owned by different"},
     {"rule": "Shared phone or domain alone: a group signal, not a duplicate", "why": "Groups share switchboards and domains", "match": "weak evidence only"},
     {"rule": "Missing account type: manual", "why": "The model cannot place the record", "match": "account type missing"},
 ]
@@ -471,9 +527,11 @@ HIERARCHY_SEVERITY = {
     "orphan_parent": "error",
     "invalid_parent_type": "error",
     "practice_looks_like_group": "error",
+    "outside_its_group": "error",
     "empty_group": "question",
     "single_site_group": "question",
 }
+ACCOUNT_LEVEL = {"Practice": 0, "Group": 1, "Superorga": 2}
 
 
 def current_state(c, contacts):
@@ -567,6 +625,7 @@ HIERARCHY_QUEUE = {
     "orphan_parent": "hierarchy_error",
     "invalid_parent_type": "hierarchy_error",
     "practice_looks_like_group": "hierarchy_error",
+    "outside_its_group": "site_to_attach",
     "empty_group": "structure_question",
     "single_site_group": "structure_question",
 }
@@ -733,7 +792,7 @@ def write_action_pack(path, cockpit, clusters, review, hierarchy, moves, pairs, 
     readme = pd.DataFrame({"Vocca TAM action pack": [
         "Produced by 1B_tam_mapping/tam_dedup.py on the anonymised Attio export of 25 Sep 2026.",
         "Model: the account is the site (SIRET), rolled up to a group and a network; the legal entity (SIREN) is linked.",
-        "Auto merges: certain duplicates, never a customer, never two owners. Survivor: customer, most deals, most contacts, most complete, oldest.",
+        "Auto merges: certain duplicates in the same postcode, never a customer, never two owners. Survivor: customer, most deals, most contacts, most complete, oldest.",
         "Manual review: pairs the rules refuse to merge without a human. Decide in the TAM cockpit, then export.",
         "Tabs: Summary, Rules, Auto merges, Manual review, Hierarchy, Contact moves, Markets, All pairs.",
         "CRM identity is generic: country + company_number + company_number_type (SIRET in France, NPI in the US), validated per type.",
@@ -782,7 +841,8 @@ def main(data_dir, out_dir, web_data_dir=None):
             "decision": decision, "reason": reason,
         })
     pairs = pd.DataFrame(pair_rows)
-    pairs = pairs[pairs.decision.ne("already_linked")].sort_values(["decision", "shared_keys"])
+    pairs = pairs[pairs.decision.ne("already_linked")]
+    pairs = demote_inconsistent_chains(pairs, c).sort_values(["decision", "shared_keys"])
     pairs.to_csv(out / "merge_pairs.csv", index=False)
 
     auto = pairs[pairs.decision.eq("auto_merge")]
@@ -790,10 +850,10 @@ def main(data_dir, out_dir, web_data_dir=None):
     clusters.to_csv(out / "merge_clusters.csv", index=False)
     merge_map = dict(zip(clusters.record_id, clusters.survivor_id))
 
-    hierarchy = hierarchy_issues(c)
-    hierarchy.to_csv(out / "hierarchy_issues.csv", index=False)
-    moves = contact_moves(c, contacts, merge_map)
+    moves, site_links = contact_moves(c, contacts, merge_map)
     moves.to_csv(out / "contact_moves.csv", index=False)
+    hierarchy = pd.concat([hierarchy_issues(c), site_links], ignore_index=True)
+    hierarchy.to_csv(out / "hierarchy_issues.csv", index=False)
     team = pd.read_csv(f"{data_dir}/sales_team.csv", dtype=str)
     markets = market_issues(c, team)
     markets.to_csv(out / "market_issues.csv", index=False)
@@ -819,7 +879,8 @@ def main(data_dir, out_dir, web_data_dir=None):
         "hierarchy_invalid_parents": hierarchy[hierarchy.issue.eq("invalid_parent_type")].detail.value_counts().to_dict() if len(hierarchy) else {},
         "hierarchy_structure_errors": int(hierarchy[hierarchy.severity.eq("error") & hierarchy.issue.ne("missing_type")].record_id.nunique()) if len(hierarchy) else 0,
         "contact_moves": moves.reason.value_counts().to_dict() if len(moves) else {},
-        "company_number_types": {f"{k[0]} {k[1]}": int(v) for k, v in c.groupby(["country_norm", "company_number_type"]).size().items() if k[0] in ("FR", "US")},
+        "company_number_types": {f"{k[0]} {k[1]}{'' if k[2] or k[1] not in ('SIRET', 'NPI') else ' (fails validation)'}": int(v)
+                                 for k, v in c.groupby(["country_norm", "company_number_type", "company_number_valid"]).size().items() if k[0] in ("FR", "US")},
         "market_issues": markets.issue.value_counts().to_dict() if len(markets) else {},
         "markets": market_summary(c, deals, markets),
     }

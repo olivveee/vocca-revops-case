@@ -11,8 +11,8 @@ Volumes: 1,506 deals and 28 people in `sales_team`. Sized with the scripts in [`
 | 1 | Won deals without `signed_date` | 176 / 567 | Booking date = `signed_date`, falling back to `close_date` (changes the month for 52 deals) |
 | 2 | Won deals without `signed_arr`, or at 0 | 36 + 10 | Fall back to `forecasted_arr`, and flag it |
 | 3 | Missing funnel dates on won deals: no `demo_held_date` (390/567), no `quote_sent_date` (379/567) | ~70% | No date-based funnel; stages reached are derived from the stage |
-| 4 | 145 deals Closed Lost "Too much time with no sales actions": 71 closed in one clean-up on 20-25 Jul 2026, the others between May and September 2026 (median age at closing 262 days) | 145 | A pipeline clean-up, not real losses of the month; distorts July win rate and cycle time |
-| 5 | Outlier `forecasted_arr`: €4,988,890 on one deal (next largest €766k); raw open pipe €12.2M | 1 deal + a long tail | Capped and flagged; weighted pipe shown instead |
+| 4 | 145 deals Closed Lost "Too much time with no sales actions": 71 closed in one clean-up on 20-25 Jul 2026, 73 others between May and September 2026 and 1 in July 2025 (median age at closing 262 days) | 145 | A pipeline clean-up, not real losses of the month; distorts July win rate and cycle time |
+| 5 | Outlier `forecasted_arr`: €4,988,890 on one Closed Lost deal (the largest open deal is €766k); raw open pipe €12.2M, with a long tail of six-figure forecasts at Demo stage | 1 deal + a long tail | Capped and flagged so it never enters ARR or averages; the open pipe is weighted by stage instead of taken at face value |
 | 6 | `closing_probability` blank on 49%; lost deals at 75-90%, won deals at 25% | about half | Ignored; pipe weighted by stage |
 | 7 | Source `Group Rollout` typed `New` | 165 | Inflates new logos: these are expansions of a group account |
 | 8 | `Group Rollout` without `group_contract` = TRUE | 102 | `group_contract` not reliable |

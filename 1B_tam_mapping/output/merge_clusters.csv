@@ -1,233 +1,183 @@
 cluster_id,record_id,role,survivor_id,name,type,lifecycle,country,company_number,company_number_type,postcode,deals,contacts
-C0001,d8a02fa7-e8cf-4ed8-a2b3-8e05a0236e05,merge_into_survivor,5d66df80-7242-4473-bbb6-4d992327664c,Pôle Santé Lumaqua ,Practice,Lead,FR,09056282887846,SIRET,75018,0,0
-C0001,a1d02fc9-1a92-412a-8631-feff313f263b,merge_into_survivor,5d66df80-7242-4473-bbb6-4d992327664c,Pôle Santé Lumaqua,Practice,Lead,FR,09056282887846,SIRET,75018,0,0
-C0001,5d66df80-7242-4473-bbb6-4d992327664c,survivor,5d66df80-7242-4473-bbb6-4d992327664c,Scanner IRM Hugo,Practice,Prospect,FR,09056282887846,SIRET,91540,0,0
-C0002,16628d83-d721-467e-96bd-ba1aac0ddcfc,merge_into_survivor,05adad88-80b9-49a9-bf9f-801b5d75d63e,Centre Cardiologique des Vignes,Practice,,FR,03321234116496,SIRET,97122,1,0
-C0002,05adad88-80b9-49a9-bf9f-801b5d75d63e,survivor,05adad88-80b9-49a9-bf9f-801b5d75d63e,Centre Cardiologique Océane,Practice,Prospect,FR,03321234116496,SIRET,97122,1,1
-C0002,8d9f491e-078d-4e55-a7e8-7305ea5d83da,merge_into_survivor,05adad88-80b9-49a9-bf9f-801b5d75d63e,Cabinet de Cardiologie Schmitt,Practice,Lead,FR,03321234116496,SIRET,31130,1,0
-C0003,a5c6e8d0-289a-496c-a1ca-98262489b86c,survivor,a5c6e8d0-289a-496c-a1ca-98262489b86c,Centre Ophtalmologique Benali,Practice,Prospect,FR,08505078984556,SIRET,47240,1,3
-C0003,9b5b2774-aea3-4c9d-bda6-657a11c7dd2e,merge_into_survivor,a5c6e8d0-289a-496c-a1ca-98262489b86c,Centre Ophtalmologique Benali ,Practice,Lead,FR,08505078984556,SIRET,47240,0,2
-C0004,9b356bd5-c608-425c-b24d-d1157046d883,merge_into_survivor,021d3b01-ed7a-4377-a67c-b22b4b1587db,Centre Médical Pluridisciplinaire des Glycinse,Practice,Lead,FR,07007639313186,SIRET,06690,0,0
-C0004,021d3b01-ed7a-4377-a67c-b22b4b1587db,survivor,021d3b01-ed7a-4377-a67c-b22b4b1587db,Centre Médical Pluridisciplinaire des Glycines,Practice,Prospect,FR,07007639313186,SIRET,06690,1,1
-C0005,9cbb6f8d-449d-4f7a-9519-0cc8c16e0167,survivor,9cbb6f8d-449d-4f7a-9519-0cc8c16e0167,Maison de Santé Ampère,Practice,Prospect,FR,07421397680621,SIRET,91360,1,1
-C0005,8be3ecfa-9009-4dbb-b993-5d67985e3f30,merge_into_survivor,9cbb6f8d-449d-4f7a-9519-0cc8c16e0167,MSP Ampère,Practice,,FR,07421397680621,SIRET,91360,0,0
-C0006,c85e5115-0603-4288-98dd-218025cb8eea,merge_into_survivor,6218dc0d-8bb6-4c48-b086-e95a94779817,  scm dentaire du forum ,Practice,Lead,FR,08894802125581,SIRET,81600,0,0
-C0006,6218dc0d-8bb6-4c48-b086-e95a94779817,survivor,6218dc0d-8bb6-4c48-b086-e95a94779817,SCM Dentaire du Forum,Practice,Lead,FR,08894802125581,SIRET,81600,0,1
-C0007,e922ac74-1ccb-47db-99f0-ad7de96800d5,survivor,e922ac74-1ccb-47db-99f0-ad7de96800d5,MSP Saint-Michel,Practice,Lead,FR,02536673334760,SIRET,31660,0,1
-C0007,b4b01df7-81e5-4ca0-9b3d-075968e0afdc,merge_into_survivor,e922ac74-1ccb-47db-99f0-ad7de96800d5,MSP Saint-Michel ,Practice,Lead,FR,02536673334760,SIRET,31660,0,0
-C0008,3175f323-0afc-448c-ae4c-4451c35e3f7c,merge_into_survivor,12249d24-533d-4915-a02e-227e2433a36b,POLYCLINIQUE DES PLATANES,Practice,Lead,FR,02624821126757,SIRET,75009,0,1
-C0008,12249d24-533d-4915-a02e-227e2433a36b,survivor,12249d24-533d-4915-a02e-227e2433a36b,Polyclinique des Platanes,Practice,Lead,FR,02624821126757,SIRET,75009,0,1
-C0009,c185760d-f9f5-4324-97f4-9d5376bdc9d0,merge_into_survivor,522cbd2d-adb0-48d6-927f-98d97a8844dc,  RADIOLOGIE LESCAR ,Practice,Lead,FR,03021552999404,SIRET,64230,0,0
-C0009,522cbd2d-adb0-48d6-927f-98d97a8844dc,survivor,522cbd2d-adb0-48d6-927f-98d97a8844dc,Radiologie Lescar,Practice,Prospect,FR,03021552999404,SIRET,64230,1,0
-C0010,bba517d2-28b7-441d-b265-eab7c55702df,merge_into_survivor,9f4eb6da-eb9b-4ebd-80d8-6b34cb8c9e53,Cabinet d'Ophtalmologie des Acacias ,Practice,Lead,FR,09325061141703,SIRET,97122,0,2
-C0010,9f4eb6da-eb9b-4ebd-80d8-6b34cb8c9e53,survivor,9f4eb6da-eb9b-4ebd-80d8-6b34cb8c9e53,Cabinet d'Ophtalmologie des Acacias,Practice,Lead,FR,09325061141703,SIRET,97122,0,3
-C0011,cdfb8647-f028-45ca-8f2c-ef2af6091f46,merge_into_survivor,42000652-ed73-4c52-90a1-26d55166c009,  cardiologie montpellier ,Practice,Lead,FR,01795126000102,SIRET,34000,0,5
-C0011,42000652-ed73-4c52-90a1-26d55166c009,survivor,42000652-ed73-4c52-90a1-26d55166c009,Cardiologie Montpellier,Practice,Lead,FR,01795126000102,SIRET,34000,1,5
-C0012,d61928f9-0065-456c-9d5d-9855fc924f80,survivor,d61928f9-0065-456c-9d5d-9855fc924f80,Scanner IRM Sallanches,Practice,Lead,FR,02022974661979,SIRET,74700,0,1
-C0012,4b5c324c-23a1-42af-9507-9f4f8d5f1187,merge_into_survivor,d61928f9-0065-456c-9d5d-9855fc924f80,  scanner irm sallanches ,Practice,,FR,02022974661979,SIRET,74700,0,0
-C0013,d011e6ca-9f83-42b9-b440-fc1acfde5546,survivor,d011e6ca-9f83-42b9-b440-fc1acfde5546,MSP des Iris,Practice,Lead,FR,03516542288867,SIRET,49300,0,1
-C0013,67beb5b2-d190-41cf-b4ed-ee8cbec3193c,merge_into_survivor,d011e6ca-9f83-42b9-b440-fc1acfde5546,MSP DES IRIS,Practice,Lead,FR,03516542288867,SIRET,49300,0,1
-C0014,f363e220-18d6-4348-8aa5-b861d656e4d7,survivor,f363e220-18d6-4348-8aa5-b861d656e4d7,Centre de Radiologie du Port,Practice,Lead,FR,04188783772055,SIRET,40280,0,1
-C0014,3aae255e-f305-407e-a3f4-5fba813af05f,merge_into_survivor,f363e220-18d6-4348-8aa5-b861d656e4d7,  centre de radiologie du port ,Practice,Lead,FR,04188783772055,SIRET,40280,0,0
-C0015,45e8dfd8-3360-46d3-8b2c-f2ef320a2977,survivor,45e8dfd8-3360-46d3-8b2c-f2ef320a2977,Centre d'Imagerie des Tilleuls,Practice,Lead,FR,04302098106202,SIRET,33000,0,0
-C0015,3f701c61-1fa3-49d6-94da-fbf70df8a490,merge_into_survivor,45e8dfd8-3360-46d3-8b2c-f2ef320a2977,  centre d'imagerie des tilleuls ,Practice,Lead,FR,04302098106202,SIRET,33000,0,0
-C0016,e624598c-c7b2-40ad-a83c-a0feea588805,merge_into_survivor,17b376fa-c52e-4ec0-84c8-948408d5a877,Cabinet de Radiologie des Arcades SCM,Practice,Lead,FR,05396454069524,SIRET,78180,0,2
-C0016,17b376fa-c52e-4ec0-84c8-948408d5a877,survivor,17b376fa-c52e-4ec0-84c8-948408d5a877,Cabinet de Radiologie des Arcades,Practice,Lead,FR,05396454069524,SIRET,78180,0,3
-C0017,7321558b-6769-414e-8570-ddfda92992be,survivor,7321558b-6769-414e-8570-ddfda92992be,Centre d'Imagerie Imagora,Practice,Lead,FR,09635877544829,SIRET,69008,0,2
-C0017,361dd252-40b0-4789-86eb-295653912bc3,merge_into_survivor,7321558b-6769-414e-8570-ddfda92992be,Centre d'Imagerie Imagora ,Practice,Lead,FR,09635877544829,SIRET,69008,0,1
-C0018,90447cdf-56f8-48f8-9130-5f65abddb05e,merge_into_survivor,434c8af0-b8e9-43e9-8a35-8df73d16e2cf,Kine du Forum,Practice,Lead,FR,09983849256779,SIRET,76360,0,2
-C0018,434c8af0-b8e9-43e9-8a35-8df73d16e2cf,survivor,434c8af0-b8e9-43e9-8a35-8df73d16e2cf,Kiné du Forum,Practice,Lead,FR,09983849256779,SIRET,76360,0,3
-C0019,39b5bb84-404d-4280-aec3-db5e7108ce7d,merge_into_survivor,1dd17a81-15ed-4672-acdc-bc8896aca478,Cabinet d'Ophtalmologie des Irsi SAS,Practice,Lead,FR,06503242752720,SIRET,97420,0,3
-C0019,1dd17a81-15ed-4672-acdc-bc8896aca478,survivor,1dd17a81-15ed-4672-acdc-bc8896aca478,Cabinet d'Ophtalmologie des Iris,Practice,Lead,FR,06503242752720,SIRET,97420,1,4
-C0020,a2087ab6-3ed5-4791-9fb9-0bbccb0d2925,merge_into_survivor,99972ba1-8c2b-4277-8784-ae8626282023,Cab. de Masso-Kinesithérapie Henry,Practice,Lead,FR,00961337303104,SIRET,40000,0,2
-C0020,99972ba1-8c2b-4277-8784-ae8626282023,survivor,99972ba1-8c2b-4277-8784-ae8626282023,Cabinet de Masso-Kinésithérapie Henry,Practice,Lead,FR,00961337303104,SIRET,40000,0,3
-C0021,e168d0eb-5c43-448c-956d-e6d31253dca2,survivor,e168d0eb-5c43-448c-956d-e6d31253dca2,Radiologie des Oliviesr,Practice,Lead,FR,01209641805615,SIRET,72100,0,0
-C0021,a4a24341-df5c-49fa-bb83-8fc5e6f1ccff,merge_into_survivor,e168d0eb-5c43-448c-956d-e6d31253dca2,Radiologie des Oliviers,Practice,Lead,FR,01209641805615,SIRET,72100,0,0
-C0022,a08e5ed3-cd74-496c-9c23-5edf72928ab5,survivor,a08e5ed3-cd74-496c-9c23-5edf72928ab5,Maison de Santé Parsi,Practice,Prospect,FR,01971534167466,SIRET,75018,0,4
-C0022,041d632e-5e55-4863-b5c4-7efe93595dd9,merge_into_survivor,a08e5ed3-cd74-496c-9c23-5edf72928ab5,Maison de Santé Paris,Practice,Lead,FR,01971534167466,SIRET,75018,0,6
-C0023,53a90f6b-0520-4025-ab80-7a902da31e2c,merge_into_survivor,3aa52ad4-3f53-4150-b16a-614cc939270d,Centre de Radiologie Océaen,Practice,Lead,FR,03887585207340,SIRET,85000,0,3
-C0023,3aa52ad4-3f53-4150-b16a-614cc939270d,survivor,3aa52ad4-3f53-4150-b16a-614cc939270d,Centre de Radiologie Océane,Practice,Lead,FR,03887585207340,SIRET,85000,0,4
-C0024,ad4cccac-2a82-4946-b3ef-2e08aad92f59,survivor,ad4cccac-2a82-4946-b3ef-2e08aad92f59,Centre d'Imagerie du Cours,Practice,Lead,FR,06623417074393,SIRET,78000,0,1
-C0024,3de5a9e9-8e47-42ad-8dad-7e3b19415c5d,merge_into_survivor,ad4cccac-2a82-4946-b3ef-2e08aad92f59,Ctre d'Imagerie du Cours,Practice,Lead,FR,06623417074393,SIRET,78000,0,1
-C0025,f94f200a-bc25-4f0b-8bcb-cd26614d906a,merge_into_survivor,8735562a-d285-49e9-a87c-0af0dcc6f064,Centre Ophtalmologique du Potn,Practice,Prospect,FR,,missing,45770,0,0
-C0025,8735562a-d285-49e9-a87c-0af0dcc6f064,survivor,8735562a-d285-49e9-a87c-0af0dcc6f064,Centre Ophtalmologique du Pont,Practice,Prospect,FR,03760112710401,SIRET,45770,1,1
-C0026,e81bc336-4cad-4c21-894e-12f4505dc5ad,merge_into_survivor,1317fe61-aad7-4f5a-b21b-0db00f23a213,Cabinet Medical du Canal,Practice,Prospect,FR,,missing,45400,0,0
-C0026,1317fe61-aad7-4f5a-b21b-0db00f23a213,survivor,1317fe61-aad7-4f5a-b21b-0db00f23a213,Cabinet Médical du Canal,Practice,Prospect,FR,06769891020525,SIRET,45400,1,0
-C0027,c201d7d2-fb50-4544-8497-c73581ca22ac,merge_into_survivor,2ce8fe6c-1675-45b8-a12a-858d02d8edc9,  centre de santé dentaire des arcades ,Practice,Prospect,FR,,missing,80240,0,0
-C0027,2ce8fe6c-1675-45b8-a12a-858d02d8edc9,survivor,2ce8fe6c-1675-45b8-a12a-858d02d8edc9,Centre de Santé Dentaire des Arcades,Practice,Prospect,FR,06449506267841,SIRET,80240,1,1
-C0028,c15fdc9e-0958-4940-85d1-cfd862213881,survivor,c15fdc9e-0958-4940-85d1-cfd862213881,Cabinet Médical Saint-Denis,Practice,Lead,FR,02284150600375,SIRET,97400,0,5
-C0028,1f9f077a-13d9-4f42-9e63-e04851183a98,merge_into_survivor,c15fdc9e-0958-4940-85d1-cfd862213881,  cabinet médical saint-denis ,Practice,Lead,FR,,missing,97400,0,5
-C0029,f9e8b65b-7138-48c5-982f-bd65f8e657f7,merge_into_survivor,c62f4c24-50be-4f36-8d99-c5edbc98f3e1,Centre d'Imagerie Saint-Pierre ,Practice,Lead,FR,,missing,13200,0,0
-C0029,c62f4c24-50be-4f36-8d99-c5edbc98f3e1,survivor,c62f4c24-50be-4f36-8d99-c5edbc98f3e1,Centre d'Imagerie Saint-Pierre,Practice,Lead,FR,04277002428357,SIRET,13200,0,0
-C0030,5ae9d162-505f-4117-b641-6d58e8e88010,survivor,5ae9d162-505f-4117-b641-6d58e8e88010,Radiologie Saint-Georges,Practice,Lead,FR,05998113439087,SIRET,44390,0,1
-C0030,2b584ee4-92af-49f5-af92-fdda42a1ef0e,merge_into_survivor,5ae9d162-505f-4117-b641-6d58e8e88010,Radiologie Saint-Georges ,Practice,Lead,FR,,missing,44390,0,1
-C0031,b4cef410-5e93-407c-8351-49548e23e156,survivor,b4cef410-5e93-407c-8351-49548e23e156,Clinique Rolland,Practice,Lead,FR,07232569973672,SIRET,71880,0,5
-C0031,4af9a574-f767-4115-8825-bdbb29e6d701,merge_into_survivor,b4cef410-5e93-407c-8351-49548e23e156,Clinique Rolland ,Practice,Lead,FR,,missing,71880,0,5
-C0032,1fbfc9ba-c4d2-461c-84c8-bd9b0604b8bb,merge_into_survivor,1842335d-28c0-46c9-8460-a18dfafb475d,CENTRE DE RÉÉDUCATION NEOTIS,Practice,,FR,,missing,85710,0,1
-C0032,1842335d-28c0-46c9-8460-a18dfafb475d,survivor,1842335d-28c0-46c9-8460-a18dfafb475d,Centre de Rééducation Neotis,Practice,Lead,FR,04083993855099,SIRET,85710,0,2
-C0033,687d3859-1332-408a-b080-2f632485b484,merge_into_survivor,34bbc3e4-fb9d-4ae3-811e-1218b4caed1b,  centre de rééducation ollioules ,Practice,Lead,FR,,missing,83190,0,1
-C0033,34bbc3e4-fb9d-4ae3-811e-1218b4caed1b,survivor,34bbc3e4-fb9d-4ae3-811e-1218b4caed1b,Centre de Rééducation Ollioules,Practice,Lead,FR,06968376120137,SIRET,83190,0,1
-C0034,d46f4812-5d90-40d4-8647-6d80ef33ff4d,survivor,d46f4812-5d90-40d4-8647-6d80ef33ff4d,Centre Médical Pluridisciplinaire Challans,Practice,Lead,FR,03861399818303,SIRET,85300,0,4
-C0034,c9317093-6890-4c27-8d2e-022b4f8b8bef,merge_into_survivor,d46f4812-5d90-40d4-8647-6d80ef33ff4d,Centre Médical Pluridisciplinaire Challans SELARL,Practice,,FR,,missing,85300,0,5
-C0035,846ca115-0a5f-4b5d-babb-0632cc68febd,survivor,846ca115-0a5f-4b5d-babb-0632cc68febd,Clinique Altialys,Practice,Prospect,FR,05085626936948,SIRET,92300,1,4
-C0035,111f0d56-f7c0-43c0-b255-e2008a8c427b,merge_into_survivor,846ca115-0a5f-4b5d-babb-0632cc68febd,Clinique Altialys ,Practice,,FR,,missing,92300,0,4
-C0036,e5d4cd78-07be-4d99-b0f0-5c52a24328f1,survivor,e5d4cd78-07be-4d99-b0f0-5c52a24328f1,SCM Dentaire Azoulay,Practice,Lead,FR,03495633497762,SIRET,75011,0,4
-C0036,98391730-4ca6-4a79-bf6b-ec6e4656efd7,merge_into_survivor,e5d4cd78-07be-4d99-b0f0-5c52a24328f1,SCM Dentaire Azoulay ,Practice,,FR,,missing,75011,0,4
-C0037,d00bf3b5-7f55-4e95-bd9d-476e0a49b108,survivor,d00bf3b5-7f55-4e95-bd9d-476e0a49b108,Clinique des Platanes,Practice,Lead,FR,047104690,SIREN,62160,0,1
-C0037,78b8f0bc-2cf1-4c6a-ae18-6f4ac2561570,merge_into_survivor,d00bf3b5-7f55-4e95-bd9d-476e0a49b108,  clinique des platanes ,Practice,Lead,FR,047104690,SIREN,62160,0,0
-C0038,8ce647eb-e9a2-4368-a9d8-0d1a4751fb13,merge_into_survivor,70b2ec73-2321-4c7b-9cf8-0670d9ae07b7,Polyclinique Bénard,Practice,Lead,FR,088865829,SIREN,56390,0,3
-C0038,70b2ec73-2321-4c7b-9cf8-0670d9ae07b7,survivor,70b2ec73-2321-4c7b-9cf8-0670d9ae07b7,Polyclinique Benard,Practice,Lead,FR,088865829,SIREN,56390,0,3
-C0039,80f68514-5934-445a-9cd6-a0c50ff5cf84,merge_into_survivor,11431219-d909-44c3-8ec2-2f6e3a8f88e8,Pôle Santé Lanester ,Practice,,FR,097941330,SIREN,56600,0,0
-C0039,11431219-d909-44c3-8ec2-2f6e3a8f88e8,survivor,11431219-d909-44c3-8ec2-2f6e3a8f88e8,Pôle Santé Lanester,Practice,Lead,FR,097941330,SIREN,56600,0,1
-C0040,a7aced42-dbd8-441d-bcff-fde708355e9f,survivor,a7aced42-dbd8-441d-bcff-fde708355e9f,Cabinet du Dr Guillaume,Practice,Lead,FR,04081848677460,SIRET,58200,0,1
-C0040,654f121d-183f-44eb-998a-865c3e428e5a,merge_into_survivor,a7aced42-dbd8-441d-bcff-fde708355e9f,Cabinet du Dr Guillauem,Practice,,FR,,missing,58200,0,0
-C0041,d58dcffd-7828-40b9-ac2a-85675239879b,merge_into_survivor,7f39bc40-33aa-48eb-9710-4010740ec712,Clinique Océaen,Practice,,FR,,missing,21200,0,3
-C0041,7f39bc40-33aa-48eb-9710-4010740ec712,survivor,7f39bc40-33aa-48eb-9710-4010740ec712,Clinique Océane,Practice,Prospect,FR,04234576948021,SIRET,21200,2,3
-C0042,f129e3fe-3e6c-4f62-8a41-e68f1e45e903,merge_into_survivor,0e4dd5d6-4de3-4cd8-965e-3a20827d9d61,Clinique Atlantique,Practice,Lead,FR,023921612,SIREN,79000,0,0
-C0042,0e4dd5d6-4de3-4cd8-965e-3a20827d9d61,survivor,0e4dd5d6-4de3-4cd8-965e-3a20827d9d61,CLINIQUE ATLANTIQEU,Practice,Lead,FR,023921612,SIREN,79000,0,0
-C0043,b4f25644-87f5-4a4e-97c7-46bc8f9fd79b,merge_into_survivor,9704baf8-59bb-405a-9a16-4fac641233cc,Centre de Santé Caen,Practice,Lead,FR,024596728,SIREN,14000,0,0
-C0043,9704baf8-59bb-405a-9a16-4fac641233cc,survivor,9704baf8-59bb-405a-9a16-4fac641233cc,CDS Caen,Practice,Lead,FR,024596728,SIREN,14000,0,0
-C0044,ede5fac7-594e-4409-a400-baee4fdb88a8,survivor,ede5fac7-594e-4409-a400-baee4fdb88a8,Cabinet Médical du Mail,Practice,Lead,FR,052373255,SIREN,34070,1,5
-C0044,1f902848-dea9-4644-8b10-924e74a1b9a6,merge_into_survivor,ede5fac7-594e-4409-a400-baee4fdb88a8,Cabinet Médical du Mali,Practice,,FR,052373255,SIREN,34070,0,5
-C0045,d4dd247a-99d7-47a7-ba31-b0f025ace869,merge_into_survivor,18ba5665-15d3-46ad-8936-9630dddf7728,Clinique du Châteua,Practice,,FR,094831211,SIREN,81100,0,0
-C0045,18ba5665-15d3-46ad-8936-9630dddf7728,survivor,18ba5665-15d3-46ad-8936-9630dddf7728,Clinique du Château,Practice,Lead,FR,094831211,SIREN,81100,0,1
-C0046,74b863d1-776d-49b6-b3b1-f28db21b54fc,survivor,74b863d1-776d-49b6-b3b1-f28db21b54fc,MSP des Acacias,Practice,Lead,FR,09949480948362,SIRET,76230,0,10
-C0046,3da4e552-a84d-45ff-b35c-8063585dd9f8,merge_into_survivor,74b863d1-776d-49b6-b3b1-f28db21b54fc,Cabinet du Dr Roche,Practice,Lead,FR,09949480948362,SIRET,56890,0,6
-C0047,6cd20f20-f404-4eb9-8cf8-6e5ecef7db83,merge_into_survivor,38e7e384-31c9-43ff-9d7a-3d03f3f81432,Centre Ophtalmologique Saint-Luc SAS,Practice,,FR,03800774661649,SIRET,64100,0,1
-C0047,38e7e384-31c9-43ff-9d7a-3d03f3f81432,survivor,38e7e384-31c9-43ff-9d7a-3d03f3f81432,Centre Ophtalmologique Saint-Luc,Practice,Lead,FR,03800774661649,SIRET,64100,1,2
-C0048,79aef258-3f6e-4b5e-9f5c-bfc0007540bb,survivor,79aef258-3f6e-4b5e-9f5c-bfc0007540bb,Centre de la Vision du Moulin,Practice,Lead,FR,02157335717183,SIRET,59190,1,1
-C0048,06f5c5f8-5c64-4bc5-be4b-f408a454f54d,merge_into_survivor,79aef258-3f6e-4b5e-9f5c-bfc0007540bb,Centre de la Vision du Moulni,Practice,Lead,FR,02157335717183,SIRET,59190,0,0
-C0049,d7708c44-2100-4b65-91c8-8a7b98237196,survivor,d7708c44-2100-4b65-91c8-8a7b98237196,Cabinet Dentaire Saint-Chamond,Practice,Lead,FR,01267720953227,SIRET,42400,0,0
-C0049,477bb8bc-3208-4a50-8719-0a0318d931f5,merge_into_survivor,d7708c44-2100-4b65-91c8-8a7b98237196,CABINET DENTAIRE SAINT-CHAMOND,Practice,Lead,FR,01267720953227,SIRET,42400,0,0
-C0050,fcfbf897-16eb-498d-b96c-eb5136f857cf,merge_into_survivor,db2b2d18-4d61-4a53-8569-b2f2d9280ec2,Centre Médical Leroy,Practice,Lead,FR,03495633457097,SIRET,13002,0,0
-C0050,db2b2d18-4d61-4a53-8569-b2f2d9280ec2,survivor,db2b2d18-4d61-4a53-8569-b2f2d9280ec2,  centre médical leroy ,Practice,Prospect,FR,03495633457097,SIRET,13002,0,0
-C0051,b282acb9-5b15-458a-a080-002b0d678bb0,survivor,b282acb9-5b15-458a-a080-002b0d678bb0,Centre Médical Confluence,Practice,Lead,FR,03495633470850,SIRET,97200,0,0
-C0051,4254b2f2-af67-48b9-b60d-64c2e0e58aad,merge_into_survivor,b282acb9-5b15-458a-a080-002b0d678bb0,Centre Médical Confluence ,Practice,Lead,FR,03495633470850,SIRET,97200,0,0
-C0052,55903bd9-31ff-4d9b-bd31-690fe55d744e,survivor,55903bd9-31ff-4d9b-bd31-690fe55d744e,Pôle Médical des Platanes,Practice,Lead,FR,01267720939788,SIRET,80800,0,1
-C0052,14390d16-379c-439c-9f51-e8cb6d5682ad,merge_into_survivor,55903bd9-31ff-4d9b-bd31-690fe55d744e,Pole Medical des Platanes,Practice,Lead,FR,01267720939788,SIRET,80800,0,0
-C0053,ec8bf8d7-c4ee-48e7-ab5c-a5aaea5bddbb,merge_into_survivor,e56d2c08-28cf-4a24-b0cf-815a4f9a4e35,CENTRE DE CHIRURGIE DES COTEAUX,Practice,Lead,FR,02172901793237,SIRET,77600,0,1
-C0053,e56d2c08-28cf-4a24-b0cf-815a4f9a4e35,survivor,e56d2c08-28cf-4a24-b0cf-815a4f9a4e35,Centre de Chirurgie des Coteaux,Practice,Lead,FR,02172901793237,SIRET,77600,0,1
-C0054,b943d656-bf9f-4609-8ede-d8acbb79b446,survivor,b943d656-bf9f-4609-8ede-d8acbb79b446,Centre de la Vision Lacroix,Practice,Lead,FR,04497583733070,SIRET,62540,0,2
-C0054,96e25a8e-b1dd-4bd8-8d02-d4f16baad05d,merge_into_survivor,b943d656-bf9f-4609-8ede-d8acbb79b446,Centre de la Vision Lacroix ,Practice,,FR,04497583733070,SIRET,62540,0,1
-C0055,f1a1f091-96a9-4773-be6c-b713d7f0b83c,survivor,f1a1f091-96a9-4773-be6c-b713d7f0b83c,Pôle Santé Curie SCM,Practice,Lead,FR,05047914696253,SIRET,21000,0,6
-C0055,85b668ed-6fe2-4651-8910-601ea95f674b,merge_into_survivor,f1a1f091-96a9-4773-be6c-b713d7f0b83c,Pôle Santé Curie,Practice,Lead,FR,05047914696253,SIRET,21000,0,5
-C0056,93ec05bb-e860-452a-bee3-bfa542c6c6c2,merge_into_survivor,5ef7a2af-bd68-4ed1-a1bc-6fb978fc6349,Cabinet de Radiologie Saint-Georges ,Practice,Lead,FR,00298606503233,SIRET,31130,0,0
-C0056,5ef7a2af-bd68-4ed1-a1bc-6fb978fc6349,survivor,5ef7a2af-bd68-4ed1-a1bc-6fb978fc6349,Cabinet de Radiologie Saint-Georges,Practice,Lead,FR,00298606503233,SIRET,31130,0,0
-C0057,ae26f76d-d4eb-4455-ac94-0ca7f9c4e6c9,merge_into_survivor,0eeefc7c-ca28-49e1-9586-22cfe900dc8f,Cabinet Dentaire Horizon,Practice,,FR,00438246156501,SIRET,97420,1,0
-C0057,0eeefc7c-ca28-49e1-9586-22cfe900dc8f,survivor,0eeefc7c-ca28-49e1-9586-22cfe900dc8f,  cabinet dentaire horizon ,Practice,Prospect,FR,00438246156501,SIRET,97420,0,0
-C0058,60123440-a293-43f3-8d25-202bb18a28c0,survivor,60123440-a293-43f3-8d25-202bb18a28c0,Centre de Chirurgie du Canal,Practice,Lead,FR,00519498014082,SIRET,91300,1,1
-C0058,08d9d0ae-0e99-426d-bb22-4cda03e027bc,merge_into_survivor,60123440-a293-43f3-8d25-202bb18a28c0,Centre de Chirurgie du Canal ,Practice,,FR,00519498014082,SIRET,91300,0,0
-C0059,77bd9f21-6587-4598-b7ed-bc8076cc4d75,survivor,77bd9f21-6587-4598-b7ed-bc8076cc4d75,Centre de Radiologie Brest,Practice,Lead,FR,01867460647937,SIRET,29200,0,2
-C0059,55e07d2e-1f77-4dc5-8584-f1d6fb3377d3,merge_into_survivor,77bd9f21-6587-4598-b7ed-bc8076cc4d75,Centre de Radiologie Brest ,Practice,,FR,01867460647937,SIRET,29200,0,2
-C0060,cf10c266-ebf7-46ad-88f7-44a95d55ef4e,merge_into_survivor,c4e56758-77ba-49a6-922a-1a5bd82e39ba,Imagerie Médicale Lumatis,Practice,Lead,FR,02470549322587,SIRET,35760,0,0
-C0060,c4e56758-77ba-49a6-922a-1a5bd82e39ba,survivor,c4e56758-77ba-49a6-922a-1a5bd82e39ba,  imagerie médicale lumatis ,Practice,Lead,FR,02470549322587,SIRET,35760,0,0
-C0061,8bd82047-81c9-45ba-a2ea-c6700298ca67,survivor,8bd82047-81c9-45ba-a2ea-c6700298ca67,Pôle Santé Guillaume ,Practice,Lead,FR,02637400911902,SIRET,37540,0,5
-C0061,7da1a2f0-d5ba-4e94-bd7d-7414729a8f3d,merge_into_survivor,8bd82047-81c9-45ba-a2ea-c6700298ca67,Pôle Santé Guillaume,Practice,Lead,FR,02637400911902,SIRET,37540,0,5
-C0062,da47a151-03b8-4bdc-9ffd-85288555dc7f,merge_into_survivor,6d3096c9-e6dc-4220-be7c-79a55afc9e32,SCANNER IRM PONTENX-LES-FORGES,Practice,,FR,03075965840415,SIRET,40200,0,0
-C0062,6d3096c9-e6dc-4220-be7c-79a55afc9e32,survivor,6d3096c9-e6dc-4220-be7c-79a55afc9e32,Scanner IRM Pontenx-Les-Forges,Practice,Lead,FR,03075965840415,SIRET,40200,0,0
-C0063,fae28bdb-94c6-4047-9c02-0030c608efa1,survivor,fae28bdb-94c6-4047-9c02-0030c608efa1,Radiologie Montceau-Les-Mines,Practice,Lead,FR,03743577307582,SIRET,71300,0,3
-C0063,ef35136e-9559-46ce-86f9-a7cdb3082e69,merge_into_survivor,fae28bdb-94c6-4047-9c02-0030c608efa1,Radiologie Montceau-Les-Mines SCM,Practice,Lead,FR,03743577307582,SIRET,71300,0,2
-C0064,ec222369-c5ac-4607-8d6b-84afb35cbf05,merge_into_survivor,9c3e7029-3ecf-4cb0-806e-469ef5fa1412,Kiné Odolia ,Practice,Lead,FR,03818477689063,SIRET,27000,0,1
-C0064,9c3e7029-3ecf-4cb0-806e-469ef5fa1412,survivor,9c3e7029-3ecf-4cb0-806e-469ef5fa1412,Kiné Odolia,Practice,Lead,FR,03818477689063,SIRET,27000,0,2
-C0065,bdb67ca7-7834-4fe9-936e-9ac573329a80,survivor,bdb67ca7-7834-4fe9-936e-9ac573329a80,Polyclinique Océane,Practice,Lead,FR,04678914524334,SIRET,75116,0,5
-C0065,7294ca37-32cf-4eb8-88ae-fe28f3b8b5a8,merge_into_survivor,bdb67ca7-7834-4fe9-936e-9ac573329a80,Polyclinique Oceane,Practice,Lead,FR,04678914524334,SIRET,75116,0,5
-C0066,fa5de116-2118-430e-84a6-eb486dfb4b47,merge_into_survivor,ad9ed67f-81b1-4f10-b934-841179083645,Radiologie du Lac ,Practice,Lead,FR,04924250643225,SIRET,62128,0,0
-C0066,ad9ed67f-81b1-4f10-b934-841179083645,survivor,ad9ed67f-81b1-4f10-b934-841179083645,Radiologie du Lac,Practice,Lead,FR,04924250643225,SIRET,62128,0,0
-C0067,bd44a9e4-06fa-44a7-8a3b-05f0238d6ef2,survivor,bd44a9e4-06fa-44a7-8a3b-05f0238d6ef2,Centre de Radiologie Bayonne,Practice,Lead,FR,05114757786904,SIRET,64100,0,0
-C0067,0ca53a74-a52f-477d-95b0-4b50954eb8d4,merge_into_survivor,bd44a9e4-06fa-44a7-8a3b-05f0238d6ef2,  centre de radiologie bayonne ,Practice,Lead,FR,05114757786904,SIRET,64100,0,0
-C0068,b538bc70-6989-4283-8cd6-6ff2ccaebb23,survivor,b538bc70-6989-4283-8cd6-6ff2ccaebb23,IMAGERIE MEDICALE SAINT-MARTIN,Practice,Prospect,FR,05300412359704,SIRET,69008,0,3
-C0068,480f0b66-b0e6-4544-acc0-2277fbabc0a3,merge_into_survivor,b538bc70-6989-4283-8cd6-6ff2ccaebb23,Imagerie Médicale Saint-Martin,Practice,Lead,FR,05300412359704,SIRET,69008,0,3
-C0069,9114e4fc-b981-46d5-b96b-8afbd01052db,survivor,9114e4fc-b981-46d5-b96b-8afbd01052db,Cabinet de Masso-Kinésithérapie Condorcet,Practice,Lead,FR,06130799711089,SIRET,11000,0,1
-C0069,38720541-554d-4605-a3f2-464d9bdea7b2,merge_into_survivor,9114e4fc-b981-46d5-b96b-8afbd01052db,Cabinet de Masso-Kinésithérapie Condorcet SCM,Practice,,FR,06130799711089,SIRET,11000,0,0
-C0070,fd7d52ff-ae42-4e75-926e-b6cfaef379ad,merge_into_survivor,af33f1b3-5d6d-448c-8977-64451dbc1af9,Radiologie des Iris,Practice,Lead,FR,07020328674388,SIRET,01500,0,0
-C0070,af33f1b3-5d6d-448c-8977-64451dbc1af9,survivor,af33f1b3-5d6d-448c-8977-64451dbc1af9,RADIOLOGIE DES IRIS,Practice,Lead,FR,07020328674388,SIRET,01500,0,0
-C0071,e0d7f8f1-84bb-4a7a-be39-e5b4324d64fa,survivor,e0d7f8f1-84bb-4a7a-be39-e5b4324d64fa,Clinique Agde,Practice,Lead,FR,07134555783893,SIRET,34300,0,0
-C0071,b928af2e-3bb1-4612-a21e-6feadaedd5db,merge_into_survivor,e0d7f8f1-84bb-4a7a-be39-e5b4324d64fa,CLINIQUE AGDE,Practice,Lead,FR,07134555783893,SIRET,34300,0,0
-C0072,8ef48d64-622b-43ad-88bb-f473218b5df3,survivor,8ef48d64-622b-43ad-88bb-f473218b5df3,CABINET DE MASSO-KINESITHÉRAPIE FAURE,Practice,Prospect,FR,08166000399536,SIRET,75008,0,1
-C0072,661d4bbf-4328-4d8d-8376-3c6d0f619253,merge_into_survivor,8ef48d64-622b-43ad-88bb-f473218b5df3,Cabinet de Masso-Kinésithérapie Faure,Practice,Lead,FR,08166000399536,SIRET,75008,0,1
-C0073,e434d058-34e7-46fd-8182-9c315d7bc832,merge_into_survivor,0087ac17-fcf2-42df-80ed-1ec07595f63c,Centre de Chirurgie Kinetis ,Practice,Lead,FR,09073243972674,SIRET,84700,0,2
-C0073,0087ac17-fcf2-42df-80ed-1ec07595f63c,survivor,0087ac17-fcf2-42df-80ed-1ec07595f63c,Centre de Chirurgie Kinetis,Practice,Lead,FR,09073243972674,SIRET,84700,1,2
-C0074,e51df875-15a5-43d1-a50c-a042cadb2b51,merge_into_survivor,da7b95ea-8bc2-4a3e-be6d-1df45ce06266,Centre de Rééducation Saint-Michel,Practice,Lead,FR,09340174350521,SIRET,13013,0,1
-C0074,da7b95ea-8bc2-4a3e-be6d-1df45ce06266,survivor,da7b95ea-8bc2-4a3e-be6d-1df45ce06266,Centre de Rééducation Saint-Michel ,Practice,Prospect,FR,09340174350521,SIRET,13013,0,0
-C0075,c53abe0a-b1d6-4c49-9534-d6e212384f39,survivor,c53abe0a-b1d6-4c49-9534-d6e212384f39,Cardiologie Toulouse,Practice,Lead,FR,08894802164200,SIRET,31100,0,5
-C0075,5cd41452-5107-47ac-a8b1-9fdd018bbe64,merge_into_survivor,c53abe0a-b1d6-4c49-9534-d6e212384f39,Cardiologie Toulouse - doublon ?,Practice,,FR,08894802164200,SIRET,31100,0,5
-C0076,ef94ab85-0db8-4e34-b54f-06a7a01cf973,survivor,ef94ab85-0db8-4e34-b54f-06a7a01cf973,Pôle Médical Imagtis,Practice,Lead,FR,09949480967693,SIRET,28000,0,2
-C0076,e5b681ba-f67a-4bdc-9d35-18c2b39e638c,merge_into_survivor,ef94ab85-0db8-4e34-b54f-06a7a01cf973,Pôle Médical Imagtsi,Practice,,FR,09949480967693,SIRET,28000,0,1
-C0077,d5aa033b-0f2f-4f69-ae7e-9ecb5837eeec,survivor,d5aa033b-0f2f-4f69-ae7e-9ecb5837eeec,Centre d'Imagerie Thomas,Practice,Lead,FR,04982152306960,SIRET,31130,0,0
-C0077,11569cb5-3217-463d-b0ed-ec080de7d9f6,merge_into_survivor,d5aa033b-0f2f-4f69-ae7e-9ecb5837eeec,Centre d’Imagerie Thomas,Practice,,FR,04982152306960,SIRET,31130,0,0
-C0078,ca3794f6-f714-45cc-bedf-2d9679ec27f5,merge_into_survivor,a9fbe1f6-a8a7-41af-8460-b5fa1dceab17,Cabinet Dentaire Saint-Antoine,Practice,Lead,FR,07383975538334,SIRET,77160,0,10
-C0078,a9fbe1f6-a8a7-41af-8460-b5fa1dceab17,survivor,a9fbe1f6-a8a7-41af-8460-b5fa1dceab17,Centre de Chirurgie Orbiance,Practice,Lead,FR,07383975538334,SIRET,92000,0,10
-C0079,cb814b5d-4b90-475a-9207-d560d951e2fd,survivor,cb814b5d-4b90-475a-9207-d560d951e2fd,Ctre de Chirurgie Orbiora,Practice,Prospect,FR,09807176427929,SIRET,68240,0,2
-C0079,0db07de5-0d07-4a03-95cc-180e62d01508,merge_into_survivor,cb814b5d-4b90-475a-9207-d560d951e2fd,Centre de Chirurgie Orbiora,Practice,Lead,FR,09807176427929,SIRET,68240,1,3
-C0080,a282b4e6-9fc1-40d7-9a6c-9d91b52a0b2b,merge_into_survivor,016d9709-a33e-4911-867e-b2af3c7094a5,Cabinet de Radiologie Condorcet,Practice,Prospect,FR,00176524726161,SIRET,86000,0,0
-C0080,016d9709-a33e-4911-867e-b2af3c7094a5,survivor,016d9709-a33e-4911-867e-b2af3c7094a5,Centre de Radiologie Floirac,Practice,Prospect,FR,00176524726161,SIRET,33270,1,3
-C0081,e5228d25-5b98-437a-a5e0-db3b408ac9e2,merge_into_survivor,08ed1a09-94ca-444b-a142-da0c6543734b,Cardiologie du Val,Practice,Lead,FR,00311461841638,SIRET,75013,1,0
-C0081,08ed1a09-94ca-444b-a142-da0c6543734b,survivor,08ed1a09-94ca-444b-a142-da0c6543734b,MSP Ampère,Practice,Lead,FR,00311461841638,SIRET,94190,1,9
-C0082,21099280-df44-4453-84b1-73ba3b7784fe,survivor,21099280-df44-4453-84b1-73ba3b7784fe,Centre Médical des Remparts,Practice,Lead,FR,00420943308734,SIRET,78000,0,1
-C0082,06107682-50f0-47fa-ac24-f58b33f0b199,merge_into_survivor,21099280-df44-4453-84b1-73ba3b7784fe,Clinique des Glycines,Practice,Lead,FR,00420943308734,SIRET,75012,0,0
-C0083,9b1f7dcf-0d5c-433f-8324-e0b90352cb7e,survivor,9b1f7dcf-0d5c-433f-8324-e0b90352cb7e,Pôle Santé du Bocage,Practice,Lead,FR,01351810523189,SIRET,78580,0,1
-C0083,98c6ff5e-d157-4c00-a79b-8495f4cbf44f,merge_into_survivor,9b1f7dcf-0d5c-433f-8324-e0b90352cb7e,Clinique Saint-Luc,Practice,Lead,FR,01351810523189,SIRET,94550,0,0
-C0084,e1be34d8-c766-4275-988c-6cbd0a2237e2,survivor,e1be34d8-c766-4275-988c-6cbd0a2237e2,Centre d'Imagerie du Marché,Practice,Lead,FR,01765054016537,SIRET,29200,0,5
-C0084,98986227-ecaf-4622-a34f-fb123c91ad39,merge_into_survivor,e1be34d8-c766-4275-988c-6cbd0a2237e2,Centre de Radiologie Riviera,Practice,Lead,FR,01765054016537,SIRET,36100,0,0
-C0085,763c3369-3491-417f-b24c-e0bd65b2d6af,merge_into_survivor,75b808c9-18ad-4bb3-90cd-ba45fce83662,Cabinet de Radiologie Diderot ,Practice,,FR,01973877225992,SIRET,93260,0,0
-C0085,75b808c9-18ad-4bb3-90cd-ba45fce83662,survivor,75b808c9-18ad-4bb3-90cd-ba45fce83662,Cabinet de Radiologie Diderot,Practice,Lead,FR,01973877225992,SIRET,9326,0,0
-C0086,6709aaad-34ed-4980-a3aa-d2935ccf6418,merge_into_survivor,0c0d6117-10b7-4a62-86ae-92bdd9d63435,Cabinet de Radiologie Estuaire,Practice,Lead,FR,02503803573725,SIRET,77000,0,0
-C0086,0c0d6117-10b7-4a62-86ae-92bdd9d63435,survivor,0c0d6117-10b7-4a62-86ae-92bdd9d63435,Clinique Saint-Jacques,Practice,Lead,FR,02503803573725,SIRET,75012,0,0
-C0087,ad702483-defe-499c-956f-efc24a8d1ceb,merge_into_survivor,a6632071-c2d4-4116-b02d-b27ad8bab1aa,Cabinet de Masso-Kinésithérapie Le Tampon,Practice,,FR,02822049914562,SIRET,97430,1,0
-C0087,a6632071-c2d4-4116-b02d-b27ad8bab1aa,survivor,a6632071-c2d4-4116-b02d-b27ad8bab1aa,Cabinet de Masso-Kinésithérapie Le Tampon - doublon ?,Practice,Lead,FR,02822049914562,SIRET,97430,0,0
-C0088,24a7aec8-fc89-4c92-a4a2-3eaa8afc5e1e,survivor,24a7aec8-fc89-4c92-a4a2-3eaa8afc5e1e,Pôle Médical du Marché,Practice,Lead,FR,03150704983683,SIRET,49150,0,1
-C0088,1a2539fa-abb6-443e-8f68-1f150420aea6,merge_into_survivor,24a7aec8-fc89-4c92-a4a2-3eaa8afc5e1e,Centre Médical Saint-Georges,Practice,Lead,FR,03150704983683,SIRET,53000,0,0
-C0089,7281184b-c3e2-44a0-8cc5-6aefc6a5c1cc,survivor,7281184b-c3e2-44a0-8cc5-6aefc6a5c1cc,Polyclinique des Halles,Practice,Lead,FR,03187815009610,SIRET,93390,0,7
-C0089,24a246b0-e0b7-4ed6-83a5-2aa20d257209,merge_into_survivor,7281184b-c3e2-44a0-8cc5-6aefc6a5c1cc,Polyclinique des Hallse,Practice,Lead,FR,03187815009610,SIRET,93390,0,5
-C0090,ccff0a3d-407e-4e94-ab13-5a89aeebfbe5,merge_into_survivor,3f06c51f-eb63-43e2-abb1-4a3c6e46dc69,Kine des Platanse,Practice,Lead,FR,03228641102136,SIRET,92110,0,4
-C0090,3f06c51f-eb63-43e2-abb1-4a3c6e46dc69,survivor,3f06c51f-eb63-43e2-abb1-4a3c6e46dc69,Kiné des Platanes,Practice,Lead,FR,03228641102136,SIRET,92110,0,6
-C0091,7ec4e24e-26d5-467f-8d71-e91fa2b2dc3a,survivor,7ec4e24e-26d5-467f-8d71-e91fa2b2dc3a,Scanner IRM du Port,Practice,Lead,FR,03490891395683,SIRET,94340,0,1
-C0091,68213239-ce80-4170-94e4-fa7cc5607571,merge_into_survivor,7ec4e24e-26d5-467f-8d71-e91fa2b2dc3a,Imagerie Médicale Saint-Martin,Practice,Lead,FR,03490891395683,SIRET,75009,0,0
-C0092,a35dc497-9720-4530-9d04-d7b202befc2d,survivor,a35dc497-9720-4530-9d04-d7b202befc2d,Radiologie Altiys,Practice,Lead,FR,04084033256926,SIRET,92600,0,2
-C0092,3f3e1f64-a806-46b5-80df-1248c8a5a0ab,merge_into_survivor,a35dc497-9720-4530-9d04-d7b202befc2d,Centre de Radiologie du Palais,Practice,Lead,FR,04084033256926,SIRET,94600,0,0
-C0093,4245b8a0-6a52-4001-b485-572eecc50d2b,merge_into_survivor,2397bbe7-3b79-43a2-9081-6edded68a07f,Ctre Dentaire du Lac,Practice,Lead,FR,04540312838650,SIRET,21540,0,1
-C0093,2397bbe7-3b79-43a2-9081-6edded68a07f,survivor,2397bbe7-3b79-43a2-9081-6edded68a07f,Centre Dentaire du Lac,Practice,Lead,FR,04540312838650,SIRET,21540,0,2
-C0094,9e8a0d52-7798-4962-94a6-4b7cfbe3c53d,merge_into_survivor,9df9e085-54df-4cf5-b2b1-f9b02559d084,Clinique Riviera,Practice,Lead,FR,04759574927023,SIRET,75018,0,4
-C0094,9df9e085-54df-4cf5-b2b1-f9b02559d084,survivor,9df9e085-54df-4cf5-b2b1-f9b02559d084,Clinique des Lilas,Practice,Lead,FR,04759574927023,SIRET,78500,1,2
-C0095,8e079aaf-1389-487b-be7d-92910e28ea49,survivor,8e079aaf-1389-487b-be7d-92910e28ea49,Scanner IRM Helialys,Practice,Lead,FR,04767067441915,SIRET,91000,0,6
-C0095,098eacda-2219-4daf-ab9b-9f2bce84b0bf,merge_into_survivor,8e079aaf-1389-487b-be7d-92910e28ea49,Centre de Santé Ferrand,Practice,Lead,FR,04767067441915,SIRET,77340,0,5
-C0096,b73ad8aa-8157-40d9-b90c-b88bf7d4ea49,merge_into_survivor,5660a8d9-da59-4633-8211-ec5f233aa58d,Polyclinique des Lilas,Practice,Lead,FR,04771074452733,SIRET,38480,0,10
-C0096,5660a8d9-da59-4633-8211-ec5f233aa58d,survivor,5660a8d9-da59-4633-8211-ec5f233aa58d,Centre de Chirurgie Azoulay,Practice,Prospect,FR,04771074452733,SIRET,07500,1,1
-C0097,4112015f-7b43-4e2c-8faf-6148f7722677,merge_into_survivor,3cd4c048-2a75-4d7f-97a0-48baabeaa959,Centre de Santé du Mail,Practice,Lead,FR,05371982952822,SIRET,01480,1,1
-C0097,3cd4c048-2a75-4d7f-97a0-48baabeaa959,survivor,3cd4c048-2a75-4d7f-97a0-48baabeaa959,Ctre de Santé du Mail,Practice,Prospect,FR,05371982952822,SIRET,01480,0,0
-C0098,c89c4b64-7c2b-4f48-8133-e1fc1cd0b826,merge_into_survivor,81b2aeb6-299d-4a27-b25d-1e125e5333ed,Cabinet de Radiologie Medinor,Practice,Lead,FR,05860828237034,SIRET,35760,0,0
-C0098,81b2aeb6-299d-4a27-b25d-1e125e5333ed,survivor,81b2aeb6-299d-4a27-b25d-1e125e5333ed,Clinique Estuaire,Practice,Lead,FR,05860828237034,SIRET,56300,0,6
-C0099,2362e63c-8266-4e64-bf6e-119f570f5a85,survivor,2362e63c-8266-4e64-bf6e-119f570f5a85,Cabinet de Radiologie Mediis,Practice,Lead,FR,07323103730999,SIRET,94270,0,1
-C0099,2016e113-6d5f-4bbe-b27d-9e7f4064492f,merge_into_survivor,2362e63c-8266-4e64-bf6e-119f570f5a85,Centre de Radiologie Estuaire,Practice,Lead,FR,07323103730999,SIRET,95120,0,0
-C0100,45a5cbef-7124-4d2b-8266-dec5de73cbfc,merge_into_survivor,42995a6f-477a-4bfb-9a8a-f42420f10fe4,Imagerie Médicale Vernoil Le Fourrier,Practice,Lead,FR,07754209083901,SIRET,49390,0,0
-C0100,42995a6f-477a-4bfb-9a8a-f42420f10fe4,survivor,42995a6f-477a-4bfb-9a8a-f42420f10fe4,Centre de Radiologie Saint-Louis,Practice,Lead,FR,07754209083901,SIRET,76200,0,0
-C0101,faf64788-165e-4c7e-8e3d-963135035320,survivor,faf64788-165e-4c7e-8e3d-963135035320,Centre d'Imagerie du Mail,Practice,Lead,FR,08256714053410,SIRET,34400,0,7
-C0101,d431651f-9ddd-48f4-9193-a333ae46bbd2,merge_into_survivor,faf64788-165e-4c7e-8e3d-963135035320,Cabinet de Radiologie Saint-Éloi,Practice,Lead,FR,08256714053410,SIRET,64100,0,2
-C0102,7f1403d0-be22-4ed4-a437-29fc99555bea,merge_into_survivor,1d23a564-2794-4c67-9a7c-78827b1033ea,Centre de la Vision Vauban,Practice,Lead,FR,08778893139249,SIRET,34070,0,2
-C0102,1d23a564-2794-4c67-9a7c-78827b1033ea,survivor,1d23a564-2794-4c67-9a7c-78827b1033ea,Centre Ophtalmologique du Moulin,Practice,Lead,FR,08778893139249,SIRET,65360,0,3
-C0103,ca7edfcd-7029-4a26-adf9-8b87f4c2d48d,survivor,ca7edfcd-7029-4a26-adf9-8b87f4c2d48d,Centre d'Imagerie Jaurès,Practice,Lead,FR,08928787475536,SIRET,77290,0,1
-C0103,a9f2d88a-6edc-45ab-8a1d-796061d89894,merge_into_survivor,ca7edfcd-7029-4a26-adf9-8b87f4c2d48d,Scanner IRM Saint-Pierre,Practice,Lead,FR,08928787475536,SIRET,75019,0,0
-C0104,fd7063c8-8227-48ea-b665-66ade642760a,merge_into_survivor,1f7fb7e1-1c06-4a56-900c-7c4d8d1987b1,Scanner IRM Hamno,Practice,Lead,FR,09574470236485,SIRET,75006,0,2
-C0104,1f7fb7e1-1c06-4a56-900c-7c4d8d1987b1,survivor,1f7fb7e1-1c06-4a56-900c-7c4d8d1987b1,Scanner IRM Hamon,Practice,Lead,FR,09574470236485,SIRET,75006,0,3
-C0105,f08802ec-5b36-439d-9b1b-b72c51c763d3,survivor,f08802ec-5b36-439d-9b1b-b72c51c763d3,Centre Médical Saint-Nicolsa,Practice,Prospect,FR,09652570487594,SIRET,53000,0,0
-C0105,5f447f88-7da7-455e-89ee-242fa00fc0f6,merge_into_survivor,f08802ec-5b36-439d-9b1b-b72c51c763d3,Centre Médical Saint-Nicolas,Practice,Lead,FR,09652570487594,SIRET,53000,0,0
-C0106,3f28fb9d-24a0-443e-839f-ebb719106cb1,merge_into_survivor,129e8528-83e6-419c-83f8-ba26d337c5d2,Centre de Chirurgie Saint-Louis,Practice,Lead,FR,09753681755331,SIRET,93140,0,0
-C0106,129e8528-83e6-419c-83f8-ba26d337c5d2,survivor,129e8528-83e6-419c-83f8-ba26d337c5d2,Polyclinique St Maur Des Fosses,Practice,Lead,FR,09753681755331,SIRET,94100,1,7
-C0107,77b7cab2-7b72-47be-9565-368aa95cdd7f,merge_into_survivor,2812dbd3-2f93-4131-9412-ec7e42aa8b20,Scanner IRM du Cours ,Practice,Lead,FR,035159623,SIREN,30900,0,1
-C0107,2812dbd3-2f93-4131-9412-ec7e42aa8b20,survivor,2812dbd3-2f93-4131-9412-ec7e42aa8b20,Scanner IRM du Cours,Practice,Lead,FR,035159623,SIREN,30900,0,1
-C0108,e0a81754-e95b-4c4f-b367-e156ba9ce4bf,merge_into_survivor,cfb613ec-30de-4823-b9c5-829fdab2dff0,  centre de santé des marronniers ,Practice,Lead,FR,039667373,SIREN,76600,0,0
-C0108,cfb613ec-30de-4823-b9c5-829fdab2dff0,survivor,cfb613ec-30de-4823-b9c5-829fdab2dff0,Centre de Santé des Marronniers,Practice,Lead,FR,039667373,SIREN,76600,0,1
-C0109,88e28067-6436-421f-8e19-eb265125f836,merge_into_survivor,2b5dbd22-7307-4883-bc19-be04d50c441c,Clinique Nice,Practice,Lead,FR,046344842,SIREN,06000,0,1
-C0109,2b5dbd22-7307-4883-bc19-be04d50c441c,survivor,2b5dbd22-7307-4883-bc19-be04d50c441c,Clinique Nice ,Practice,Prospect,FR,046344842,SIREN,06000,0,1
-C0110,d63bf354-20a4-40dc-9667-7eff8f3a2475,merge_into_survivor,5050b8fc-f3db-45fe-962a-cf2071e65024,Imagerie Médicale Lamartine SCM,Practice,Lead,FR,05674488127145,SIRET,29600,0,0
-C0110,5050b8fc-f3db-45fe-962a-cf2071e65024,survivor,5050b8fc-f3db-45fe-962a-cf2071e65024,Imagerie Médicale Lamartine,Practice,Lead,FR,05674488127140,SIRET,29600,0,1
-C0111,e02d1949-c9b3-4926-8b80-be44fd107268,survivor,e02d1949-c9b3-4926-8b80-be44fd107268,Centre de Santé Arnaud,Practice,Lead,FR,062964945,SIREN,63800,0,1
-C0111,5d9ed219-6b51-4735-a2b6-656423bbc731,merge_into_survivor,e02d1949-c9b3-4926-8b80-be44fd107268,CENTRE DE SANTÉ ARNAUD,Practice,,FR,062964945,SIREN,63800,0,0
-C0112,cbf697c7-acd5-4a1a-8a27-e0461f5498cf,survivor,cbf697c7-acd5-4a1a-8a27-e0461f5498cf,CENTRE CARDIOLOGIQUE LUMAVIA,Practice,Prospect,FR,089072326,SIREN,95000,0,0
-C0112,3661984f-d2b2-4ba6-ab35-6a9e76d23f63,merge_into_survivor,cbf697c7-acd5-4a1a-8a27-e0461f5498cf,Centre Cardiologique Lumavia,Practice,Lead,FR,089072326,SIREN,95000,0,1
-C0113,5b1b0916-6246-46f2-b0fa-cf3e02160466,merge_into_survivor,1994b760-d1f3-47df-983e-ceec8f7c6f00,CLINIQUE DES OLIVIERS,Practice,Lead,FR,09278430536246,SIRET,75008,0,1
-C0113,1994b760-d1f3-47df-983e-ceec8f7c6f00,survivor,1994b760-d1f3-47df-983e-ceec8f7c6f00,Clinique des Oliviers,Practice,Lead,FR,09278430536240,SIRET,75008,1,2
-C0114,bea543d4-3e31-4290-9c83-d311af647a0b,survivor,bea543d4-3e31-4290-9c83-d311af647a0b,Pôle Santé Olivet,Practice,Lead,FR,093789634,SIREN,45160,0,1
-C0114,3aee9f62-aec8-4bf9-9350-fee21b3ae662,merge_into_survivor,bea543d4-3e31-4290-9c83-d311af647a0b,PÔLE SANTÉ OLIVET,Practice,Lead,FR,093789634,SIREN,45160,0,0
-C0115,8af565a7-01a8-44c5-a4c2-2f5ee9e78c4d,survivor,8af565a7-01a8-44c5-a4c2-2f5ee9e78c4d,  pôle santé la chevroliere ,Practice,Prospect,FR,097020093,SIREN,44118,0,0
-C0115,5729f72c-e91b-48ef-8f3f-9b0d3e90b824,merge_into_survivor,8af565a7-01a8-44c5-a4c2-2f5ee9e78c4d,Pôle Santé La Chevroliere,Practice,Lead,FR,097020093,SIREN,44118,0,1
+C0001,a5c6e8d0-289a-496c-a1ca-98262489b86c,survivor,a5c6e8d0-289a-496c-a1ca-98262489b86c,Centre Ophtalmologique Benali,Practice,Prospect,FR,08505078984556,SIRET,47240,1,3
+C0001,9b5b2774-aea3-4c9d-bda6-657a11c7dd2e,merge_into_survivor,a5c6e8d0-289a-496c-a1ca-98262489b86c,Centre Ophtalmologique Benali ,Practice,Lead,FR,08505078984556,SIRET,47240,0,2
+C0002,9b356bd5-c608-425c-b24d-d1157046d883,merge_into_survivor,021d3b01-ed7a-4377-a67c-b22b4b1587db,Centre Médical Pluridisciplinaire des Glycinse,Practice,Lead,FR,07007639313186,SIRET,06690,0,0
+C0002,021d3b01-ed7a-4377-a67c-b22b4b1587db,survivor,021d3b01-ed7a-4377-a67c-b22b4b1587db,Centre Médical Pluridisciplinaire des Glycines,Practice,Prospect,FR,07007639313186,SIRET,06690,1,1
+C0003,9cbb6f8d-449d-4f7a-9519-0cc8c16e0167,survivor,9cbb6f8d-449d-4f7a-9519-0cc8c16e0167,Maison de Santé Ampère,Practice,Prospect,FR,07421397680621,SIRET,91360,1,1
+C0003,8be3ecfa-9009-4dbb-b993-5d67985e3f30,merge_into_survivor,9cbb6f8d-449d-4f7a-9519-0cc8c16e0167,MSP Ampère,Practice,,FR,07421397680621,SIRET,91360,0,0
+C0004,c85e5115-0603-4288-98dd-218025cb8eea,merge_into_survivor,6218dc0d-8bb6-4c48-b086-e95a94779817,  scm dentaire du forum ,Practice,Lead,FR,08894802125581,SIRET,81600,0,0
+C0004,6218dc0d-8bb6-4c48-b086-e95a94779817,survivor,6218dc0d-8bb6-4c48-b086-e95a94779817,SCM Dentaire du Forum,Practice,Lead,FR,08894802125581,SIRET,81600,0,1
+C0005,e922ac74-1ccb-47db-99f0-ad7de96800d5,survivor,e922ac74-1ccb-47db-99f0-ad7de96800d5,MSP Saint-Michel,Practice,Lead,FR,02536673334760,SIRET,31660,0,1
+C0005,b4b01df7-81e5-4ca0-9b3d-075968e0afdc,merge_into_survivor,e922ac74-1ccb-47db-99f0-ad7de96800d5,MSP Saint-Michel ,Practice,Lead,FR,02536673334760,SIRET,31660,0,0
+C0006,3175f323-0afc-448c-ae4c-4451c35e3f7c,merge_into_survivor,12249d24-533d-4915-a02e-227e2433a36b,POLYCLINIQUE DES PLATANES,Practice,Lead,FR,02624821126757,SIRET,75009,0,1
+C0006,12249d24-533d-4915-a02e-227e2433a36b,survivor,12249d24-533d-4915-a02e-227e2433a36b,Polyclinique des Platanes,Practice,Lead,FR,02624821126757,SIRET,75009,0,1
+C0007,c185760d-f9f5-4324-97f4-9d5376bdc9d0,merge_into_survivor,522cbd2d-adb0-48d6-927f-98d97a8844dc,  RADIOLOGIE LESCAR ,Practice,Lead,FR,03021552999404,SIRET,64230,0,0
+C0007,522cbd2d-adb0-48d6-927f-98d97a8844dc,survivor,522cbd2d-adb0-48d6-927f-98d97a8844dc,Radiologie Lescar,Practice,Prospect,FR,03021552999404,SIRET,64230,1,0
+C0008,bba517d2-28b7-441d-b265-eab7c55702df,merge_into_survivor,9f4eb6da-eb9b-4ebd-80d8-6b34cb8c9e53,Cabinet d'Ophtalmologie des Acacias ,Practice,Lead,FR,09325061141703,SIRET,97122,0,2
+C0008,9f4eb6da-eb9b-4ebd-80d8-6b34cb8c9e53,survivor,9f4eb6da-eb9b-4ebd-80d8-6b34cb8c9e53,Cabinet d'Ophtalmologie des Acacias,Practice,Lead,FR,09325061141703,SIRET,97122,0,3
+C0009,cdfb8647-f028-45ca-8f2c-ef2af6091f46,merge_into_survivor,42000652-ed73-4c52-90a1-26d55166c009,  cardiologie montpellier ,Practice,Lead,FR,01795126000102,SIRET,34000,0,5
+C0009,42000652-ed73-4c52-90a1-26d55166c009,survivor,42000652-ed73-4c52-90a1-26d55166c009,Cardiologie Montpellier,Practice,Lead,FR,01795126000102,SIRET,34000,1,5
+C0010,d61928f9-0065-456c-9d5d-9855fc924f80,survivor,d61928f9-0065-456c-9d5d-9855fc924f80,Scanner IRM Sallanches,Practice,Lead,FR,02022974661979,SIRET,74700,0,1
+C0010,4b5c324c-23a1-42af-9507-9f4f8d5f1187,merge_into_survivor,d61928f9-0065-456c-9d5d-9855fc924f80,  scanner irm sallanches ,Practice,,FR,02022974661979,SIRET,74700,0,0
+C0011,d011e6ca-9f83-42b9-b440-fc1acfde5546,survivor,d011e6ca-9f83-42b9-b440-fc1acfde5546,MSP des Iris,Practice,Lead,FR,03516542288867,SIRET,49300,0,1
+C0011,67beb5b2-d190-41cf-b4ed-ee8cbec3193c,merge_into_survivor,d011e6ca-9f83-42b9-b440-fc1acfde5546,MSP DES IRIS,Practice,Lead,FR,03516542288867,SIRET,49300,0,1
+C0012,f363e220-18d6-4348-8aa5-b861d656e4d7,survivor,f363e220-18d6-4348-8aa5-b861d656e4d7,Centre de Radiologie du Port,Practice,Lead,FR,04188783772055,SIRET,40280,0,1
+C0012,3aae255e-f305-407e-a3f4-5fba813af05f,merge_into_survivor,f363e220-18d6-4348-8aa5-b861d656e4d7,  centre de radiologie du port ,Practice,Lead,FR,04188783772055,SIRET,40280,0,0
+C0013,45e8dfd8-3360-46d3-8b2c-f2ef320a2977,survivor,45e8dfd8-3360-46d3-8b2c-f2ef320a2977,Centre d'Imagerie des Tilleuls,Practice,Lead,FR,04302098106202,SIRET,33000,0,0
+C0013,3f701c61-1fa3-49d6-94da-fbf70df8a490,merge_into_survivor,45e8dfd8-3360-46d3-8b2c-f2ef320a2977,  centre d'imagerie des tilleuls ,Practice,Lead,FR,04302098106202,SIRET,33000,0,0
+C0014,e624598c-c7b2-40ad-a83c-a0feea588805,merge_into_survivor,17b376fa-c52e-4ec0-84c8-948408d5a877,Cabinet de Radiologie des Arcades SCM,Practice,Lead,FR,05396454069524,SIRET,78180,0,2
+C0014,17b376fa-c52e-4ec0-84c8-948408d5a877,survivor,17b376fa-c52e-4ec0-84c8-948408d5a877,Cabinet de Radiologie des Arcades,Practice,Lead,FR,05396454069524,SIRET,78180,0,3
+C0015,d8a02fa7-e8cf-4ed8-a2b3-8e05a0236e05,survivor,d8a02fa7-e8cf-4ed8-a2b3-8e05a0236e05,Pôle Santé Lumaqua ,Practice,Lead,FR,09056282887846,SIRET,75018,0,0
+C0015,a1d02fc9-1a92-412a-8631-feff313f263b,merge_into_survivor,d8a02fa7-e8cf-4ed8-a2b3-8e05a0236e05,Pôle Santé Lumaqua,Practice,Lead,FR,09056282887846,SIRET,75018,0,0
+C0016,7321558b-6769-414e-8570-ddfda92992be,survivor,7321558b-6769-414e-8570-ddfda92992be,Centre d'Imagerie Imagora,Practice,Lead,FR,09635877544829,SIRET,69008,0,2
+C0016,361dd252-40b0-4789-86eb-295653912bc3,merge_into_survivor,7321558b-6769-414e-8570-ddfda92992be,Centre d'Imagerie Imagora ,Practice,Lead,FR,09635877544829,SIRET,69008,0,1
+C0017,90447cdf-56f8-48f8-9130-5f65abddb05e,merge_into_survivor,434c8af0-b8e9-43e9-8a35-8df73d16e2cf,Kine du Forum,Practice,Lead,FR,09983849256779,SIRET,76360,0,2
+C0017,434c8af0-b8e9-43e9-8a35-8df73d16e2cf,survivor,434c8af0-b8e9-43e9-8a35-8df73d16e2cf,Kiné du Forum,Practice,Lead,FR,09983849256779,SIRET,76360,0,3
+C0018,39b5bb84-404d-4280-aec3-db5e7108ce7d,merge_into_survivor,1dd17a81-15ed-4672-acdc-bc8896aca478,Cabinet d'Ophtalmologie des Irsi SAS,Practice,Lead,FR,06503242752720,SIRET,97420,0,3
+C0018,1dd17a81-15ed-4672-acdc-bc8896aca478,survivor,1dd17a81-15ed-4672-acdc-bc8896aca478,Cabinet d'Ophtalmologie des Iris,Practice,Lead,FR,06503242752720,SIRET,97420,1,4
+C0019,a2087ab6-3ed5-4791-9fb9-0bbccb0d2925,merge_into_survivor,99972ba1-8c2b-4277-8784-ae8626282023,Cab. de Masso-Kinesithérapie Henry,Practice,Lead,FR,00961337303104,SIRET,40000,0,2
+C0019,99972ba1-8c2b-4277-8784-ae8626282023,survivor,99972ba1-8c2b-4277-8784-ae8626282023,Cabinet de Masso-Kinésithérapie Henry,Practice,Lead,FR,00961337303104,SIRET,40000,0,3
+C0020,e168d0eb-5c43-448c-956d-e6d31253dca2,survivor,e168d0eb-5c43-448c-956d-e6d31253dca2,Radiologie des Oliviesr,Practice,Lead,FR,01209641805615,SIRET,72100,0,0
+C0020,a4a24341-df5c-49fa-bb83-8fc5e6f1ccff,merge_into_survivor,e168d0eb-5c43-448c-956d-e6d31253dca2,Radiologie des Oliviers,Practice,Lead,FR,01209641805615,SIRET,72100,0,0
+C0021,a08e5ed3-cd74-496c-9c23-5edf72928ab5,survivor,a08e5ed3-cd74-496c-9c23-5edf72928ab5,Maison de Santé Parsi,Practice,Prospect,FR,01971534167466,SIRET,75018,0,4
+C0021,041d632e-5e55-4863-b5c4-7efe93595dd9,merge_into_survivor,a08e5ed3-cd74-496c-9c23-5edf72928ab5,Maison de Santé Paris,Practice,Lead,FR,01971534167466,SIRET,75018,0,6
+C0022,53a90f6b-0520-4025-ab80-7a902da31e2c,merge_into_survivor,3aa52ad4-3f53-4150-b16a-614cc939270d,Centre de Radiologie Océaen,Practice,Lead,FR,03887585207340,SIRET,85000,0,3
+C0022,3aa52ad4-3f53-4150-b16a-614cc939270d,survivor,3aa52ad4-3f53-4150-b16a-614cc939270d,Centre de Radiologie Océane,Practice,Lead,FR,03887585207340,SIRET,85000,0,4
+C0023,ad4cccac-2a82-4946-b3ef-2e08aad92f59,survivor,ad4cccac-2a82-4946-b3ef-2e08aad92f59,Centre d'Imagerie du Cours,Practice,Lead,FR,06623417074393,SIRET,78000,0,1
+C0023,3de5a9e9-8e47-42ad-8dad-7e3b19415c5d,merge_into_survivor,ad4cccac-2a82-4946-b3ef-2e08aad92f59,Ctre d'Imagerie du Cours,Practice,Lead,FR,06623417074393,SIRET,78000,0,1
+C0024,f94f200a-bc25-4f0b-8bcb-cd26614d906a,merge_into_survivor,8735562a-d285-49e9-a87c-0af0dcc6f064,Centre Ophtalmologique du Potn,Practice,Prospect,FR,,missing,45770,0,0
+C0024,8735562a-d285-49e9-a87c-0af0dcc6f064,survivor,8735562a-d285-49e9-a87c-0af0dcc6f064,Centre Ophtalmologique du Pont,Practice,Prospect,FR,03760112710401,SIRET,45770,1,1
+C0025,c201d7d2-fb50-4544-8497-c73581ca22ac,merge_into_survivor,2ce8fe6c-1675-45b8-a12a-858d02d8edc9,  centre de santé dentaire des arcades ,Practice,Prospect,FR,,missing,80240,0,0
+C0025,2ce8fe6c-1675-45b8-a12a-858d02d8edc9,survivor,2ce8fe6c-1675-45b8-a12a-858d02d8edc9,Centre de Santé Dentaire des Arcades,Practice,Prospect,FR,06449506267841,SIRET,80240,1,1
+C0026,c15fdc9e-0958-4940-85d1-cfd862213881,survivor,c15fdc9e-0958-4940-85d1-cfd862213881,Cabinet Médical Saint-Denis,Practice,Lead,FR,02284150600375,SIRET,97400,0,5
+C0026,1f9f077a-13d9-4f42-9e63-e04851183a98,merge_into_survivor,c15fdc9e-0958-4940-85d1-cfd862213881,  cabinet médical saint-denis ,Practice,Lead,FR,,missing,97400,0,5
+C0027,f9e8b65b-7138-48c5-982f-bd65f8e657f7,merge_into_survivor,c62f4c24-50be-4f36-8d99-c5edbc98f3e1,Centre d'Imagerie Saint-Pierre ,Practice,Lead,FR,,missing,13200,0,0
+C0027,c62f4c24-50be-4f36-8d99-c5edbc98f3e1,survivor,c62f4c24-50be-4f36-8d99-c5edbc98f3e1,Centre d'Imagerie Saint-Pierre,Practice,Lead,FR,04277002428357,SIRET,13200,0,0
+C0028,5ae9d162-505f-4117-b641-6d58e8e88010,survivor,5ae9d162-505f-4117-b641-6d58e8e88010,Radiologie Saint-Georges,Practice,Lead,FR,05998113439087,SIRET,44390,0,1
+C0028,2b584ee4-92af-49f5-af92-fdda42a1ef0e,merge_into_survivor,5ae9d162-505f-4117-b641-6d58e8e88010,Radiologie Saint-Georges ,Practice,Lead,FR,,missing,44390,0,1
+C0029,b4cef410-5e93-407c-8351-49548e23e156,survivor,b4cef410-5e93-407c-8351-49548e23e156,Clinique Rolland,Practice,Lead,FR,07232569973672,SIRET,71880,0,5
+C0029,4af9a574-f767-4115-8825-bdbb29e6d701,merge_into_survivor,b4cef410-5e93-407c-8351-49548e23e156,Clinique Rolland ,Practice,Lead,FR,,missing,71880,0,5
+C0030,1fbfc9ba-c4d2-461c-84c8-bd9b0604b8bb,merge_into_survivor,1842335d-28c0-46c9-8460-a18dfafb475d,CENTRE DE RÉÉDUCATION NEOTIS,Practice,,FR,,missing,85710,0,1
+C0030,1842335d-28c0-46c9-8460-a18dfafb475d,survivor,1842335d-28c0-46c9-8460-a18dfafb475d,Centre de Rééducation Neotis,Practice,Lead,FR,04083993855099,SIRET,85710,0,2
+C0031,687d3859-1332-408a-b080-2f632485b484,merge_into_survivor,34bbc3e4-fb9d-4ae3-811e-1218b4caed1b,  centre de rééducation ollioules ,Practice,Lead,FR,,missing,83190,0,1
+C0031,34bbc3e4-fb9d-4ae3-811e-1218b4caed1b,survivor,34bbc3e4-fb9d-4ae3-811e-1218b4caed1b,Centre de Rééducation Ollioules,Practice,Lead,FR,06968376120137,SIRET,83190,0,1
+C0032,d46f4812-5d90-40d4-8647-6d80ef33ff4d,survivor,d46f4812-5d90-40d4-8647-6d80ef33ff4d,Centre Médical Pluridisciplinaire Challans,Practice,Lead,FR,03861399818303,SIRET,85300,0,4
+C0032,c9317093-6890-4c27-8d2e-022b4f8b8bef,merge_into_survivor,d46f4812-5d90-40d4-8647-6d80ef33ff4d,Centre Médical Pluridisciplinaire Challans SELARL,Practice,,FR,,missing,85300,0,5
+C0033,846ca115-0a5f-4b5d-babb-0632cc68febd,survivor,846ca115-0a5f-4b5d-babb-0632cc68febd,Clinique Altialys,Practice,Prospect,FR,05085626936948,SIRET,92300,1,4
+C0033,111f0d56-f7c0-43c0-b255-e2008a8c427b,merge_into_survivor,846ca115-0a5f-4b5d-babb-0632cc68febd,Clinique Altialys ,Practice,,FR,,missing,92300,0,4
+C0034,e5d4cd78-07be-4d99-b0f0-5c52a24328f1,survivor,e5d4cd78-07be-4d99-b0f0-5c52a24328f1,SCM Dentaire Azoulay,Practice,Lead,FR,03495633497762,SIRET,75011,0,4
+C0034,98391730-4ca6-4a79-bf6b-ec6e4656efd7,merge_into_survivor,e5d4cd78-07be-4d99-b0f0-5c52a24328f1,SCM Dentaire Azoulay ,Practice,,FR,,missing,75011,0,4
+C0035,d00bf3b5-7f55-4e95-bd9d-476e0a49b108,survivor,d00bf3b5-7f55-4e95-bd9d-476e0a49b108,Clinique des Platanes,Practice,Lead,FR,047104690,SIREN,62160,0,1
+C0035,78b8f0bc-2cf1-4c6a-ae18-6f4ac2561570,merge_into_survivor,d00bf3b5-7f55-4e95-bd9d-476e0a49b108,  clinique des platanes ,Practice,Lead,FR,047104690,SIREN,62160,0,0
+C0036,8ce647eb-e9a2-4368-a9d8-0d1a4751fb13,merge_into_survivor,70b2ec73-2321-4c7b-9cf8-0670d9ae07b7,Polyclinique Bénard,Practice,Lead,FR,088865829,SIREN,56390,0,3
+C0036,70b2ec73-2321-4c7b-9cf8-0670d9ae07b7,survivor,70b2ec73-2321-4c7b-9cf8-0670d9ae07b7,Polyclinique Benard,Practice,Lead,FR,088865829,SIREN,56390,0,3
+C0037,80f68514-5934-445a-9cd6-a0c50ff5cf84,merge_into_survivor,11431219-d909-44c3-8ec2-2f6e3a8f88e8,Pôle Santé Lanester ,Practice,,FR,097941330,SIREN,56600,0,0
+C0037,11431219-d909-44c3-8ec2-2f6e3a8f88e8,survivor,11431219-d909-44c3-8ec2-2f6e3a8f88e8,Pôle Santé Lanester,Practice,Lead,FR,097941330,SIREN,56600,0,1
+C0038,a7aced42-dbd8-441d-bcff-fde708355e9f,survivor,a7aced42-dbd8-441d-bcff-fde708355e9f,Cabinet du Dr Guillaume,Practice,Lead,FR,04081848677460,SIRET,58200,0,1
+C0038,654f121d-183f-44eb-998a-865c3e428e5a,merge_into_survivor,a7aced42-dbd8-441d-bcff-fde708355e9f,Cabinet du Dr Guillauem,Practice,,FR,,missing,58200,0,0
+C0039,d58dcffd-7828-40b9-ac2a-85675239879b,merge_into_survivor,7f39bc40-33aa-48eb-9710-4010740ec712,Clinique Océaen,Practice,,FR,,missing,21200,0,3
+C0039,7f39bc40-33aa-48eb-9710-4010740ec712,survivor,7f39bc40-33aa-48eb-9710-4010740ec712,Clinique Océane,Practice,Prospect,FR,04234576948021,SIRET,21200,2,3
+C0040,f129e3fe-3e6c-4f62-8a41-e68f1e45e903,merge_into_survivor,0e4dd5d6-4de3-4cd8-965e-3a20827d9d61,Clinique Atlantique,Practice,Lead,FR,023921612,SIREN,79000,0,0
+C0040,0e4dd5d6-4de3-4cd8-965e-3a20827d9d61,survivor,0e4dd5d6-4de3-4cd8-965e-3a20827d9d61,CLINIQUE ATLANTIQEU,Practice,Lead,FR,023921612,SIREN,79000,0,0
+C0041,b4f25644-87f5-4a4e-97c7-46bc8f9fd79b,merge_into_survivor,9704baf8-59bb-405a-9a16-4fac641233cc,Centre de Santé Caen,Practice,Lead,FR,024596728,SIREN,14000,0,0
+C0041,9704baf8-59bb-405a-9a16-4fac641233cc,survivor,9704baf8-59bb-405a-9a16-4fac641233cc,CDS Caen,Practice,Lead,FR,024596728,SIREN,14000,0,0
+C0042,ede5fac7-594e-4409-a400-baee4fdb88a8,survivor,ede5fac7-594e-4409-a400-baee4fdb88a8,Cabinet Médical du Mail,Practice,Lead,FR,052373255,SIREN,34070,1,5
+C0042,1f902848-dea9-4644-8b10-924e74a1b9a6,merge_into_survivor,ede5fac7-594e-4409-a400-baee4fdb88a8,Cabinet Médical du Mali,Practice,,FR,052373255,SIREN,34070,0,5
+C0043,d4dd247a-99d7-47a7-ba31-b0f025ace869,merge_into_survivor,18ba5665-15d3-46ad-8936-9630dddf7728,Clinique du Châteua,Practice,,FR,094831211,SIREN,81100,0,0
+C0043,18ba5665-15d3-46ad-8936-9630dddf7728,survivor,18ba5665-15d3-46ad-8936-9630dddf7728,Clinique du Château,Practice,Lead,FR,094831211,SIREN,81100,0,1
+C0044,6cd20f20-f404-4eb9-8cf8-6e5ecef7db83,merge_into_survivor,38e7e384-31c9-43ff-9d7a-3d03f3f81432,Centre Ophtalmologique Saint-Luc SAS,Practice,,FR,03800774661649,SIRET,64100,0,1
+C0044,38e7e384-31c9-43ff-9d7a-3d03f3f81432,survivor,38e7e384-31c9-43ff-9d7a-3d03f3f81432,Centre Ophtalmologique Saint-Luc,Practice,Lead,FR,03800774661649,SIRET,64100,1,2
+C0045,d7708c44-2100-4b65-91c8-8a7b98237196,survivor,d7708c44-2100-4b65-91c8-8a7b98237196,Cabinet Dentaire Saint-Chamond,Practice,Lead,FR,01267720953227,SIRET,42400,0,0
+C0045,477bb8bc-3208-4a50-8719-0a0318d931f5,merge_into_survivor,d7708c44-2100-4b65-91c8-8a7b98237196,CABINET DENTAIRE SAINT-CHAMOND,Practice,Lead,FR,01267720953227,SIRET,42400,0,0
+C0046,fcfbf897-16eb-498d-b96c-eb5136f857cf,merge_into_survivor,db2b2d18-4d61-4a53-8569-b2f2d9280ec2,Centre Médical Leroy,Practice,Lead,FR,03495633457097,SIRET,13002,0,0
+C0046,db2b2d18-4d61-4a53-8569-b2f2d9280ec2,survivor,db2b2d18-4d61-4a53-8569-b2f2d9280ec2,  centre médical leroy ,Practice,Prospect,FR,03495633457097,SIRET,13002,0,0
+C0047,b282acb9-5b15-458a-a080-002b0d678bb0,survivor,b282acb9-5b15-458a-a080-002b0d678bb0,Centre Médical Confluence,Practice,Lead,FR,03495633470850,SIRET,97200,0,0
+C0047,4254b2f2-af67-48b9-b60d-64c2e0e58aad,merge_into_survivor,b282acb9-5b15-458a-a080-002b0d678bb0,Centre Médical Confluence ,Practice,Lead,FR,03495633470850,SIRET,97200,0,0
+C0048,55903bd9-31ff-4d9b-bd31-690fe55d744e,survivor,55903bd9-31ff-4d9b-bd31-690fe55d744e,Pôle Médical des Platanes,Practice,Lead,FR,01267720939788,SIRET,80800,0,1
+C0048,14390d16-379c-439c-9f51-e8cb6d5682ad,merge_into_survivor,55903bd9-31ff-4d9b-bd31-690fe55d744e,Pole Medical des Platanes,Practice,Lead,FR,01267720939788,SIRET,80800,0,0
+C0049,ec8bf8d7-c4ee-48e7-ab5c-a5aaea5bddbb,merge_into_survivor,e56d2c08-28cf-4a24-b0cf-815a4f9a4e35,CENTRE DE CHIRURGIE DES COTEAUX,Practice,Lead,FR,02172901793237,SIRET,77600,0,1
+C0049,e56d2c08-28cf-4a24-b0cf-815a4f9a4e35,survivor,e56d2c08-28cf-4a24-b0cf-815a4f9a4e35,Centre de Chirurgie des Coteaux,Practice,Lead,FR,02172901793237,SIRET,77600,0,1
+C0050,b943d656-bf9f-4609-8ede-d8acbb79b446,survivor,b943d656-bf9f-4609-8ede-d8acbb79b446,Centre de la Vision Lacroix,Practice,Lead,FR,04497583733070,SIRET,62540,0,2
+C0050,96e25a8e-b1dd-4bd8-8d02-d4f16baad05d,merge_into_survivor,b943d656-bf9f-4609-8ede-d8acbb79b446,Centre de la Vision Lacroix ,Practice,,FR,04497583733070,SIRET,62540,0,1
+C0051,f1a1f091-96a9-4773-be6c-b713d7f0b83c,survivor,f1a1f091-96a9-4773-be6c-b713d7f0b83c,Pôle Santé Curie SCM,Practice,Lead,FR,05047914696253,SIRET,21000,0,6
+C0051,85b668ed-6fe2-4651-8910-601ea95f674b,merge_into_survivor,f1a1f091-96a9-4773-be6c-b713d7f0b83c,Pôle Santé Curie,Practice,Lead,FR,05047914696253,SIRET,21000,0,5
+C0052,93ec05bb-e860-452a-bee3-bfa542c6c6c2,merge_into_survivor,5ef7a2af-bd68-4ed1-a1bc-6fb978fc6349,Cabinet de Radiologie Saint-Georges ,Practice,Lead,FR,00298606503233,SIRET,31130,0,0
+C0052,5ef7a2af-bd68-4ed1-a1bc-6fb978fc6349,survivor,5ef7a2af-bd68-4ed1-a1bc-6fb978fc6349,Cabinet de Radiologie Saint-Georges,Practice,Lead,FR,00298606503233,SIRET,31130,0,0
+C0053,ae26f76d-d4eb-4455-ac94-0ca7f9c4e6c9,merge_into_survivor,0eeefc7c-ca28-49e1-9586-22cfe900dc8f,Cabinet Dentaire Horizon,Practice,,FR,00438246156501,SIRET,97420,1,0
+C0053,0eeefc7c-ca28-49e1-9586-22cfe900dc8f,survivor,0eeefc7c-ca28-49e1-9586-22cfe900dc8f,  cabinet dentaire horizon ,Practice,Prospect,FR,00438246156501,SIRET,97420,0,0
+C0054,60123440-a293-43f3-8d25-202bb18a28c0,survivor,60123440-a293-43f3-8d25-202bb18a28c0,Centre de Chirurgie du Canal,Practice,Lead,FR,00519498014082,SIRET,91300,1,1
+C0054,08d9d0ae-0e99-426d-bb22-4cda03e027bc,merge_into_survivor,60123440-a293-43f3-8d25-202bb18a28c0,Centre de Chirurgie du Canal ,Practice,,FR,00519498014082,SIRET,91300,0,0
+C0055,77bd9f21-6587-4598-b7ed-bc8076cc4d75,survivor,77bd9f21-6587-4598-b7ed-bc8076cc4d75,Centre de Radiologie Brest,Practice,Lead,FR,01867460647937,SIRET,29200,0,2
+C0055,55e07d2e-1f77-4dc5-8584-f1d6fb3377d3,merge_into_survivor,77bd9f21-6587-4598-b7ed-bc8076cc4d75,Centre de Radiologie Brest ,Practice,,FR,01867460647937,SIRET,29200,0,2
+C0056,cf10c266-ebf7-46ad-88f7-44a95d55ef4e,merge_into_survivor,c4e56758-77ba-49a6-922a-1a5bd82e39ba,Imagerie Médicale Lumatis,Practice,Lead,FR,02470549322587,SIRET,35760,0,0
+C0056,c4e56758-77ba-49a6-922a-1a5bd82e39ba,survivor,c4e56758-77ba-49a6-922a-1a5bd82e39ba,  imagerie médicale lumatis ,Practice,Lead,FR,02470549322587,SIRET,35760,0,0
+C0057,8bd82047-81c9-45ba-a2ea-c6700298ca67,survivor,8bd82047-81c9-45ba-a2ea-c6700298ca67,Pôle Santé Guillaume ,Practice,Lead,FR,02637400911902,SIRET,37540,0,5
+C0057,7da1a2f0-d5ba-4e94-bd7d-7414729a8f3d,merge_into_survivor,8bd82047-81c9-45ba-a2ea-c6700298ca67,Pôle Santé Guillaume,Practice,Lead,FR,02637400911902,SIRET,37540,0,5
+C0058,da47a151-03b8-4bdc-9ffd-85288555dc7f,merge_into_survivor,6d3096c9-e6dc-4220-be7c-79a55afc9e32,SCANNER IRM PONTENX-LES-FORGES,Practice,,FR,03075965840415,SIRET,40200,0,0
+C0058,6d3096c9-e6dc-4220-be7c-79a55afc9e32,survivor,6d3096c9-e6dc-4220-be7c-79a55afc9e32,Scanner IRM Pontenx-Les-Forges,Practice,Lead,FR,03075965840415,SIRET,40200,0,0
+C0059,fae28bdb-94c6-4047-9c02-0030c608efa1,survivor,fae28bdb-94c6-4047-9c02-0030c608efa1,Radiologie Montceau-Les-Mines,Practice,Lead,FR,03743577307582,SIRET,71300,0,3
+C0059,ef35136e-9559-46ce-86f9-a7cdb3082e69,merge_into_survivor,fae28bdb-94c6-4047-9c02-0030c608efa1,Radiologie Montceau-Les-Mines SCM,Practice,Lead,FR,03743577307582,SIRET,71300,0,2
+C0060,ec222369-c5ac-4607-8d6b-84afb35cbf05,merge_into_survivor,9c3e7029-3ecf-4cb0-806e-469ef5fa1412,Kiné Odolia ,Practice,Lead,FR,03818477689063,SIRET,27000,0,1
+C0060,9c3e7029-3ecf-4cb0-806e-469ef5fa1412,survivor,9c3e7029-3ecf-4cb0-806e-469ef5fa1412,Kiné Odolia,Practice,Lead,FR,03818477689063,SIRET,27000,0,2
+C0061,bdb67ca7-7834-4fe9-936e-9ac573329a80,survivor,bdb67ca7-7834-4fe9-936e-9ac573329a80,Polyclinique Océane,Practice,Lead,FR,04678914524334,SIRET,75116,0,5
+C0061,7294ca37-32cf-4eb8-88ae-fe28f3b8b5a8,merge_into_survivor,bdb67ca7-7834-4fe9-936e-9ac573329a80,Polyclinique Oceane,Practice,Lead,FR,04678914524334,SIRET,75116,0,5
+C0062,fa5de116-2118-430e-84a6-eb486dfb4b47,merge_into_survivor,ad9ed67f-81b1-4f10-b934-841179083645,Radiologie du Lac ,Practice,Lead,FR,04924250643225,SIRET,62128,0,0
+C0062,ad9ed67f-81b1-4f10-b934-841179083645,survivor,ad9ed67f-81b1-4f10-b934-841179083645,Radiologie du Lac,Practice,Lead,FR,04924250643225,SIRET,62128,0,0
+C0063,bd44a9e4-06fa-44a7-8a3b-05f0238d6ef2,survivor,bd44a9e4-06fa-44a7-8a3b-05f0238d6ef2,Centre de Radiologie Bayonne,Practice,Lead,FR,05114757786904,SIRET,64100,0,0
+C0063,0ca53a74-a52f-477d-95b0-4b50954eb8d4,merge_into_survivor,bd44a9e4-06fa-44a7-8a3b-05f0238d6ef2,  centre de radiologie bayonne ,Practice,Lead,FR,05114757786904,SIRET,64100,0,0
+C0064,b538bc70-6989-4283-8cd6-6ff2ccaebb23,survivor,b538bc70-6989-4283-8cd6-6ff2ccaebb23,IMAGERIE MEDICALE SAINT-MARTIN,Practice,Prospect,FR,05300412359704,SIRET,69008,0,3
+C0064,480f0b66-b0e6-4544-acc0-2277fbabc0a3,merge_into_survivor,b538bc70-6989-4283-8cd6-6ff2ccaebb23,Imagerie Médicale Saint-Martin,Practice,Lead,FR,05300412359704,SIRET,69008,0,3
+C0065,9114e4fc-b981-46d5-b96b-8afbd01052db,survivor,9114e4fc-b981-46d5-b96b-8afbd01052db,Cabinet de Masso-Kinésithérapie Condorcet,Practice,Lead,FR,06130799711089,SIRET,11000,0,1
+C0065,38720541-554d-4605-a3f2-464d9bdea7b2,merge_into_survivor,9114e4fc-b981-46d5-b96b-8afbd01052db,Cabinet de Masso-Kinésithérapie Condorcet SCM,Practice,,FR,06130799711089,SIRET,11000,0,0
+C0066,fd7d52ff-ae42-4e75-926e-b6cfaef379ad,merge_into_survivor,af33f1b3-5d6d-448c-8977-64451dbc1af9,Radiologie des Iris,Practice,Lead,FR,07020328674388,SIRET,01500,0,0
+C0066,af33f1b3-5d6d-448c-8977-64451dbc1af9,survivor,af33f1b3-5d6d-448c-8977-64451dbc1af9,RADIOLOGIE DES IRIS,Practice,Lead,FR,07020328674388,SIRET,01500,0,0
+C0067,e0d7f8f1-84bb-4a7a-be39-e5b4324d64fa,survivor,e0d7f8f1-84bb-4a7a-be39-e5b4324d64fa,Clinique Agde,Practice,Lead,FR,07134555783893,SIRET,34300,0,0
+C0067,b928af2e-3bb1-4612-a21e-6feadaedd5db,merge_into_survivor,e0d7f8f1-84bb-4a7a-be39-e5b4324d64fa,CLINIQUE AGDE,Practice,Lead,FR,07134555783893,SIRET,34300,0,0
+C0068,8ef48d64-622b-43ad-88bb-f473218b5df3,survivor,8ef48d64-622b-43ad-88bb-f473218b5df3,CABINET DE MASSO-KINESITHÉRAPIE FAURE,Practice,Prospect,FR,08166000399536,SIRET,75008,0,1
+C0068,661d4bbf-4328-4d8d-8376-3c6d0f619253,merge_into_survivor,8ef48d64-622b-43ad-88bb-f473218b5df3,Cabinet de Masso-Kinésithérapie Faure,Practice,Lead,FR,08166000399536,SIRET,75008,0,1
+C0069,e434d058-34e7-46fd-8182-9c315d7bc832,merge_into_survivor,0087ac17-fcf2-42df-80ed-1ec07595f63c,Centre de Chirurgie Kinetis ,Practice,Lead,FR,09073243972674,SIRET,84700,0,2
+C0069,0087ac17-fcf2-42df-80ed-1ec07595f63c,survivor,0087ac17-fcf2-42df-80ed-1ec07595f63c,Centre de Chirurgie Kinetis,Practice,Lead,FR,09073243972674,SIRET,84700,1,2
+C0070,e51df875-15a5-43d1-a50c-a042cadb2b51,merge_into_survivor,da7b95ea-8bc2-4a3e-be6d-1df45ce06266,Centre de Rééducation Saint-Michel,Practice,Lead,FR,09340174350521,SIRET,13013,0,1
+C0070,da7b95ea-8bc2-4a3e-be6d-1df45ce06266,survivor,da7b95ea-8bc2-4a3e-be6d-1df45ce06266,Centre de Rééducation Saint-Michel ,Practice,Prospect,FR,09340174350521,SIRET,13013,0,0
+C0071,c53abe0a-b1d6-4c49-9534-d6e212384f39,survivor,c53abe0a-b1d6-4c49-9534-d6e212384f39,Cardiologie Toulouse,Practice,Lead,FR,08894802164200,SIRET,31100,0,5
+C0071,5cd41452-5107-47ac-a8b1-9fdd018bbe64,merge_into_survivor,c53abe0a-b1d6-4c49-9534-d6e212384f39,Cardiologie Toulouse - doublon ?,Practice,,FR,08894802164200,SIRET,31100,0,5
+C0072,ef94ab85-0db8-4e34-b54f-06a7a01cf973,survivor,ef94ab85-0db8-4e34-b54f-06a7a01cf973,Pôle Médical Imagtis,Practice,Lead,FR,09949480967693,SIRET,28000,0,2
+C0072,e5b681ba-f67a-4bdc-9d35-18c2b39e638c,merge_into_survivor,ef94ab85-0db8-4e34-b54f-06a7a01cf973,Pôle Médical Imagtsi,Practice,,FR,09949480967693,SIRET,28000,0,1
+C0073,d5aa033b-0f2f-4f69-ae7e-9ecb5837eeec,survivor,d5aa033b-0f2f-4f69-ae7e-9ecb5837eeec,Centre d'Imagerie Thomas,Practice,Lead,FR,04982152306960,SIRET,31130,0,0
+C0073,11569cb5-3217-463d-b0ed-ec080de7d9f6,merge_into_survivor,d5aa033b-0f2f-4f69-ae7e-9ecb5837eeec,Centre d’Imagerie Thomas,Practice,,FR,04982152306960,SIRET,31130,0,0
+C0074,cb814b5d-4b90-475a-9207-d560d951e2fd,survivor,cb814b5d-4b90-475a-9207-d560d951e2fd,Ctre de Chirurgie Orbiora,Practice,Prospect,FR,09807176427929,SIRET,68240,0,2
+C0074,0db07de5-0d07-4a03-95cc-180e62d01508,merge_into_survivor,cb814b5d-4b90-475a-9207-d560d951e2fd,Centre de Chirurgie Orbiora,Practice,Lead,FR,09807176427929,SIRET,68240,1,3
+C0075,ad702483-defe-499c-956f-efc24a8d1ceb,merge_into_survivor,a6632071-c2d4-4116-b02d-b27ad8bab1aa,Cabinet de Masso-Kinésithérapie Le Tampon,Practice,,FR,02822049914562,SIRET,97430,1,0
+C0075,a6632071-c2d4-4116-b02d-b27ad8bab1aa,survivor,a6632071-c2d4-4116-b02d-b27ad8bab1aa,Cabinet de Masso-Kinésithérapie Le Tampon - doublon ?,Practice,Lead,FR,02822049914562,SIRET,97430,0,0
+C0076,7281184b-c3e2-44a0-8cc5-6aefc6a5c1cc,survivor,7281184b-c3e2-44a0-8cc5-6aefc6a5c1cc,Polyclinique des Halles,Practice,Lead,FR,03187815009610,SIRET,93390,0,7
+C0076,24a246b0-e0b7-4ed6-83a5-2aa20d257209,merge_into_survivor,7281184b-c3e2-44a0-8cc5-6aefc6a5c1cc,Polyclinique des Hallse,Practice,Lead,FR,03187815009610,SIRET,93390,0,5
+C0077,ccff0a3d-407e-4e94-ab13-5a89aeebfbe5,merge_into_survivor,3f06c51f-eb63-43e2-abb1-4a3c6e46dc69,Kine des Platanse,Practice,Lead,FR,03228641102136,SIRET,92110,0,4
+C0077,3f06c51f-eb63-43e2-abb1-4a3c6e46dc69,survivor,3f06c51f-eb63-43e2-abb1-4a3c6e46dc69,Kiné des Platanes,Practice,Lead,FR,03228641102136,SIRET,92110,0,6
+C0078,16628d83-d721-467e-96bd-ba1aac0ddcfc,merge_into_survivor,05adad88-80b9-49a9-bf9f-801b5d75d63e,Centre Cardiologique des Vignes,Practice,,FR,03321234116496,SIRET,97122,1,0
+C0078,05adad88-80b9-49a9-bf9f-801b5d75d63e,survivor,05adad88-80b9-49a9-bf9f-801b5d75d63e,Centre Cardiologique Océane,Practice,Prospect,FR,03321234116496,SIRET,97122,1,1
+C0079,4245b8a0-6a52-4001-b485-572eecc50d2b,merge_into_survivor,2397bbe7-3b79-43a2-9081-6edded68a07f,Ctre Dentaire du Lac,Practice,Lead,FR,04540312838650,SIRET,21540,0,1
+C0079,2397bbe7-3b79-43a2-9081-6edded68a07f,survivor,2397bbe7-3b79-43a2-9081-6edded68a07f,Centre Dentaire du Lac,Practice,Lead,FR,04540312838650,SIRET,21540,0,2
+C0080,4112015f-7b43-4e2c-8faf-6148f7722677,merge_into_survivor,3cd4c048-2a75-4d7f-97a0-48baabeaa959,Centre de Santé du Mail,Practice,Lead,FR,05371982952822,SIRET,01480,1,1
+C0080,3cd4c048-2a75-4d7f-97a0-48baabeaa959,survivor,3cd4c048-2a75-4d7f-97a0-48baabeaa959,Ctre de Santé du Mail,Practice,Prospect,FR,05371982952822,SIRET,01480,0,0
+C0081,fd7063c8-8227-48ea-b665-66ade642760a,merge_into_survivor,1f7fb7e1-1c06-4a56-900c-7c4d8d1987b1,Scanner IRM Hamno,Practice,Lead,FR,09574470236485,SIRET,75006,0,2
+C0081,1f7fb7e1-1c06-4a56-900c-7c4d8d1987b1,survivor,1f7fb7e1-1c06-4a56-900c-7c4d8d1987b1,Scanner IRM Hamon,Practice,Lead,FR,09574470236485,SIRET,75006,0,3
+C0082,f08802ec-5b36-439d-9b1b-b72c51c763d3,survivor,f08802ec-5b36-439d-9b1b-b72c51c763d3,Centre Médical Saint-Nicolsa,Practice,Prospect,FR,09652570487594,SIRET,53000,0,0
+C0082,5f447f88-7da7-455e-89ee-242fa00fc0f6,merge_into_survivor,f08802ec-5b36-439d-9b1b-b72c51c763d3,Centre Médical Saint-Nicolas,Practice,Lead,FR,09652570487594,SIRET,53000,0,0
+C0083,77b7cab2-7b72-47be-9565-368aa95cdd7f,merge_into_survivor,2812dbd3-2f93-4131-9412-ec7e42aa8b20,Scanner IRM du Cours ,Practice,Lead,FR,035159623,SIREN,30900,0,1
+C0083,2812dbd3-2f93-4131-9412-ec7e42aa8b20,survivor,2812dbd3-2f93-4131-9412-ec7e42aa8b20,Scanner IRM du Cours,Practice,Lead,FR,035159623,SIREN,30900,0,1
+C0084,e0a81754-e95b-4c4f-b367-e156ba9ce4bf,merge_into_survivor,cfb613ec-30de-4823-b9c5-829fdab2dff0,  centre de santé des marronniers ,Practice,Lead,FR,039667373,SIREN,76600,0,0
+C0084,cfb613ec-30de-4823-b9c5-829fdab2dff0,survivor,cfb613ec-30de-4823-b9c5-829fdab2dff0,Centre de Santé des Marronniers,Practice,Lead,FR,039667373,SIREN,76600,0,1
+C0085,88e28067-6436-421f-8e19-eb265125f836,merge_into_survivor,2b5dbd22-7307-4883-bc19-be04d50c441c,Clinique Nice,Practice,Lead,FR,046344842,SIREN,06000,0,1
+C0085,2b5dbd22-7307-4883-bc19-be04d50c441c,survivor,2b5dbd22-7307-4883-bc19-be04d50c441c,Clinique Nice ,Practice,Prospect,FR,046344842,SIREN,06000,0,1
+C0086,d63bf354-20a4-40dc-9667-7eff8f3a2475,merge_into_survivor,5050b8fc-f3db-45fe-962a-cf2071e65024,Imagerie Médicale Lamartine SCM,Practice,Lead,FR,05674488127145,SIRET,29600,0,0
+C0086,5050b8fc-f3db-45fe-962a-cf2071e65024,survivor,5050b8fc-f3db-45fe-962a-cf2071e65024,Imagerie Médicale Lamartine,Practice,Lead,FR,05674488127140,SIRET,29600,0,1
+C0087,e02d1949-c9b3-4926-8b80-be44fd107268,survivor,e02d1949-c9b3-4926-8b80-be44fd107268,Centre de Santé Arnaud,Practice,Lead,FR,062964945,SIREN,63800,0,1
+C0087,5d9ed219-6b51-4735-a2b6-656423bbc731,merge_into_survivor,e02d1949-c9b3-4926-8b80-be44fd107268,CENTRE DE SANTÉ ARNAUD,Practice,,FR,062964945,SIREN,63800,0,0
+C0088,cbf697c7-acd5-4a1a-8a27-e0461f5498cf,survivor,cbf697c7-acd5-4a1a-8a27-e0461f5498cf,CENTRE CARDIOLOGIQUE LUMAVIA,Practice,Prospect,FR,089072326,SIREN,95000,0,0
+C0088,3661984f-d2b2-4ba6-ab35-6a9e76d23f63,merge_into_survivor,cbf697c7-acd5-4a1a-8a27-e0461f5498cf,Centre Cardiologique Lumavia,Practice,Lead,FR,089072326,SIREN,95000,0,1
+C0089,5b1b0916-6246-46f2-b0fa-cf3e02160466,merge_into_survivor,1994b760-d1f3-47df-983e-ceec8f7c6f00,CLINIQUE DES OLIVIERS,Practice,Lead,FR,09278430536246,SIRET,75008,0,1
+C0089,1994b760-d1f3-47df-983e-ceec8f7c6f00,survivor,1994b760-d1f3-47df-983e-ceec8f7c6f00,Clinique des Oliviers,Practice,Lead,FR,09278430536240,SIRET,75008,1,2
+C0090,bea543d4-3e31-4290-9c83-d311af647a0b,survivor,bea543d4-3e31-4290-9c83-d311af647a0b,Pôle Santé Olivet,Practice,Lead,FR,093789634,SIREN,45160,0,1
+C0090,3aee9f62-aec8-4bf9-9350-fee21b3ae662,merge_into_survivor,bea543d4-3e31-4290-9c83-d311af647a0b,PÔLE SANTÉ OLIVET,Practice,Lead,FR,093789634,SIREN,45160,0,0
+C0091,8af565a7-01a8-44c5-a4c2-2f5ee9e78c4d,survivor,8af565a7-01a8-44c5-a4c2-2f5ee9e78c4d,  pôle santé la chevroliere ,Practice,Prospect,FR,097020093,SIREN,44118,0,0
+C0091,5729f72c-e91b-48ef-8f3f-9b0d3e90b824,merge_into_survivor,8af565a7-01a8-44c5-a4c2-2f5ee9e78c4d,Pôle Santé La Chevroliere,Practice,Lead,FR,097020093,SIREN,44118,0,1

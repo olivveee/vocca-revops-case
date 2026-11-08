@@ -1,20 +1,22 @@
 {
   "accounts_before": 5080,
-  "accounts_after_auto_merge": 4963,
-  "records_removed_by_auto_merge": 117,
-  "auto_merge_clusters": 115,
+  "accounts_after_auto_merge": 4989,
+  "records_removed_by_auto_merge": 91,
+  "auto_merge_clusters": 91,
   "pairs_by_decision": {
     "do_not_merge": 5158,
-    "manual_review": 211,
-    "auto_merge": 119,
+    "manual_review": 239,
+    "auto_merge": 91,
     "hierarchy_fix": 40
   },
   "manual_review_reasons": {
     "two different validated numbers but same calendar or name + postcode: one number is probably wrong": 75,
-    "customer record involved (billing ID / ARR): never merged automatically": 70,
-    "same name and postcode, no SIRET to confirm or contradict": 40,
+    "same identifier but different postcode: one number is probably wrong, or the site moved": 53,
+    "customer record involved (billing ID / ARR): never merged automatically": 43,
+    "same name and postcode, no SIRET to confirm or contradict": 36,
     "account type missing on one record": 22,
-    "same booking calendar only": 4
+    "owned by different salespeople (account owner or open deals): needs an owner decision": 7,
+    "same booking calendar only": 3
   },
   "hierarchy_fix_reasons": {
     "site shares siren with another group than its current parent": 16,
@@ -36,6 +38,7 @@
     "single_site_group": 76,
     "missing_type": 65,
     "practice_looks_like_group": 53,
+    "outside_its_group": 47,
     "invalid_parent_type": 17,
     "self_parent": 3
   },
@@ -44,17 +47,18 @@
     "Group under Practice": 5,
     "Practice under nan": 3
   },
-  "hierarchy_structure_errors": 73,
+  "hierarchy_structure_errors": 113,
   "contact_moves": {
-    "email domain belongs to another account family": 244,
+    "email domain belongs to another account family": 160,
     "no company attached": 3
   },
   "company_number_types": {
     "FR SIREN": 756,
-    "FR SIRET": 3817,
+    "FR SIRET (fails validation)": 30,
+    "FR SIRET": 3787,
     "FR invalid": 6,
     "FR missing": 220,
-    "US NPI": 7,
+    "US NPI (fails validation)": 7,
     "US missing": 167,
     "US unverified": 1
   },

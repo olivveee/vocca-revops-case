@@ -27,7 +27,7 @@ The Vocca Senior RevOps case. Part 1: **1A**, a sales efficiency dashboard for t
 | ↳ Work queues: duplicates, identity, structure, market, contacts | [Tab](https://vocca-revops-case.vercel.app/tam.html#queues) |
 | ↳ Explorer: every record behind a queue, filterable, CSV export | [Tab](https://vocca-revops-case.vercel.app/tam.html#explore/all) |
 | ↳ Quality by source: which tool creates the mess | [Tab](https://vocca-revops-case.vercel.app/tam.html#sources) |
-| ↳ Pair review: 211 pairs to merge or keep separate | [Tab](https://vocca-revops-case.vercel.app/tam.html#review) |
+| ↳ Pair review: 239 pairs to merge or keep separate | [Tab](https://vocca-revops-case.vercel.app/tam.html#review) |
 | **Action pack** (Excel: every merge, review pair, hierarchy fix, contact move) | [Download](https://vocca-revops-case.vercel.app/data/tam_action_pack.xlsx) |
 | The script that does the work on the file | [`1B_tam_mapping/tam_dedup.py`](1B_tam_mapping/tam_dedup.py), outputs in [`1B_tam_mapping/output/`](1B_tam_mapping/output/) |
 
@@ -56,7 +56,7 @@ Choices worth knowing:
 
 - **Country is the account's, not the AE's:** the French team owns almost every deal, US accounts included. The quota is compared with what the country's own team signed.
 - **Group rollouts typed `New` are counted as expansion**, and the deals closed lost for "no sales actions" (145, of which 71 in one clean-up on 20-25 Jul 2026) are counted as the AE's losses, with the win rate without it shown next to it.
-- **Quota:** the synthetic quotas of the team file put every tenured AE at about 170-480%, so by default the quota is recalculated: median monthly new-logo ARR of tenured AEs over the last 6 complete months, with a 25/50/75/100% ramp-up. `PARAMS` > Quota used switches back to the provided quotas to compare, and a top-down target typed in `PARAMS` overrides both.
+- **Quota:** the synthetic quotas of the team file put every tenured AE above quota, at about 140-600% over the calibration window, so by default the quota is recalculated: median monthly new-logo ARR of tenured AEs over the last 6 complete months, with a 25/50/75/100% ramp-up. `PARAMS` > Quota used switches back to the provided quotas to compare, and a top-down target typed in `PARAMS` overrides both.
 - **One reporting currency, USD by default:** deals come in EUR (1,469) or USD (37). The EUR→USD rate is fixed in `PARAMS` (1.1145, rate of 8 Nov 2026) so the Sheet and the web view match; clearing it switches to the live Google Finance rate in the Sheet.
 - **Left out on purpose:** sales cycle length (deals are created late, often at signature), the AEs' closing probability (half empty, uncalibrated), activity volume (not in the export), SDR metrics (demo attribution is broken).
 
