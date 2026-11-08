@@ -31,7 +31,13 @@ Part 1 of the Vocca Senior RevOps case: **1A**, a sales efficiency dashboard for
 | **Action pack** (Excel: every merge, review pair, hierarchy fix, contact move) | [Download](https://vocca-revops-case.vercel.app/data/tam_action_pack.xlsx) |
 | The script that does the work on the file | [`scripts/tam_dedup.py`](scripts/tam_dedup.py), outputs in [`out/tam/`](out/tam/) |
 
-Parts 2 and 3 are presented live.
+### 2 · A project I ran
+
+| What | Link |
+| --- | --- |
+| **Support slides** (4, in French: qualified prospect lists delivered to every sales rep) | [Open the slides](https://vocca-revops-case.vercel.app/partie2.html) · [PDF](https://vocca-revops-case.vercel.app/partie2.pdf) |
+
+Part 3 is live, with no material.
 
 ## 1A in short
 
