@@ -55,7 +55,7 @@ The dashboard answers, in order, the questions a Head of Sales asks on Monday mo
 Choices worth knowing:
 
 - **Country is the account's, not the AE's:** the French team owns almost every deal, US accounts included. The quota is compared with what the country's own team signed.
-- **Group rollouts typed `New` are counted as expansion**, and the July bulk clean-up (145 deals closed lost in one sweep) is counted as the AE's losses, with the win rate without it shown next to it.
+- **Group rollouts typed `New` are counted as expansion**, and the deals closed lost for "no sales actions" (145, of which 71 in one clean-up on 20-25 Jul 2026) are counted as the AE's losses, with the win rate without it shown next to it.
 - **Quota:** the synthetic quotas of the team file put every tenured AE at about 170-480%, so by default the quota is recalculated: median monthly new-logo ARR of tenured AEs over the last 6 complete months, with a 25/50/75/100% ramp-up. `PARAMS` > Quota used switches back to the provided quotas to compare, and a top-down target typed in `PARAMS` overrides both.
 - **One reporting currency, USD by default:** deals come in EUR (1,469) or USD (37). The EUR→USD rate is fixed in `PARAMS` (1.1145, rate of 8 Nov 2026) so the Sheet and the web view match; clearing it switches to the live Google Finance rate in the Sheet.
 - **Left out on purpose:** sales cycle length (deals are created late, often at signature), the AEs' closing probability (half empty, uncalibrated), activity volume (not in the export), SDR metrics (demo attribution is broken).

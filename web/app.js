@@ -384,7 +384,7 @@ function renderNotes(model) {
   const t = model.team;
   const items = [
     `<strong>Country is the account's, not the AE's.</strong> The French team owns almost every deal, US accounts included: filtering on the AE's market would show nothing.`,
-    `<strong>${t.sweepTotal} deals were closed lost in one sweep</strong> (20-25 Jul 2026, "no sales actions"). Counted as losses: excluding them would reward leaving dead deals open.`,
+    `<strong>${t.sweepTotal} deals were closed lost for "no sales actions"</strong>, most of them in a pipeline clean-up (71 on 20-25 Jul 2026). Counted as losses: excluding them would reward leaving dead deals open.`,
     `<strong>Group rollouts typed as New</strong> are counted as expansion, otherwise they inflate new logos.`,
     `<strong>Source and specialty are typed by hand</strong>: specialty spellings are merged in PARAMS, empty values show as Unknown. Win rates on fewer than 5 closed deals are greyed out.`,
     `<strong>closing_probability is ignored</strong> (half empty, lost deals at 90%): the pipe is weighted by stage. <strong>Next steps are not maintained</strong>, so only a step more than ${state.data.params.graceDays} days late counts.`,
