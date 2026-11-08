@@ -210,22 +210,7 @@ function compute() {
     const q = quota === null ? 0 : sum(aesInSeat(m), (ae) => quotaFor(ae, m, p.quotaBase));
     return { month: m, byKind, total: sum(wm, (d) => d.arr), quota: q, attainment: q ? byKind["New logo"] / q : null };
   });
-  const everything = state.data.deals;
-  const openAll = everything.filter((d) => d.status === "open");
-  const corrections = {
-    rolloutNew: everything.filter((d) => d.rolloutNew).length,
-    sweep: everything.filter((d) => d.sweep).length,
-    sweepJuly: everything.filter((d) => d.sweep && d.closeDate >= "2026-07-20" && d.closeDate <= "2026-07-25").length,
-    wonNoSignedDate: everything.filter((d) => d.noSignedDate).length,
-    wonNoSignedArr: everything.filter((d) => d.noSignedArr).length,
-    outliers: everything.filter((d) => d.outlier).length,
-    noProbability: everything.filter((d) => d.noProbability).length,
-    open: openAll.length,
-    sick: openAll.filter((d) => d.unhealthy).length,
-    futureNextStep: openAll.filter((d) => d.nextStep && d.nextStep >= state.data.asOf).length,
-    forecast: sum(openAll, (d) => d.forecast),
-    healthy: sum(openAll, (d) => d.weightedHealthy),
-  };
+
 
   const newArr = sum(won.filter((d) => d.motion === "New logo"), (d) => d.arr);
   // Quota belongs to a team: compare it with what that team signed, not with every deal on the country's accounts.
@@ -233,7 +218,7 @@ function compute() {
   const expansionArr = sum(won.filter((d) => d.motion === "Expansion"), (d) => d.arr);
   const expansionRates = rates(all.filter((d) => d.motion === "Expansion"), rateFrom, to);
   return {
-    from, to, rateFrom, months, reps, history, stages, markets, dealTypes, monthly, corrections,
+    from, to, rateFrom, months, reps, history, stages, markets, dealTypes, monthly,
     sources: breakdown(deals, "source", from, to),
     specialties: breakdown(deals, "specialty", from, to, 9),
     team: {
@@ -319,19 +304,6 @@ function heat(v, lo, mid, hi) {
 }
 const winHeat = (v) => heat(v, 0.2, 0.5, 0.8);
 const quantile = (vals, q) => { const v = vals.filter((x) => x !== null).sort((x, y) => x - y); return v.length ? v[Math.min(v.length - 1, Math.floor(q * (v.length - 1)))] : 0; };
-
-// ---------- corrections applied (same text as the Sheet's yellow box) ----------
-function renderCorrections(model) {
-  const c = model.corrections;
-  const items = [
-    `<b>${c.rolloutNew} déploiements de groupe</b> ont été saisis « New » dans Attio alors qu'ils suivent un contrat cadre déjà signé par le groupe : comptés en expansion, pas en new logo.`,
-    `<b>${c.sweep} deals</b> ont été perdus pour « aucune action commerciale », dont <b>${c.sweepJuly}</b> en un seul nettoyage du 20 au 25 juillet 2026 : comptés comme pertes de l'AE ; le taux de gain sans eux est affiché à côté.`,
-    `<b>${c.wonNoSignedDate} deals gagnés</b> n'ont pas de date de signature : ils sont datés à leur date de clôture. <b>${c.wonNoSignedArr}</b> n'ont pas d'ARR signé : leur ARR prévu est utilisé. <b>${c.outliers}</b> prévision aberrante est exclue.`,
-    `<b>${c.noProbability} deals</b> n'ont pas de probabilité de closing : le pipe est pondéré par étape, pas par l'estimation de l'AE.`,
-    `<b>Le pipe n'est pas nettoyé</b> : ${c.sick} des ${c.open} deals ouverts (${pct(c.open ? c.sick / c.open : null)}) sont trop vieux ou en retard et n'ont jamais été fermés, et seulement ${c.futureNextStep} deal ouvert a une prochaine action à venir. Les prévisions des AE totalisent ${money(c.forecast)} ; pondéré par étape et sans ces deals, il reste <b>${money(c.healthy)}</b>. Tant que le pipe n'est pas nettoyé, le taux de gain varie à chaque nettoyage.`,
-  ];
-  el("corrections").innerHTML = `<p class="corr-title">Corrections appliquées : tous les chiffres de cette page sont calculés sur les données corrigées.</p><ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul>`;
-}
 
 // ---------- small tables: by market, by deal type ----------
 function renderMarkets(model) {
@@ -514,7 +486,6 @@ function render() {
     `${COUNTRY_LABEL[state.country]}  ·  Won ARR: ${range}  ·  Win rate: ${rateRange}  ·  Pipe as of ${new Date(state.data.asOf).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}`;
   el("whatworks-sub").textContent = `Deals closed ${range}${state.motion === "All" ? "" : `, ${state.motion.toLowerCase()} only`}. Bar = won ARR; win rate = won / closed.`;
   renderTiles(model);
-  renderCorrections(model);
   renderPipe(model);
   renderMarkets(model);
   renderDealTypes(model);
@@ -617,13 +588,6 @@ async function loadFromSheet() {
       unhealthy: flag(r.is_sick),
       age: num(r.open_age_days),
       kind: r.deal_kind || "Unknown",
-      closeDate: isoDate(r.close_date),
-      nextStep: isoDate(r.next_step_date),
-      rolloutNew: flag(r.dq_rollout_typed_new),
-      noSignedDate: flag(r.dq_won_no_signed_date),
-      noSignedArr: flag(r.dq_won_no_signed_arr),
-      outlier: flag(r.forecast_outlier),
-      noProbability: flag(r.dq_no_probability),
       weightedHealthy: num(r.weighted_pipe_healthy) || 0,
     })),
   };
