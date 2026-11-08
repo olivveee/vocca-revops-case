@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Partie 2 · Listes qualifiées</title>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap">
+<style>
+/* Same tokens as the Part 1 deck (web/style.css), inlined so this file stands alone.
+   Fixed 1600x900 pages so the PDF export is one slide per page. */
+:root {
+  color-scheme: light;
+  --brand: #0073ec; --brand-soft: #e5f1fd; --page: #fafafa; --surface: #ffffff;
+  --text-primary: #0c1112; --text-secondary: #666666; --text-muted: #999999;
+  --grid: #efefef; --axis: #d6d6d6; --border: rgba(12, 17, 18, 0.08);
+  --good: #0ca30c; --critical: #d03b3b; --neutral-chip: #f3f4f5;
+  --font-display: "Satoshi", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@page { size: 1600px 900px; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #0c1112; font-family: var(--font-body); color: var(--text-primary); line-height: 1.4; }
+.slide { width: 1600px; height: 900px; margin: 0 auto 24px; background: var(--page); position: relative; overflow: hidden;
+  padding: 64px 80px 72px; display: flex; flex-direction: column; break-after: page; }
+@media print { body { background: var(--page); } .slide { margin: 0; } }
+.kicker { font-size: 18px; color: var(--text-secondary); margin: 0 0 12px; display: flex; align-items: center; gap: 10px; }
+.kicker::before { content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--brand); }
+h2 { font-family: var(--font-display); font-weight: 500; font-size: 52px; letter-spacing: -0.02em; margin: 0; line-height: 1.08; }
+.sub { font-size: 23px; color: var(--text-secondary); margin: 12px 0 0; max-width: 1200px; }
+.body { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; padding-top: 18px; gap: 20px; }
+.footer { position: absolute; left: 80px; bottom: 26px; font-size: 15px; color: var(--text-muted); }
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 24px 28px; }
+.panel h3 { margin: 0 0 14px; font-family: var(--font-display); font-weight: 500; font-size: 26px; }
+.label { font-size: 15px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 10px; }
+ul.clean { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 19px; }
+ul.clean li { padding-left: 22px; position: relative; }
+ul.clean li::before { content: ""; position: absolute; left: 2px; top: 10px; width: 8px; height: 8px; border-radius: 50%; background: var(--axis); }
+ul.clean li span { color: var(--text-secondary); }
+.takeaway { padding: 16px 26px; border-radius: 16px; background: var(--text-primary); color: #fff; font-size: 22px; }
+.takeaway b { color: #8cc2ff; font-weight: 600; }
+.num { font-family: var(--font-display); font-size: 58px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+/* Slide 1 */
+.s1 { display: grid; grid-template-columns: 1.15fr 0.85fr 1.1fr; gap: 20px; }
+.growth { display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+.growth .row { display: flex; align-items: baseline; gap: 14px; }
+.growth .arrow { color: var(--brand); font-size: 40px; }
+.growth .num.to { color: var(--brand); }
+.growth p { margin: 0; font-size: 19px; color: var(--text-secondary); }
+.versus { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 6px; }
+.tier { border-radius: 14px; padding: 14px 16px; border: 1px solid var(--border); font-size: 17px; }
+.tier b { display: block; font-family: var(--font-display); font-size: 21px; font-weight: 500; margin-bottom: 4px; }
+.tier .badge { display: inline-block; font-size: 14px; font-weight: 700; padding: 3px 10px; border-radius: 999px; margin-bottom: 8px; }
+.gold .badge { background: #fff3cf; color: #8a6200; }
+.bronze .badge { background: #f6e3d6; color: #8a4a1f; }
+.tier span { color: var(--text-secondary); }
+.verdict { margin: 12px 0 0; font-size: 18px; color: var(--critical); font-weight: 600; }
+
+/* Slide 2 */
+.pipe { display: grid; grid-template-columns: 0.8fr 34px 0.75fr 34px 1.55fr 34px 0.95fr; align-items: stretch; }
+.pipe .arrow { display: grid; place-items: center; color: var(--brand); font-size: 30px; }
+.box { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; }
+.box h3 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 23px; }
+.box .tag { font-size: 14px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
+.box.core { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
+.box.core .tag { color: #8cc2ff; }
+.chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.chip { font-size: 16px; padding: 5px 12px; border-radius: 999px; background: var(--neutral-chip); }
+.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+.steps li { display: flex; gap: 12px; align-items: flex-start; font-size: 18px; }
+.steps li i { font-style: normal; width: 28px; height: 28px; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-size: 15px; font-weight: 700; flex: none; }
+.steps li b { font-weight: 600; display: block; }
+.steps li span { font-size: 15.5px; color: rgba(255,255,255,0.72); }
+.route { border-radius: 14px; padding: 12px 16px; font-size: 16px; border: 1px solid var(--border); }
+.route b { display: block; font-size: 18px; margin-bottom: 2px; }
+.route span { color: var(--text-secondary); }
+.route.ent { background: var(--brand-soft); border-color: transparent; }
+.route.pool { background: #e6f5e6; border-color: transparent; }
+.route.back { background: var(--neutral-chip); border-color: transparent; }
+.facts { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 20px; }
+.fact { display: flex; gap: 16px; align-items: center; }
+.fact .num { font-size: 44px; color: var(--brand); white-space: nowrap; }
+.fact p { margin: 0; font-size: 17px; color: var(--text-secondary); }
+.fact p b { color: var(--text-primary); }
+
+/* Slide 3 */
+.who { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.who .panel { display: flex; flex-direction: column; gap: 10px; }
+.who .panel p { margin: 0; font-size: 19px; color: var(--text-secondary); }
+.who .panel p b { color: var(--text-primary); }
+.who .cost { margin-top: auto; font-family: var(--font-display); font-size: 30px; font-weight: 500; }
+.who .cost span { display: block; font-family: var(--font-body); font-size: 16px; color: var(--text-secondary); font-weight: 400; }
+.adopt { display: grid; grid-template-columns: 0.9fr 34px 1.6fr; align-items: stretch; }
+.adopt .arrow { display: grid; place-items: center; color: var(--brand); font-size: 30px; }
+.before { background: #fdecec; border-radius: 18px; padding: 20px 24px; }
+.before h3, .after h3 { margin: 0 0 8px; font-family: var(--font-display); font-weight: 500; font-size: 23px; }
+.before p { margin: 0; font-size: 18px; color: var(--text-secondary); }
+.after { background: var(--brand-soft); border-radius: 18px; padding: 20px 24px; }
+.kept { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.kept div { background: var(--surface); border-radius: 12px; padding: 12px 14px; font-size: 16px; color: var(--text-secondary); }
+.kept div b { display: block; color: var(--text-primary); font-size: 18px; margin-bottom: 3px; }
+
+/* Slide 4 */
+.s4 { display: grid; grid-template-columns: 1fr 1.25fr 0.85fr; gap: 20px; }
+.s4 .panel { display: flex; flex-direction: column; gap: 12px; }
+.s4 .panel.broke { background: #fdecec; border-color: transparent; }
+.quote { font-family: var(--font-display); font-size: 25px; font-weight: 500; line-height: 1.25; margin: 4px 0 0; }
+.det { display: flex; flex-direction: column; gap: 10px; }
+.det div { display: grid; grid-template-columns: 26px 1fr; gap: 10px; font-size: 17.5px; }
+.det div i { font-style: normal; width: 24px; height: 24px; border-radius: 50%; background: #e6f5e6; color: var(--good); display: grid; place-items: center; font-weight: 700; font-size: 14px; margin-top: 1px; }
+.det div.ai i { background: var(--brand-soft); color: var(--brand); }
+.det div span { color: var(--text-secondary); }
+.det div b { color: var(--text-primary); }
+.redo { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
+.redo .takeaway { display: flex; flex-direction: column; justify-content: center; }
+.link { border: 1px dashed var(--axis); border-radius: 16px; padding: 14px 22px; font-size: 18px; color: var(--text-secondary); display: flex; flex-direction: column; justify-content: center; }
+.link b { color: var(--text-primary); display: block; margin-bottom: 4px; }
+</style>
+<style>
+/* v2: shorter, business-first wording */
+.cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 26px 28px; display: flex; flex-direction: column; gap: 12px; }
+.card h3 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 27px; line-height: 1.2; }
+.card p { margin: 0; font-size: 20px; color: var(--text-secondary); }
+.card p b { color: var(--text-primary); }
+.card.alert { background: #fdecec; border-color: transparent; }
+.card.soft { background: var(--brand-soft); border-color: transparent; }
+.machine { display: grid; grid-template-columns: 1fr 30px 1fr 30px 1fr 30px 1fr; align-items: stretch; }
+.machine .arrow { display: grid; place-items: center; color: var(--brand); font-size: 30px; }
+.stage { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 24px 24px; display: flex; flex-direction: column; gap: 10px; }
+.stage i { font-style: normal; width: 34px; height: 34px; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 17px; }
+.stage h3 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 28px; }
+.stage p { margin: 0; font-size: 18.5px; color: var(--text-secondary); }
+.stage .how { margin-top: auto; font-size: 15px; color: var(--text-muted); border-top: 1px solid var(--grid); padding-top: 10px; }
+.stage.core { background: var(--text-primary); border-color: var(--text-primary); color: #fff; }
+.stage.core p { color: rgba(255,255,255,0.75); }
+.stage.core .how { color: #8cc2ff; border-color: rgba(255,255,255,0.15); }
+</style>
+</head>
+<body>
+
+<section class="slide">
+  <p class="kicker">1 · Le projet et pourquoi il existait</p>
+  <h2>Des listes de prospection qualifiées, livrées à chaque commercial</h2>
+  <p class="sub">Chez Sunday (paiement au restaurant), j'ai transformé notre base de restaurants en listes prêtes à appeler pour les AE et les SDR.</p>
+  <div class="body">
+    <div class="cards3">
+      <div class="card">
+        <p class="label">Au départ</p>
+        <h3>Une base riche, pensée pour la RevOps</h3>
+        <p>Tous les restaurants de nos zones, enrichis automatiquement. Utile pour mesurer le marché, <b>pas pour savoir qui appeler</b>.</p>
+      </div>
+      <div class="card">
+        <p class="label">Le déclencheur</p>
+        <h3><span class="num" style="font-size:46px">15 → <span style="color:var(--brand)">70+</span></span></h3>
+        <p>commerciaux, dont <b>15 à 20 SDR</b>. Ils ne peuvent pas construire leurs listes : il faut <b>les leur livrer</b>.</p>
+      </div>
+      <div class="card alert">
+        <p class="label">Le problème</p>
+        <h3>Un score qui récompensait la popularité, pas le fit</h3>
+        <p>Un fast-food de chaîne sortait <b>gold</b>, un restaurant étoilé <b>bronze</b>. Le Royaume-Uni et les US ont arrêté de s'en servir.</p>
+      </div>
+    </div>
+    <div class="takeaway">L'objectif : que chaque commercial reçoive <b>les bons comptes, au bon moment</b>, sans avoir à les chercher.</div>
+  </div>
+  <span class="footer">Case Senior RevOps · Partie 2 · 1 / 4</span>
+</section>
+
+<section class="slide">
+  <p class="kicker">2 · Ce que j'ai construit</p>
+  <h2>Une machine qui livre 200 bons comptes à chaque commercial</h2>
+  <div class="body">
+    <div class="machine">
+      <div class="stage"><i>1</i><h3>Trouver</h3><p>Tous les restaurants d'une zone, mis à jour en continu.</p><span class="how">Google Maps, registre légal</span></div>
+      <div class="arrow">→</div>
+      <div class="stage"><i>2</i><h3>Écarter</h3><p>Ce qui n'est pas pour nous (hôtels, fast-foods, cafés), avec des règles simples, avant de dépenser quoi que ce soit.</p><span class="how">Règles</span></div>
+      <div class="arrow">→</div>
+      <div class="stage core"><i>3</i><h3>Qualifier</h3><p>Est-ce un bon fit, pourquoi, quel segment, fait-il partie d'un groupe, qui décide.</p><span class="how">IA, avec une justification par compte</span></div>
+      <div class="arrow">→</div>
+      <div class="stage"><i>4</i><h3>Livrer</h3><p>Au bon commercial selon son territoire. Les grands groupes vont à l'équipe Enterprise.</p><span class="how">CRM</span></div>
+    </div>
+    <div class="panel facts">
+      <div class="fact"><span class="num">200</span><p>comptes par <b>AE</b>, chaque mois</p></div>
+      <div class="fact"><span class="num">200</span><p>comptes par <b>SDR</b>, toutes les deux semaines</p></div>
+      <div class="fact"><span class="num">30-40 %</span><p>écartés, avec la raison, et <b>revus dans 2 ans</b> (estimation)</p></div>
+    </div>
+    <div class="takeaway"><b>Pourquoi ces choix :</b> une V1 sur Cargo pour <b>aller vite</b> et avoir des résultats dans chaque marché sans attendre une infra data complète. Des règles avant l'IA pour <b>ne pas payer</b> l'IA sur des comptes évidents. Une justification par compte pour que <b>les SDR puissent la contester</b>.</div>
+  </div>
+  <span class="footer">Case Senior RevOps · Partie 2 · 2 / 4</span>
+</section>
+
+<section class="slide">
+  <p class="kicker">3 · L'adoption</p>
+  <h2>Livrer moins d'informations, mais celles qu'on lit</h2>
+  <div class="body">
+    <div class="adopt">
+      <div class="before">
+        <h3>V1 : ils ne s'en servaient pas toujours</h3>
+        <p>Trop de champs, des paragraphes générés par l'IA que personne ne lisait, une qualité pas encore au niveau.</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="after">
+        <h3>Après des allers-retours avec les Sales, trois choses</h3>
+        <div class="kept">
+          <div><b>Des clients proches</b>à citer comme référence dans l'appel</div>
+          <div><b>Pourquoi c'est un bon fit</b>en trois puces, pas en paragraphe</div>
+          <div><b>Le segment</b>pour qu'ils se fassent leurs propres listes</div>
+        </div>
+      </div>
+    </div>
+    <div class="cards3">
+      <div class="card"><p class="label">Construit</p><p><b>Par moi, de bout en bout</b> : la logique, l'IA, la livraison dans le CRM.</p></div>
+      <div class="card"><p class="label">Co-construit</p><p><b>Avec la strat et l'enablement</b> : eux définissent ce qui fait un bon compte, moi je dis si on peut le trouver, et à quel coût.</p></div>
+      <div class="card"><p class="label">Acheté</p><p><b>Cargo</b> pour l'orchestration et l'IA, plus des outils de scraping. Pas d'équipe data à recruter pour lancer la V1.</p></div>
+    </div>
+    <div class="takeaway">Une information que personne ne lit est <b>un coût, pas une valeur</b>. Le vrai gain : une proximité avec les Sales que la RevOps n'avait pas avant.</div>
+  </div>
+  <span class="footer">Case Senior RevOps · Partie 2 · 3 / 4</span>
+</section>
+
+<section class="slide">
+  <p class="kicker">4 · Ce qui a cassé, et la suite</p>
+  <h2>L'IA ne remplace pas une donnée fiable</h2>
+  <div class="body">
+    <div class="cards3">
+      <div class="card alert">
+        <p class="label">Ce qui a cassé</p>
+        <h3>L'IA qualifiait avec assurance des comptes qui n'étaient pas des restaurants</h3>
+        <p>La donnée d'entrée était fausse. L'IA l'a rendue crédible.</p>
+      </div>
+      <div class="card">
+        <p class="label">En cours</p>
+        <h3>Structurer et rendre la donnée déterministe</h3>
+        <p><b>Registre légal</b> pour les dirigeants et les groupes, <b>Guide Michelin</b> pour les étoilés, <b>une table de référence</b> pour trier les types de restaurants. L'IA ne garde que ce qu'aucune source ne sait dire.</p>
+      </div>
+      <div class="card soft">
+        <p class="label">Aujourd'hui</p>
+        <h3>En production en France et au Royaume-Uni</h3>
+        <p>Prochaine étape : que les commerciaux interrogent cette donnée directement, via un agent, et plus seulement dans le CRM.</p>
+      </div>
+    </div>
+    <div class="redo">
+      <div class="takeaway"><span><b>Ce que je referais :</b> fiabiliser la donnée et poser les règles d'abord, l'IA seulement pour ce qu'aucune règle ne tranche, et mesurer la qualité avec les SDR dès la V1.</span></div>
+      <div class="link"><b>Le lien avec Vocca</b>Les mêmes enjeux : un marché de sites physiques, des groupes à reconnaître, des listes en lesquelles les SDR ont confiance.</div>
+    </div>
+  </div>
+  <span class="footer">Case Senior RevOps · Partie 2 · 4 / 4</span>
+</section>
+
+</body>
+</html>
