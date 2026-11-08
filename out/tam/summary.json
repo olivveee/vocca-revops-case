@@ -73,6 +73,7 @@
       "customer_arr_eur": 8716060.0,
       "without_lifecycle": 135,
       "validated_company_number": 3787,
+      "without_company_number": 220,
       "open_deals": 523,
       "countries": {
         "FR": 4799
@@ -89,6 +90,7 @@
       "customer_arr_eur": 15360.0,
       "without_lifecycle": 82,
       "validated_company_number": 0,
+      "without_company_number": 98,
       "open_deals": 4,
       "countries": {
         "GB": 58,
@@ -111,6 +113,7 @@
       "customer_arr_eur": 90740.0,
       "without_lifecycle": 117,
       "validated_company_number": 0,
+      "without_company_number": 167,
       "open_deals": 8,
       "countries": {
         "US": 175
@@ -129,6 +132,7 @@
       "customer_arr_eur": 0.0,
       "without_lifecycle": 0,
       "validated_company_number": 0,
+      "without_company_number": 0,
       "open_deals": 2,
       "countries": {
         "UNKNOWN": 2

@@ -435,6 +435,7 @@ def market_summary(c, deals, issues):
             "customer_arr_eur": float(arr[g.index][g.lifecycle.eq("Customer")].sum()),
             "without_lifecycle": int(g.lifecycle.isna().sum()),
             "validated_company_number": int(g.company_number_valid.sum()),
+            "without_company_number": int(g.siret.isna().sum()),
             "open_deals": int(g.record_id.map(open_deals).fillna(0).sum()),
             "countries": {k: int(v) for k, v in g.country_norm.value_counts().head(6).items()},
             "issues": {k: int(v) for k, v in mi.issue.value_counts().items()} if len(mi) else {},

@@ -71,7 +71,7 @@ function renderState() {
     <p class="lead">What the CRM looks like today, before any clean-up. Every figure is a count of records in the export.</p>
     <div class="tiles">
       ${tile("Accounts in Attio", fmt.format(c.accounts), `${fmt.format(c.by_type.Practice || 0)} practices · ${fmt.format(c.by_type.Group || 0)} groups · ${fmt.format(c.by_type.Superorga || 0)} networks · ${fmt.format(c.by_type.Missing || 0)} untyped`)}
-      ${tile("No validated company number", pct(noSiret, c.accounts), `${fmt.format(noSiret)} accounts: no SIRET in France, no NPI in the US`, "alert")}
+      ${tile("No validated company number", pct(noSiret, c.accounts), `${fmt.format(noSiret)} accounts: no validated SIRET in France; in the US, ${fmt.format((data.summary.markets.US || {}).without_company_number || 0)} of ${fmt.format((data.summary.markets.US || {}).accounts || 0)} accounts have no number at all`, "alert")}
       ${tile("Certain duplicates", fmt.format(s.records_removed_by_auto_merge), `+ ${fmt.format(data.review.length)} pairs that need a human`, "alert")}
       ${tile("Outside the market", fmt.format(outOfMarket), `${fmt.format(rel.Invest || 0)} investors · ${fmt.format(rel.Partner || 0)} partners · ${fmt.format(rel.Media || 0)} media, mixed with prospects`, "alert")}
       ${tile("Contacts misplaced", fmt.format(s.contact_moves["email domain belongs to another account family"] || 0), `on the wrong account · ${fmt.format(c.contacts_without_company)} without company · ${fmt.format(c.contacts_on_group_level)} parked on a group`)}

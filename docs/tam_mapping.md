@@ -15,8 +15,8 @@ Full list with every number: [`docs/data_findings.md`](data_findings.md). The is
 
 | Problem | Size | Why it matters |
 |---|---|---|
-| No usable identity | **25% of accounts** have no validated company number: in France 756 SIRENs typed in the SIRET field and 220 empty; in the US **0 of 175** accounts has a valid one | Matching falls back on names and phones, which is where duplicates come from |
-| A French field used for every country | US numbers are typed in the `siret` field; **none of them passes the NPI check** (10 digits, starting with 1 or 2, check digit) | Foreign identifiers are stored and never validated: they cannot be used to deduplicate |
+| No usable identity | **25% of accounts** have no validated company number: in France 756 SIRENs typed in the SIRET field and 220 empty; in the US **167 of 175** accounts have no number at all | Matching falls back on names and phones, which is where duplicates come from |
+| No field for a foreign identity | The 8 US accounts that have a number carry it in the French `siret` field, typed by hand (7 by one French AE); none passes the NPI check (10 digits, starting with 1 or 2, check digit), and the anonymised export probably scrambled them | The CRM was built for France only: there is nowhere to store a US identity, so US accounts cannot be deduplicated |
 | Duplicates | **117 records** are certain duplicates; 136 more pairs need a human | Two owners working the same practice; inflated TAM and pipeline |
 | Duplicates are produced by tools, not people | Of the 117, **43 were created by the enrichment pipeline**, 11 by n8n, 11 by email sync; of the 450 contacts without an account, 432 were created by telephony, email sync or enrichment | The tools are connected but not orchestrated: they insert instead of upserting, so cleaning once will not last |
 | No clear structure | **65 accounts without type**; 53 "practices" with several sites; 14 accounts attached to a practice (9 practices, 5 groups); 3 self-parents; **60 multi-site organisations with no group** (e.g. 3 US sites in 3 cities sharing one domain). Groups under a group are fine (sub-groups of a larger one). Open questions rather than errors: 112 empty groups, 76 single-site groups | To deploy a group tomorrow, nobody can tell from the CRM which structure to set up |
@@ -148,7 +148,7 @@ The TAM is built from the registries, not from the CRM: every site of a target s
 | **P0 · Fix what breaks reporting** | 117 automatic merges; account and relationship types set; countries set; investors, partners and media out of TAM and SAM views; the 3 cycles and 17 impossible parents | Revenue, pipeline and TAM numbers are wrong today | Weeks 1-2 |
 | **P1 · Master record** | Warehouse models joining Attio, Hyperline and the French and US registries into the generic model; sync to Attio | One source of truth, refreshed, with history | Weeks 2-5 |
 | **P1 · Clear the queues** | 136 review pairs, 38 sites to attach, 60 groups to create, 47 accounts to reassign to the US team, 247 contacts | Small enough to finish in a few days with Sales | Weeks 2-3, about 3 days of work |
-| **P1 · US identity** | Validate the 175 US accounts against NPPES; build their groups (dental groups first) | The US base is small: fixing it now is cheap, after 1,000 accounts it is not | Weeks 3-4 |
+| **P1 · US identity** | Find the NPI of the 175 US accounts in NPPES (167 have no number today); build their groups (dental groups first) | The US base is small: fixing it now is cheap, after 1,000 accounts it is not | Weeks 3-4 |
 | **P2 · Size and score the TAM per market** | Full universe from registries by specialty and structure type; score; flag "not in Attio" | Feeds territories and outbound for the 3x plan, starting with the US | Weeks 5-7 |
 | **P3 · Run it** | Data-quality dashboard per market, weekly review, warehouse tests | Keeps it clean without heroics | Ongoing |
 

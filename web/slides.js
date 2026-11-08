@@ -54,7 +54,7 @@ function slides(d) {
         </div>
         <p class="group-title">On ne sait pas qui est qui</p>
         <div class="problems four">
-          <div class="problem">${icon("id")}<span class="num">${noId} %</span><span class="what">Pas d'identité fiable</span><span class="why">pas de SIRET validé en France, aucun NPI valide sur les ${us.accounts} comptes US</span></div>
+          <div class="problem">${icon("id")}<span class="num">${noId} %</span><span class="what">Pas d'identité fiable</span><span class="why">pas de SIRET validé en France ; aux US, ${fmt.format(us.without_company_number || 0)} comptes sur ${us.accounts} sans aucun numéro</span></div>
           <div class="problem">${icon("copy")}<span class="num">${fmt.format(s.records_removed_by_auto_merge)}</span><span class="what">Doublons certains</span><span class="why">+ ${fmt.format(d.review.length)} paires à faire valider par un humain</span></div>
           <div class="problem">${icon("tree")}<span class="num">${fmt.format(s.hierarchy_structure_errors)}</span><span class="what">Hiérarchie incohérente</span><span class="why">${fmt.format(hi.practice_looks_like_group || 0)} cabinets multi-sites, ${fmt.format(underPractice)} rattachés à un cabinet, ${fmt.format(hi.self_parent || 0)} boucles : quelle structure pour déployer un groupe ?</span></div>
           <div class="problem">${icon("person")}<span class="num">${fmt.format(c.contacts_without_company)}</span><span class="what">Contacts rattachés à aucun compte</span><span class="why">+ ${fmt.format(wrongAccount)} sur le mauvais compte · aucune règle de création</span></div>
@@ -163,7 +163,7 @@ function slides(d) {
           <div class="label"><b>P0</b>Arrêter l'hémorragie</div><div class="bar" style="grid-column: span 1">Identité + MAJ</div><div style="grid-column: span 7"></div>
           <div class="label"><b>P0</b>Corriger le reporting</div><div class="bar" style="grid-column: span 2">${fmt.format(s.records_removed_by_auto_merge)} fusions · types de compte</div><div style="grid-column: span 6"></div>
           <div class="label"><b>P1</b>Master record</div><div></div><div class="bar p1" style="grid-column: span 4">Modèles warehouse + synchro vers Attio</div><div style="grid-column: span 3"></div>
-          <div class="label"><b>P1</b>Files · identité US</div><div></div><div class="bar p1" style="grid-column: span 3">${fmt.format(d.review.length)} revues · NPI des ${us.accounts} comptes US</div><div style="grid-column: span 4"></div>
+          <div class="label"><b>P1</b>Files · identité US</div><div></div><div class="bar p1" style="grid-column: span 3">${fmt.format(d.review.length)} revues · NPI des comptes US via NPPES</div><div style="grid-column: span 4"></div>
           <div class="label"><b>P2</b>Dimensionner le TAM</div><div style="grid-column: span 4"></div><div class="bar p2" style="grid-column: span 3">Registres par marché, US d'abord</div><div></div>
           <div class="label"><b>P3</b>Faire tourner</div><div style="grid-column: span 2"></div><div class="bar p3" style="grid-column: span 6">Indicateurs et revue hebdo, tests warehouse</div>
         </div>
