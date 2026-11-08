@@ -9,7 +9,8 @@ The Vocca Senior RevOps case. Part 1: **1A**, a sales efficiency dashboard for t
 | What | Link |
 | --- | --- |
 | **Google Sheet** (the deliverable, shared as editor) | [Open the Sheet](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit) |
-| ↳ `DASHBOARD`: four numbers, corrections, pipe, market, deal type, month by month, one line per AE | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=102) |
+| ↳ `DASHBOARD`: four numbers, corrections, pipe, market, deal type, month by month, one line per AE, what SDRs bring | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=102) |
+| ↳ `PERSON`: pick one AE, SDR or AM and see their own numbers, with 12 months of history | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=109) |
 | ↳ `WHAT_WORKS`: won ARR and win rate by source and by specialty | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=108) |
 | ↳ `DATA_QUALITY`: the numbers not to trust, and what the dashboard does about them | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=103) |
 | ↳ `PARAMS`: every setting in one place (quota, currency, thresholds) | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=104) |
@@ -50,7 +51,9 @@ The dashboard answers, in order, the questions a Head of Sales asks on Monday mo
 1. **Are we on track?** New-logo ARR vs quota, expansion ARR, weighted healthy pipe, win rate; then the open pipe by stage with its unhealthy share. A deal is unhealthy when it is older than 90 days, or its next step / expected close is more than 30 days late; the healthy pipe keeps only the other open deals, weighted by stage.
 2. **What works?** Won ARR and win rate by source and by specialty.
 3. **Who needs help?** One line per AE, lowest attainment first and ramping AEs last: new-logo ARR vs quota, win rate, healthy pipe, and a flag that says why (below quota, low conversion, pipe needs cleaning, does not close out losses).
-4. **What not to trust:** the `DATA_QUALITY` tab, live counts with the handling of each issue.
+4. **What do SDRs bring?** Demos booked by an SDR vs not, their share of demos and of won new-logo ARR, and one line per SDR: demos booked, held, held vs target. A demo is credited to the SDR who created the deal, else to the SDR who owns the account from their start date: the export has no "booked by" field, so this is an approximation.
+5. **One person:** the `PERSON` tab (and the Person filter on the web view) shows one AE, SDR or AM, as deal owner and as SDR, month by month.
+6. **What not to trust:** the `DATA_QUALITY` tab, live counts with the handling of each issue.
 
 Choices worth knowing:
 
@@ -58,7 +61,7 @@ Choices worth knowing:
 - **Group rollouts typed `New` are counted as expansion**, and the deals closed lost for "no sales actions" (145, of which 71 in one clean-up on 20-25 Jul 2026) are counted as the AE's losses, with the win rate without it shown next to it.
 - **Quota:** the synthetic quotas of the team file put every tenured AE above quota, at about 140-600% over the calibration window, so by default the quota is recalculated: median monthly new-logo ARR of tenured AEs over the last 6 complete months, with a 25/50/75/100% ramp-up. `PARAMS` > Quota used switches back to the provided quotas to compare, and a top-down target typed in `PARAMS` overrides both.
 - **One reporting currency, USD by default:** deals come in EUR (1,469) or USD (37). The EUR→USD rate is fixed in `PARAMS` (1.1145, rate of 8 Nov 2026) so the Sheet and the web view match; clearing it switches to the live Google Finance rate in the Sheet.
-- **Left out on purpose:** sales cycle length (deals are created late, often at signature), the AEs' closing probability (half empty, uncalibrated), activity volume (not in the export), SDR metrics (demo attribution is broken).
+- **Left out on purpose:** sales cycle length (deals are created late, often at signature), the AEs' closing probability (half empty, uncalibrated), activity volume (not in the export).
 
 ## 2 in short
 
@@ -76,7 +79,7 @@ Attio export (CSV)  ->  Google Sheet                         ->  web view
                         DEALS_CLEAN   one row per deal, formulas  WEB_PARAMS, published as CSV;
                         PARAMS        every setting               no business rule lives here
                         CALC          quota calibration base
-                        DASHBOARD, WHAT_WORKS, DATA_QUALITY
+                        DASHBOARD, PERSON, WHAT_WORKS, DATA_QUALITY
 
 data/  ->  1B_tam_mapping/tam_dedup.py  ->  1B_tam_mapping/output/*.csv
                                  ->  web/data/ (TAM cockpit feed, action pack)  ->  slides and cockpit

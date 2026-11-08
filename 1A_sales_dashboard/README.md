@@ -4,7 +4,8 @@ The deliverable is the **Google Sheet**: [open it](https://docs.google.com/sprea
 
 | Tab | What it holds |
 | --- | --- |
-| [`DASHBOARD`](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=102) | Four numbers (new-logo ARR vs quota, expansion ARR, weighted healthy pipe, win rate), corrections applied, pipe by stage, by market, by deal type, month by month, one line per AE with a 12-month trend and a flag |
+| [`DASHBOARD`](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=102) | Four numbers (new-logo ARR vs quota, expansion ARR, weighted healthy pipe, win rate), corrections applied, pipe by stage, by market, by deal type, month by month, one line per AE with a 12-month trend and a flag, then what SDRs bring (share of demos and of won ARR, one line per SDR vs target) |
+| [`PERSON`](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=109) | One person (AE, SDR or AM): as deal owner and as SDR, with 12 months of history |
 | [`WHAT_WORKS`](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=108) | Won ARR and win rate by source and by specialty |
 | [`DATA_QUALITY`](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=103) | The numbers not to trust, counted live, and what the dashboard does about each |
 | [`PARAMS`](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=104) | Every setting in one place: quota, currency and rate, thresholds, stage weights, ramp-up |

@@ -18,7 +18,7 @@ Volumes: 1,506 deals and 28 people in `sales_team`. Sized with the scripts in [`
 | 8 | `Group Rollout` without `group_contract` = TRUE | 102 | `group_contract` not reliable |
 | 9 | Deals owned by non-AEs: Ops 76, AM 42, SDR 16, Other 11, CS 3 | 148 | Filtered on role; shown as "outside AE table" |
 | 10 | Deals owned by people who left | 102 (13 still open) | History kept; open ones need reassigning |
-| 11 | `created_by` blank (13%) or `API · n8n` (182 deals) | ~380 | SDR attribution of booked demos not reliable |
+| 11 | `created_by` blank (13%) or `API · n8n` (182 deals) | ~380 | No "booked by" field: a demo is credited to the SDR who created the deal, else to the SDR who owns the account from their start date (an approximation) |
 | 12 | Open-pipe hygiene: 288 deals older than 90 days, 311 with an overdue next step, 227 without one, 99 with an expected close in the past; only 1 open deal has a next step in the future | out of 539 | These become dashboard metrics |
 | 13 | 37 deals in USD, only 2 owned by the US AE; the other 1,469 are in EUR | 37 | Every amount converted to one reporting currency (USD by default; EUR→USD rate fixed in PARAMS at 1.1145, or live from Google Finance when the cell is cleared) |
 | 14 | Uneven history: 1 deal in May 2025, 6 in April 2025 | early 2025 | Probably incomplete history; excluded from trends |

@@ -249,3 +249,15 @@ table.reps.compact { min-width: 0; }
   .hbar-head, .hbar-row { grid-template-columns: minmax(80px, 110px) minmax(0, 1fr) 56px 40px; gap: 6px; }
   .hbar.five .hbar-head, .hbar.five .hbar-row { grid-template-columns: minmax(70px, 96px) minmax(0, 1fr) 54px 40px 44px; }
 }
+
+/* SDR block and person view */
+.table-card + .table-card { margin-top: 12px; }
+.card.person { margin: 0 0 16px; border-color: var(--series-1); }
+.person-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 10px; }
+.person-head h3 { margin: 0; font-size: 18px; }
+.person-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px; }
+.person-cols .corr-title { margin: 0 0 6px; font-weight: 700; }
+.kv { display: grid; grid-template-columns: 1fr auto; gap: 0 12px; padding: 4px 0; border-bottom: 1px solid var(--grid); font-size: 13px; }
+.kv b { text-align: right; padding: 0 4px; border-radius: 4px; }
+.kv small { grid-column: 1 / -1; color: var(--text-muted); font-size: 11px; }
+@media (max-width: 720px) { .person-cols { grid-template-columns: 1fr; } }

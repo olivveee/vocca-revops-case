@@ -5,7 +5,7 @@
 // so a change in the sheet shows up here on the next page load. The breakdowns below
 // (by country, stage, source, specialty) use the same definitions as the WHAT_WORKS tab.
 
-const state = { data: null, month: null, country: "All", period: "ytd", motion: "All" };
+const state = { data: null, month: null, country: "All", period: "ytd", motion: "All", person: "" };
 
 const STAGES = ["Demo Scheduled", "Demo Held", "Qualified", "Quoted"];
 const KINDS = ["New logo", "Group rollout", "Upsell", "Cross-sell", "Retention"];
@@ -74,6 +74,15 @@ function aesInSeat(month) {
   const market = teamMarket();
   return state.data.team.filter((t) =>
     t.role === "AE" &&
+    monthOf(t.start) <= month &&
+    (t.end === null || monthOf(t.end) >= month) &&
+    (state.country === "All" || t.market === market));
+}
+
+function sdrsInSeat(month) {
+  const market = teamMarket();
+  return state.data.team.filter((t) =>
+    t.role === "SDR" &&
     monthOf(t.start) <= month &&
     (t.end === null || monthOf(t.end) >= month) &&
     (state.country === "All" || t.market === market));
@@ -212,13 +221,34 @@ function compute() {
   });
 
 
+  // SDRs: a demo booked = a new-logo deal created (deals are created at Demo Scheduled), credited in the Sheet (DEALS_CLEAN.sdr).
+  const newLogo = all.filter((d) => d.motion === "New logo");
+  const bookedIn = (d) => d.created !== null && inMonths(d.created, from, to);
+  const wonIn = (d) => d.status === "won" && inMonths(d.booking, from, to);
+  const trendOf = (ds) => Array.from({ length: 12 }, (_, i) => {
+    const m = addMonths(to, i - 11);
+    return { month: m, value: ds.filter((d) => d.created && monthOf(d.created) === m).length };
+  });
+  const sdrGroup = (label, ds) => {
+    const bk = ds.filter(bookedIn); const wn = ds.filter(wonIn);
+    return { label, booked: bk.length, held: bk.filter((d) => d.reachedDemo).length, won: wn.length, wonArr: sum(wn, (d) => d.arr), trend: trendOf(ds) };
+  };
+  const sdrGroups = [sdrGroup("Booked by an SDR", newLogo.filter((d) => d.sdr)), sdrGroup("Not by an SDR (AE, inbound, automation)", newLogo.filter((d) => !d.sdr)), sdrGroup("Total", newLogo)];
+  const sdrs = sdrsInSeat(to).map((t) => {
+    const ds = newLogo.filter((d) => d.sdr === t.name);
+    const bk = ds.filter(bookedIn);
+    const target = (t.demoTarget || 0) * months.filter((m) => monthOf(t.start) <= m).length;
+    const held = bk.filter((d) => d.reachedDemo).length;
+    return { name: t.name, start: t.start, booked: bk.length, held, target, vsTarget: target ? held / target : null, wonArr: sum(ds.filter(wonIn), (d) => d.arr), trend: trendOf(ds) };
+  }).sort((a, b) => a.name.localeCompare(b.name));
+
   const newArr = sum(won.filter((d) => d.motion === "New logo"), (d) => d.arr);
   // Quota belongs to a team: compare it with what that team signed, not with every deal on the country's accounts.
   const quotaArr = teamMarket() ? sum(won.filter((d) => d.motion === "New logo" && d.market === teamMarket()), (d) => d.arr) : newArr;
   const expansionArr = sum(won.filter((d) => d.motion === "Expansion"), (d) => d.arr);
   const expansionRates = rates(all.filter((d) => d.motion === "Expansion"), rateFrom, to);
   return {
-    from, to, rateFrom, months, reps, history, stages, markets, dealTypes, monthly,
+    from, to, rateFrom, months, reps, history, stages, markets, dealTypes, monthly, sdrGroups, sdrs,
     sources: breakdown(deals, "source", from, to),
     specialties: breakdown(deals, "specialty", from, to, 9),
     team: {
@@ -232,6 +262,41 @@ function compute() {
       sweepTotal: all.filter((d) => d.sweep).length,
       nonAeDeals: all.filter((d) => d.role !== "AE").length,
     },
+  };
+}
+
+// One person, all countries, same period: as deal owner (Sales) and as SDR (demos booked). Same as the PERSON tab.
+function personModel(name, model) {
+  const p = state.data.params;
+  const t = state.data.team.find((x) => x.name === name);
+  const { from, to, rateFrom, months } = model;
+  const deals = state.data.deals;
+  const own = deals.filter((d) => d.owner === name);
+  const ownOpen = own.filter((d) => d.status === "open");
+  const booked = deals.filter((d) => d.sdr === name && d.motion === "New logo");
+  const bk = booked.filter((d) => d.created !== null && inMonths(d.created, from, to));
+  const wonIn = (d) => d.status === "won" && inMonths(d.booking, from, to);
+  const quota = t.role === "AE" ? sum(months.filter((m) => monthOf(t.start) <= m), (m) => quotaFor(t, m, p.quotaBase)) : null;
+  const newArr = sum(own.filter((d) => d.motion === "New logo" && wonIn(d)), (d) => d.arr);
+  const target = (t.demoTarget || 0) * months.filter((m) => monthOf(t.start) <= m).length;
+  const held = bk.filter((d) => d.reachedDemo).length;
+  const rr = rates(own, rateFrom, to);
+  const monthsBack = Array.from({ length: 12 }, (_, i) => addMonths(to, -i));
+  const inM = (iso, m) => iso !== null && monthOf(iso) === m;
+  const lines = [
+    { label: "Demos booked (as SDR)", values: monthsBack.map((m) => booked.filter((d) => inM(d.created, m)).length), fmt: String },
+    { label: "Demos held (as SDR)", values: monthsBack.map((m) => booked.filter((d) => inM(d.created, m) && d.reachedDemo).length), fmt: String },
+    { label: "New-logo deals won (as owner)", values: monthsBack.map((m) => own.filter((d) => d.status === "won" && d.motion === "New logo" && inM(d.booking, m)).length), fmt: String },
+    { label: "New-logo ARR won", values: monthsBack.map((m) => sum(own.filter((d) => d.status === "won" && d.motion === "New logo" && inM(d.booking, m)), (d) => d.arr)), fmt: money },
+    { label: "Expansion ARR won", values: monthsBack.map((m) => sum(own.filter((d) => d.status === "won" && d.motion === "Expansion" && inM(d.booking, m)), (d) => d.arr)), fmt: money },
+    { label: "Win rate (closed in the month)", values: monthsBack.map((m) => { const r = rates(own, m, m); return r.winRate; }), fmt: pct, heat: true },
+  ];
+  return {
+    person: t, monthsBack, lines,
+    sales: { newArr, quota, attainment: quota ? newArr / quota : null, expansionArr: sum(own.filter((d) => d.motion === "Expansion" && wonIn(d)), (d) => d.arr),
+      winRate: rr.winRate, won: rr.won, closed: rr.closed, open: ownOpen.length,
+      unhealthyShare: ownOpen.length ? ownOpen.filter((d) => d.unhealthy).length / ownOpen.length : null, pipe: sum(ownOpen, (d) => d.weightedHealthy) },
+    sdr: { booked: bk.length, held, target, vsTarget: target ? held / target : null, won: booked.filter(wonIn).length, wonArr: sum(booked.filter(wonIn), (d) => d.arr) },
   };
 }
 
@@ -465,6 +530,48 @@ function renderTable(model) {
   el("reps-table").innerHTML = head + `<tbody>${rows || `<tr><td colspan="6">No AE team covers this country.</td></tr>`}</tbody>`;
 }
 
+// ---------- SDRs ----------
+function renderSdr(model) {
+  const g = model.sdrGroups; const tot = g[2];
+  el("sdr-split").innerHTML = `<table class="plain"><thead><tr><th class="left">Who booked the demo</th><th>Demos booked</th><th>Share of demos</th><th>Demos held</th><th>Held / booked</th><th>Won new-logo deals</th><th>Won new-logo ARR</th><th>Share of won ARR</th><th class="left">12-month trend</th></tr></thead><tbody>${
+    g.map((r, i) => `<tr class="${i === 2 ? "total" : ""}"><td class="left">${esc(r.label)}</td><td class="num">${r.booked}</td><td class="num">${pct(tot.booked ? r.booked / tot.booked : null)}</td><td class="num">${r.held}</td><td class="num" style="${i < 2 ? heat(r.booked ? r.held / r.booked : null, 0.3, 0.5, 0.7) : ""}">${pct(r.booked ? r.held / r.booked : null)}</td><td class="num">${r.won}</td><td class="num">${money(r.wonArr)}</td><td class="num">${pct(tot.wonArr ? r.wonArr / tot.wonArr : null)}</td><td class="left">${sparkline(r.trend, model.to)}</td></tr>`).join("")}</tbody></table>`;
+  el("sdr-table").innerHTML = `<thead><tr><th>SDR</th><th>Demos booked</th><th>Demos held</th><th>Target: held</th><th>Held vs target</th><th>Won new-logo ARR</th><th class="left">12-month trend (demos booked)</th></tr></thead><tbody>${
+    model.sdrs.map((r) => `<tr><td><span class="rep-name">${esc(r.name)}</span><span class="rep-meta">since ${monthLabel(monthOf(r.start), true)}</span></td><td>${r.booked}</td><td>${r.held}</td><td>${r.target}</td><td style="${heat(r.vsTarget, 0.5, 0.9, 1.1)}">${pct(r.vsTarget)}</td><td>${money(r.wonArr)}</td><td class="left">${sparkline(r.trend, model.to)}</td></tr>`).join("") ||
+    `<tr><td colspan="7">No SDR in seat for this team at the end of the period.</td></tr>`}</tbody>`;
+}
+
+// ---------- one person ----------
+function renderPerson(model) {
+  const host = el("person");
+  if (!state.person) { host.hidden = true; return; }
+  const v = personModel(state.person, model);
+  const t = v.person; const s = v.sales; const d = v.sdr;
+  const kv = (label, value, sub = "", style = "") => `<div class="kv"><span>${esc(label)}</span><b style="${style}">${esc(value)}</b><small>${esc(sub)}</small></div>`;
+  host.hidden = false;
+  host.innerHTML = `
+    <div class="person-head"><h3>${esc(t.name)}</h3><span class="muted">${esc(t.role)} · ${esc(t.market)} · since ${monthLabel(monthOf(t.start), true)} · all countries, same period</span></div>
+    <div class="person-cols">
+      <div><p class="corr-title">As deal owner (Sales)</p>
+        ${kv("New-logo ARR won", money(s.newArr))}
+        ${kv("New-logo ARR vs quota", s.quota === null ? "–" : pct(s.attainment), s.quota === null ? "No new-logo quota: not an AE" : `of ${money(s.quota)}`, s.quota === null ? "" : heat(s.attainment, 0.5, 0.9, 1.1))}
+        ${kv("Expansion ARR won", money(s.expansionArr))}
+        ${kv("Win rate", pct(s.winRate), `${s.won} won of ${s.closed} closed`)}
+        ${kv("Open deals", String(s.open), `${pct(s.unhealthyShare)} unhealthy`)}
+        ${kv("Healthy weighted pipe", money(s.pipe))}
+      </div>
+      <div><p class="corr-title">As SDR (demos booked)</p>
+        ${kv("Demos booked", String(d.booked), "New-logo deals created in the period")}
+        ${kv("Demos held", String(d.held), "Of those, demo held so far")}
+        ${kv("Target: demos held", String(d.target), "Monthly target × months in seat")}
+        ${kv("Held vs target", pct(d.vsTarget), "", heat(d.vsTarget, 0.5, 0.9, 1.1))}
+        ${kv("Won new-logo deals", String(d.won), "From demos they booked")}
+        ${kv("Won new-logo ARR", money(d.wonArr))}
+      </div>
+    </div>
+    <div class="table-scroll"><table class="plain mini"><thead><tr><th class="left"></th><th class="left">12-month trend</th>${v.monthsBack.map((m) => `<th>${monthLabel(m)}</th>`).join("")}</tr></thead><tbody>${
+      v.lines.map((l) => `<tr><td class="left">${esc(l.label)}</td><td class="left">${sparkline(v.monthsBack.map((m, i) => ({ month: m, value: l.values[i] || 0 })).reverse(), model.to)}</td>${l.values.map((x) => `<td class="num" style="${l.heat ? heat(x, 0.2, 0.5, 0.8) : ""}">${l.fmt(x)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+
 function renderNotes(model) {
   const t = model.team;
   const items = [
@@ -493,6 +600,8 @@ function render() {
   renderBreakdown("by-source", model.sources);
   renderBreakdown("by-specialty", model.specialties);
   renderTable(model);
+  renderSdr(model);
+  renderPerson(model);
   renderNotes(model);
 }
 
@@ -569,6 +678,7 @@ async function loadFromSheet() {
     team: teamRows.filter((r) => r.name).map((r) => ({
       name: r.name, role: r.role, market: r.market, start: isoDate(r.start_date), end: isoDate(r.end_date),
       quotaProvided: num(r.monthly_new_arr_quota_synthetic),
+      demoTarget: num(r.monthly_demos_held_target_synthetic),
     })).filter((t) => t.start),
     deals: dealRows.filter((r) => r.deal_id).map((r) => ({
       owner: r.owner,
@@ -588,6 +698,8 @@ async function loadFromSheet() {
       unhealthy: flag(r.is_sick),
       age: num(r.open_age_days),
       kind: r.deal_kind || "Unknown",
+      created: isoDate(r.created_date),
+      sdr: r.sdr || "",
       weightedHealthy: num(r.weighted_pipe_healthy) || 0,
     })),
   };
@@ -606,7 +718,9 @@ async function init() {
   fillSelect(el("filter-period"), Object.entries(PERIOD_LABEL).map(([value, label]) => ({ value, label })), state.period);
   fillSelect(el("filter-month"), months.map((m) => ({ value: m, label: monthLabel(m, true) + (m === asOfMonth ? " (to date)" : "") })), state.month);
   fillSelect(el("filter-motion"), ["All", "New logo", "Expansion"].map((m) => ({ value: m, label: m === "All" ? "All deals" : m })), state.motion);
-  [["filter-country", "country"], ["filter-period", "period"], ["filter-month", "month"], ["filter-motion", "motion"]].forEach(([id, key]) =>
+  const people = state.data.team.filter((t) => ["AE", "SDR", "AM"].includes(t.role)).sort((a, b) => a.role.localeCompare(b.role) || a.name.localeCompare(b.name));
+  fillSelect(el("filter-person"), [{ value: "", label: "Everyone" }, ...people.map((t) => ({ value: t.name, label: `${t.name} (${t.role})` }))], state.person);
+  [["filter-country", "country"], ["filter-period", "period"], ["filter-month", "month"], ["filter-motion", "motion"], ["filter-person", "person"]].forEach(([id, key]) =>
     el(id).addEventListener("change", (e) => { state[key] = e.target.value; render(); }));
 
   let resizeTimer;
