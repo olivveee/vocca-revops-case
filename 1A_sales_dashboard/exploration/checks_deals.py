@@ -1,6 +1,6 @@
 """Data-quality checks on deals: stage vs dates, amounts, owners, type/source, links to accounts.
 
-Usage: python scripts/checks_deals.py <data_dir>
+Usage: python 1A_sales_dashboard/exploration/checks_deals.py <data_dir>
 """
 import sys, pandas as pd
 d=sys.argv[1]

@@ -1,6 +1,6 @@
 "use strict";
 
-// TAM cockpit: a work tool on top of scripts/tam_dedup.py (data/tam_cockpit.json).
+// TAM cockpit: a work tool on top of 1B_tam_mapping/tam_dedup.py (data/tam_cockpit.json).
 // Work queues -> the detailed list behind each queue (explorer) -> quality by source -> pair review.
 // Review decisions are kept in this browser (localStorage) and exported as CSV;
 // in production they would be posted to an n8n workflow that writes to Attio.

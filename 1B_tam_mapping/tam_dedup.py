@@ -19,7 +19,7 @@ Never merged automatically:
   - pairs with open deals owned by different people;
   - matches resting on a shared phone, domain or name only.
 
-Usage: python scripts/tam_dedup.py <data_dir> <out_dir> [<web_data_dir>]
+Usage: python 1B_tam_mapping/tam_dedup.py <data_dir> <out_dir> [<web_data_dir>]
 Writes merge_pairs.csv, merge_clusters.csv, hierarchy_issues.csv, contact_moves.csv
 and summary.json to <out_dir>. With <web_data_dir>, also writes the TAM cockpit feed
 (tam_cockpit.json) and the action pack (tam_action_pack.xlsx) there.
@@ -714,7 +714,7 @@ def write_cockpit(web_dir, c, contacts, deals, pairs, clusters, hierarchy, moves
     accounts, contact_rows, sources, health = worklist(c, contacts, pairs, clusters, hierarchy, moves, markets)
 
     cockpit = {
-        "generated_from": "scripts/tam_dedup.py",
+        "generated_from": "1B_tam_mapping/tam_dedup.py",
         "current": current_state(c, contacts),
         "summary": summary,
         "duplicate_sources": duplicate_sources(clusters, c),
@@ -731,7 +731,7 @@ def write_cockpit(web_dir, c, contacts, deals, pairs, clusters, hierarchy, moves
 
 def write_action_pack(path, cockpit, clusters, review, hierarchy, moves, pairs, markets):
     readme = pd.DataFrame({"Vocca TAM action pack": [
-        "Produced by scripts/tam_dedup.py on the anonymised Attio export of 25 Sep 2026.",
+        "Produced by 1B_tam_mapping/tam_dedup.py on the anonymised Attio export of 25 Sep 2026.",
         "Model: the account is the site (SIRET), rolled up to a group and a network; the legal entity (SIREN) is linked.",
         "Auto merges: certain duplicates, never a customer, never two owners. Survivor: customer, most deals, most contacts, most complete, oldest.",
         "Manual review: pairs the rules refuse to merge without a human. Decide in the TAM cockpit, then export.",

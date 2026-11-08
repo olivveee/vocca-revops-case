@@ -1,7 +1,7 @@
 "use strict";
 
 // Four slides for Part 1B, in French (the cockpit, write-up and repo stay in English). Figures come from data/tam_cockpit.json, written by
-// scripts/tam_dedup.py, so the slides, the cockpit and the action pack always agree.
+// 1B_tam_mapping/tam_dedup.py, so the slides, the cockpit and the action pack always agree.
 
 const fmt = new Intl.NumberFormat("fr-FR");
 const AUTOMATIONS = ["API · enrichment pipeline", "API · n8n", "Attio · auto-created from email sync"];

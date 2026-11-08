@@ -1,6 +1,6 @@
 """Fill rate and value distribution of every column in deals, companies and contacts.
 
-Usage: python scripts/profile.py <data_dir>
+Usage: python 1A_sales_dashboard/exploration/profile.py <data_dir>
 """
 import sys, pandas as pd
 d = sys.argv[1]

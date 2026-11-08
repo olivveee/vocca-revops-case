@@ -3,9 +3,9 @@ __pycache__/
 .venv/
 .claude/
 .vercel/
-# Working notes in French, superseded by docs/data_findings.md
+# Working notes in French, superseded by 1A_sales_dashboard/data_findings.md and 1B_tam_mapping/data_findings.md
 constats_dataset.md
-# French working copy of docs/tam_mapping.md, for review only
+# French working copy of 1B_tam_mapping/tam_mapping.md, for review only
 tam_mapping_fr.md
 slides_fr.md
 # Part 2 detailed working draft: internal details, kept out of the public repo

@@ -1,6 +1,6 @@
 """Data-quality checks on companies and contacts: identity keys, duplicates, hierarchy, fields, wrong-account contacts.
 
-Usage: python scripts/checks_accounts.py <data_dir>
+Usage: python 1B_tam_mapping/exploration/checks_accounts.py <data_dir>
 """
 import sys, re, unicodedata, pandas as pd
 d=sys.argv[1]

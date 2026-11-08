@@ -1,6 +1,6 @@
 """Test the candidate 1A metrics per AE over the last 6 complete months.
 
-Usage: python scripts/metrics_test.py <data_dir>
+Usage: python 1A_sales_dashboard/exploration/metrics_test.py <data_dir>
 """
 import sys, pandas as pd
 d = sys.argv[1]

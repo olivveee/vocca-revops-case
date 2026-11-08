@@ -1,6 +1,6 @@
 """Follow-up checks: bulk clean-up dates, forecast outliers, wrong-account contacts by account family.
 
-Usage: python scripts/checks_extra.py <data_dir>
+Usage: python 1A_sales_dashboard/exploration/checks_extra.py <data_dir>
 """
 import sys, pandas as pd
 d=sys.argv[1]

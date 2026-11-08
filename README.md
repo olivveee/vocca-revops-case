@@ -15,21 +15,21 @@ The Vocca Senior RevOps case. Part 1: **1A**, a sales efficiency dashboard for t
 | ↳ `PARAMS`: every setting in one place (quota, currency, thresholds) | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=104) |
 | ↳ `README`: how to read and maintain the file | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=101) |
 | **Web view** of the same Sheet (read-only) | [vocca-revops-case.vercel.app](https://vocca-revops-case.vercel.app/) |
-| What is wrong in the export, sized | [`docs/data_findings.md`](docs/data_findings.md) |
+| What is wrong in the deals export, sized | [`1A_sales_dashboard/data_findings.md`](1A_sales_dashboard/data_findings.md) |
 
 ### 1B · Mapping the TAM
 
 | What | Link |
 | --- | --- |
 | **Slides** (4, in French: what is wrong, the model, the build, recommendations) | [Open the slides](https://vocca-revops-case.vercel.app/slides.html) |
-| **Write-up**: account model, generic identity, build, recommendations | [`docs/tam_mapping.md`](docs/tam_mapping.md) |
+| **Write-up**: account model, generic identity, build, recommendations | [`1B_tam_mapping/tam_mapping.md`](1B_tam_mapping/tam_mapping.md) |
 | **TAM cockpit**: the work tool built on the file | [Open the cockpit](https://vocca-revops-case.vercel.app/tam.html) |
 | ↳ Work queues: duplicates, identity, structure, market, contacts | [Tab](https://vocca-revops-case.vercel.app/tam.html#queues) |
 | ↳ Explorer: every record behind a queue, filterable, CSV export | [Tab](https://vocca-revops-case.vercel.app/tam.html#explore/all) |
 | ↳ Quality by source: which tool creates the mess | [Tab](https://vocca-revops-case.vercel.app/tam.html#sources) |
 | ↳ Pair review: 211 pairs to merge or keep separate | [Tab](https://vocca-revops-case.vercel.app/tam.html#review) |
 | **Action pack** (Excel: every merge, review pair, hierarchy fix, contact move) | [Download](https://vocca-revops-case.vercel.app/data/tam_action_pack.xlsx) |
-| The script that does the work on the file | [`scripts/tam_dedup.py`](scripts/tam_dedup.py), outputs in [`out/tam/`](out/tam/) |
+| The script that does the work on the file | [`1B_tam_mapping/tam_dedup.py`](1B_tam_mapping/tam_dedup.py), outputs in [`1B_tam_mapping/output/`](1B_tam_mapping/output/) |
 
 ### 2 · A project I ran
 
@@ -78,7 +78,7 @@ Attio export (CSV)  ->  Google Sheet                         ->  web view
                         CALC          quota calibration base
                         DASHBOARD, WHAT_WORKS, DATA_QUALITY
 
-data/  ->  scripts/tam_dedup.py  ->  out/tam/*.csv
+data/  ->  1B_tam_mapping/tam_dedup.py  ->  1B_tam_mapping/output/*.csv
                                  ->  web/data/ (TAM cockpit feed, action pack)  ->  slides and cockpit
 ```
 
@@ -88,25 +88,26 @@ data/  ->  scripts/tam_dedup.py  ->  out/tam/*.csv
 
 ## Repository layout
 
-| Path | What it is |
-| --- | --- |
-| `data/` | The anonymised CRM export provided for the case, with its data dictionary (`data/README.md`) |
-| `docs/data_findings.md` | What is wrong in the export, sized (dashboard and TAM) |
-| `docs/tam_mapping.md` | 1B write-up |
-| `scripts/tam_dedup.py` | 1B work on the file: deduplication, hierarchy audit, contact re-attachment, work queues |
-| `scripts/profile.py`, `checks_*.py`, `metrics_test.py` | Exploration scripts used to audit the export and test candidate metrics |
-| `out/tam/` | Output of `tam_dedup.py`: merge pairs and clusters, hierarchy and market issues, contact moves, summary |
-| `web/` | Static site (HTML/CSS/JS, no build step): 1A web view (`index.html`), TAM slides (`slides.html`), TAM cockpit (`tam.html`), Part 2 slides and PDF (`partie2.html`, `partie2.pdf`) |
+One folder per part of the case; `web/` is the site deployed on Vercel for both parts.
+
+```
+README.md              this page
+data/                  the anonymised Attio export provided for the case, with its data dictionary
+1A_sales_dashboard/    README (links to the Sheet and its tabs), data_findings.md, exploration/
+1B_tam_mapping/        README, tam_mapping.md (write-up), data_findings.md, tam_dedup.py, output/, exploration/
+web/                   static site: 1A web view (index.html), TAM slides (slides.html), TAM cockpit (tam.html)
+requirements.txt       pandas and openpyxl, for the scripts
+```
 
 ## Running it
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python scripts/tam_dedup.py data out/tam web/data   # refreshes the cockpit feed and the action pack
-python3 -m http.server 4173 --directory web                  # then open http://localhost:4173
+.venv/bin/python 1B_tam_mapping/tam_dedup.py data 1B_tam_mapping/output web/data   # refreshes the cockpit feed and the action pack
+python3 -m http.server 4173 --directory web                                      # then open http://localhost:4173
 ```
 
-The exploration scripts take the data folder as argument (`.venv/bin/python scripts/profile.py data`). The 1A web view reads the published Sheet configured in `web/config.js`.
+The exploration scripts take the data folder as argument (`.venv/bin/python 1A_sales_dashboard/exploration/profile.py data`). The 1A web view reads the published Sheet configured in `web/config.js`.
 
 **Vercel:** import the repository with **Root Directory = `web`**, no build command. `web/vercel.json` sets `X-Robots-Tag: noindex`.
 
