@@ -16,6 +16,7 @@ Attio export (CSV)  ->  Google Sheet  ->  web page
                         PARAMS
                         CALC
                         DASHBOARD
+                        WHAT_WORKS
                         DATA_QUALITY
 ```
 
@@ -37,11 +38,13 @@ Attio export (CSV)  ->  Google Sheet  ->  web page
 
 ## Metrics, and what was left out
 
-Kept, grouped by the three questions a Head of Sales asks on Monday morning:
+The web page reads top-down, from the country to the AE, with four filters: country of the account, period (month, last 3 months, year to date), month, and deals (all, new logo, expansion).
 
-1. **Are we on track?** New-logo ARR vs quota (group rollouts counted as expansion), healthy weighted pipe.
-2. **Who needs help?** Win rate on 3 rolling months with the July bulk clean-up counted as losses, demo-to-won rate, average deal.
-3. **Why?** Share of unhealthy open deals (older than 90 days, or next step / expected close more than 30 days late), clean-up losses per AE.
+1. **Are we on track?** Four numbers: new-logo ARR vs quota (group rollouts counted as expansion), expansion ARR, weighted healthy pipe, win rate with the July bulk clean-up counted as losses. Then the 12-month new-logo trend and the open pipe by stage with its unhealthy share (older than 90 days, or next step / expected close more than 30 days late).
+2. **What works?** Won ARR, win rate and open deals by source and by specialty.
+3. **Who needs help?** One line per AE, five columns: new-logo ARR vs quota, win rate, healthy pipe, flags.
+
+Country is the account's, not the AE's: the French team owns almost every deal, US accounts included. The quota is compared with what the country's own team signed. The Sheet's `WHAT_WORKS` tab holds the same breakdowns in formulas; account country, source and cleaned specialty are columns of `DEALS_CLEAN`.
 
 Left out on purpose: sales cycle length (deals are created late, often at signature), the AEs' closing probability (half empty, uncalibrated), activity volume (not in the export), SDR metrics (demo attribution is broken). The `README` and `DATA_QUALITY` tabs of the sheet explain each choice.
 

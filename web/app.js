@@ -2,9 +2,14 @@
 
 // Presentation layer only. Every cleaning rule, the quota and the flag thresholds come
 // from the Google Sheet (DEALS_CLEAN, RAW_team and WEB_PARAMS tabs, published as CSV),
-// so a change in the sheet shows up here on the next page load.
+// so a change in the sheet shows up here on the next page load. The breakdowns below
+// (by country, stage, source, specialty) use the same definitions as the WHAT_WORKS tab.
 
-const state = { data: null, month: null, market: "All", pipeline: "All" };
+const state = { data: null, month: null, country: "All", period: "ytd", motion: "All" };
+
+const STAGES = ["Demo Scheduled", "Demo Held", "Qualified", "Quoted"];
+const COUNTRY_LABEL = { All: "All countries", FR: "France", US: "United States", Other: "Other countries", Unknown: "Country unknown" };
+const PERIOD_LABEL = { month: "Month", quarter: "Last 3 months", ytd: "Year to date" };
 
 const eur = new Intl.NumberFormat("en-GB", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
 const pct = (v) => (v === null || Number.isNaN(v) ? "–" : `${Math.round(v * 100)}%`);
@@ -34,27 +39,33 @@ const monthLabel = (m, long = false) => {
   });
 };
 const inMonths = (iso, from, to) => iso !== null && monthOf(iso) >= from && monthOf(iso) <= to;
+const monthsBetween = (from, to) => Array.from({ length: monthDiff(from, to) + 1 }, (_, i) => addMonths(from, i));
 
 // ---------- calculations ----------
 const sum = (arr, f) => arr.reduce((s, x) => s + (f(x) || 0), 0);
 
-function filteredDeals({ byMarket }) {
-  return state.data.deals.filter((d) =>
-    (state.pipeline === "All" || d.pipeline === state.pipeline) &&
-    (!byMarket || state.market === "All" || d.market === state.market));
+function periodRange() {
+  const to = state.month;
+  if (state.period === "month") return { from: to, to };
+  if (state.period === "quarter") return { from: addMonths(to, -2), to };
+  return { from: `${to.slice(0, 4)}-01`, to };
 }
 
+// Deals are filtered on the country of the account; AEs (quota, table) on the market of their team.
+const countryDeals = () => state.data.deals.filter((d) => state.country === "All" || d.country === state.country);
+const byMotion = (deals) => deals.filter((d) => state.motion === "All" || d.motion === state.motion);
+const teamMarket = () => (state.country === "FR" || state.country === "US" ? state.country : null);
+
 function aesInSeat(month) {
+  const market = teamMarket();
   return state.data.team.filter((t) =>
     t.role === "AE" &&
     monthOf(t.start) <= month &&
     (t.end === null || monthOf(t.end) >= month) &&
-    (state.market === "All" || t.market === state.market));
+    (state.country === "All" || t.market === market));
 }
 
-function tenure(ae, month) {
-  return monthDiff(monthOf(ae.start), month) + 1;
-}
+const tenure = (ae, month) => monthDiff(monthOf(ae.start), month) + 1;
 
 function quotaFor(ae, month, base) {
   const ramp = state.data.params.ramp;
@@ -65,90 +76,114 @@ function rates(deals, from, to) {
   const closed = deals.filter((d) => d.status !== "open" && inMonths(d.booking, from, to));
   const won = closed.filter((d) => d.status === "won");
   const sweep = closed.filter((d) => d.sweep).length;
-  const afterDemo = closed.filter((d) => d.reachedDemo);
   return {
     winRate: closed.length ? won.length / closed.length : null,
     winRateExSweep: closed.length - sweep ? won.length / (closed.length - sweep) : null,
-    demoToWon: afterDemo.length ? won.length / afterDemo.length : null,
-    avgDeal: won.length ? sum(won, (d) => d.arr) / won.length : null,
     closed: closed.length,
     won: won.length,
+    wonArr: sum(won, (d) => d.arr),
   };
 }
 
+// One row per value of `key` (source, specialty): closed deals in the period, won ARR, win rate, open pipe.
+// Beyond `top` rows the long tail is grouped, so the list stays readable.
+function breakdown(deals, key, from, to, top = Infinity) {
+  const rows = {};
+  deals.forEach((d) => {
+    const k = d[key] || "Unknown";
+    const r = rows[k] || (rows[k] = { label: k, won: 0, closed: 0, wonArr: 0, open: 0, pipe: 0 });
+    if (d.status === "open") { r.open += 1; r.pipe += d.weightedHealthy; return; }
+    if (!inMonths(d.booking, from, to)) return;
+    r.closed += 1;
+    if (d.status === "won") { r.won += 1; r.wonArr += d.arr || 0; }
+  });
+  const list = Object.values(rows).filter((r) => r.closed || r.open)
+    .map((r) => ({ ...r, winRate: r.closed ? r.won / r.closed : null }))
+    .sort((a, b) => b.wonArr - a.wonArr || b.closed - a.closed);
+  if (list.length <= top + 1) return list;
+  const rest = list.slice(top);
+  const other = rest.reduce((o, r) => ({ ...o, won: o.won + r.won, closed: o.closed + r.closed, wonArr: o.wonArr + r.wonArr, open: o.open + r.open, pipe: o.pipe + r.pipe }),
+    { label: `${rest.length} others`, won: 0, closed: 0, wonArr: 0, open: 0, pipe: 0, grouped: true });
+  other.winRate = other.closed ? other.won / other.closed : null;
+  return [...list.slice(0, top), other];
+}
+
 function compute() {
-  const month = state.month;
-  const winFrom = addMonths(month, -(state.data.params.rateWindowMonths - 1));
-  const quotaBase = state.data.params.quotaBase;
-  const teamDeals = filteredDeals({ byMarket: true });
-  const allDeals = filteredDeals({ byMarket: false });
+  const p = state.data.params;
+  const { from, to } = periodRange();
+  const months = monthsBetween(from, to);
+  // A single month holds too few closed deals per AE: rates then use the rolling window.
+  const rateFrom = state.period === "month" ? addMonths(to, -(p.rateWindowMonths - 1)) : from;
+  const all = countryDeals();
+  const deals = byMotion(all);
+  const won = all.filter((d) => d.status === "won" && inMonths(d.booking, from, to));
+  const open = deals.filter((d) => d.status === "open");
+  const quota = teamMarket() || state.country === "All" ? sum(months, (m) => sum(aesInSeat(m), (ae) => quotaFor(ae, m, p.quotaBase))) : null;
+  const r = rates(deals, rateFrom, to);
 
-  const monthDeals = teamDeals.filter((d) => d.status === "won" && d.booking && monthOf(d.booking) === month);
-  const open = teamDeals.filter((d) => d.status === "open");
-  const teamRates = rates(teamDeals, winFrom, month);
-
-  const reps = aesInSeat(month).sort((a, b) => a.name.localeCompare(b.name)).map((ae) => {
-    const own = allDeals.filter((d) => d.owner === ae.name);
-    const won = own.filter((d) => d.status === "won" && d.booking && monthOf(d.booking) === month);
+  const reps = aesInSeat(to).sort((a, b) => a.name.localeCompare(b.name)).map((ae) => {
+    const own = state.data.deals.filter((d) => d.owner === ae.name);
     const ownOpen = own.filter((d) => d.status === "open");
-    const r = rates(own, winFrom, month);
-    const quota = quotaFor(ae, month, quotaBase);
-    const newArr = sum(won.filter((d) => d.motion === "new"), (d) => d.arr);
-    const trend = Array.from({ length: 12 }, (_, i) => {
-      const m = addMonths(month, i - 11);
-      return { month: m, value: sum(own.filter((d) => d.status === "won" && d.motion === "new" && d.booking && monthOf(d.booking) === m), (d) => d.arr) };
-    });
+    const repQuota = sum(months.filter((m) => monthOf(ae.start) <= m), (m) => quotaFor(ae, m, p.quotaBase));
+    const newArr = sum(own.filter((d) => d.status === "won" && d.motion === "New logo" && inMonths(d.booking, from, to)), (d) => d.arr);
+    const rr = rates(own, rateFrom, to);
     const rep = {
       name: ae.name,
       market: ae.market,
-      tenure: tenure(ae, month),
-      quota,
+      tenure: tenure(ae, to),
+      quota: repQuota,
       newArr,
-      attainment: quota ? newArr / quota : 0,
-      expansionArr: sum(won.filter((d) => d.motion === "expansion"), (d) => d.arr),
-      winRate: r.winRate,
-      demoToWon: r.demoToWon,
-      avgDeal: r.avgDeal,
+      attainment: repQuota ? newArr / repQuota : 0,
+      winRate: rr.winRate,
+      closed: rr.closed,
       healthyPipe: sum(ownOpen, (d) => d.weightedHealthy),
       openDeals: ownOpen.length,
-      unhealthyDeals: ownOpen.filter((d) => d.unhealthy).length,
       unhealthyShare: ownOpen.length ? ownOpen.filter((d) => d.unhealthy).length / ownOpen.length : null,
       sweepLosses: own.filter((d) => d.sweep).length,
-      trend,
     };
-    rep.flags = flagsFor(rep, teamRates.winRate);
+    rep.flags = flagsFor(rep, rates(all, rateFrom, to).winRate);
     return rep;
   });
 
   const history = Array.from({ length: 12 }, (_, i) => {
-    const m = addMonths(month, i - 11);
-    const r = rates(teamDeals, addMonths(m, -(state.data.params.rateWindowMonths - 1)), m);
+    const m = addMonths(to, i - 11);
     return {
       month: m,
-      newArr: sum(teamDeals.filter((d) => d.status === "won" && d.motion === "new" && d.booking && monthOf(d.booking) === m), (d) => d.arr),
-      quota: sum(aesInSeat(m), (ae) => quotaFor(ae, m, quotaBase)),
-      winRate: r.winRate,
-      winRateExSweep: r.winRateExSweep,
+      newArr: sum(all.filter((d) => d.status === "won" && d.motion === "New logo" && d.booking && monthOf(d.booking) === m), (d) => d.arr),
+      quota: quota === null ? 0 : sum(aesInSeat(m), (ae) => quotaFor(ae, m, p.quotaBase)),
     };
   });
 
+  const stages = STAGES.map((s) => {
+    const inStage = open.filter((d) => d.stage === s);
+    return {
+      stage: s,
+      deals: inStage.length,
+      forecast: sum(inStage, (d) => d.forecast),
+      pipe: sum(inStage, (d) => d.weightedHealthy),
+      unhealthyShare: inStage.length ? inStage.filter((d) => d.unhealthy).length / inStage.length : null,
+    };
+  });
+
+  const newArr = sum(won.filter((d) => d.motion === "New logo"), (d) => d.arr);
+  // Quota belongs to a team: compare it with what that team signed, not with every deal on the country's accounts.
+  const quotaArr = teamMarket() ? sum(won.filter((d) => d.motion === "New logo" && d.market === teamMarket()), (d) => d.arr) : newArr;
+  const expansionArr = sum(won.filter((d) => d.motion === "Expansion"), (d) => d.arr);
+  const expansionRates = rates(all.filter((d) => d.motion === "Expansion"), rateFrom, to);
   return {
-    month, winFrom, quotaBase, reps, history,
+    from, to, rateFrom, months, reps, history, stages,
+    sources: breakdown(deals, "source", from, to),
+    specialties: breakdown(deals, "specialty", from, to, 9),
     team: {
-      winRate: teamRates.winRate,
-      winRateExSweep: teamRates.winRateExSweep,
-      newArr: sum(monthDeals.filter((d) => d.motion === "new"), (d) => d.arr),
-      expansionArr: sum(monthDeals.filter((d) => d.motion === "expansion"), (d) => d.arr),
-      won: monthDeals.length,
-      avgDeal: monthDeals.length ? sum(monthDeals, (d) => d.arr) / monthDeals.length : null,
-      quota: sum(reps, (r) => r.quota),
+      newArr, expansionArr, quota, quotaArr,
+      expansionShare: newArr + expansionArr ? expansionArr / (newArr + expansionArr) : null,
+      expansionWinRate: expansionRates.winRate,
+      winRate: r.winRate, winRateExSweep: r.winRateExSweep, closed: r.closed, wonCount: r.won,
       healthyPipe: sum(open, (d) => d.weightedHealthy),
-      rawPipe: sum(open, (d) => d.forecast),
       openDeals: open.length,
-      unhealthyDeals: open.filter((d) => d.unhealthy).length,
-      outsideAe: sum(monthDeals.filter((d) => d.role !== "AE"), (d) => d.arr),
-      sweepTotal: teamDeals.filter((d) => d.sweep).length,
-      nonAeDeals: teamDeals.filter((d) => d.role !== "AE").length,
+      unhealthyShare: open.length ? open.filter((d) => d.unhealthy).length / open.length : null,
+      sweepTotal: all.filter((d) => d.sweep).length,
+      nonAeDeals: all.filter((d) => d.role !== "AE").length,
     },
   };
 }
@@ -162,7 +197,6 @@ function flagsFor(rep, teamWinRate) {
   if (rep.winRate !== null && teamWinRate !== null && rep.winRate < teamWinRate * t.lowConversion) flags.push({ label: "Low conversion", tone: "serious" });
   if (rep.unhealthyShare !== null && rep.unhealthyShare > t.unhealthyShare) flags.push({ label: "Pipe needs cleaning", tone: "warning" });
   if (rep.sweepLosses >= t.sweepLosses) flags.push({ label: "Does not close out losses", tone: "serious" });
-  if (!flags.length) flags.push({ label: "OK", tone: "good" });
   return flags;
 }
 
@@ -232,20 +266,21 @@ function renderArrChart(model) {
   }
   data.forEach((d, i) => {
     const cx = m.left + band * i + band / 2;
-    const selected = d.month === model.month;
+    const selected = d.month === model.to;
     svg += `<path d="${barPath(cx - bw / 2, y(d.newArr), bw, m.top + ih - y(d.newArr))}" fill="var(--series-1)" opacity="${selected ? 1 : 0.55}"/>`;
     if (i % 2 === 1 || data.length <= 6 || selected) {
       svg += `<text x="${cx}" y="${H - 8}" text-anchor="middle" class="${selected ? "label-strong" : ""}">${monthLabel(d.month)}</text>`;
     }
     svg += `<rect x="${m.left + band * i}" y="${m.top}" width="${band}" height="${ih}" fill="transparent" data-tip="${i}"/>`;
   });
-  // Quota as a step line on the same axis (same unit, so one axis).
+  // Quota as a step line on the same axis (same unit, so one axis); none when no team covers the country.
+  const showQuota = model.team.quota !== null;
   let path = "";
   data.forEach((d, i) => {
     const x0 = m.left + band * i;
     path += `${i === 0 ? "M" : "L"}${x0},${y(d.quota)}H${x0 + band}`;
   });
-  svg += `<path d="${path}" fill="none" stroke="var(--text-secondary)" stroke-width="2" pointer-events="none"/>`;
+  if (showQuota) svg += `<path d="${path}" fill="none" stroke="var(--text-secondary)" stroke-width="2" pointer-events="none"/>`;
   svg += "</svg>";
   host.innerHTML = svg;
   bindTooltips(host, (i) => {
@@ -254,132 +289,20 @@ function renderArrChart(model) {
   });
   el("legend-arr").innerHTML =
     `<span><i class="swatch" style="background:var(--series-1)"></i>New-logo ARR signed</span>` +
-    `<span><i class="swatch line" style="background:var(--text-secondary)"></i>Team quota</span>`;
+    (showQuota ? `<span><i class="swatch line" style="background:var(--text-secondary)"></i>Team quota</span>` : "");
 }
 
-function renderWinChart(model) {
-  const host = el("chart-win");
-  const W = Math.max(320, host.clientWidth);
-  const H = 240;
-  const m = { top: 12, right: 64, bottom: 28, left: 40 };
-  const iw = W - m.left - m.right;
-  const ih = H - m.top - m.bottom;
-  const data = model.history;
-  const x = (i) => m.left + (iw / (data.length - 1)) * i;
-  const y = (v) => m.top + ih - v * ih;
-  const series = [
-    { key: "winRate", label: "Clean-up counted as losses", color: "var(--series-1)" },
-    { key: "winRateExSweep", label: "Excluding the clean-up", color: "var(--series-2)" },
-  ];
-
-  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Rolling 3-month win rate">`;
-  [0, 0.25, 0.5, 0.75, 1].forEach((v) => {
-    svg += `<line x1="${m.left}" x2="${W - m.right}" y1="${y(v)}" y2="${y(v)}" stroke="var(--${v === 0 ? "axis" : "grid"})" stroke-width="1"/>`;
-    svg += `<text x="${m.left - 8}" y="${y(v) + 4}" text-anchor="end">${pct(v)}</text>`;
-  });
-  data.forEach((d, i) => {
-    if (i % 2 === 1 || d.month === model.month) {
-      svg += `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" class="${d.month === model.month ? "label-strong" : ""}">${monthLabel(d.month)}</text>`;
-    }
-  });
-  const ends = [];
-  // Draw the headline series last so it stays on top where the lines overlap.
-  [...series].reverse().forEach((s) => {
-    const pts = data.map((d, i) => (d[s.key] === null ? null : [x(i), y(d[s.key])]));
-    let p = "";
-    pts.forEach((pt, i) => { if (pt) p += `${p && pts[i - 1] ? "L" : "M"}${pt[0]},${pt[1]}`; });
-    svg += `<path d="${p}" fill="none" stroke="${s.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
-    const last = [...pts].reverse().find(Boolean);
-    if (last) {
-      svg += `<circle cx="${last[0]}" cy="${last[1]}" r="4" fill="${s.color}" stroke="var(--surface)" stroke-width="2"/>`;
-      ends.push({ y: last[1], text: pct(data[data.length - 1][s.key]), color: s.color });
-    }
-  });
-  // Direct labels at the line ends, nudged apart if they collide.
-  ends.sort((a, b) => a.y - b.y);
-  for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 14) ends[i].y = ends[i - 1].y + 14;
-  ends.forEach((e) => { svg += `<text x="${W - m.right + 10}" y="${e.y + 4}" class="label-strong">${e.text}</text>`; });
-  const band = iw / (data.length - 1);
-  data.forEach((d, i) => {
-    svg += `<rect x="${x(i) - band / 2}" y="${m.top}" width="${band}" height="${ih}" fill="transparent" data-tip="${i}"/>`;
-  });
-  svg += `<line id="win-cross" x1="0" x2="0" y1="${m.top}" y2="${m.top + ih}" stroke="var(--axis)" stroke-width="1" visibility="hidden" pointer-events="none"/>`;
-  svg += "</svg>";
-  host.innerHTML = svg;
-  const cross = host.querySelector("#win-cross");
-  host.querySelectorAll("[data-tip]").forEach((node) => {
-    node.addEventListener("mouseenter", () => {
-      const xi = x(Number(node.dataset.tip));
-      cross.setAttribute("x1", xi); cross.setAttribute("x2", xi); cross.setAttribute("visibility", "visible");
-    });
-    node.addEventListener("mouseleave", () => cross.setAttribute("visibility", "hidden"));
-  });
-  bindTooltips(host, (i) => {
-    const d = data[Number(i)];
-    return `<div class="tt-title">3 months to ${monthLabel(d.month, true)}</div>${ttRow("Win rate", pct(d.winRate))}${ttRow("Excluding clean-up", pct(d.winRateExSweep))}`;
-  });
-  el("legend-win").innerHTML = series.map((s) => `<span><i class="swatch line" style="background:${s.color}"></i>${s.label}</span>`).join("");
-}
-
-function renderHealthChart(model) {
-  const host = el("chart-health");
-  const reps = model.reps.filter((r) => r.openDeals > 0).sort((a, b) => b.openDeals - a.openDeals);
-  const W = Math.max(320, host.clientWidth);
-  const rowH = 26;
-  const m = { top: 4, right: 48, bottom: 8, left: 120 };
-  const H = m.top + m.bottom + rowH * Math.max(reps.length, 1);
-  const iw = W - m.left - m.right;
-  const max = Math.max(1, ...reps.map((r) => r.openDeals));
-  const xs = (v) => (v / max) * iw;
-  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Healthy and unhealthy open deals per AE">`;
-  reps.forEach((r, i) => {
-    const yy = m.top + i * rowH;
-    const healthy = r.openDeals - r.unhealthyDeals;
-    const bh = 14;
-    const by = yy + (rowH - bh) / 2;
-    svg += `<text x="${m.left - 10}" y="${by + 11}" text-anchor="end" class="label-strong">${esc(r.name)}</text>`;
-    const wh = xs(healthy);
-    const wu = xs(r.unhealthyDeals);
-    if (wh > 0) svg += `<rect x="${m.left}" y="${by}" width="${Math.max(wh - 1, 1)}" height="${bh}" rx="2" fill="var(--good)"/>`;
-    if (wu > 0) svg += `<rect x="${m.left + wh + (wh > 0 ? 1 : 0)}" y="${by}" width="${Math.max(wu - (wh > 0 ? 1 : 0), 1)}" height="${bh}" rx="2" fill="var(--critical)"/>`;
-    svg += `<text x="${m.left + wh + wu + 8}" y="${by + 11}">${pct(r.unhealthyShare)}</text>`;
-    svg += `<rect x="0" y="${yy}" width="${W}" height="${rowH}" fill="transparent" data-tip="${i}"/>`;
-  });
-  svg += "</svg>";
-  host.innerHTML = reps.length ? svg : `<p class="muted">No open deals for this selection.</p>`;
-  bindTooltips(host, (i) => {
-    const r = reps[Number(i)];
-    return `<div class="tt-title">${esc(r.name)}</div>${ttRow("Open deals", r.openDeals)}${ttRow("Healthy", r.openDeals - r.unhealthyDeals)}${ttRow("Unhealthy", r.unhealthyDeals)}${ttRow("Healthy weighted pipe", money(r.healthyPipe))}`;
-  });
-  el("legend-health").innerHTML =
-    `<span><i class="swatch" style="background:var(--good)"></i>Healthy open deals</span>` +
-    `<span><i class="swatch" style="background:var(--critical)"></i>Unhealthy open deals</span>`;
-}
-
-function sparkline(trend, selectedMonth) {
-  const W = 120, H = 28, gap = 2;
-  const bw = (W - gap * (trend.length - 1)) / trend.length;
-  const max = Math.max(1, ...trend.map((t) => t.value));
-  const bars = trend.map((t, i) => {
-    const h = t.value > 0 ? Math.max(2, (t.value / max) * (H - 2)) : 0;
-    const op = t.month === selectedMonth ? 1 : 0.5;
-    return h ? `<path d="${barPath(i * (bw + gap), H - h, bw, h, 1.5)}" fill="var(--series-1)" opacity="${op}"/>` : `<rect x="${i * (bw + gap)}" y="${H - 1}" width="${bw}" height="1" fill="var(--grid)"/>`;
-  }).join("");
-  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" aria-hidden="true">${bars}</svg>`;
-}
-
-// ---------- tiles, table, notes ----------
+// ---------- tiles ----------
 function renderTiles(model) {
   const t = model.team;
-  const att = t.quota ? t.newArr / t.quota : 0;
+  const att = t.quota ? t.quotaArr / t.quota : null;
   const tiles = [
-    { label: "New-logo ARR (month)", value: money(t.newArr), sub: `${pct(att)} of team quota (${money(t.quota)})`, meter: { value: att, tone: attainmentTone(att) } },
-    { label: "Expansion ARR (month)", value: money(t.expansionArr), sub: "Group rollouts, upsell, cross-sell" },
-    { label: "Deals won (month)", value: String(t.won), sub: `avg deal ${money(t.avgDeal)}` },
-    { label: "Win rate (3-month rolling)", value: pct(t.winRate), sub: `excluding bulk clean-up: ${pct(t.winRateExSweep)}` },
-    { label: "Healthy weighted pipe", value: money(t.healthyPipe), sub: `out of ${money(t.rawPipe)} raw open pipe` },
-    { label: "Unhealthy open pipe", value: pct(t.openDeals ? t.unhealthyDeals / t.openDeals : null), sub: `${t.unhealthyDeals} of ${t.openDeals} open deals` },
-    { label: "Outside AE table (month)", value: money(t.outsideAe), sub: "Signed on deals owned by Ops / AM / SDR" },
+    t.quota === null
+      ? { label: "New-logo ARR", value: money(t.newArr), sub: "No quota: no AE team covers this country" }
+      : { label: "New-logo ARR vs quota", value: pct(att), sub: t.quotaArr === t.newArr ? `${money(t.newArr)} of ${money(t.quota)}` : `${money(t.quotaArr)} by the ${state.country} team of ${money(t.quota)} · ${money(t.newArr)} signed on ${state.country} accounts`, meter: { value: att, tone: attainmentTone(att) } },
+    { label: "Expansion ARR", value: money(t.expansionArr), sub: `${pct(t.expansionShare)} of won ARR · win rate ${pct(t.expansionWinRate)}` },
+    { label: "Weighted healthy pipe", value: money(t.healthyPipe), sub: `${t.openDeals} open deals · ${pct(t.unhealthyShare)} unhealthy` },
+    { label: "Win rate", value: pct(t.winRate), sub: `${t.wonCount} won of ${t.closed} closed · ${pct(t.winRateExSweep)} without the clean-up` },
   ];
   el("tiles").innerHTML = tiles.map((x) => `
     <div class="card tile">
@@ -390,59 +313,88 @@ function renderTiles(model) {
     </div>`).join("");
 }
 
+// ---------- pipe in progress ----------
+function renderPipe(model) {
+  const max = Math.max(1, ...model.stages.map((s) => s.deals));
+  el("pipe").innerHTML = `
+    <div class="hbar-head"><span>Stage</span><span>Open deals</span><span class="num">Weighted pipe</span><span class="num">Unhealthy</span></div>
+    ${model.stages.map((s, i) => `
+      <div class="hbar-row" data-tip="${i}">
+        <span class="hbar-label">${esc(s.stage)}</span>
+        <span class="hbar-track"><span style="width:${(s.deals / max) * 100}%"></span><b>${s.deals}</b></span>
+        <span class="num">${money(s.pipe)}</span>
+        <span class="num ${s.unhealthyShare > state.data.params.flags.unhealthyShare ? "bad" : ""}">${pct(s.unhealthyShare)}</span>
+      </div>`).join("")}`;
+  bindTooltips(el("pipe"), (i) => {
+    const s = model.stages[Number(i)];
+    return `<div class="tt-title">${esc(s.stage)}</div>${ttRow("Open deals", s.deals)}${ttRow("Forecast ARR (AE)", money(s.forecast))}${ttRow("Weighted healthy pipe", money(s.pipe))}${ttRow("Unhealthy share", pct(s.unhealthyShare))}`;
+  });
+}
+
+// ---------- what works ----------
+function renderBreakdown(id, rows) {
+  const max = Math.max(1, ...rows.map((r) => r.wonArr));
+  const host = el(id);
+  host.innerHTML = rows.length ? `
+    <div class="hbar-head"><span></span><span>Won ARR</span><span class="num">Win rate</span><span class="num">Open</span></div>
+    ${rows.map((r, i) => {
+      const thin = r.closed < 5;
+      return `<div class="hbar-row${r.grouped ? " grouped" : ""}" data-tip="${i}">
+        <span class="hbar-label" title="${esc(r.label)}">${esc(r.label)}</span>
+        <span class="hbar-track"><span style="width:${(r.wonArr / max) * 100}%"></span><b>${compactMoney(r.wonArr)}</b></span>
+        <span class="num${thin ? " thin" : r.winRate !== null && r.winRate < 0.25 ? " bad" : ""}">${pct(r.winRate)}</span>
+        <span class="num">${r.open}</span>
+      </div>`;
+    }).join("")}` : `<p class="muted">No deal for this selection.</p>`;
+  bindTooltips(host, (i) => {
+    const r = rows[Number(i)];
+    return `<div class="tt-title">${esc(r.label)}</div>${ttRow("Won ARR", money(r.wonArr))}${ttRow("Won / closed", `${r.won} / ${r.closed}`)}${ttRow("Win rate", pct(r.winRate))}${ttRow("Average won", money(r.won ? r.wonArr / r.won : null))}${ttRow("Open deals", r.open)}${ttRow("Weighted healthy pipe", money(r.pipe))}`;
+  });
+}
+
+// ---------- AE table ----------
 function renderTable(model) {
-  const head = `<thead><tr>
-    <th>AE</th><th class="left">Flag</th><th>Quota</th><th>New-logo ARR</th><th>% of quota</th><th class="left">12-month trend</th>
-    <th>Expansion ARR</th><th>Win rate 3m</th><th>Demo → won 3m</th><th>Avg deal 3m</th>
-    <th>Healthy pipe</th><th>Open deals</th><th>% unhealthy</th><th>Clean-up losses</th>
-  </tr></thead>`;
+  const head = `<thead><tr><th>AE</th><th>New-logo ARR vs quota</th><th>Win rate</th><th>Healthy pipe</th><th class="left">Flag</th></tr></thead>`;
   const rows = model.reps.map((r) => {
-    const tone = attainmentTone(r.attainment);
     const ramping = r.tenure < state.data.params.ramp.length;
+    const tone = ramping ? "neutral" : attainmentTone(r.attainment);
     return `<tr class="${ramping ? "ramping" : ""}">
       <td><span class="rep-name">${esc(r.name)}</span><span class="rep-meta">${esc(r.market)} · month ${r.tenure}</span></td>
-      <td class="left"><span class="chips">${r.flags.map((f) => `<span class="chip"><i style="background:${statusColor(f.tone)}"></i>${esc(f.label)}</span>`).join("")}</span></td>
-      <td>${money(r.quota)}</td>
-      <td>${money(r.newArr)}</td>
-      <td><span class="pct">${pct(r.attainment)}<span class="pct-bar" aria-hidden="true"><span style="width:${Math.min(100, r.attainment * 100)}%;background:${statusColor(ramping ? "neutral" : tone)}"></span></span></span></td>
-      <td class="left">${sparkline(r.trend, model.month)}</td>
-      <td>${money(r.expansionArr)}</td>
-      <td>${pct(r.winRate)}</td>
-      <td>${pct(r.demoToWon)}</td>
-      <td>${money(r.avgDeal)}</td>
-      <td>${money(r.healthyPipe)}</td>
-      <td>${r.openDeals}</td>
-      <td>${pct(r.unhealthyShare)}</td>
-      <td>${r.sweepLosses}</td>
+      <td><span class="pct">${pct(r.attainment)}<span class="pct-bar" aria-hidden="true"><span style="width:${Math.min(100, r.attainment * 100)}%;background:${statusColor(tone)}"></span></span></span><span class="rep-meta">${money(r.newArr)} of ${money(r.quota)}</span></td>
+      <td>${pct(r.winRate)}<span class="rep-meta">${r.closed} closed</span></td>
+      <td>${money(r.healthyPipe)}<span class="rep-meta">${r.openDeals} open · ${pct(r.unhealthyShare)} unhealthy</span></td>
+      <td class="left"><span class="chips">${r.flags.map((f) => `<span class="chip"><i style="background:${statusColor(f.tone)}"></i>${esc(f.label)}</span>`).join("") || `<span class="muted">–</span>`}</span></td>
     </tr>`;
   }).join("");
-  el("reps-table").innerHTML = head + `<tbody>${rows || `<tr><td colspan="14">No AE in seat for this selection.</td></tr>`}</tbody>`;
+  el("reps-table").innerHTML = head + `<tbody>${rows || `<tr><td colspan="5">No AE team covers this country.</td></tr>`}</tbody>`;
 }
 
 function renderNotes(model) {
   const t = model.team;
   const items = [
-    `<strong>close_date is not a close date.</strong> It is filled on most open deals as an expected date, so "closed" is read from the stage only.`,
-    `<strong>${t.sweepTotal} deals were closed lost in one sweep</strong> (20-25 Jul 2026, "no sales actions"). Counted as the AE's losses: excluding them would reward leaving dead deals open.`,
-    `<strong>Group rollouts typed as New</strong> are reclassified as expansion, otherwise they inflate new logos.`,
-    `<strong>${t.nonAeDeals} deals are owned by non-AEs</strong> (Ops, AM, SDR): kept in team totals, out of the AE table.`,
-    `<strong>closing_probability is ignored</strong> (half empty, lost deals at 90%): the pipe is weighted by stage. <strong>Next steps are not maintained</strong> (none in the future), so only a step more than ${state.data.params.graceDays} days late counts.`,
-    `<strong>Sales cycle is left out</strong>: deals are often created at signature.`,
+    `<strong>Country is the account's, not the AE's.</strong> The French team owns almost every deal, US accounts included: filtering on the AE's market would show nothing.`,
+    `<strong>${t.sweepTotal} deals were closed lost in one sweep</strong> (20-25 Jul 2026, "no sales actions"). Counted as losses: excluding them would reward leaving dead deals open.`,
+    `<strong>Group rollouts typed as New</strong> are counted as expansion, otherwise they inflate new logos.`,
+    `<strong>Source and specialty are typed by hand</strong>: specialty spellings are merged in PARAMS, empty values show as Unknown. Win rates on fewer than 5 closed deals are greyed out.`,
+    `<strong>closing_probability is ignored</strong> (half empty, lost deals at 90%): the pipe is weighted by stage. <strong>Next steps are not maintained</strong>, so only a step more than ${state.data.params.graceDays} days late counts.`,
+    `<strong>${t.nonAeDeals} deals are owned by non-AEs</strong> (Ops, AM, SDR): in the totals, out of the AE table.`,
   ];
   el("caveats").innerHTML = items.map((i) => `<li>${i}</li>`).join("");
 }
 
 function render() {
   const model = compute();
-  const p = state.data.params;
-  el("health-sub").textContent = `Unhealthy = older than ${p.staleDays} days, or next step / expected close more than ${p.graceDays} days late`;
+  const range = model.from === model.to ? monthLabel(model.to, true) : `${monthLabel(model.from, true)} – ${monthLabel(model.to, true)}`;
+  const rateRange = model.rateFrom === model.from ? "same period" : `${monthLabel(model.rateFrom, true)} – ${monthLabel(model.to, true)}`;
   el("context-line").textContent =
-    `Volumes: ${monthLabel(model.month, true)}  ·  Rates: ${monthLabel(model.winFrom, true)} – ${monthLabel(model.month, true)}  ·  Pipe as of ${new Date(state.data.asOf).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}  ·  Quota base ${money(model.quotaBase)} per tenured AE per month`;
+    `${COUNTRY_LABEL[state.country]}  ·  Won ARR: ${range}  ·  Win rate: ${rateRange}  ·  Pipe as of ${new Date(state.data.asOf).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}`;
+  el("whatworks-sub").textContent = `Deals closed ${range}${state.motion === "All" ? "" : `, ${state.motion.toLowerCase()} only`}. Bar = won ARR; win rate = won / closed.`;
   renderTiles(model);
   renderArrChart(model);
-  renderWinChart(model);
+  renderPipe(model);
+  renderBreakdown("by-source", model.sources);
+  renderBreakdown("by-specialty", model.specialties);
   renderTable(model);
-  renderHealthChart(model);
   renderNotes(model);
 }
 
@@ -489,6 +441,7 @@ async function fetchTab(gid) {
   return parseCsv(await res.text());
 }
 
+
 async function loadFromSheet() {
   const cfg = window.DASHBOARD_CONFIG;
   if (!cfg || !cfg.publishedId) throw new Error("publishedId is empty in config.js: publish the sheet tabs to the web first");
@@ -520,7 +473,11 @@ async function loadFromSheet() {
       role: r.owner_role,
       market: r.owner_market,
       status: r.status.toLowerCase(),
-      motion: r.motion === "New logo" ? "new" : "expansion",
+      motion: r.motion === "New logo" ? "New logo" : "Expansion",
+      country: r.account_market || "Unknown",
+      source: r.source || "Unknown",
+      specialty: r.specialty || "Unknown",
+      stage: r.stage,
       sweep: flag(r.is_sweep_loss),
       booking: isoDate(r.booking_date),
       arr: num(r.arr_won_eur),
@@ -528,25 +485,24 @@ async function loadFromSheet() {
       reachedDemo: flag(r.reached_demo),
       unhealthy: flag(r.is_sick),
       weightedHealthy: num(r.weighted_pipe_healthy) || 0,
-      pipeline: r.pipeline || "Sales",
     })),
   };
 }
+
 
 async function init() {
   state.data = await loadFromSheet();
   const asOfMonth = monthOf(state.data.asOf);
   const months = [...new Set(state.data.deals.filter((d) => d.booking).map((d) => monthOf(d.booking)))].sort().reverse();
   state.month = months.includes(addMonths(asOfMonth, -1)) ? addMonths(asOfMonth, -1) : months[0];
-  const markets = ["All", ...new Set(state.data.team.map((t) => t.market).filter(Boolean))];
-  const pipelines = ["All", ...new Set(state.data.deals.map((d) => d.pipeline))];
+  const countries = ["All", "FR", "US", "Other", "Unknown"].filter((c) => c === "All" || state.data.deals.some((d) => d.country === c));
 
+  fillSelect(el("filter-country"), countries.map((c) => ({ value: c, label: COUNTRY_LABEL[c] })), state.country);
+  fillSelect(el("filter-period"), Object.entries(PERIOD_LABEL).map(([value, label]) => ({ value, label })), state.period);
   fillSelect(el("filter-month"), months.map((m) => ({ value: m, label: monthLabel(m, true) + (m === asOfMonth ? " (to date)" : "") })), state.month);
-  fillSelect(el("filter-market"), markets.map((m) => ({ value: m, label: m })), state.market);
-  fillSelect(el("filter-pipeline"), pipelines.map((p) => ({ value: p, label: p })), state.pipeline);
-  el("filter-month").addEventListener("change", (e) => { state.month = e.target.value; render(); });
-  el("filter-market").addEventListener("change", (e) => { state.market = e.target.value; render(); });
-  el("filter-pipeline").addEventListener("change", (e) => { state.pipeline = e.target.value; render(); });
+  fillSelect(el("filter-motion"), ["All", "New logo", "Expansion"].map((m) => ({ value: m, label: m === "All" ? "All deals" : m })), state.motion);
+  [["filter-country", "country"], ["filter-period", "period"], ["filter-month", "month"], ["filter-motion", "motion"]].forEach(([id, key]) =>
+    el(id).addEventListener("change", (e) => { state[key] = e.target.value; render(); }));
 
   let resizeTimer;
   window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(render, 150); });

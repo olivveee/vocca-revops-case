@@ -8,8 +8,8 @@
   <title>Sales Efficiency Dashboard</title>
   <link rel="preconnect" href="https://api.fontshare.com">
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="tam.css">
+  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="tam.css?v=2">
 </head>
 <body>
   <main class="page">
@@ -21,65 +21,69 @@
     <header class="masthead">
       <div>
         <p class="eyebrow">Vocca · RevOps case study · Part 1A</p>
-        <h1>Sales efficiency by AE</h1>
+        <h1>Sales efficiency</h1>
         <p class="context" id="context-line"></p>
       </div>
       <div class="filters" role="group" aria-label="Filters">
-        <label>Month <select id="filter-month"></select></label>
-        <label>Market <select id="filter-market"></select></label>
-        <label>Pipeline <select id="filter-pipeline"></select></label>
+        <label>Country <select id="filter-country"></select></label>
+        <label>Period <select id="filter-period"></select></label>
+        <label>Up to <select id="filter-month"></select></label>
+        <label>Deals <select id="filter-motion"></select></label>
       </div>
     </header>
 
     <section aria-labelledby="h-team">
       <h2 id="h-team">Are we on track?</h2>
-      <div class="tiles" id="tiles"></div>
+      <div class="tiles tiles-4" id="tiles"></div>
       <div class="charts-2">
         <figure class="card">
           <figcaption>
             <span class="chart-title">New-logo ARR vs team quota</span>
-            <span class="chart-sub">Last 12 months · quota includes ramp-up of new AEs</span>
+            <span class="chart-sub">Last 12 months · quota includes the ramp-up of new AEs</span>
           </figcaption>
           <div class="legend" id="legend-arr"></div>
           <div class="chart" id="chart-arr"></div>
         </figure>
         <figure class="card">
           <figcaption>
-            <span class="chart-title">Win rate, 3-month rolling</span>
-            <span class="chart-sub">The gap is the July bulk clean-up of dead deals</span>
+            <span class="chart-title">Pipe in progress</span>
+            <span class="chart-sub">Open deals as of the data date · unhealthy = older than 90 days, or next step / expected close more than 30 days late</span>
           </figcaption>
-          <div class="legend" id="legend-win"></div>
-          <div class="chart" id="chart-win"></div>
+          <div class="hbar" id="pipe"></div>
+        </figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-works">
+      <h2 id="h-works">What works?</h2>
+      <p class="section-note" id="whatworks-sub"></p>
+      <div class="charts-2">
+        <figure class="card">
+          <figcaption><span class="chart-title">By source</span><span class="chart-sub">First touch, set at creation</span></figcaption>
+          <div class="hbar" id="by-source"></div>
+        </figure>
+        <figure class="card">
+          <figcaption><span class="chart-title">By specialty</span><span class="chart-sub">Specialty of the account</span></figcaption>
+          <div class="hbar" id="by-specialty"></div>
         </figure>
       </div>
     </section>
 
     <section aria-labelledby="h-reps">
       <h2 id="h-reps">Who needs help?</h2>
-      <p class="section-note">AEs in seat during the selected month. Volumes on the month, rates on 3 rolling months, pipe as of the data date. Ramping AEs are greyed out and judged on a ramped quota.</p>
+      <p class="section-note">AEs in seat at the end of the period, for the selected country's team. Quota on the period with ramp-up; win rate on 3 rolling months when a single month is selected.</p>
       <div class="card table-card">
         <div class="table-scroll">
-          <table class="reps" id="reps-table"></table>
+          <table class="reps compact" id="reps-table"></table>
         </div>
       </div>
     </section>
 
-    <section aria-labelledby="h-why">
-      <h2 id="h-why">Why?</h2>
-      <div class="charts-2">
-        <figure class="card">
-          <figcaption>
-            <span class="chart-title">Open pipe health by AE</span>
-            <span class="chart-sub" id="health-sub"></span>
-          </figcaption>
-          <div class="legend" id="legend-health"></div>
-          <div class="chart" id="chart-health"></div>
-        </figure>
-        <div class="card notes">
-          <h3>What I do not trust in the export</h3>
-          <ul id="caveats"></ul>
-          <p class="muted">Full list, counts and handling: DATA_QUALITY tab of the Google Sheet. This page reads the sheet directly: cleaning rules, quota and thresholds are edited there, not here.</p>
-        </div>
+    <section aria-labelledby="h-trust">
+      <h2 id="h-trust">What I do not trust in the export</h2>
+      <div class="card notes">
+        <ul id="caveats"></ul>
+        <p class="muted">Full list, counts and handling: DATA_QUALITY tab of the Google Sheet. The same breakdowns are in its WHAT_WORKS tab, in formulas. This page reads the sheet directly: cleaning rules, quota and thresholds are edited there, not here.</p>
       </div>
     </section>
 
@@ -89,6 +93,6 @@
   </main>
   <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
   <script src="config.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>
