@@ -249,5 +249,13 @@ ul.clean li span { color: var(--text-secondary); }
   <span class="footer">Case Senior RevOps · Partie 2 · 4 / 4</span>
 </section>
 
+<script>
+// Slides are fixed 1600x900 for the PDF export; on screen, scale them to the window width.
+const fit = () => { document.body.style.zoom = Math.min(1, (window.innerWidth - 16) / 1600); };
+window.addEventListener("resize", fit);
+window.addEventListener("beforeprint", () => { document.body.style.zoom = 1; });
+window.addEventListener("afterprint", fit);
+fit();
+</script>
 </body>
 </html>
