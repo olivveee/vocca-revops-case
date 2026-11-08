@@ -9,8 +9,8 @@ The Vocca Senior RevOps case. Part 1: **1A**, a sales efficiency dashboard for t
 | What | Link |
 | --- | --- |
 | **Google Sheet** (the deliverable, shared as editor) | [Open the Sheet](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit) |
-| ↳ `DASHBOARD`: four numbers, pipe by stage, one line per AE | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=102) |
-| ↳ `WHAT_WORKS`: won ARR and win rate by country, motion, stage, source, specialty | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=108) |
+| ↳ `DASHBOARD`: four numbers, corrections, pipe, market, deal type, month by month, one line per AE | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=102) |
+| ↳ `WHAT_WORKS`: won ARR and win rate by source and by specialty | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=108) |
 | ↳ `DATA_QUALITY`: the numbers not to trust, and what the dashboard does about them | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=103) |
 | ↳ `PARAMS`: every setting in one place (quota, currency, thresholds) | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=104) |
 | ↳ `README`: how to read and maintain the file | [Tab](https://docs.google.com/spreadsheets/d/15gDvbv-UHpQrvqLaG8rC6UI93rJtEb1nnbNSiZPjwug/edit#gid=101) |

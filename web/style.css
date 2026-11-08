@@ -205,6 +205,20 @@ table.reps { width: 100%; border-collapse: collapse; font-variant-numeric: tabul
 .tooltip .tt-row b { color: var(--text-primary); font-variant-numeric: tabular-nums; }
 
 /* 1A: four headline tiles, horizontal bar lists, compact AE table */
+.card.corrections { margin: 0 0 12px; background: #fef6e2; border-color: #f7d98c; font-size: 13px; color: #54400d; }
+.corrections .corr-title { margin: 0 0 6px; font-weight: 700; color: #875900; }
+.corrections ul { margin: 0; padding-left: 18px; }
+.corrections li { margin-bottom: 4px; }
+.card.block { margin-top: 12px; }
+table.plain.mini { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+table.plain.mini th { text-align: left; font-size: 11px; color: var(--text-secondary); font-weight: 600; padding: 6px 8px; border-bottom: 1px solid var(--axis); white-space: nowrap; }
+table.plain.mini td { padding: 6px 8px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+table.plain.mini .num { text-align: right; }
+table.plain.mini.month tr.total td { font-weight: 700; border-top: 1px solid var(--axis); }
+table.plain.mini.month tr.quota td { color: var(--text-secondary); font-style: italic; }
+table.plain.mini.month tr.att td { font-weight: 700; }
+.swatch.line.dashed { background: repeating-linear-gradient(90deg, var(--text-primary) 0 5px, transparent 5px 8px); }
+
 .tiles-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 12px; }
 table.reps.compact { min-width: 0; }
 .reps.compact td { white-space: normal; vertical-align: top; }
