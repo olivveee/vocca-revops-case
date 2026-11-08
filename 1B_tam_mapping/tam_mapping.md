@@ -2,7 +2,7 @@
 
 > **Three choices.**
 > 1. **One account model for every market.** The account is the **site**: the place patients book, the unit Vocca deploys and bills. Sites roll up to a **group** (where the decision and the framework contract sit) and a **network**. The **legal entity** is linked to sites, not used as the hierarchy.
-> 2. **One generic identity in the CRM.** Attio carries `country` + `company_number` + `company_number_type` (SIRET in France, NPI in the US…), validated per type, and that is the only dedupe key. Market-specific columns and sources live upstream, in the warehouse, which joins them into this shape.
+> 2. **One generic identity in the CRM.** Attio carries `country` + `company_number` + `company_number_type` (SIRET in France, NPI in the US…), validated per type, and that is the main dedupe key: without a validated number, a machine only merges when two keys agree (same calendar plus a second key, or same SIREN, name and postcode). Market-specific columns and sources live upstream, in the warehouse, which joins them into this shape.
 > 3. **A machine only merges two records of the same site: same identifier, same postcode, no customer, one salesperson.** Everything else goes to a person.
 >
 > Real work on the file: [`tam_dedup.py`](tam_dedup.py) applies this model to the 5,080 accounts and produces the action lists in [`output/`](output/). The [TAM cockpit](https://vocca-revops-case.vercel.app/tam.html) turns the result into work queues: each opens onto the detailed list of records with the reason, the next action and the rule, plus a quality-by-source view and the pair review.
@@ -76,6 +76,9 @@ A number only counts as identity once it passes its type's validation; until the
 | Two different salespeople (account owner or open deals) | Manual review | Ownership decision, not a data one |
 | Shared phone or domain only | Not a duplicate: a group signal | Groups share switchboards and domains; on this file 47 of the 48 phone-only pairs are in different cities. A domain shared across cities is a **group to create** |
 | Same calendar URL only, or same name + postcode without a number | Manual review | Strong hint, not proof |
+| Account type missing on one record | Manual review | Without a type the model cannot tell a duplicate from a site under its group (22 pairs) |
+
+**Merged automatically**: same validated number (62 pairs), same calendar plus a second key (20), same SIREN, name and postcode (9); always in the same postcode, never a customer, never two salespeople.
 
 **Survivor rule**: customer first, then most deals, most contacts, most complete, oldest.
 

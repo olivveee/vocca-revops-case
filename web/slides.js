@@ -90,14 +90,15 @@ function slides(d) {
                 <tr><td><code>practitioner_number</code></td><td>RPPS</td><td>NPI (individuel)</td></tr>
               </tbody>
             </table>
-            <p class="note">Validé selon son type, c'est ensuite <b>la seule clé de dédoublonnage</b>. Clés de secours : URL d'agenda, adresse, nom + code postal. Téléphone et domaine ne sont pas des clés : partagés par les groupes, ils servent à détecter les groupes.</p>
+            <p class="note">Validé selon son type, c'est <b>la clé principale de dédoublonnage</b>. Sans numéro validé, une fusion automatique demande deux clés concordantes : même agenda + une autre clé, ou même SIREN + nom + code postal. Téléphone et domaine ne sont pas des clés : partagés par les groupes, ils servent à détecter les groupes.</p>
           </div>
         </div>
         <p class="rules-title">Jamais fusionné automatiquement</p>
         <div class="rules">
-          <div class="rule"><span class="x">✕</span><div><b>Deux numéros validés différents</b><span>deux sites d'une même société : on relie. Même agenda ou adresse : revue</span></div></div>
+          <div class="rule"><span class="x">✕</span><div><b>Deux numéros validés différents</b><span>deux sites distincts, reliés à leur entité légale. Même agenda ou adresse : revue</span></div></div>
           <div class="rule"><span class="x">✕</span><div><b>Même numéro, deux codes postaux</b><span>un site est un lieu : un numéro a été recopié. Revue</span></div></div>
           <div class="rule"><span class="x">✕</span><div><b>Un client ou deux commerciaux</b><span>fusionner déplace des factures ou un propriétaire : un humain décide</span></div></div>
+          <div class="rule"><span class="x">✕</span><div><b>Un seul indice ou pas de type</b><span>agenda seul, nom + code postal sans numéro, type manquant : revue</span></div></div>
           <div class="rule"><span class="x">✕</span><div><b>Un site et un groupe</b><span>même SIREN ou SIRET : on rattache le site au groupe, ce n'est pas un doublon</span></div></div>
         </div>
       </div>
