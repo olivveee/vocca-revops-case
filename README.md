@@ -47,9 +47,9 @@ Part 3 is live, with no material.
 
 The dashboard answers, in order, the questions a Head of Sales asks on Monday morning:
 
-1. **Are we on track?** New-logo ARR vs quota, expansion ARR, weighted healthy pipe, win rate; then the open pipe by stage with its unhealthy share (older than 90 days, or next step / expected close more than 30 days late).
+1. **Are we on track?** New-logo ARR vs quota, expansion ARR, weighted healthy pipe, win rate; then the open pipe by stage with its unhealthy share. A deal is unhealthy when it is older than 90 days, or its next step / expected close is more than 30 days late; the healthy pipe keeps only the other open deals, weighted by stage.
 2. **What works?** Won ARR and win rate by source and by specialty.
-3. **Who needs help?** One line per AE: new-logo ARR vs quota, win rate, healthy pipe, and a flag that says why (below quota, low conversion, pipe needs cleaning, does not close out losses).
+3. **Who needs help?** One line per AE, lowest attainment first and ramping AEs last: new-logo ARR vs quota, win rate, healthy pipe, and a flag that says why (below quota, low conversion, pipe needs cleaning, does not close out losses).
 4. **What not to trust:** the `DATA_QUALITY` tab, live counts with the handling of each issue.
 
 Choices worth knowing:

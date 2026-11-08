@@ -129,7 +129,7 @@ function compute() {
   const quota = teamMarket() || state.country === "All" ? sum(months, (m) => sum(aesInSeat(m), (ae) => quotaFor(ae, m, p.quotaBase))) : null;
   const r = rates(deals, rateFrom, to);
 
-  const reps = aesInSeat(to).sort((a, b) => a.name.localeCompare(b.name)).map((ae) => {
+  const reps = aesInSeat(to).map((ae) => {
     const own = state.data.deals.filter((d) => d.owner === ae.name);
     const ownOpen = own.filter((d) => d.status === "open");
     const repQuota = sum(months.filter((m) => monthOf(ae.start) <= m), (m) => quotaFor(ae, m, p.quotaBase));
@@ -152,6 +152,9 @@ function compute() {
     rep.flags = flagsFor(rep, rates(all, rateFrom, to).winRate);
     return rep;
   });
+  // Who needs help first: tenured AEs by attainment, lowest first; ramping AEs last.
+  const rampMonths = p.ramp.length - 1;
+  reps.sort((a, b) => (a.tenure <= rampMonths) - (b.tenure <= rampMonths) || a.attainment - b.attainment || a.name.localeCompare(b.name));
 
   const history = Array.from({ length: 12 }, (_, i) => {
     const m = addMonths(to, i - 11);
