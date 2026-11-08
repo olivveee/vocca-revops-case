@@ -20,7 +20,7 @@ Produced with the scripts in `scripts/` (`profile.py`, `checks_deals.py`, `check
 | 11 | Deals owned by people who left | 102 (13 still open) | History kept; open ones need reassigning |
 | 12 | `created_by` blank (13%) or `API · n8n` (182 deals) | ~380 | SDR attribution of booked demos not reliable |
 | 13 | Open-pipe hygiene: 288 deals older than 90 days, 311 with an overdue next step, 227 without one, 99 with an expected close in the past; no open deal has a next step in the future | out of 539 | These become dashboard metrics |
-| 14 | 37 deals in USD, only 2 owned by the US AE | 37 | Converted to EUR |
+| 14 | 37 deals in USD, only 2 owned by the US AE; the other 1,469 are in EUR | 37 | Every amount converted to one reporting currency (USD by default, live EUR→USD rate from Google Finance, fixed rate possible in PARAMS) |
 | 15 | Uneven history: 1 deal in May 2025, 6 in April 2025 | early 2025 | Probably incomplete history; excluded from trends |
 | 16 | Specialty taxonomy: Ophtalmology / Ophthalmology, Chirurgy / Surgery, lowercase "rhumatology" | 29 values | Needs a mapping table |
 | 17 | Deals on companies missing from the export (3) or without `type` (19) | 22 | Minor |

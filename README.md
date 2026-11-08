@@ -44,7 +44,7 @@ The web page reads top-down, from the country to the AE, with four filters: coun
 2. **What works?** Won ARR, win rate and open deals by source and by specialty.
 3. **Who needs help?** One line per AE, five columns: new-logo ARR vs quota, win rate, healthy pipe, flags.
 
-Country is the account's, not the AE's: the French team owns almost every deal, US accounts included. The quota is compared with what the country's own team signed. The Sheet's `WHAT_WORKS` tab holds the same breakdowns in formulas; account country, source and cleaned specialty are columns of `DEALS_CLEAN`.
+Amounts are in one reporting currency, USD by default: deals come in EUR (1,469) or USD (37) and are converted at the live EUR→USD rate (Google Finance), or at a fixed rate typed in `PARAMS`. Country is the account's, not the AE's: the French team owns almost every deal, US accounts included. The quota is compared with what the country's own team signed. The Sheet's `WHAT_WORKS` tab holds the same breakdowns in formulas; account country, source and cleaned specialty are columns of `DEALS_CLEAN`.
 
 Left out on purpose: sales cycle length (deals are created late, often at signature), the AEs' closing probability (half empty, uncalibrated), activity volume (not in the export), SDR metrics (demo attribution is broken). The `README` and `DATA_QUALITY` tabs of the sheet explain each choice.
 

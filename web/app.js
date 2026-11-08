@@ -11,13 +11,19 @@ const STAGES = ["Demo Scheduled", "Demo Held", "Qualified", "Quoted"];
 const COUNTRY_LABEL = { All: "All countries", FR: "France", US: "United States", Other: "Other countries", Unknown: "Country unknown" };
 const PERIOD_LABEL = { month: "Month", quarter: "Last 3 months", ytd: "Year to date" };
 
-const eur = new Intl.NumberFormat("en-GB", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+// Amounts arrive in the Sheet's reporting currency (WEB_PARAMS "currency", USD by default).
+let currencyFmt = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+let currencySymbol = "$";
+function setCurrency(code) {
+  currencyFmt = new Intl.NumberFormat("en-US", { style: "currency", currency: code, maximumFractionDigits: 0 });
+  currencySymbol = currencyFmt.formatToParts(0).find((p) => p.type === "currency").value;
+}
 const pct = (v) => (v === null || Number.isNaN(v) ? "–" : `${Math.round(v * 100)}%`);
-const money = (v) => (v === null || Number.isNaN(v) ? "–" : eur.format(v));
+const money = (v) => (v === null || Number.isNaN(v) ? "–" : currencyFmt.format(v));
 const compactMoney = (v) => {
-  if (Math.abs(v) >= 1e6) return `€${(v / 1e6).toFixed(1)}M`;
-  if (Math.abs(v) >= 1e3) return `€${Math.round(v / 1e3)}k`;
-  return `€${Math.round(v)}`;
+  if (Math.abs(v) >= 1e6) return `${currencySymbol}${(v / 1e6).toFixed(1)}M`;
+  if (Math.abs(v) >= 1e3) return `${currencySymbol}${Math.round(v / 1e3)}k`;
+  return `${currencySymbol}${Math.round(v)}`;
 };
 
 // ---------- month helpers (months are "YYYY-MM" strings) ----------
@@ -452,6 +458,7 @@ async function loadFromSheet() {
   if (missing.length) throw new Error(`WEB_PARAMS is missing: ${missing.join(", ")}`);
   return {
     asOf: isoDate(kv.as_of),
+    currency: /^[A-Z]{3}$/.test(kv.currency || "") ? kv.currency : "USD",
     params: {
       quotaBase: num(kv.quota_base),
       rateWindowMonths: num(kv.rate_window_months),
@@ -480,8 +487,8 @@ async function loadFromSheet() {
       stage: r.stage,
       sweep: flag(r.is_sweep_loss),
       booking: isoDate(r.booking_date),
-      arr: num(r.arr_won_eur),
-      forecast: flag(r.forecast_outlier) ? null : num(r.forecast_eur),
+      arr: num(r.arr_won),
+      forecast: flag(r.forecast_outlier) ? null : num(r.forecast_amt),
       reachedDemo: flag(r.reached_demo),
       unhealthy: flag(r.is_sick),
       weightedHealthy: num(r.weighted_pipe_healthy) || 0,
@@ -492,6 +499,7 @@ async function loadFromSheet() {
 
 async function init() {
   state.data = await loadFromSheet();
+  setCurrency(state.data.currency);
   const asOfMonth = monthOf(state.data.asOf);
   const months = [...new Set(state.data.deals.filter((d) => d.booking).map((d) => monthOf(d.booking)))].sort().reverse();
   state.month = months.includes(addMonths(asOfMonth, -1)) ? addMonths(asOfMonth, -1) : months[0];
