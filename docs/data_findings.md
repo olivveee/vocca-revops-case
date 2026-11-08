@@ -40,7 +40,6 @@ Produced with the scripts in `scripts/` (`profile.py`, `checks_deals.py`, `check
 - 112 Groups without any child practice, 76 with a single child.
 - `practice_count` does not match the number of children in the CRM for 233 of 329 Groups.
 - 53 rows typed Practice have `practice_count` above 1: mistyped groups.
-- 426 child rows carry ARR while their parent does too: double-count risk in the €8.8M customer ARR.
 - 572 children have a different `sales_owner` from their parent.
 
 ### Untrustworthy fields

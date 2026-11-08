@@ -18,11 +18,10 @@ Full list with every number: [`docs/data_findings.md`](data_findings.md). The is
 | No usable identity | **25% of accounts** have no validated company number: in France 756 SIRENs typed in the SIRET field and 220 empty; in the US **0 of 175** accounts has a valid one | Matching falls back on names and phones, which is where duplicates come from |
 | A French field used for every country | US numbers are typed in the `siret` field; **none of them passes the NPI check** (10 digits, starting with 1 or 2, check digit) | Foreign identifiers are stored and never validated: they cannot be used to deduplicate |
 | Duplicates | **117 records** are certain duplicates; 136 more pairs need a human | Two owners working the same practice; inflated TAM and pipeline |
-| Duplicates are produced by automations | Of the 117, **43 were created by the enrichment pipeline**, 11 by n8n, 11 by email sync | Inserts instead of upserts: cleaning once will not last |
-| Hierarchy broken | 3 self-parents, 36 impossible parent types, 53 "practices" with several sites, 112 empty groups, 65 accounts without type, **60 multi-site organisations with no group** (e.g. 3 US sites in 3 cities sharing one domain) | Group roll-outs and account plans cannot be read from the CRM |
-| ARR counted twice | **€4.0M** on 426 sites whose group carries ARR too (customer ARR €8.8M) | Revenue reporting is wrong as soon as a hierarchy is summed |
-| Market not set or not used | 118 accounts without country (all French postcodes); **47 US accounts owned by the French team**; 67% of US accounts without lifecycle | Territories, ownership and US pipeline cannot be trusted |
-| Out-of-TAM accounts mixed in | **101 investors, partners and media** in the same object as prospects (41 in the US) | They inflate the TAM and the lead counts |
+| Duplicates are produced by tools, not people | Of the 117, **43 were created by the enrichment pipeline**, 11 by n8n, 11 by email sync; of the 450 contacts without an account, 432 were created by telephony, email sync or enrichment | The tools are connected but not orchestrated: they insert instead of upserting, so cleaning once will not last |
+| No clear structure | **65 accounts without type**; 53 "practices" with several sites; 14 accounts attached to a practice (9 practices, 5 groups); 3 self-parents; **60 multi-site organisations with no group** (e.g. 3 US sites in 3 cities sharing one domain). Groups under a group are fine (sub-groups of a larger one). Open questions rather than errors: 112 empty groups, 76 single-site groups | To deploy a group tomorrow, nobody can tell from the CRM which structure to set up |
+| Market not set | 118 accounts without country (all French postcodes); 67% of US accounts without lifecycle. 47 US accounts are still owned by the French team, which is expected (the first US AE started in July 2026): they go to the reassignment queue | Territories and US pipeline cannot be read by market |
+| No shared definition of what counts | **101 investors, partners and media** in the same object as prospects (41 in the US), 65 accounts without type; nothing separates the TAM, the SAM and accounts outside the market | They inflate the TAM and the lead counts, and two people asked "how big is our market" get two answers |
 | Junk enrichment | Practice "websites" such as doctolib.fr or gmail.com (60); **doctolib.fr booking pages on US accounts** (8), a platform that does not operate there | Enrichment writes whatever it finds, unchecked |
 | Contacts on the wrong account | **244 contacts** whose work-email domain belongs to another account family; 450 without company | Outreach and champions mapped to the wrong practice |
 
@@ -38,7 +37,17 @@ Full list with every number: [`docs/data_findings.md`](data_findings.md). The is
 | **Legal entity** | The company behind sites or a group | Contracts and invoices. Linked, not a level: in France 314 legal entities run several sites, and 689 sites sit under a group whose legal entity differs from theirs |
 | **Practitioner** | A person working at one or more sites | Pricing driver and champion |
 
-Rules that follow: **ARR and billing IDs live on sites only** (group ARR = sum of its sites). Contacts attach to the site where they work; group-level contacts attach to the group. Investors, partners and media stay in Attio but outside the TAM.
+Rules that follow: a site generates the revenue and a group is the sum of its sites. Groups can nest; every account carries its **ultimate parent** (the top of its chain) so a group is read in one place. Sites are attached to their legal entity (SIRET to SIREN) automatically. Contacts attach to the site where they work; group-level contacts attach to the group.
+
+### What counts in the market
+
+| Scope | Definition | Where it lives |
+|---|---|---|
+| **TAM** | Every site of a target specialty and structure type in a market, known to us or not | Warehouse, built from the registries, scored |
+| **SAM** | What we actually address: in the ICP, in a market we cover, with a team to work it | Attio, pushed when a team takes it on |
+| **Outside the market** | Investors, partners, media | Attio, with their own `business_relationship_type`; never counted in the TAM or SAM |
+
+Every account carries a type (site, group, network) and a relationship type; both are required.
 
 ### One generic identity, validated per market
 
@@ -75,7 +84,7 @@ A number only counts as identity once it passes its type's validation; until the
 |---|---|
 | `merge_clusters.csv` | **5,080 → 4,963 accounts**: 117 records merged into 115 survivors, no customer touched |
 | `merge_pairs.csv` | Every candidate pair with the keys it shares, the decision and the reason: 119 auto-merge, **136 manual review** (70 involve a customer, 40 same name + postcode without number, 22 missing type, 4 same calendar only), 40 hierarchy fixes, 5,233 refused (mostly sites sharing a legal entity) |
-| `hierarchy_issues.csv` | 771 issues with a proposed action (426 ARR on site and group, 112 empty groups, 53 practices that are groups, 36 impossible parents, 3 self-parents…) |
+| `hierarchy_issues.csv` | Each issue with a severity and a proposed action. Errors: 65 accounts without type, 53 practices that are groups, 17 impossible parents (14 under a practice), 3 self-parents. Questions to settle with Sales: 112 empty groups, 76 single-site groups |
 | `market_issues.csv` | 356 market issues: 118 countries inferred, 101 out-of-TAM accounts, 60 multi-site organisations without group, 47 accounts owned by the other market's team, 16 unverified foreign numbers, 12 booking URLs from the wrong country |
 | `contact_moves.csv` | **247 contacts** to re-attach |
 | `tam_action_pack.xlsx` | All of the above in one workbook, plus the rules |
@@ -100,7 +109,7 @@ The TAM is built from the registries, not from the CRM: every site of a target s
 
 ### Where the master record lives
 
-**In the warehouse.** Golden `site`, `group`, `legal_entity` and `practitioner` tables, rebuilt nightly (ingest → normalise → match → survivorship). **Attio is the operational copy**: a daily sync pushes accounts, hierarchy and the generic identity; Attio writes back only the fields Sales owns (owner, lifecycle, notes). Every Attio record carries the master ID.
+**The TAM in the warehouse, the SAM in Attio.** Golden `site`, `group`, `legal_entity` and `practitioner` tables, rebuilt nightly (ingest → normalise → match → survivorship). **Attio is the operational copy**: a daily sync pushes accounts, hierarchy and the generic identity; Attio writes back only the fields Sales owns (owner, lifecycle, notes). Every Attio record carries the master ID.
 
 ### Keeping it fresh
 
@@ -113,13 +122,13 @@ The TAM is built from the registries, not from the CRM: every site of a target s
 
 ### Measuring that it is clean, and stopping it degrading
 
-**Data-quality KPIs, per market** (one dashboard, weekly): % of sites with a validated company number, duplicate pairs open, review queue size and age, hierarchy violations, % of contacts on the right account, % of customers whose billing ID matches Hyperline, ARR reconciliation Attio vs Hyperline, accounts owned outside their market.
+**Data-quality KPIs, per market** (one dashboard, weekly): % of sites with a validated company number, duplicate pairs open, review queue size and age, hierarchy violations, % of contacts on the right account, % of customers whose billing ID matches Hyperline, accounts owned outside their market.
 
 **Gates that prevent new mess:**
 - `company_number` unique per `country` + type in Attio, validated on entry, required from Prospect stage.
 - Every automation (enrichment, n8n, email sync) **upserts on the identity**; none creates an account without a lookup. Email sync attaches contacts, it does not create companies.
 - Country required; ownership routed by market.
-- Warehouse tests fail the nightly run on cycles, impossible parents, ARR on two levels, or a booking URL from a platform absent in the account's country.
+- Warehouse tests fail the nightly run on cycles, impossible parents, or a booking URL from a platform absent in the account's country.
 
 ### Automated vs manual
 
@@ -136,7 +145,7 @@ The TAM is built from the registries, not from the CRM: every site of a target s
 | Priority | What | Why first | Effort |
 |---|---|---|---|
 | **P0 · Stop the bleeding** | Generic identity in Attio (`country`, `company_number`, type), unique and validated; automations switched to upsert; creation lookup | Otherwise every clean-up is undone within weeks | Week 1 |
-| **P0 · Fix what breaks reporting** | 117 automatic merges; ARR on sites only; countries set; investors, partners and media out of TAM views; the 3 cycles and 36 impossible parents | Revenue, pipeline and TAM numbers are wrong today | Weeks 1-2 |
+| **P0 · Fix what breaks reporting** | 117 automatic merges; account and relationship types set; countries set; investors, partners and media out of TAM and SAM views; the 3 cycles and 17 impossible parents | Revenue, pipeline and TAM numbers are wrong today | Weeks 1-2 |
 | **P1 · Master record** | Warehouse models joining Attio, Hyperline and the French and US registries into the generic model; sync to Attio | One source of truth, refreshed, with history | Weeks 2-5 |
 | **P1 · Clear the queues** | 136 review pairs, 38 sites to attach, 60 groups to create, 47 accounts to reassign to the US team, 247 contacts | Small enough to finish in a few days with Sales | Weeks 2-3, about 3 days of work |
 | **P1 · US identity** | Validate the 175 US accounts against NPPES; build their groups (dental groups first) | The US base is small: fixing it now is cheap, after 1,000 accounts it is not | Weeks 3-4 |

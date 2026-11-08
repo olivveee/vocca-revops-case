@@ -31,14 +31,19 @@
   "valid_siret_failing_checksum": 30,
   "multi_site_sirens": 314,
   "hierarchy_issues": {
-    "arr_on_parent_and_child": 426,
     "empty_group": 112,
     "single_site_group": 76,
     "missing_type": 65,
     "practice_looks_like_group": 53,
-    "invalid_parent_type": 36,
+    "invalid_parent_type": 17,
     "self_parent": 3
   },
+  "hierarchy_invalid_parents": {
+    "Practice under Practice": 9,
+    "Group under Practice": 5,
+    "Practice under nan": 3
+  },
+  "hierarchy_structure_errors": 73,
   "contact_moves": {
     "email domain belongs to another account family": 244,
     "no company attached": 3

@@ -309,7 +309,7 @@ def hierarchy_issues(c):
 
     def issue(rid, kind, detail, action):
         rows.append({"record_id": rid, "name": by_id.at[rid, "name"], "type": by_id.at[rid, "type"],
-                     "issue": kind, "detail": detail, "proposed_action": action})
+                     "issue": kind, "severity": HIERARCHY_SEVERITY[kind], "detail": detail, "proposed_action": action})
 
     children = c.parent_record_id.value_counts()
     for rid, row in by_id.iterrows():
@@ -324,11 +324,10 @@ def hierarchy_issues(c):
                 issue(rid, "orphan_parent", "parent not found", "clear or re-match parent")
                 continue
             ptype = by_id.at[parent_id, "type"]
-            allowed = {"Practice": {"Group", "Superorga"}, "Group": {"Superorga"}, "Superorga": set()}
+            # A group under a group is a sub-group of a larger one: valid, the top of the chain is the ultimate parent.
+            allowed = {"Practice": {"Group", "Superorga"}, "Group": {"Group", "Superorga"}, "Superorga": set()}
             if isinstance(row.type, str) and ptype not in allowed.get(row.type, set()):
                 issue(rid, "invalid_parent_type", f"{row.type} under {ptype}", "re-type the parent or re-attach to the right group")
-            if pd.notna(row.arr_signed_eur) and pd.notna(by_id.at[parent_id, "arr_signed_eur"]):
-                issue(rid, "arr_on_parent_and_child", "ARR carried at both levels", "keep ARR on sites only; group ARR = sum of sites")
         pc = pd.to_numeric(row.practice_count, errors="coerce")
         if row.type == "Practice" and pc and pc > 1:
             issue(rid, "practice_looks_like_group", f"practice_count = {int(pc)}", "re-type as Group and create its sites")
@@ -460,9 +459,18 @@ GUARDS = [
     {"rule": "Shared phone, domain or name alone: no merge", "why": "Groups share switchboards and domains; names repeat", "match": "weak evidence only"},
     {"rule": "Missing account type: manual", "why": "The model cannot place the record", "match": "account type missing"},
 ]
+# "error": the structure is wrong and must be fixed. "question": a structure choice to make with Sales, not an error.
+HIERARCHY_SEVERITY = {
+    "missing_type": "error",
+    "self_parent": "error",
+    "orphan_parent": "error",
+    "invalid_parent_type": "error",
+    "practice_looks_like_group": "error",
+    "empty_group": "question",
+    "single_site_group": "question",
+}
 HIERARCHY_ACTIONS = {
     "self_parent": ("auto", "Clear the parent link"),
-    "arr_on_parent_and_child": ("auto", "Keep ARR on sites, group ARR becomes the sum"),
     "invalid_parent_type": ("manual", "Re-type or re-attach"),
     "practice_looks_like_group": ("manual", "Re-type as group and create its sites"),
     "empty_group": ("manual", "Create sites from SIRENE or re-type as practice"),
@@ -474,7 +482,7 @@ HIERARCHY_ACTIONS = {
 
 def current_state(c, contacts):
     arr = pd.to_numeric(c.arr_signed_eur, errors="coerce")
-    parent_arr = c.parent_record_id.map(dict(zip(c.record_id, arr)))
+    no_company = contacts[contacts.company_record_id.isna()]
     junk_domain = c.domains.fillna("").str.lower().str.contains("|".join(re.escape(d) for d in PLATFORM_OR_WEBMAIL_DOMAINS))
     types = c.set_index("record_id").type
     return {
@@ -488,13 +496,12 @@ def current_state(c, contacts):
         "multi_site_sirens": int(c[c.siret_valid].groupby("siren").siret_norm.nunique().gt(1).sum()),
         "calendar_coverage": int(c.calendar_norm.notna().sum()),
         "junk_domains": int(junk_domain.sum()),
-        "arr_double_counted_sites": int((arr.notna() & parent_arr.notna()).sum()),
-        "arr_double_counted_eur": float(arr[arr.notna() & parent_arr.notna()].sum()),
-        "customer_arr_eur": float(arr[c.lifecycle.eq("Customer")].sum()),
+        "by_relationship": {str(k): int(v) for k, v in c.business_relationship_type.fillna("Missing").value_counts().items()},
         "billing_id_on_non_customers": int((c.hyperline_customer_id.notna() & c.lifecycle.ne("Customer")).sum()),
         "customers_without_arr": int((c.lifecycle.eq("Customer") & arr.isna()).sum()),
         "contacts": int(len(contacts)),
-        "contacts_without_company": int(contacts.company_record_id.isna().sum()),
+        "contacts_without_company": int(len(no_company)),
+        "contacts_without_company_by_tool": int(no_company.created_by.fillna("").str.contains(" · ", regex=False).sum()),
         "contacts_on_group_level": int(contacts.company_record_id.map(types).isin(["Group", "Superorga"]).sum()),
     }
 
@@ -687,6 +694,8 @@ def main(data_dir, out_dir, web_data_dir=None):
         "valid_siret_failing_checksum": int((~sirets.map(luhn_ok)).sum()),
         "multi_site_sirens": int(c[c.siret_valid].groupby("siren").siret_norm.nunique().gt(1).sum()),
         "hierarchy_issues": hierarchy.issue.value_counts().to_dict() if len(hierarchy) else {},
+        "hierarchy_invalid_parents": hierarchy[hierarchy.issue.eq("invalid_parent_type")].detail.value_counts().to_dict() if len(hierarchy) else {},
+        "hierarchy_structure_errors": int(hierarchy[hierarchy.severity.eq("error") & hierarchy.issue.ne("missing_type")].record_id.nunique()) if len(hierarchy) else 0,
         "contact_moves": moves.reason.value_counts().to_dict() if len(moves) else {},
         "company_number_types": {f"{k[0]} {k[1]}": int(v) for k, v in c.groupby(["country_norm", "company_number_type"]).size().items() if k[0] in ("FR", "US")},
         "market_issues": markets.issue.value_counts().to_dict() if len(markets) else {},

@@ -4,14 +4,13 @@
 // scripts/tam_dedup.py, so the slides, the cockpit and the action pack always agree.
 
 const fmt = new Intl.NumberFormat("fr-FR");
-const millions = (v) => `${(v / 1e6).toFixed(1).replace(".", ",")} M€`;
 const AUTOMATIONS = ["API · enrichment pipeline", "API · n8n", "Attio · auto-created from email sync"];
 const ICONS = {
   id: '<path d="M4 5h16v14H4z"/><circle cx="9" cy="11" r="2"/><path d="M6.5 16c.6-1.6 1.6-2.4 2.5-2.4s1.9.8 2.5 2.4M14 10h4M14 13h3"/>',
   copy: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',
-  euro: '<path d="M17 6.5A7 7 0 1 0 17 17.5M4 10h9M4 14h9"/>',
+  tag: '<path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.5"/>',
+  help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17h.01"/>',
   tree: '<rect x="9" y="3" width="6" height="4" rx="1"/><rect x="3" y="17" width="6" height="4" rx="1"/><rect x="15" y="17" width="6" height="4" rx="1"/><path d="M12 7v5M6 17v-5h12v5"/>',
-  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>',
   person: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4 4.3-6 8-6s6.8 2 8 6"/>',
 };
 const icon = (name) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
@@ -24,8 +23,13 @@ function slides(d) {
   const noId = Math.round(((c.accounts - c.company_number_validated) / c.accounts) * 100);
   const dupTotal = Object.values(d.duplicate_sources).reduce((t, v) => t + v, 0);
   const dupAuto = Object.entries(d.duplicate_sources).filter(([k]) => AUTOMATIONS.includes(k)).reduce((t, [, v]) => t + v, 0);
-  const hierTotal = Object.values(s.hierarchy_issues).reduce((t, v) => t + v, 0);
+  const hi = s.hierarchy_issues;
+  const ip = s.hierarchy_invalid_parents || {};
+  const underPractice = (ip["Practice under Practice"] || 0) + (ip["Group under Practice"] || 0);
   const wrongAccount = s.contact_moves["email domain belongs to another account family"] || 0;
+  const rel = c.by_relationship || {};
+  const outOfMarket = (rel.Invest || 0) + (rel.Partner || 0) + (rel.Media || 0);
+  const noCompanyByTool = Math.round((c.contacts_without_company_by_tool / c.contacts_without_company) * 100);
   const us = s.markets.US || { accounts: 0 };
 
   return [
@@ -33,15 +37,30 @@ function slides(d) {
       <p class="kicker">1 · Ce qui ne va pas aujourd'hui</p>
       <h2>La base ne nous dit pas quel est notre marché</h2>
       <p class="sub">${fmt.format(c.accounts)} comptes dans Attio, lus tels quels.</p>
-      <div class="body"><div class="problems">
-        <div class="problem">${icon("id")}<span class="num">${noId} %</span><span class="what">Pas d'identité fiable</span><span class="why">Pas de SIRET validé en France, aucun NPI valide sur les ${us.accounts} comptes US</span></div>
-        <div class="problem">${icon("copy")}<span class="num">${fmt.format(s.records_removed_by_auto_merge)}</span><span class="what">Doublons certains</span><span class="why">+ ${fmt.format(d.review.length)} paires qui demandent un humain</span></div>
-        <div class="problem">${icon("euro")}<span class="num">${millions(c.arr_double_counted_eur)}</span><span class="what">ARR compté deux fois</span><span class="why">Sur un site et sur son groupe, pour ${millions(c.customer_arr_eur)} d'ARR client</span></div>
-        <div class="problem">${icon("tree")}<span class="num">${fmt.format(hierTotal)}</span><span class="what">Ruptures de hiérarchie</span><span class="why">${fmt.format(mi.group_missing || 0)} organisations multi-sites sans groupe, des groupes sous des cabinets, des boucles</span></div>
-        <div class="problem">${icon("globe")}<span class="num">${fmt.format(mi.owner_market_mismatch || 0)}</span><span class="what">Comptes US portés par l'équipe française</span><span class="why">+ ${fmt.format(mi.out_of_tam || 0)} investisseurs, partenaires et médias comptés dans le TAM</span></div>
-        <div class="problem">${icon("person")}<span class="num">${fmt.format(wrongAccount)}</span><span class="what">Contacts sur le mauvais compte</span><span class="why">+ ${fmt.format(c.contacts_without_company)} contacts sans société</span></div>
+      <div class="body">
+        <p class="group-title">Ce qui compte dans notre marché n'est pas défini</p>
+        <div class="problems four">
+          <div class="problem definition">
+            <span class="what">Pas de définition commune des comptes</span>
+            <span class="why">Tout est dans le même objet, sans distinction :</span>
+            <ul class="defs">
+              <li><b>TAM</b> tout le marché adressable, connu ou non</li>
+              <li><b>SAM</b> ce qu'on adresse vraiment : ICP, marché couvert, une équipe</li>
+              <li><b>Hors marché</b> partenaires, investisseurs, médias : suivis, jamais comptés</li>
+            </ul>
+          </div>
+          <div class="problem">${icon("tag")}<span class="num">${fmt.format(outOfMarket)}</span><span class="what">Comptes hors marché</span><span class="why">${fmt.format(rel.Invest || 0)} investisseurs, ${fmt.format(rel.Partner || 0)} partenaires, ${fmt.format(rel.Media || 0)} médias mélangés aux prospects</span></div>
+          <div class="problem">${icon("help")}<span class="num">${fmt.format(c.by_type.Missing || 0)}</span><span class="what">Comptes sans type</span><span class="why">ni site ni groupe : impossible à placer · + ${fmt.format(mi.country_inferred || 0)} comptes sans pays</span></div>
+        </div>
+        <p class="group-title">On ne sait pas qui est qui</p>
+        <div class="problems four">
+          <div class="problem">${icon("id")}<span class="num">${noId} %</span><span class="what">Pas d'identité fiable</span><span class="why">pas de SIRET validé en France, aucun NPI valide sur les ${us.accounts} comptes US</span></div>
+          <div class="problem">${icon("copy")}<span class="num">${fmt.format(s.records_removed_by_auto_merge)}</span><span class="what">Doublons certains</span><span class="why">+ ${fmt.format(d.review.length)} paires à faire valider par un humain</span></div>
+          <div class="problem">${icon("tree")}<span class="num">${fmt.format(s.hierarchy_structure_errors)}</span><span class="what">Hiérarchie incohérente</span><span class="why">${fmt.format(hi.practice_looks_like_group || 0)} cabinets multi-sites, ${fmt.format(underPractice)} rattachés à un cabinet, ${fmt.format(hi.self_parent || 0)} boucles : quelle structure pour déployer un groupe ?</span></div>
+          <div class="problem">${icon("person")}<span class="num">${fmt.format(c.contacts_without_company)}</span><span class="what">Contacts rattachés à aucun compte</span><span class="why">+ ${fmt.format(wrongAccount)} sur le mauvais compte · aucune règle de création</span></div>
+        </div>
+        <div class="takeaway">Ce ne sont pas les équipes, ce sont les outils : <b>branchés au CRM mais pas orchestrés</b>, sans règle de création, ils créent au lieu de mettre à jour. Ils sont à l'origine de <b>${Math.round((dupAuto / dupTotal) * 100)} % des doublons</b> et de <b>${noCompanyByTool} % des contacts sans compte</b> (enrichissement, n8n, synchro email, téléphonie).</div>
       </div>
-      <div class="takeaway">Le désordre se recrée en continu : <b>${Math.round((dupAuto / dupTotal) * 100)} % des doublons ont été créés par des automatisations</b> (enrichissement, n8n, synchro email) qui insèrent au lieu de mettre à jour.</div></div>
       ${mark(1)}
     </section>`,
 
@@ -77,7 +96,7 @@ function slides(d) {
         <p class="rules-title">Jamais fusionné automatiquement</p>
         <div class="rules">
           <div class="rule"><span class="x">✕</span><div><b>Deux numéros validés différents</b><span>deux sites, même d'une même société : on relie, on ne fusionne pas</span></div></div>
-          <div class="rule"><span class="x">✕</span><div><b>Un client ou deux commerciaux</b><span>un humain valide toute fusion qui déplace de l'ARR ou une attribution</span></div></div>
+          <div class="rule"><span class="x">✕</span><div><b>Un client ou deux commerciaux</b><span>un humain valide toute fusion qui touche la facturation ou une attribution</span></div></div>
           <div class="rule"><span class="x">✕</span><div><b>Téléphone, domaine ou nom seuls</b><span>partagés par les groupes ; un domaine dans plusieurs villes, c'est un groupe à créer</span></div></div>
         </div>
       </div>
@@ -86,7 +105,7 @@ function slides(d) {
 
     `<section class="slide">
       <p class="kicker">3 · Le build</p>
-      <h2>Le master dans le warehouse, Attio en copie opérationnelle</h2>
+      <h2>Le TAM dans le warehouse, le SAM dans Attio</h2>
       <div class="body">
         <div class="flow">
           <div class="stage">
@@ -98,20 +117,20 @@ function slides(d) {
           <div class="arrow">→</div>
           <div class="stage core">
             <span class="tag">Warehouse · chaque nuit</span>
-            <h3>Référentiel site, groupe, entité légale, praticien</h3>
+            <h3>Le TAM : tous les sites du marché, scorés</h3>
             <ol class="steps">
               <li><i>1</i>Normaliser dans le modèle générique</li>
-              <li><i>2</i>Valider les numéros, matcher sur les clés</li>
-              <li><i>3</i>Survivant : client, deals, complétude</li>
-              <li><i>4</i>Tests : pas de boucle, ARR sur un seul niveau</li>
+              <li><i>2</i>Valider les numéros, rattacher chaque SIRET à son SIREN</li>
+              <li><i>3</i>Matcher, choisir le survivant : client, deals, complétude</li>
+              <li><i>4</i>Tests : type renseigné, pas de boucle, compte racine calculé</li>
             </ol>
           </div>
           <div class="arrow">→</div>
           <div class="stage">
             <span class="tag">Attio · synchro quotidienne</span>
-            <h3>Ce que voient les Sales</h3>
-            <div class="chips"><span class="chip-s">identité générique</span><span class="chip-s">hiérarchie</span><span class="chip-s">ID du master</span><span class="chip-s">marché</span></div>
-            <p class="note" style="margin:0">Attio ne réécrit que ce qui appartient aux Sales : propriétaire, cycle de vie, notes.</p>
+            <h3>Le SAM : les comptes qu'on adresse</h3>
+            <div class="chips"><span class="chip-s">identité générique</span><span class="chip-s">hiérarchie</span><span class="chip-s">compte racine</span><span class="chip-s">ID du master</span><span class="chip-s">marché</span><span class="chip-s">type de relation</span></div>
+            <p class="note" style="margin:0">Poussé quand une équipe le travaille. Partenaires, investisseurs, médias : dans Attio, hors TAM et SAM. Attio ne réécrit que ce qui appartient aux Sales : propriétaire, cycle de vie, notes.</p>
           </div>
         </div>
         <div class="guards">
@@ -122,11 +141,13 @@ function slides(d) {
               <li>Les automatisations <b>mettent à jour</b>, sans jamais insérer</li>
               <li><b>Recherche avant création</b> dans Attio</li>
               <li>Pays obligatoire, <b>attribution par marché</b></li>
+              <li><b>Type de compte et de relation</b> obligatoires</li>
+              <li>Une <b>règle de création</b> par outil : qui crée quoi</li>
             </ul>
           </div>
           <div class="panel">
             <h3>Des humains là où ça compte</h3>
-            <p class="note" style="margin:0">File de revue hebdomadaire portée par RevOps : <b>${fmt.format(d.review.length)}</b> paires aujourd'hui. Indicateurs de qualité par marché, chaque semaine.</p>
+            <p class="note" style="margin:0">File de revue hebdomadaire portée par RevOps : <b>${fmt.format(d.review.length)}</b> paires aujourd'hui. Questions de structure tranchées avec les Sales : <b>${fmt.format(hi.empty_group || 0)}</b> groupes vides, <b>${fmt.format(hi.single_site_group || 0)}</b> groupes à un seul site. Indicateurs de qualité par marché, chaque semaine.</p>
           </div>
         </div>
       </div>
@@ -140,14 +161,14 @@ function slides(d) {
         <div class="roadmap">
           <div></div>${[1, 2, 3, 4, 5, 6, 7, 8].map((w) => `<div class="wk">S${w}</div>`).join("")}
           <div class="label"><b>P0</b>Arrêter l'hémorragie</div><div class="bar" style="grid-column: span 1">Identité + MAJ</div><div style="grid-column: span 7"></div>
-          <div class="label"><b>P0</b>Corriger le reporting</div><div class="bar" style="grid-column: span 2">${fmt.format(s.records_removed_by_auto_merge)} fusions · ARR sur les sites</div><div style="grid-column: span 6"></div>
+          <div class="label"><b>P0</b>Corriger le reporting</div><div class="bar" style="grid-column: span 2">${fmt.format(s.records_removed_by_auto_merge)} fusions · types de compte</div><div style="grid-column: span 6"></div>
           <div class="label"><b>P1</b>Master record</div><div></div><div class="bar p1" style="grid-column: span 4">Modèles warehouse + synchro vers Attio</div><div style="grid-column: span 3"></div>
           <div class="label"><b>P1</b>Files · identité US</div><div></div><div class="bar p1" style="grid-column: span 3">${fmt.format(d.review.length)} revues · NPI des ${us.accounts} comptes US</div><div style="grid-column: span 4"></div>
           <div class="label"><b>P2</b>Dimensionner le TAM</div><div style="grid-column: span 4"></div><div class="bar p2" style="grid-column: span 3">Registres par marché, US d'abord</div><div></div>
           <div class="label"><b>P3</b>Faire tourner</div><div style="grid-column: span 2"></div><div class="bar p3" style="grid-column: span 6">Indicateurs et revue hebdo, tests warehouse</div>
         </div>
         <div class="closing">
-          <div class="big">6 à 8 semaines, une personne<span>Valeur visible dès la semaine 2 : doublons fusionnés, ARR compté une fois, comptes US avec leur équipe.</span></div>
+          <div class="big">6 à 8 semaines, une personne<span>Valeur visible dès la semaine 2 : doublons fusionnés, TAM, SAM et hors marché séparés, comptes US avec leur équipe.</span></div>
           <a class="cta" href="tam.html">Ouvrir le cockpit TAM →</a>
         </div>
       </div>

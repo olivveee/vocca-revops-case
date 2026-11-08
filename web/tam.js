@@ -9,7 +9,6 @@ const AUTOMATION_CREATORS = ["API · enrichment pipeline", "API · n8n", "Attio 
 
 const fmt = new Intl.NumberFormat("en-GB");
 const eur = new Intl.NumberFormat("en-GB", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
-const eurM = (v) => `€${(v / 1e6).toFixed(1)}M`;
 const pct = (n, d) => (d ? `${Math.round((n / d) * 100)}%` : "–");
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const el = (id) => document.getElementById(id);
@@ -50,8 +49,12 @@ const csvCell = (v) => { const s = String(v ?? ""); return /[",\n]/.test(s) ? `"
 const toCsv = (rows) => rows.map((r) => r.map(csvCell).join(",")).join("\n");
 
 // ---------- 1. current state ----------
+const outOfMarketCount = (rel) => (rel.Invest || 0) + (rel.Partner || 0) + (rel.Media || 0);
+
 function renderState() {
   const c = data.current;
+  const rel = c.by_relationship || {};
+  const outOfMarket = outOfMarketCount(rel);
   const s = data.summary;
   const noSiret = c.accounts - c.company_number_validated;
   const auto = Object.entries(data.duplicate_sources).filter(([k]) => AUTOMATION_CREATORS.includes(k)).reduce((t, [, v]) => t + v, 0);
@@ -70,7 +73,7 @@ function renderState() {
       ${tile("Accounts in Attio", fmt.format(c.accounts), `${fmt.format(c.by_type.Practice || 0)} practices · ${fmt.format(c.by_type.Group || 0)} groups · ${fmt.format(c.by_type.Superorga || 0)} networks · ${fmt.format(c.by_type.Missing || 0)} untyped`)}
       ${tile("No validated company number", pct(noSiret, c.accounts), `${fmt.format(noSiret)} accounts: no SIRET in France, no NPI in the US`, "alert")}
       ${tile("Certain duplicates", fmt.format(s.records_removed_by_auto_merge), `+ ${fmt.format(data.review.length)} pairs that need a human`, "alert")}
-      ${tile("ARR counted twice", eurM(c.arr_double_counted_eur), `${fmt.format(c.arr_double_counted_sites)} sites whose group also carries ARR (customer ARR ${eurM(c.customer_arr_eur)})`, "alert")}
+      ${tile("Outside the market", fmt.format(outOfMarket), `${fmt.format(rel.Invest || 0)} investors · ${fmt.format(rel.Partner || 0)} partners · ${fmt.format(rel.Media || 0)} media, mixed with prospects`, "alert")}
       ${tile("Contacts misplaced", fmt.format(s.contact_moves["email domain belongs to another account family"] || 0), `on the wrong account · ${fmt.format(c.contacts_without_company)} without company · ${fmt.format(c.contacts_on_group_level)} parked on a group`)}
       ${tile("Lifecycle / billing out of sync", fmt.format(c.by_lifecycle.Missing || 0), `accounts without lifecycle · ${fmt.format(c.billing_id_on_non_customers)} billing IDs on non-customers · ${fmt.format(c.customers_without_arr)} customers without ARR`)}
     </div>
@@ -131,6 +134,7 @@ function renderMarkets() {
 // ---------- 2. after the scripts ----------
 function renderAfter() {
   const c = data.current;
+  const outOfMarket = outOfMarketCount(c.by_relationship || {});
   const s = data.summary;
   const autoActions = data.actions.filter((a) => a.mode === "auto");
   const manualActions = data.actions.filter((a) => a.mode === "manual");
@@ -149,7 +153,7 @@ function renderAfter() {
     <p class="lead">What running <code>tam_dedup.py</code> does to the base: automatic actions are safe by construction (no customer, no ownership conflict); everything else lands in a review queue.</p>
     <div class="compare">
       <div class="card"><span class="tile-label">Accounts</span><div class="from-to"><span class="from">${fmt.format(s.accounts_before)}</span><span class="arrow">→</span><span class="to">${fmt.format(s.accounts_after_auto_merge)}</span></div><span class="tile-sub">${fmt.format(s.records_removed_by_auto_merge)} duplicates merged into ${fmt.format(s.auto_merge_clusters)} survivors</span></div>
-      <div class="card"><span class="tile-label">ARR counted twice</span><div class="from-to"><span class="from">${eurM(c.arr_double_counted_eur)}</span><span class="arrow">→</span><span class="to">€0</span></div><span class="tile-sub">ARR kept on sites; group ARR = sum of its sites</span></div>
+      <div class="card"><span class="tile-label">Accounts counted in the TAM by mistake</span><div class="from-to"><span class="from">${fmt.format(outOfMarket)}</span><span class="arrow">→</span><span class="to">0</span></div><span class="tile-sub">Investors, partners and media kept in Attio, excluded from TAM and SAM views</span></div>
       <div class="card"><span class="tile-label">Contacts on the wrong account</span><div class="from-to"><span class="from">${fmt.format(s.contact_moves["email domain belongs to another account family"] || 0)}</span><span class="arrow">→</span><span class="to">0</span></div><span class="tile-sub">Re-attached by work-email domain</span></div>
       <div class="card"><span class="tile-label">Left for a human</span><div class="from-to"><span class="to">${fmt.format(manualTotal)}</span></div><span class="tile-sub">items across ${manualActions.length} review queues, about 3 days with Sales</span></div>
     </div>
