@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://api.fontshare.com">
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="tam.css">
+  <link rel="stylesheet" href="tam.css?v=2">
 </head>
 <body>
   <main class="page">
@@ -18,30 +18,33 @@
       <a href="slides.html">TAM slides (1B)</a>
       <a href="tam.html" aria-current="page">TAM cockpit (1B)</a>
     </nav>
-    <header class="masthead">
+    <header class="masthead cockpit-head">
       <div>
         <p class="eyebrow">Vocca · RevOps case study · Part 1B</p>
         <h1>TAM cockpit</h1>
-        <p class="context">Account model: the <strong>site</strong> (one SIRET, one booking calendar) rolls up to a <strong>group</strong> and a <strong>network</strong>; the legal entity (SIREN) is linked, not used as the hierarchy.</p>
+        <p class="context">Where the CRM needs cleaning, the detailed list behind each queue, and which tool creates the mess.</p>
       </div>
+      <a class="btn" href="data/tam_action_pack.xlsx" download>Download the action pack (.xlsx)</a>
     </header>
 
+    <div class="health" id="health"></div>
+
     <div class="tabs" role="tablist" aria-label="Cockpit sections">
-      <button role="tab" data-tab="state" aria-selected="true">1 · Current state</button>
-      <button role="tab" data-tab="after" aria-selected="false">2 · After the scripts</button>
-      <button role="tab" data-tab="rules" aria-selected="false">3 · Rules</button>
-      <button role="tab" data-tab="review" aria-selected="false">4 · Manual review <span class="tab-count" id="review-count"></span></button>
+      <button role="tab" data-tab="queues" aria-selected="true">Work queues</button>
+      <button role="tab" data-tab="explore" aria-selected="false">Explorer</button>
+      <button role="tab" data-tab="sources" aria-selected="false">Quality by source</button>
+      <button role="tab" data-tab="review" aria-selected="false">Pair review <span class="tab-count" id="review-count"></span></button>
     </div>
 
-    <section class="tab-panel" id="panel-state" role="tabpanel"></section>
-    <section class="tab-panel" id="panel-after" role="tabpanel" hidden></section>
-    <section class="tab-panel" id="panel-rules" role="tabpanel" hidden></section>
+    <section class="tab-panel" id="panel-queues" role="tabpanel"></section>
+    <section class="tab-panel" id="panel-explore" role="tabpanel" hidden></section>
+    <section class="tab-panel" id="panel-sources" role="tabpanel" hidden></section>
     <section class="tab-panel" id="panel-review" role="tabpanel" hidden></section>
 
     <footer class="footer">
       <p>Every number on this page is produced by <code>scripts/tam_dedup.py</code> on the anonymised Attio export of 25 Sep 2026. The page is read-only: in production the buttons would call n8n workflows that write to Attio.</p>
     </footer>
   </main>
-  <script src="tam.js"></script>
+  <script src="tam.js?v=2"></script>
 </body>
 </html>

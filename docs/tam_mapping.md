@@ -5,7 +5,7 @@
 > 2. **One generic identity in the CRM.** Attio carries `country` + `company_number` + `company_number_type` (SIRET in France, NPI in the US…), validated per type, and that is the only dedupe key. Market-specific columns and sources live upstream, in the warehouse, which joins them into this shape.
 > 3. **Nothing that touches a customer or two sales owners is merged by a machine.**
 >
-> Real work on the file: [`scripts/tam_dedup.py`](../scripts/tam_dedup.py) applies this model to the 5,080 accounts and produces the action lists in [`out/tam/`](../out/tam/). The [TAM cockpit](https://vocca-revops-case.vercel.app/tam.html) shows the result, the rules and the manual review queue.
+> Real work on the file: [`scripts/tam_dedup.py`](../scripts/tam_dedup.py) applies this model to the 5,080 accounts and produces the action lists in [`out/tam/`](../out/tam/). The [TAM cockpit](https://vocca-revops-case.vercel.app/tam.html) turns the result into work queues: each opens onto the detailed list of records with the reason, the next action and the rule, plus a quality-by-source view and the pair review.
 
 ---
 

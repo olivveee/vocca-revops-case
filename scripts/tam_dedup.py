@@ -470,15 +470,6 @@ HIERARCHY_SEVERITY = {
     "empty_group": "question",
     "single_site_group": "question",
 }
-HIERARCHY_ACTIONS = {
-    "self_parent": ("auto", "Clear the parent link"),
-    "invalid_parent_type": ("manual", "Re-type or re-attach"),
-    "practice_looks_like_group": ("manual", "Re-type as group and create its sites"),
-    "empty_group": ("manual", "Create sites from SIRENE or re-type as practice"),
-    "single_site_group": ("manual", "Check: real group or duplicate of its site"),
-    "missing_type": ("manual", "Set the type"),
-    "orphan_parent": ("auto", "Clear the parent link"),
-}
 
 
 def current_state(c, contacts):
@@ -554,6 +545,153 @@ def record_card(row, deals_by_company):
     }
 
 
+# ---------- work queues for the cockpit ----------
+TOOL_LABELS = {
+    "API · enrichment pipeline": "Enrichment",
+    "API · n8n": "n8n",
+    "Attio · auto-created from email sync": "Email sync",
+    "App · telephony integration": "Telephony",
+}
+SIRET_STATUS_DETAIL = {
+    "siren_only": "SIREN (9 digits) typed in the SIRET field",
+    "missing": "no SIRET",
+    "invalid": "malformed SIRET",
+}
+HIERARCHY_QUEUE = {
+    "missing_type": "missing_type",
+    "self_parent": "hierarchy_error",
+    "orphan_parent": "hierarchy_error",
+    "invalid_parent_type": "hierarchy_error",
+    "practice_looks_like_group": "hierarchy_error",
+    "empty_group": "structure_question",
+    "single_site_group": "structure_question",
+}
+MARKET_QUEUE = {
+    "out_of_tam": "out_of_market",
+    "country_inferred": "no_country",
+    "country_unknown": "no_country",
+    "owner_market_mismatch": "owner_market",
+    "group_missing": "group_missing",
+    "booking_url_wrong_country": "enrichment_junk",
+    "company_number_unverified": None,  # already covered by no_identity
+}
+
+
+def source_of(created_by):
+    """Group record creators: each tool on its own, every person under one label."""
+    if not isinstance(created_by, str) or not created_by.strip():
+        return "Unknown"
+    if " · " in created_by:
+        return TOOL_LABELS.get(created_by, created_by)
+    return "People"
+
+
+def worklist(c, contacts, pairs, clusters, hierarchy, moves, markets):
+    """One row per account (and per contact) with every issue it carries, for the cockpit's work queues."""
+    by_id = c.set_index("record_id")
+    issues = {}
+
+    def add(rid, queue, detail):
+        issues.setdefault(rid, []).append([queue, detail])
+
+    for r in clusters[clusters.role.eq("merge_into_survivor")].itertuples():
+        add(r.record_id, "dup_certain", f"merge into {by_id.at[r.survivor_id, 'name']}")
+    for r in pairs[pairs.decision.eq("manual_review")].itertuples():
+        add(r.record_a, "dup_review", f"{r.reason} (with {r.name_b})")
+        add(r.record_b, "dup_review", f"{r.reason} (with {r.name_a})")
+    for r in pairs[pairs.decision.eq("hierarchy_fix")].itertuples():
+        site, other = (r.record_a, r.name_b) if r.type_a == "Practice" else (r.record_b, r.name_a)
+        add(site, "site_to_attach", f"{r.reason.split(':')[0]} ({other})")
+    for rid, row in by_id[~by_id.company_number_valid].iterrows():
+        if row.country_norm == "FR":
+            detail = SIRET_STATUS_DETAIL.get(row.siret_status, row.siret_status)
+        elif isinstance(row.company_number, str):
+            detail = f"{row.company_number_type} {row.company_number} fails validation"
+        else:
+            detail = f"no {row.company_number_type or 'company number'}"
+        add(rid, "no_identity", detail)
+    for r in hierarchy.itertuples():
+        add(r.record_id, HIERARCHY_QUEUE[r.issue], f"{r.issue.replace('_', ' ')}: {r.detail}")
+    for r in markets.itertuples():
+        queue = MARKET_QUEUE.get(r.issue)
+        if queue:
+            add(r.record_id, queue, r.detail)
+    junk = c.domains.fillna("").str.lower().str.contains("|".join(re.escape(d) for d in PLATFORM_OR_WEBMAIL_DOMAINS))
+    for rid, dom in zip(c.record_id[junk], c.domains[junk]):
+        add(rid, "enrichment_junk", f"website is a platform or webmail ({dom})")
+
+    accounts = []
+    for rid, items in issues.items():
+        row = by_id.loc[rid]
+        accounts.append({
+            "id": rid,
+            "name": row["name"],
+            "type": row.type if isinstance(row.type, str) else None,
+            "country": row.country_norm,
+            "number": row.company_number if isinstance(row.company_number, str) else None,
+            "lifecycle": row.lifecycle if isinstance(row.lifecycle, str) else None,
+            "owner": row.sales_owner if isinstance(row.sales_owner, str) else None,
+            "city": row.city if isinstance(row.city, str) else None,
+            "created_by": row.created_by if isinstance(row.created_by, str) else None,
+            "source": source_of(row.created_by),
+            "issues": items,
+        })
+
+    names = dict(zip(c.record_id, c.name))
+    move_by_contact = dict(zip(moves.contact_id, moves.proposed_company_id))
+    wrong = set(moves[moves.reason.ne("no company attached")].contact_id)
+    contact_rows = []
+    for r in contacts.itertuples():
+        no_account = not isinstance(r.company_record_id, str)
+        if not no_account and r.record_id not in wrong:
+            continue
+        email = str(r.email_addresses).split(",")[0].strip().lower() if isinstance(r.email_addresses, str) else ""
+        proposed = move_by_contact.get(r.record_id)
+        contact_rows.append({
+            "id": r.record_id,
+            "name": " ".join(x for x in [r.first_name, r.last_name] if isinstance(x, str)),
+            "job": r.job_title if isinstance(r.job_title, str) else None,
+            "category": r.category if isinstance(r.category, str) else None,
+            "email_domain": email.split("@")[-1] if "@" in email else None,
+            "account": names.get(r.company_record_id),
+            "proposed_account": names.get(proposed) if proposed else None,
+            "created_by": r.created_by if isinstance(r.created_by, str) else None,
+            "source": source_of(r.created_by),
+            "issues": [["contact_no_account" if no_account else "contact_wrong_account",
+                        f"re-attach to {names.get(proposed)} (email domain)" if proposed else "no account, no matching email domain"]],
+        })
+
+    acc_src = c.created_by.map(source_of)
+    with_issue = c.record_id.isin(issues)
+    dup_ids = set(clusters[clusters.role.eq("merge_into_survivor")].record_id)
+    con_src = contacts.created_by.map(source_of)
+    no_acc = contacts.company_record_id.isna()
+    wrong_mask = contacts.record_id.isin(wrong)
+    sources = []
+    for src in sorted(set(acc_src) | set(con_src)):
+        a, k = acc_src.eq(src), con_src.eq(src)
+        sources.append({
+            "source": src,
+            "is_tool": src not in ("People", "Unknown"),
+            "accounts_created": int(a.sum()),
+            "accounts_with_issue": int((a & with_issue).sum()),
+            "certain_duplicates": int(c.record_id[a].isin(dup_ids).sum()),
+            "contacts_created": int(k.sum()),
+            "contacts_without_account": int((k & no_acc).sum()),
+            "contacts_wrong_account": int((k & wrong_mask).sum()),
+        })
+    tool_accounts = acc_src.isin([s["source"] for s in sources if s["is_tool"]])
+    health = {
+        "accounts": int(len(c)),
+        "identity_validated": int(c.company_number_valid.sum()),
+        "accounts_with_issue": int(with_issue.sum()),
+        "accounts_with_issue_from_tools": int((with_issue & tool_accounts).sum()),
+        "contacts": int(len(contacts)),
+        "contacts_without_account": int(no_acc.sum()),
+    }
+    return accounts, contact_rows, sources, health
+
+
 def write_cockpit(web_dir, c, contacts, deals, pairs, clusters, hierarchy, moves, summary, markets):
     web = Path(web_dir)
     web.mkdir(parents=True, exist_ok=True)
@@ -569,30 +707,7 @@ def write_cockpit(web_dir, c, contacts, deals, pairs, clusters, hierarchy, moves
         "b": record_card(by_id.loc[r.record_b], deals_by_company),
     } for r in review.itertuples()]
 
-    hier_counts = hierarchy.issue.value_counts()
-    actions = [
-        {"action": "Merge duplicates", "mode": "auto", "count": summary["records_removed_by_auto_merge"], "detail": f"{summary['auto_merge_clusters']} survivors keep deals, contacts and history", "prod": "n8n workflow tam-merge -> Attio merge API, logged"},
-        {"action": "Re-attach contacts", "mode": "auto", "count": int(len(moves)), "detail": "Work-email domain owned by exactly one other account family", "prod": "n8n workflow tam-contacts -> Attio update"},
-    ]
-    for issue, n in hier_counts.items():
-        mode, what = HIERARCHY_ACTIONS.get(issue, ("manual", "Review"))
-        actions.append({"action": f"Hierarchy: {issue.replace('_', ' ')}", "mode": mode, "count": int(n), "detail": what,
-                        "prod": "dbt model + Attio sync" if mode == "auto" else "RevOps review queue"})
-    market_actions = {
-        "country_inferred": "Set the ISO country from the postcode",
-        "out_of_tam": "Exclude investors, partners and media from TAM and pipeline views",
-        "booking_url_wrong_country": "Remove booking URLs that do not exist in the account's country",
-        "company_number_unverified": "Re-enrich foreign company numbers from the market's registry",
-        "owner_market_mismatch": "Reassign accounts to the team of their market",
-        "group_missing": "Create the group of multi-site organisations and attach the sites",
-        "country_unknown": "Set the country",
-    }
-    for issue, n in (markets.issue.value_counts().items() if len(markets) else []):
-        mode = markets[markets.issue.eq(issue)].iloc[0]["mode"]
-        actions.append({"action": f"Market: {issue.replace('_', ' ')}", "mode": mode, "count": int(n), "detail": market_actions.get(issue, ""),
-                        "prod": "dbt model + Attio sync" if mode == "auto" else "RevOps review queue"})
-    actions.append({"action": "Review candidate duplicates", "mode": "manual", "count": int(len(review)), "detail": "Customer involved, no SIRET to confirm, or calendar only", "prod": "Review queue in this cockpit -> decisions to Attio"})
-    actions.append({"action": "Attach sites to their group", "mode": "manual", "count": summary["sites_to_attach_or_check"], "detail": "Site shares SIREN/SIRET with a group it is not attached to", "prod": "RevOps review queue"})
+    accounts, contact_rows, sources, health = worklist(c, contacts, pairs, clusters, hierarchy, moves, markets)
 
     cockpit = {
         "generated_from": "scripts/tam_dedup.py",
@@ -600,9 +715,11 @@ def write_cockpit(web_dir, c, contacts, deals, pairs, clusters, hierarchy, moves
         "summary": summary,
         "duplicate_sources": duplicate_sources(clusters, c),
         "rules": rules_usage(pairs),
-        "actions": actions,
-        "merge_examples": clusters.head(60).fillna("").to_dict("records"),
         "review": review_items,
+        "health": health,
+        "sources": sources,
+        "accounts": accounts,
+        "contacts": contact_rows,
     }
     (web / "tam_cockpit.json").write_text(json.dumps(cockpit, ensure_ascii=False, default=str))
     write_action_pack(web / "tam_action_pack.xlsx", cockpit, clusters, review, hierarchy, moves, pairs, markets)
