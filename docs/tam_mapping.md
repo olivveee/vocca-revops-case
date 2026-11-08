@@ -142,20 +142,18 @@ The TAM is built from the registries, not from the CRM: every site of a target s
 
 ## 5. Recommendations
 
-Deadlines follow dependencies, not the amount of work: most items take RevOps a few days, and the elapsed time comes from who else is needed.
+Four phases, in this order: **map the current architecture, decide and design the target, build it, measure it.** Cleaning without a target architecture only treats symptoms; the tools would recreate the same mess.
 
-| When | Workstream | What | RevOps effort | Depends on |
+| Phase | When | What | Deliverable | Depends on |
 |---|---|---|---|---|
-| **Week 1** | P0 · Fix the numbers | 117 automatic merges; 65 account types; 118 countries; investors, partners and media out of TAM and SAM views; 3 cycles and 17 impossible parents | 2-3 days | Nobody |
-| **Week 1** | P0 · Close the tap | Email sync and telephony stop creating companies; enrichment writes to contacts only (configuration, not development) | 1 day | Tool admins |
-| **Weeks 1-3** | P0 · Stop the bleeding for good | Generic identity in Attio (`country`, `company_number`, type), unique and validated; n8n and enrichment workflows switched to upsert; creation lookup | 3-5 days | Tool owners |
-| **Weeks 2-4** | P1 · Clear the queues with Sales | 136 review pairs, 73 hierarchy errors, 60 groups to create, 47 accounts to reassign to the US team, 450 contacts without account and 244 on the wrong one; RevOps prepares each decision, about 30 minutes per AE per week | 1 day a week | Sales time |
-| **Weeks 2-3** | P1 · US identity | Find the NPI of the 175 US accounts in NPPES (167 have no number today); build their groups, dental groups first | 2-3 days | Nobody |
-| **Weeks 2-3** | P1 · TAM map v1 | One-shot extract from the registries by specialty and structure type, scored, flagged "in Attio / not in Attio", US first | 1 week | Nobody |
-| **Months 2-3** | P2 · Master record | The one-shot becomes a daily recompute in the warehouse, with tests and the sync to Attio | To be scoped | Data team |
-| **Ongoing** | P3 · Run it | Data-quality dashboard per market, weekly review | 2 hours a week | RevOps |
+| **1 · Map the current state** | Weeks 1-2 | Every tool connected to Attio (enrichment, n8n, email sync, telephony): what it creates, what it writes, which flows run between them, who owns each one | The flow map: who creates what | Tool owners (interviews) |
+| **2 · Decide and design** | Weeks 2-3 | Target architecture: account types and TAM / SAM / outside the market; generic identity; source of truth per field; one creation rule per tool; what lives in the warehouse and what lives in Attio | The target schema, signed off by Sales, data and tool owners | Sales, data team |
+| **3 · Build** | Weeks 3-8, then month 3 | Generic identity in Attio, unique and validated; workflows switched to upsert; queues cleared with Sales (136 pairs, 73 hierarchy errors, 450 contacts without account, 47 US reassignments); NPI of the 175 US accounts from NPPES; TAM map v1 from the registries, US first; then the master record in the warehouse with the data team | TAM map v1 in week 5; master record in month 3 | Tool owners, Sales time, data team |
+| **4 · Measure** | From week 2, ongoing | Data-quality KPIs per market: % validated identity, open duplicates, contacts without account, accounts created per tool; weekly review | We know whether the base degrades, and why | RevOps, 2 hours a week |
 
-**Correct numbers in week 1, a first TAM map in week 3.** The warehouse then industrialises what was proven by hand; it is not needed to produce the first map.
+**In parallel, week 1:** fix what distorts the numbers today (117 automatic merges, 65 account types, 118 countries, investors, partners and media out of TAM and SAM views, 3 cycles) and switch off company creation by email sync and telephony. These need no design decision and take 2-3 days.
+
+**Architecture first, tools second.** The warehouse then industrialises what was designed and proven by hand.
 
 ## 6. With a week and a warehouse
 

@@ -86,20 +86,18 @@
 .guards li { margin-bottom: 0.4cqw; break-inside: avoid; }
 .guards li b { color: var(--text-primary); }
 
-/* Slide 4: roadmap */
-.roadmap { display: grid; grid-template-columns: 17cqw repeat(8, 1fr); row-gap: 0.9cqw; align-items: center; }
-.roadmap .wk { font-size: 1.02cqw; color: var(--text-muted); text-align: center; border-bottom: 1px solid var(--axis); padding-bottom: 0.5cqw; }
-.roadmap .label { font-size: 1.25cqw; padding-right: 1cqw; }
-.roadmap .label b { display: block; font-size: 1.05cqw; color: var(--brand); letter-spacing: 0.04em; }
-.bar { height: 3.4cqw; border-radius: 0.8cqw; display: flex; align-items: center; padding: 0 1cqw; font-size: 1.1cqw; color: #fff; background: var(--brand); white-space: nowrap; overflow: hidden; }
-.bar.p1 { background: #3d93f0; }
-.bar.p2 { background: #86b6ef; color: var(--text-primary); }
-.bar.p3 { background: repeating-linear-gradient(90deg, var(--grid) 0 1cqw, var(--surface) 1cqw 2cqw); color: var(--text-secondary); border: 1px solid var(--axis); }
-.roadmap.tight { row-gap: 0.55cqw; grid-template-columns: 19cqw repeat(8, 1fr); }
-.roadmap.tight .bar { height: 2.7cqw; font-size: 1.05cqw; }
-.roadmap.tight .label { font-size: 1.15cqw; line-height: 1.15; }
-.roadmap.tight .label b { font-size: 0.92cqw; }
-.roadmap-note { font-size: 1cqw; color: var(--text-secondary); padding-left: 0.9cqw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Slide 4: phases */
+.phases { display: grid; grid-template-columns: 1fr 1.8cqw 1fr 1.8cqw 1fr 1.8cqw 1fr; align-items: stretch; }
+.phase-arrow { display: grid; place-items: center; color: var(--brand); font-size: 1.8cqw; }
+.phase { background: var(--surface); border: 1px solid var(--border); border-radius: 1.3cqw; padding: 1.3cqw 1.4cqw; display: flex; flex-direction: column; gap: 0.6cqw; }
+.phase.measure { background: var(--brand-soft); border-color: transparent; }
+.phase .when { font-size: 1cqw; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
+.phase h3 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 1.7cqw; display: flex; align-items: center; gap: 0.7cqw; }
+.phase h3 i { font-style: normal; width: 2cqw; height: 2cqw; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-size: 1.05cqw; font-weight: 700; flex: none; }
+.phase p { margin: 0; font-size: 1.3cqw; color: var(--text-secondary); line-height: 1.4; flex: 1; }
+.phase .deliverable { font-size: 1.15cqw; font-weight: 600; color: var(--text-primary); border-top: 1px solid var(--grid); padding-top: 0.6cqw; }
+.parallel { margin-top: 1.2cqw; padding: 0.9cqw 1.4cqw; border-radius: 1cqw; border: 1px dashed var(--axis); font-size: 1.15cqw; color: var(--text-secondary); }
+.parallel b { color: var(--text-primary); }
 .closing { display: flex; justify-content: space-between; align-items: center; margin-top: 1.8cqw; gap: 2cqw; }
 .closing .big { font-family: var(--font-display); font-size: 2.2cqw; font-weight: 500; }
 .closing .big span { color: var(--text-secondary); font-size: 1.4cqw; display: block; font-family: var(--font-body); font-weight: 400; }

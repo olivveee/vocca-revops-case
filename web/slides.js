@@ -156,43 +156,46 @@ function slides(d) {
 
     `<section class="slide">
       <p class="kicker">4 · Recommandations</p>
-      <h2>Des chiffres justes en semaine 1, le TAM en semaine 3</h2>
+      <h2>Mettre à plat, designer, construire, mesurer</h2>
       <div class="body">
-        <div class="roadmap tight">
-          <div></div>${[1, 2, 3, 4, 5, 6, 7, 8].map((w) => `<div class="wk">S${w}</div>`).join("")}
-          ${roadmapRows(d, hi).join("")}
+        <div class="phases">
+          <div class="phase">
+            <span class="when">S1-S2</span>
+            <h3><i>1</i>Mettre à plat</h3>
+            <p>Cartographier l'existant : chaque outil branché à Attio, ce qu'il crée et ce qu'il écrit, chaque flux, chaque propriétaire.</p>
+            <span class="deliverable">Livrable : la carte des flux, qui crée quoi</span>
+          </div>
+          <div class="phase-arrow">→</div>
+          <div class="phase">
+            <span class="when">S2-S3</span>
+            <h3><i>2</i>Décider et designer</h3>
+            <p>L'architecture cible : types de compte et TAM / SAM / hors marché, identité générique, source de vérité par champ, règle de création par outil, rôle du warehouse et d'Attio.</p>
+            <span class="deliverable">Livrable : le schéma cible, validé avec Sales, data et propriétaires des outils</span>
+          </div>
+          <div class="phase-arrow">→</div>
+          <div class="phase">
+            <span class="when">S3-S8</span>
+            <h3><i>3</i>Construire</h3>
+            <p>Identité dans Attio, outils en mise à jour, files vidées avec les Sales (${fmt.format(d.review.length)} paires, ${fmt.format(s.hierarchy_structure_errors)} hiérarchies), NPI US via NPPES, carte du TAM v1, puis le master dans le warehouse avec l'équipe data.</p>
+            <span class="deliverable">Livrable : la carte du TAM v1 en S5, le master au mois 3</span>
+          </div>
+          <div class="phase-arrow">→</div>
+          <div class="phase measure">
+            <span class="when">Dès S2, en continu</span>
+            <h3><i>4</i>Mesurer</h3>
+            <p>Indicateurs qualité par marché : % d'identité validée, doublons ouverts, contacts sans compte, comptes créés par outil. Revue chaque semaine.</p>
+            <span class="deliverable">Livrable : on sait si la base se dégrade, et pourquoi</span>
+          </div>
         </div>
+        <div class="parallel"><b>En parallèle, semaine 1 :</b> corriger ce qui fausse les chiffres (${fmt.format(s.records_removed_by_auto_merge)} fusions, ${fmt.format(hi.missing_type || 0)} types, ${fmt.format((s.market_issues || {}).country_inferred || 0)} pays, hors marché sortis des vues) et couper la création de sociétés par les outils.</div>
         <div class="closing">
-          <div class="big">Les délais suivent les dépendances, pas le volume<span>Le warehouse industrialise ensuite ce qu'on a prouvé à la main.</span></div>
+          <div class="big">D'abord l'architecture, ensuite les outils<span>Le warehouse industrialise ce qu'on a designé et prouvé à la main.</span></div>
           <a class="cta" href="tam.html">Ouvrir le cockpit TAM →</a>
         </div>
       </div>
       ${mark(4)}
     </section>`,
   ];
-}
-
-// One roadmap row per workstream: priority and dependency on the left, the bar on the weeks it runs.
-function roadmapRows(d, hi) {
-  const s = d.summary;
-  const rows = [
-    { p: "P0", dep: "aucune dépendance", name: "Corriger les chiffres", start: 1, span: 1, bar: `${fmt.format(s.records_removed_by_auto_merge)} fusions`, note: `+ ${fmt.format(hi.missing_type || 0)} types, ${fmt.format((s.market_issues || {}).country_inferred || 0)} pays, hors marché sortis des vues, ${fmt.format(hi.self_parent || 0)} boucles` },
-    { p: "P0", dep: "admin des outils", name: "Fermer le robinet", start: 1, span: 1, bar: "Config", note: "synchro email et téléphonie ne créent plus de sociétés" },
-    { p: "P0", dep: "propriétaires des outils", name: "Arrêter l'hémorragie", start: 1, span: 3, bar: "Identité générique · unicité · n8n en mise à jour" },
-    { p: "P1", dep: "temps des Sales", name: "Vider les files", start: 2, span: 3, cls: "p1", bar: `${fmt.format(d.review.length)} paires · ${fmt.format(s.hierarchy_structure_errors)} hiérarchies · contacts` },
-    { p: "P1", dep: "aucune dépendance", name: "Identité US", start: 2, span: 2, cls: "p1", bar: "NPI via NPPES", note: `${fmt.format((s.markets.US || {}).accounts || 0)} comptes` },
-    { p: "P1", dep: "aucune dépendance", name: "Carte du TAM v1", start: 2, span: 2, cls: "p1", bar: "Registres, scorée", note: "US d'abord, « dans Attio / pas dans Attio »" },
-    { p: "P2", dep: "équipe data", name: "Master record", start: 5, span: 4, cls: "p2", bar: "Warehouse : recalcul quotidien, tests → mois 3" },
-    { p: "P3", dep: "RevOps, 2 h / semaine", name: "Faire tourner", start: 2, span: 7, cls: "p3", bar: "Indicateurs qualité et revue hebdo" },
-  ];
-  return rows.map((r) => {
-    const before = r.start - 1;
-    const after = 8 - before - r.span;
-    return `<div class="label"><b>${r.p} · ${r.dep}</b>${r.name}</div>`
-      + (before ? `<div style="grid-column: span ${before}"></div>` : "")
-      + `<div class="bar ${r.cls || ""}" style="grid-column: span ${r.span}">${r.bar}</div>`
-      + (after ? `<div class="roadmap-note" style="grid-column: span ${after}">${r.note || ""}</div>` : "");
-  });
 }
 
 // ---------- navigation ----------
