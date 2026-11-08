@@ -73,9 +73,11 @@ function aesInSeat(month) {
 
 const tenure = (ae, month) => monthDiff(monthOf(ae.start), month) + 1;
 
+// Quota source is chosen in the Sheet (PARAMS): recalculated base with ramp-up, or the provided per-AE quotas.
 function quotaFor(ae, month, base) {
-  const ramp = state.data.params.ramp;
-  return base * ramp[Math.min(tenure(ae, month), ramp.length) - 1];
+  const p = state.data.params;
+  if (p.quotaSource === "Provided") return (ae.quotaProvided || 0) * p.quotaProvidedRate;
+  return base * p.ramp[Math.min(tenure(ae, month), p.ramp.length) - 1];
 }
 
 function rates(deals, from, to) {
@@ -461,6 +463,8 @@ async function loadFromSheet() {
     currency: /^[A-Z]{3}$/.test(kv.currency || "") ? kv.currency : "USD",
     params: {
       quotaBase: num(kv.quota_base),
+      quotaSource: kv.quota_source === "Provided" ? "Provided" : "Recalculated",
+      quotaProvidedRate: num(kv.quota_provided_rate) || 1,
       rateWindowMonths: num(kv.rate_window_months),
       staleDays: num(kv.stale_days),
       graceDays: num(kv.grace_days),
@@ -474,6 +478,7 @@ async function loadFromSheet() {
     },
     team: teamRows.filter((r) => r.name).map((r) => ({
       name: r.name, role: r.role, market: r.market, start: isoDate(r.start_date), end: isoDate(r.end_date),
+      quotaProvided: num(r.monthly_new_arr_quota_synthetic),
     })).filter((t) => t.start),
     deals: dealRows.filter((r) => r.deal_id).map((r) => ({
       owner: r.owner,

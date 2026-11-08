@@ -48,7 +48,7 @@ Amounts are in one reporting currency, USD by default: deals come in EUR (1,469)
 
 Left out on purpose: sales cycle length (deals are created late, often at signature), the AEs' closing probability (half empty, uncalibrated), activity volume (not in the export), SDR metrics (demo attribution is broken). The `README` and `DATA_QUALITY` tabs of the sheet explain each choice.
 
-**Quota:** the synthetic quotas put every AE at 150-600%, so they were replaced by the median monthly new-logo ARR of tenured AEs over the last 6 complete months, with a 25/50/75/100% ramp-up. A top-down quota can be typed in `PARAMS` and overrides it.
+**Quota:** the synthetic quotas put every AE at 150-600%, so they were replaced by the median monthly new-logo ARR of tenured AEs over the last 6 complete months, with a 25/50/75/100% ramp-up. A top-down quota can be typed in `PARAMS` and overrides it. `PARAMS` > Quota used switches to the provided synthetic quotas, per AE and without ramp-up, to compare: the team then sits at about 260%.
 
 ## Running the scripts
 
