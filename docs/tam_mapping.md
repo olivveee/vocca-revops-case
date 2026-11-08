@@ -17,7 +17,7 @@ Full list with every number: [`docs/data_findings.md`](data_findings.md). The is
 |---|---|---|
 | No usable identity | **25% of accounts** have no validated company number: in France 756 SIRENs typed in the SIRET field and 220 empty; in the US **167 of 175** accounts have no number at all | Matching falls back on names and phones, which is where duplicates come from |
 | No field for a foreign identity | The 8 US accounts that have a number carry it in the French `siret` field, typed by hand (7 by one French AE); none passes the NPI check (10 digits, starting with 1 or 2, check digit), and the anonymised export probably scrambled them | The CRM was built for France only: there is nowhere to store a US identity, so US accounts cannot be deduplicated |
-| Duplicates | **117 records** are certain duplicates; 136 more pairs need a human | Two owners working the same practice; inflated TAM and pipeline |
+| Duplicates | **117 records** are certain duplicates; 211 more pairs need a human | Two owners working the same practice; inflated TAM and pipeline |
 | Duplicates are produced by tools, not people | Of the 117, **43 were created by the enrichment pipeline**, 11 by n8n, 11 by email sync; of the 450 contacts without an account, 432 were created by telephony, email sync or enrichment | The tools are connected but not orchestrated: they insert instead of upserting, so cleaning once will not last |
 | No clear structure | **65 accounts without type**; 53 "practices" with several sites; 14 accounts attached to a practice (9 practices, 5 groups); 3 self-parents; **60 multi-site organisations with no group** (e.g. 3 US sites in 3 cities sharing one domain). Groups under a group are fine (sub-groups of a larger one). Open questions rather than errors: 112 empty groups, 76 single-site groups | To deploy a group tomorrow, nobody can tell from the CRM which structure to set up |
 | Market not set | 118 accounts without country (all French postcodes); 67% of US accounts without lifecycle. 47 US accounts are still owned by the French team, which is expected (the first US AE started in July 2026): they go to the reassignment queue | Territories and US pipeline cannot be read by market |
@@ -67,7 +67,8 @@ A number only counts as identity once it passes its type's validation; until the
 
 | Case | Decision | Why |
 |---|---|---|
-| Two different validated company numbers | Never merge; link both sites to their legal entity | Two sites of one company are two deployments |
+| Two different validated company numbers | Never merge; link both sites to their legal entity | Two sites of one company are two deployments (98% of these pairs share only the SIREN) |
+| Two different validated numbers with the same calendar or name + postcode | Manual review | One number is probably outdated or mistyped (75 pairs) |
 | A site and a group sharing an identifier | Never merge; attach the site to the group | Head-office site or a missing hierarchy link |
 | Either record is a customer | Manual review | Merging moves invoices and ARR |
 | Open deals owned by two different people | Manual review | Ownership decision, not a data one |
@@ -83,7 +84,7 @@ A number only counts as identity once it passes its type's validation; until the
 | Output | Result |
 |---|---|
 | `merge_clusters.csv` | **5,080 → 4,963 accounts**: 117 records merged into 115 survivors, no customer touched |
-| `merge_pairs.csv` | Every candidate pair with the keys it shares, the decision and the reason: 119 auto-merge, **136 manual review** (70 involve a customer, 40 same name + postcode without number, 22 missing type, 4 same calendar only), 40 hierarchy fixes, 5,233 refused (mostly sites sharing a legal entity) |
+| `merge_pairs.csv` | Every candidate pair with the keys it shares, the decision and the reason: 119 auto-merge, **211 manual review** (75 two valid numbers with the same calendar or address, 70 involve a customer, 40 same name + postcode without number, 22 missing type, 4 same calendar only), 40 hierarchy fixes, 5,158 refused (mostly sites sharing a legal entity) |
 | `hierarchy_issues.csv` | Each issue with a severity and a proposed action. Errors: 65 accounts without type, 53 practices that are groups, 17 impossible parents (14 under a practice), 3 self-parents. Questions to settle with Sales: 112 empty groups, 76 single-site groups |
 | `market_issues.csv` | 356 market issues: 118 countries inferred, 101 out-of-TAM accounts, 60 multi-site organisations without group, 47 accounts owned by the other market's team, 16 unverified foreign numbers, 12 booking URLs from the wrong country |
 | `contact_moves.csv` | **247 contacts** to re-attach |
@@ -105,7 +106,16 @@ Each market brings its own registries, booking platforms, enrichment vendors and
 | United States | NPPES (NPI registry, organisations), CMS provider data linking clinicians to group practices | NPPES (individual NPI), state licensing boards | Practice websites; paid healthcare data vendors for group and DSO structures |
 | Every market | Enrichment vendors write to **contacts** only and never create accounts | | |
 
-The TAM is built from the registries, not from the CRM: every site of a target specialty and structure type, scored, then flagged "in Attio / not in Attio".
+The TAM is built from the registries, not from the CRM, in four steps:
+
+| Step | What it does |
+|---|---|
+| **Normalise** | Country, address, phone, company number validated per type, in the generic model |
+| **Structure** | Deduplicate, attach each site to its legal entity and group (SIRET to SIREN to group), compute the ultimate parent |
+| **Segment** | Market, specialty, structure type (practice, health centre, imaging, dental group…), size (practitioners, sites, machines) |
+| **Score** | ICP fit (specialty, structure type, online booking calendar, part of a group) times potential (practitioners or machines, the pricing driver), giving a priority per site and per group that feeds territories and outbound |
+
+Each site is then flagged "customer / in Attio / not in Attio". The score weights start as a judgement call and are recalibrated on won and lost deals once the model runs.
 
 ### Where the master record lives
 
@@ -148,7 +158,7 @@ Four phases, in this order: **map the current architecture, decide and design th
 |---|---|---|---|---|
 | **1 · Map the current state** | Weeks 1-2 | Every tool connected to Attio (enrichment, n8n, email sync, telephony): what it creates, what it writes, which flows run between them, who owns each one | The flow map: who creates what | Tool owners (interviews) |
 | **2 · Decide and design** | Weeks 2-3 | Target architecture: account types and TAM / SAM / outside the market; generic identity; source of truth per field; one creation rule per tool; what lives in the warehouse and what lives in Attio | The target schema, signed off by Sales, data and tool owners | Sales, data team |
-| **3 · Build** | Weeks 3-8, then month 3 | Generic identity in Attio, unique and validated; workflows switched to upsert; queues cleared with Sales (136 pairs, 73 hierarchy errors, 450 contacts without account, 47 US reassignments); NPI of the 175 US accounts from NPPES; TAM map v1 from the registries, US first; then the master record in the warehouse with the data team | TAM map v1 in week 5; master record in month 3 | Tool owners, Sales time, data team |
+| **3 · Build** | Weeks 3-8, then month 3 | Generic identity in Attio, unique and validated; workflows switched to upsert; queues cleared with Sales (211 pairs, 73 hierarchy errors, 450 contacts without account, 47 US reassignments); NPI of the 175 US accounts from NPPES; TAM map v1 from the registries, US first; then the master record in the warehouse with the data team | TAM map v1 in week 5; master record in month 3 | Tool owners, Sales time, data team |
 | **4 · Measure** | From week 2, ongoing | Data-quality KPIs per market: % validated identity, open duplicates, contacts without account, accounts created per tool; weekly review | We know whether the base degrades, and why | RevOps, 2 hours a week |
 
 **In parallel, week 1:** fix what distorts the numbers today (117 automatic merges, 65 account types, 118 countries, investors, partners and media out of TAM and SAM views, 3 cycles) and switch off company creation by email sync and telephony. These need no design decision and take 2-3 days.

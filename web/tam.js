@@ -18,8 +18,8 @@ const el = (id) => document.getElementById(id);
 const QUEUES = [
   { code: "dup_certain", section: "Identity and duplicates", label: "Certain duplicates", hint: "same validated number, or calendar confirmed by a second key", mode: "auto", owner: "Script",
     action: "Merge into the survivor", rule: "Same validated company number and type, or same calendar plus a second key, or same SIREN + name + postcode. Never a customer, never two owners. Survivor: customer, most deals, most contacts, most complete, oldest." },
-  { code: "dup_review", section: "Identity and duplicates", label: "Pairs to decide", hint: "customer involved, no SIRET to confirm, or calendar only", mode: "manual", owner: "Sales + RevOps", unit: "pairs",
-    action: "Decide in the pair review", rule: "A merge that moves invoices, ARR or ownership is signed off by a person. Same name + postcode without a number, or a shared calendar alone, is a strong hint, not proof." },
+  { code: "dup_review", section: "Identity and duplicates", label: "Pairs to decide", hint: "customer involved, two numbers with the same calendar or address, no SIRET to confirm", mode: "manual", owner: "Sales + RevOps", unit: "pairs",
+    action: "Decide in the pair review", rule: "A merge that moves invoices, ARR or ownership is signed off by a person. Two different validated numbers with the same calendar or address usually mean one number is wrong. Same name + postcode without a number, or a shared calendar alone, is a strong hint, not proof." },
   { code: "no_identity", section: "Identity and duplicates", label: "No validated identity", hint: "SIREN typed instead of SIRET, empty, or no US number", mode: "auto", owner: "Registry lookup",
     action: "Look up the SIRET in SIRENE, the NPI in NPPES", rule: "A number counts as identity only once it passes its type's validation (SIRET checksum, NPI check digit). Until then it is stored but ignored by matching." },
   { code: "missing_type", section: "Structure", label: "Accounts without type", hint: "neither site, group nor network", mode: "manual", owner: "RevOps",
@@ -384,7 +384,7 @@ function renderReview() {
   el("review-count").textContent = `${items.length - done.length}`;
 
   el("panel-review").innerHTML = `
-    <p class="lead">Pairs the rules refuse to merge without a human: a customer is involved, there is no SIRET to confirm, or only the calendar matches. Fields in <span style="color:var(--brand);font-weight:600">blue</span> are identical on both records.</p>
+    <p class="lead">Pairs the rules refuse to merge without a human: a customer is involved, two valid numbers share a calendar or an address, there is no SIRET to confirm, or only the calendar matches. Fields in <span style="color:var(--brand);font-weight:600">blue</span> are identical on both records.</p>
     <div class="card">
       <div class="review-head"><strong>${done.length} / ${items.length} reviewed</strong><span class="muted">${merged} to merge · ${done.length - merged} kept separate</span></div>
       <div class="progress" aria-hidden="true"><span style="width:${(merged / items.length) * 100}%;background:var(--brand)"></span><span style="width:${((done.length - merged) / items.length) * 100}%;background:var(--axis)"></span></div>

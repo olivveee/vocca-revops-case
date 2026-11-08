@@ -220,6 +220,10 @@ def decide(a, b, keys):
     type_a, type_b = a["type"], b["type"]
     weak = f"weak evidence only ({', '.join(sorted(keys))}): typically a shared group phone/domain or a recycled number"
     if a["company_number_valid"] and b["company_number_valid"] and a["company_number"] != b["company_number"]:
+        # Same booking calendar or same name + postcode despite two valid numbers: one number is probably
+        # outdated or mistyped (a move, a typo). Never merged automatically, but a person looks at it.
+        if keys & {"calendar", "name_postcode"}:
+            return "manual_review", "two different validated numbers but same calendar or name + postcode: one number is probably wrong"
         if a["siren"] == b["siren"] and isinstance(a["siren"], str):
             return "do_not_merge", "same legal entity (SIREN), different sites (SIRET): link to one legal entity, keep both sites"
         return "do_not_merge", "different validated company numbers: two distinct sites"
@@ -453,7 +457,7 @@ MATCH_KEYS = [
     {"key": "domain", "label": "Website domain (platforms and webmail excluded)", "role": "Supporting evidence only: group domains are shared"},
 ]
 GUARDS = [
-    {"rule": "Different validated company numbers are never merged", "why": "Two sites, even under one legal entity, are two deployments", "match": "different validated company numbers|different sites \\(SIRET\\)"},
+    {"rule": "Different validated company numbers are never merged automatically", "why": "Two sites, even under one legal entity, are two deployments; with the same calendar or address, a person checks which number is wrong", "match": "different validated company numbers|different sites \\(SIRET\\)|two different validated numbers"},
     {"rule": "A site and a group are never merged", "why": "It is a missing hierarchy link or the group's head-office site", "match": "site shares|orphan site"},
     {"rule": "Customers are never merged automatically", "why": "A merge moves invoices and ARR: a human signs it off", "match": "customer record involved"},
     {"rule": "Two owners with open deals: manual", "why": "Ownership is a sales decision, not a data one", "match": "open deals owned by different"},

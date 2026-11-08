@@ -79,6 +79,9 @@
 .market b { display: block; font-size: 1.15cqw; margin-bottom: 0.3cqw; }
 .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.55cqw; }
 .steps li { font-size: 1.25cqw; display: flex; gap: 0.8cqw; align-items: center; }
+.steps li > div { display: flex; flex-direction: column; line-height: 1.25; }
+.steps li > div b { font-weight: 600; }
+.steps li > div span { font-size: 1.05cqw; color: rgba(255, 255, 255, 0.72); }
 .steps li i { font-style: normal; width: 1.9cqw; height: 1.9cqw; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-size: 1cqw; font-weight: 700; flex: none; }
 .guards { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.4cqw; margin-top: 1.6cqw; }
 .guards .panel { padding: 1.2cqw 1.6cqw; }

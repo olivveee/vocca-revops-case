@@ -4,12 +4,13 @@
   "records_removed_by_auto_merge": 117,
   "auto_merge_clusters": 115,
   "pairs_by_decision": {
-    "do_not_merge": 5233,
-    "manual_review": 136,
+    "do_not_merge": 5158,
+    "manual_review": 211,
     "auto_merge": 119,
     "hierarchy_fix": 40
   },
   "manual_review_reasons": {
+    "two different validated numbers but same calendar or name + postcode: one number is probably wrong": 75,
     "customer record involved (billing ID / ARR): never merged automatically": 70,
     "same name and postcode, no SIRET to confirm or contradict": 40,
     "account type missing on one record": 22,

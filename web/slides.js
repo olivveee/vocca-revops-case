@@ -95,8 +95,8 @@ function slides(d) {
         </div>
         <p class="rules-title">Jamais fusionné automatiquement</p>
         <div class="rules">
-          <div class="rule"><span class="x">✕</span><div><b>Deux numéros validés différents</b><span>deux sites, même d'une même société : on relie, on ne fusionne pas</span></div></div>
-          <div class="rule"><span class="x">✕</span><div><b>Un client ou deux commerciaux</b><span>un humain valide toute fusion qui touche la facturation ou une attribution</span></div></div>
+          <div class="rule"><span class="x">✕</span><div><b>Deux numéros validés différents</b><span>deux sites d'une même société : on relie. Même agenda ou même adresse : revue, un numéro est sans doute faux</span></div></div>
+          <div class="rule"><span class="x">✕</span><div><b>Un client ou une attribution</b><span>fusionner déplace des factures ou un propriétaire : un humain décide</span></div></div>
           <div class="rule"><span class="x">✕</span><div><b>Téléphone, domaine ou nom seuls</b><span>partagés par les groupes ; un domaine dans plusieurs villes, c'est un groupe à créer</span></div></div>
         </div>
       </div>
@@ -119,10 +119,10 @@ function slides(d) {
             <span class="tag">Warehouse · recalcul quotidien</span>
             <h3>Le TAM : tous les sites du marché, scorés</h3>
             <ol class="steps">
-              <li><i>1</i>Normaliser dans le modèle générique</li>
-              <li><i>2</i>Valider les numéros, rattacher chaque SIRET à son SIREN</li>
-              <li><i>3</i>Matcher, choisir le survivant : client, deals, complétude</li>
-              <li><i>4</i>Tests : type renseigné, pas de boucle, compte racine calculé</li>
+              <li><i>1</i><div><b>Normaliser</b><span>pays, adresses, téléphones, numéros validés selon leur type</span></div></li>
+              <li><i>2</i><div><b>Structurer</b><span>dédoublonner, SIRET → SIREN → groupe, compte racine</span></div></li>
+              <li><i>3</i><div><b>Segmenter</b><span>marché, spécialité, type de structure, taille (praticiens, sites)</span></div></li>
+              <li><i>4</i><div><b>Scorer</b><span>fit ICP × potentiel → priorité, territoires, outbound</span></div></li>
             </ol>
           </div>
           <div class="arrow">→</div>
