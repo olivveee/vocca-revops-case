@@ -90,14 +90,14 @@ function slides(d) {
                 <tr><td><code>practitioner_number</code></td><td>RPPS</td><td>NPI (individuel)</td></tr>
               </tbody>
             </table>
-            <p class="note">Validé selon son type, c'est ensuite <b>la seule clé de dédoublonnage</b>. Clés de secours partout : URL d'agenda, adresse, téléphone, domaine, nom + code postal. Les colonnes propres à chaque pays restent en amont.</p>
+            <p class="note">Validé selon son type, c'est ensuite <b>la seule clé de dédoublonnage</b>. Clés de secours : URL d'agenda, adresse, nom + code postal. Téléphone et domaine ne sont pas des clés : partagés par les groupes, ils servent à détecter les groupes.</p>
           </div>
         </div>
         <p class="rules-title">Jamais fusionné automatiquement</p>
         <div class="rules">
           <div class="rule"><span class="x">✕</span><div><b>Deux numéros validés différents</b><span>deux sites d'une même société : on relie. Même agenda ou même adresse : revue, un numéro est sans doute faux</span></div></div>
           <div class="rule"><span class="x">✕</span><div><b>Un client ou une attribution</b><span>fusionner déplace des factures ou un propriétaire : un humain décide</span></div></div>
-          <div class="rule"><span class="x">✕</span><div><b>Téléphone, domaine ou nom seuls</b><span>partagés par les groupes ; un domaine dans plusieurs villes, c'est un groupe à créer</span></div></div>
+          <div class="rule"><span class="x">✕</span><div><b>Un site et un groupe</b><span>même SIREN ou SIRET : on rattache le site au groupe, ce n'est pas un doublon</span></div></div>
         </div>
       </div>
       ${mark(2)}

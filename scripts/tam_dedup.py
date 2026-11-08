@@ -453,15 +453,15 @@ MATCH_KEYS = [
     {"key": "calendar", "label": "Booking-calendar URL", "role": "One calendar per site. Automatic merge only if a second key agrees"},
     {"key": "siren", "label": "Legal entity (SIREN in France)", "role": "Links sites to one legal entity. Merges only with same name + postcode"},
     {"key": "name_postcode", "label": "Normalised name + postcode", "role": "Strong hint: manual review, never automatic alone"},
-    {"key": "phone", "label": "Normalised phone", "role": "Supporting evidence only: switchboards are shared"},
-    {"key": "domain", "label": "Website domain (platforms and webmail excluded)", "role": "Supporting evidence only: group domains are shared"},
+    {"key": "phone", "label": "Normalised phone", "role": "Group signal, not an identity key: switchboards are shared by a group's sites"},
+    {"key": "domain", "label": "Website domain (platforms and webmail excluded)", "role": "Group signal, not an identity key: a domain across several cities is a group to create"},
 ]
 GUARDS = [
     {"rule": "Different validated company numbers are never merged automatically", "why": "Two sites, even under one legal entity, are two deployments; with the same calendar or address, a person checks which number is wrong", "match": "different validated company numbers|different sites \\(SIRET\\)|two different validated numbers"},
     {"rule": "A site and a group are never merged", "why": "It is a missing hierarchy link or the group's head-office site", "match": "site shares|orphan site"},
     {"rule": "Customers are never merged automatically", "why": "A merge moves invoices and ARR: a human signs it off", "match": "customer record involved"},
     {"rule": "Two owners with open deals: manual", "why": "Ownership is a sales decision, not a data one", "match": "open deals owned by different"},
-    {"rule": "Shared phone, domain or name alone: no merge", "why": "Groups share switchboards and domains; names repeat", "match": "weak evidence only"},
+    {"rule": "Shared phone or domain alone: a group signal, not a duplicate", "why": "Groups share switchboards and domains", "match": "weak evidence only"},
     {"rule": "Missing account type: manual", "why": "The model cannot place the record", "match": "account type missing"},
 ]
 # "error": the structure is wrong and must be fixed. "question": a structure choice to make with Sales, not an error.

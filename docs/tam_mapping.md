@@ -59,7 +59,8 @@ Attio does not get a column per country. It gets generic fields, filled from whi
 | `company_number` + `company_number_type` (site) | SIRET (14 digits, checksum, active) | NPI of the organisation (10 digits, check digit) | National business / establishment number, to confirm per country |
 | `legal_entity_number` | SIREN | No public national registry: legal name + state of registration | Per country |
 | `practitioner_number` (on contacts) | RPPS | Individual NPI | Per country |
-| Fallback keys, same everywhere | Booking-calendar URL, normalised address, phone, website domain, name + postcode | | |
+| Fallback keys, same everywhere | Booking-calendar URL, normalised address, name + postcode | | |
+| Group signals, not identity keys | Phone and website domain: groups share switchboards and domains, so they detect groups instead of duplicates | | |
 
 A number only counts as identity once it passes its type's validation; until then it is stored but ignored by matching. That single rule is what would have kept the US numbers out of the dedupe.
 
@@ -72,7 +73,7 @@ A number only counts as identity once it passes its type's validation; until the
 | A site and a group sharing an identifier | Never merge; attach the site to the group | Head-office site or a missing hierarchy link |
 | Either record is a customer | Manual review | Merging moves invoices and ARR |
 | Open deals owned by two different people | Manual review | Ownership decision, not a data one |
-| Shared phone, domain or name only | Never merge | Groups share switchboards and domains; names repeat. A domain shared across cities is a **group to create**, not a duplicate |
+| Shared phone or domain only | Not a duplicate: a group signal | Groups share switchboards and domains; on this file 47 of the 48 phone-only pairs are in different cities. A domain shared across cities is a **group to create** |
 | Same calendar URL only, or same name + postcode without a number | Manual review | Strong hint, not proof |
 
 **Survivor rule**: customer first, then most deals, most contacts, most complete, oldest.
